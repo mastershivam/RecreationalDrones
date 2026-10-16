@@ -39,22 +39,38 @@ GitHub Actions (`.github/workflows/ci.yml`) runs tests, type-checks and builds e
 
 ## Status
 
-Phase 1 (foundations) is done, and the basemap is now Protomaps. Next is airport restriction layers, and optionally moving the tiles to R2 for deeper zoom.
+Phase 1 (foundations) is done. The basemap is Protomaps, with deep-zoom tiles served from R2 (see below). Next is airport restriction layers.
 
 ## Map data
 
-Everything the map loads is served from this site, so there are no third-party requests.
+Everything the map loads comes from this site, so there are no third-party requests.
 
 | File | What it is | How to rebuild |
 |---|---|---|
-| `data/basemap.pmtiles` | Protomaps basemap (OpenStreetMap data), zoom 0-5, about 15 MB. Source only; it is not deployed | `pmtiles extract https://build.protomaps.com/<YYYYMMDD>.pmtiles data/basemap.pmtiles --maxzoom=5` ([pmtiles CLI](https://github.com/protomaps/go-pmtiles/releases)) |
-| `public/tiles/` | The basemap unpacked into one file per tile (`{z}/{x}/{y}.mvt`). Generated and git-ignored | Runs automatically before `npm run dev` and `npm run build`, or `npm run unpack:tiles` |
-| `public/data/countries.geojson` | Country shapes the map uses to highlight and link guides (Natural Earth, public domain) | `npm run build:countries` |
-| `public/fonts/` | Noto Sans glyphs for labels (Latin ranges only, OFL licence) | Copy from [protomaps/basemaps-assets](https://github.com/protomaps/basemaps-assets) |
+| R2 bucket `recreationaldrones-tiles`, object `basemap.pmtiles` | The **production** basemap: Protomaps (OpenStreetMap data), zoom 0-7, about 189 MB. Private. The Worker serves it at `/tiles/basemap.pmtiles` | `pmtiles extract https://build.protomaps.com/<YYYYMMDD>.pmtiles data/basemap-deep.pmtiles --maxzoom=7`, then upload it (see below). `data/basemap-deep.pmtiles` is git-ignored |
+| `data/basemap.pmtiles` | A small **test** basemap, zoom 0-5, about 15 MB, committed. Used by `npm run dev` and the end-to-end tests, so nobody needs R2 or the big file to work on the site | `pmtiles extract https://build.protomaps.com/<YYYYMMDD>.pmtiles data/basemap.pmtiles --maxzoom=5` ([pmtiles CLI](https://github.com/protomaps/go-pmtiles/releases)) |
+| `public/data/countries.geojson` | Country shapes the map uses to highlight and link guides (Natural Earth 50m, public domain) | `npm run build:countries` |
+| `public/fonts/` | Noto Sans glyphs for labels (Latin, Greek and Cyrillic ranges only, OFL licence). Names in other scripts may show gaps | Copy from [protomaps/basemaps-assets](https://github.com/protomaps/basemaps-assets) |
 
-The tiles stop at zoom 5, and the map enlarges them beyond that, so detail gets soft when zoomed right in.
+The map zooms one level past the tiles and enlarges them, so detail softens beyond zoom 7 in production (beyond 5 in dev).
 
-Why unpack the `.pmtiles` file? A PMTiles file is read with HTTP range requests, and Cloudflare Workers static assets ignore those and send the whole 15 MB, which left the deployed map blank. Plain tile files work on any static host. If the tiles move to R2 later (which supports range requests), switch the source in `src/lib/map-style.ts` back to a `pmtiles://` URL.
+### Deep-zoom tiles on R2
+
+A PMTiles file is read in small pieces with HTTP byte ranges, and Cloudflare Workers static assets ignore those and send the whole file, which once left the deployed map blank. So the file lives in a private R2 bucket and the Worker (`src/worker.ts`, using `src/lib/tile-server.ts`) answers range requests for `/tiles/basemap.pmtiles` itself. Only `/tiles/*` runs the Worker (`run_worker_first` in `wrangler.toml`), and every other request is a plain static asset.
+
+**One-time setup, before the first deploy.** The deploy fails if the bucket named in `wrangler.toml` does not exist, so do this first (it needs your Cloudflare login):
+
+```sh
+npx wrangler login
+npx wrangler r2 bucket create recreationaldrones-tiles
+npx wrangler r2 object put recreationaldrones-tiles/basemap.pmtiles --file data/basemap-deep.pmtiles --remote
+```
+
+Then push. To change the tiles later, extract a new file and run the last command again. Visitors may see the old one for up to a day, because responses are cached for 24 hours.
+
+**Plan limits to know about.** A map load makes dozens of tile requests, and each one runs the Worker and reads R2. On the free Workers plan that is capped at 100,000 Worker requests a day, which is roughly a few thousand map loads. The Workers Paid plan ($5 a month) raises it to 10 million a month. R2 reads (10 million a month free) are unlikely to be the limit. If traffic outgrows this, serve the bucket publicly on a custom domain instead and change the URL in `src/lib/map-style.ts`.
+
+**Known blemish.** The country highlight uses Natural Earth 50m shapes, which are coarser than the OpenStreetMap coastline, so at zoom 6 and 7 the amber can spill a little over the sea.
 
 See [TODO.md](TODO.md) for what's planned next.
 

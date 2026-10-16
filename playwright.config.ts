@@ -25,10 +25,15 @@ export default defineConfig({
 		{ name: 'desktop', use: { ...devices['Desktop Chrome'], channel: process.env.CI ? undefined : 'chrome' } },
 		{ name: 'mobile', use: { ...devices['Pixel 7'], channel: process.env.CI ? undefined : 'chrome' } },
 	],
-	// Test the real Workers runtime serving the built site, not the Astro dev server. Production differs
-	// from dev (it ignores HTTP range requests, for example), and that difference has already caused a bug.
+	// Test the real Workers runtime serving the built site and the basemap from R2, not the Astro dev server.
+	// Production differs from dev (static assets ignore HTTP range requests, for example), and that difference
+	// has already caused a bug. The local R2 bucket is seeded with the small test basemap in data/.
 	webServer: {
-		command: `npm run build && wrangler dev --port ${PORT} --ip 127.0.0.1`,
+		command: [
+			'npm run build',
+			'wrangler r2 object put recreationaldrones-tiles/basemap.pmtiles --file data/basemap.pmtiles --local',
+			`wrangler dev --port ${PORT} --ip 127.0.0.1`,
+		].join(' && '),
 		url: `http://127.0.0.1:${PORT}`,
 		reuseExistingServer: !process.env.CI,
 		timeout: 180_000,

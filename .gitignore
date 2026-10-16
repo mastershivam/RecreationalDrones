@@ -23,8 +23,8 @@ pnpm-debug.log*
 # jetbrains setting folder
 .idea/
 
-# unpacked from data/basemap.pmtiles by npm run unpack:tiles
-public/tiles/
+# the deep-zoom basemap is uploaded to R2, not committed (see README)
+data/basemap-deep.pmtiles
 
 # wrangler local state
 .wrangler/

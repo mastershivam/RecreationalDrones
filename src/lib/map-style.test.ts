@@ -1,7 +1,8 @@
 import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
-import { BASEMAP_MAX_ZOOM, BASEMAP_TILES, COUNTRIES_URL, basemapFlavor, basemapLayers, buildStyle } from './map-style';
+import { TILE_PATH } from './tile-server';
+import { COUNTRIES_URL, basemapFlavor, basemapLayers, buildStyle } from './map-style';
 
 const colors = {
 	ocean: '#040b1c',
@@ -44,6 +45,19 @@ describe('basemapLayers', () => {
 		expect(basemapLayers(basemapFlavor(colors)).filter((l) => (l.layout as any)?.['icon-image'])).toEqual([]);
 	});
 
+	it('keeps city names without their dots, since the dots need an icon sprite', () => {
+		const city = basemapLayers(basemapFlavor(colors)).find((l) => l.id === 'places_locality')!;
+		expect(city).toBeDefined();
+		expect((city.layout as Record<string, unknown>)['text-field']).toBeDefined();
+		expect(Object.keys(city.layout as object).filter((k) => k.startsWith('icon-'))).toEqual([]);
+	});
+
+	it('drops the layers that are only icons, such as road shields and points of interest', () => {
+		const have = basemapLayers(basemapFlavor(colors)).map((l) => l.id);
+		expect(have).not.toContain('roads_shields');
+		expect(have).not.toContain('pois');
+	});
+
 	it('still has land, water, borders and country labels', () => {
 		const have = basemapLayers(basemapFlavor(colors)).map((l) => l.id);
 		for (const id of ['earth', 'water', 'boundaries_country', 'places_country']) expect(have).toContain(id);
@@ -66,17 +80,16 @@ describe('buildStyle', () => {
 	});
 
 	it('loads tiles, countries and fonts from this site', () => {
-		expect(style.sources.protomaps).toMatchObject({ tiles: [`${origin}${BASEMAP_TILES}`] });
+		expect(style.sources.protomaps).toMatchObject({ url: `pmtiles://${origin}${TILE_PATH}` });
 		expect(style.sources.countries).toMatchObject({ data: `${origin}${COUNTRIES_URL}` });
 		expect(style.glyphs).toBe(`${origin}/fonts/{fontstack}/{range}.pbf`);
 	});
 
-	it('reads plain per-tile files, not a .pmtiles archive, which Workers static assets cannot serve by byte range', () => {
-		const source = style.sources.protomaps as { url?: string; tiles: string[]; maxzoom: number };
-		expect(source.url).toBeUndefined();
-		expect(source.tiles[0]).toContain('{z}/{x}/{y}');
-		expect(source.tiles[0]).not.toContain('pmtiles');
-		expect(source.maxzoom).toBe(BASEMAP_MAX_ZOOM);
+	it('reads the basemap from the one tile file the Worker serves from R2, by byte range', () => {
+		// The file is at /tiles/basemap.pmtiles, which only the Worker answers (wrangler.toml: run_worker_first).
+		const source = style.sources.protomaps as { url: string; tiles?: string[] };
+		expect(source.url).toBe(`pmtiles://${origin}/tiles/basemap.pmtiles`);
+		expect(source.tiles).toBeUndefined();
 	});
 
 	it('credits OpenStreetMap and Protomaps, as their licences require', () => {
@@ -118,7 +131,9 @@ describe('shipped files', () => {
 		for (const iso3 of Object.keys(guides)) expect(codes).toContain(iso3);
 	});
 
-	it('ships the Latin glyph ranges for every font the style uses', () => {
+	it('ships the Latin, Greek and Cyrillic glyph ranges for every font the style uses', () => {
+		// Regression: city names in Cyrillic asked for 1024-1279.pbf, which was not shipped, so those labels came
+		// up blank and the browser logged a 404.
 		const fonts = new Set<string>();
 		for (const layer of style.layers) {
 			const font = (layer.layout as Record<string, unknown> | undefined)?.['text-font'];
@@ -126,7 +141,7 @@ describe('shipped files', () => {
 		}
 		expect(fonts.size).toBeGreaterThan(0);
 		for (const font of fonts) {
-			for (const range of ['0-255', '256-511']) {
+			for (const range of ['0-255', '256-511', '512-767', '768-1023', '1024-1279', '1280-1535']) {
 				expect(existsSync(join(publicDir, 'fonts', font, `${range}.pbf`)), `${font} ${range}`).toBe(true);
 			}
 		}

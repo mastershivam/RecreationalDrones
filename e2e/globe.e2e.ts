@@ -1,3 +1,5 @@
+import { existsSync } from 'node:fs';
+import { join } from 'node:path';
 import { expect, test } from '@playwright/test';
 import { highlightedAt, openGlobe, renderedCount } from './helpers';
 
@@ -54,22 +56,58 @@ test.describe('globe', () => {
 });
 
 test.describe('map files', () => {
-	test('serves tiles as plain files with a vector tile content type', async ({ request }) => {
-		const response = await request.get('/tiles/0/0/0.mvt');
+	const TILES = '/tiles/basemap.pmtiles';
+
+	test('serves a byte range of the basemap file, and only that range', async ({ request }) => {
+		// Regression: Workers static assets ignored the Range header and sent the whole file, which blanked the globe.
+		// The Worker now answers ranges itself, out of R2.
+		const size = Number((await request.head(TILES)).headers()['content-length']);
+		expect(size).toBeGreaterThan(1_000_000);
+
+		const response = await request.get(TILES, { headers: { Range: 'bytes=0-1023' } });
+		expect(response.status()).toBe(206);
+		expect(response.headers()['content-range']).toBe(`bytes 0-1023/${size}`);
+		expect(response.headers()['accept-ranges']).toBe('bytes');
+		const body = await response.body();
+		expect(body.length).toBe(1024);
+		expect(body.subarray(0, 7).toString()).toBe('PMTiles'); // the file's own header
+	});
+
+	test('serves ranges from the middle and the end of the file', async ({ request }) => {
+		const size = Number((await request.head(TILES)).headers()['content-length']);
+		const middle = await request.get(TILES, { headers: { Range: 'bytes=5000-5099' } });
+		expect(middle.status()).toBe(206);
+		expect((await middle.body()).length).toBe(100);
+
+		const end = await request.get(TILES, { headers: { Range: 'bytes=-100' } });
+		expect(end.status()).toBe(206);
+		expect(end.headers()['content-range']).toBe(`bytes ${size - 100}-${size - 1}/${size}`);
+		expect((await end.body()).length).toBe(100);
+	});
+
+	test('answers HEAD with the file size and no body', async ({ request }) => {
+		const response = await request.head(TILES);
 		expect(response.status()).toBe(200);
-		expect(response.headers()['content-type']).toContain('vector-tile');
-		expect((await response.body()).length).toBeGreaterThan(1000);
+		expect(Number(response.headers()['content-length'])).toBeGreaterThan(1_000_000);
+		expect((await response.body()).length).toBe(0);
 	});
 
-	test('does not need range requests for tiles', async ({ request }) => {
-		// Regression: Workers static assets ignore the Range header, which broke the .pmtiles archive.
-		const response = await request.get('/tiles/2/1/1.mvt', { headers: { Range: 'bytes=0-99' } });
-		expect(response.ok()).toBe(true);
-		expect((await response.body()).length).toBeGreaterThan(100);
+	test('refuses a range that starts past the end of the file', async ({ request }) => {
+		const size = Number((await request.head(TILES)).headers()['content-length']);
+		const response = await request.get(TILES, { headers: { Range: `bytes=${size + 1000}-${size + 2000}` } });
+		expect(response.status()).toBe(416);
+		expect(response.headers()['content-range']).toBe(`bytes */${size}`);
 	});
 
-	test('does not deploy the 15 MB source archive', async ({ request }) => {
-		expect((await request.get('/tiles/basemap.pmtiles')).status()).toBe(404);
+	test('serves nothing else under /tiles/, and only reads', async ({ request }) => {
+		expect((await request.get('/tiles/0/0/0.mvt')).status()).toBe(404);
+		expect((await request.get('/tiles/')).status()).toBe(404);
+		expect((await request.post(TILES)).status()).toBe(405);
+	});
+
+	test('does not ship the tile file as a static asset', async ({ request }) => {
+		// The file is served from R2 by the Worker, so it must not also be uploaded with the site.
+		expect(existsSync(join(import.meta.dirname, '../dist/tiles'))).toBe(false);
 		expect((await request.get('/data/basemap.pmtiles')).status()).toBe(404);
 	});
 

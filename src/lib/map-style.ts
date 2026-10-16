@@ -2,12 +2,10 @@ import { layers, namedFlavor, type Flavor } from '@protomaps/basemaps';
 import type { FilterSpecification, GeoJSONSourceSpecification, LayerSpecification, StyleSpecification } from 'maplibre-gl';
 import { nightGeoJSON } from './daynight';
 import { GLOBE_PROJECTION, coveredCountriesFilter, type MapColors } from './map-config';
+import { TILE_PATH } from './tile-server';
 
-// Both are served from this site. The tiles are unpacked from data/basemap.pmtiles at build time (see
-// src/lib/unpack-tiles.ts), because Cloudflare Workers static assets can't serve the byte ranges a
-// .pmtiles file needs. Tiles exist for zoom 0 to BASEMAP_MAX_ZOOM.
-export const BASEMAP_TILES = '/tiles/{z}/{x}/{y}.mvt';
-export const BASEMAP_MAX_ZOOM = 5;
+// The basemap is one .pmtiles file, read in small pieces with HTTP byte ranges. In production the Worker serves
+// it from a private R2 bucket (src/worker.ts); the countries file is a plain static asset.
 export const COUNTRIES_URL = '/data/countries.geojson';
 
 const ATTRIBUTION =
@@ -39,9 +37,20 @@ export function basemapFlavor(c: MapColors): Flavor {
 	};
 }
 
-// Protomaps layers without the ones that need an icon sprite (road shields, points of interest, city dots).
+// Some Protomaps layers draw icons from a sprite sheet, and we ship none. Road shields and points of interest are
+// only useful with their icons, so they are dropped. City names are the point of zooming in, so that layer keeps
+// its text and loses only the dot beside it.
+const KEEP_WITHOUT_ICON = new Set(['places_locality']);
+const ICON_PROPERTIES = ['icon-image', 'icon-size', 'icon-padding'];
+
 export function basemapLayers(flavor: Flavor): LayerSpecification[] {
-	return layers('protomaps', flavor, { lang: 'en' }).filter((l) => !(l.layout as Record<string, unknown> | undefined)?.['icon-image']);
+	return layers('protomaps', flavor, { lang: 'en' }).flatMap((layer) => {
+		const layout = layer.layout as Record<string, unknown> | undefined;
+		if (!layout?.['icon-image']) return [layer];
+		if (!KEEP_WITHOUT_ICON.has(layer.id)) return [];
+		const textOnly = Object.fromEntries(Object.entries(layout).filter(([key]) => !ICON_PROPERTIES.includes(key)));
+		return [{ ...layer, layout: textOnly } as LayerSpecification];
+	});
 }
 
 // Night shading and the glowing "we have a guide" countries. These sit above land and borders but under labels.
@@ -80,13 +89,7 @@ export function buildStyle(c: MapColors, guides: Record<string, unknown>, origin
 		projection: GLOBE_PROJECTION,
 		glyphs: `${origin}/fonts/{fontstack}/{range}.pbf`,
 		sources: {
-			protomaps: {
-				type: 'vector',
-				tiles: [`${origin}${BASEMAP_TILES}`],
-				minzoom: 0,
-				maxzoom: BASEMAP_MAX_ZOOM,
-				attribution: ATTRIBUTION,
-			},
+			protomaps: { type: 'vector', url: `pmtiles://${origin}${TILE_PATH}`, attribution: ATTRIBUTION },
 			countries: { type: 'geojson', data: `${origin}${COUNTRIES_URL}` },
 			night: { type: 'geojson', data: nightGeoJSON(now) as GeoJSONSourceSpecification['data'] },
 		},

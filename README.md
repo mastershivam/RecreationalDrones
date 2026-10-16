@@ -46,11 +46,16 @@ Everything the map loads is served from this site, so there are no third-party r
 
 | File | What it is | How to rebuild |
 |---|---|---|
-| `public/tiles/basemap.pmtiles` | Protomaps basemap (OpenStreetMap data), zoom 0-5, about 15 MB | `pmtiles extract https://build.protomaps.com/<YYYYMMDD>.pmtiles public/tiles/basemap.pmtiles --maxzoom=5` ([pmtiles CLI](https://github.com/protomaps/go-pmtiles/releases)) |
+| `data/basemap.pmtiles` | Protomaps basemap (OpenStreetMap data), zoom 0-5, about 15 MB. Source only; it is not deployed | `pmtiles extract https://build.protomaps.com/<YYYYMMDD>.pmtiles data/basemap.pmtiles --maxzoom=5` ([pmtiles CLI](https://github.com/protomaps/go-pmtiles/releases)) |
+| `public/tiles/` | The basemap unpacked into one file per tile (`{z}/{x}/{y}.mvt`). Generated and git-ignored | Runs automatically before `npm run dev` and `npm run build`, or `npm run unpack:tiles` |
 | `public/data/countries.geojson` | Country shapes the map uses to highlight and link guides (Natural Earth, public domain) | `npm run build:countries` |
 | `public/fonts/` | Noto Sans glyphs for labels (Latin ranges only, OFL licence) | Copy from [protomaps/basemaps-assets](https://github.com/protomaps/basemaps-assets) |
 
-The tiles stop at zoom 5, and the map enlarges them beyond that, so detail gets soft when zoomed right in. Cloudflare Pages limits files to 25 MB. For deeper zoom, host a bigger extract on R2 and change `BASEMAP_URL` in `src/lib/map-style.ts`.
+The tiles stop at zoom 5, and the map enlarges them beyond that, so detail gets soft when zoomed right in.
+
+Why unpack the `.pmtiles` file? A PMTiles file is read with HTTP range requests, and Cloudflare Workers static assets ignore those and send the whole 15 MB, which left the deployed map blank. Plain tile files work on any static host. If the tiles move to R2 later (which supports range requests), switch the source in `src/lib/map-style.ts` back to a `pmtiles://` URL.
+
+See [TODO.md](TODO.md) for what's planned next.
 
 ## Licensing
 

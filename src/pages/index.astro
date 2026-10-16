@@ -19,10 +19,9 @@ const guides = guideSummaries(await getCollection('countries'));
 </Base>
 
 <script>
-	import { Map, Popup, addProtocol, setWorkerUrl, type GeoJSONSource } from 'maplibre-gl';
+	import { Map, Popup, setWorkerUrl, type GeoJSONSource } from 'maplibre-gl';
 	import workerUrl from 'maplibre-gl/dist/maplibre-gl-worker.mjs?url';
 	import 'maplibre-gl/dist/maplibre-gl.css';
-	import { Protocol } from 'pmtiles';
 	import { guideForFeature, initialZoom, readMapColors, tapBox } from '../lib/map-config';
 	import type { GuideSummary } from '../lib/guides';
 	import { buildStyle } from '../lib/map-style';
@@ -31,8 +30,6 @@ const guides = guideSummaries(await getCollection('countries'));
 
 	// MapLibre looks for its worker next to its own module, which breaks once bundled.
 	setWorkerUrl(workerUrl);
-	// Lets MapLibre read tiles straight out of a single .pmtiles file with range requests.
-	addProtocol('pmtiles', new Protocol().tile);
 
 	const el = document.getElementById('map')!;
 	const guides: Record<string, GuideSummary> = JSON.parse(el.dataset.guides!);
@@ -43,7 +40,7 @@ const guides = guideSummaries(await getCollection('countries'));
 		style: buildStyle(colors, guides, location.origin),
 		center: [-4, 42],
 		zoom: initialZoom(el.clientWidth, el.clientHeight),
-		// The basemap tiles stop at zoom 5; beyond that the map just enlarges them.
+		// The basemap tiles stop at zoom 5 (BASEMAP_MAX_ZOOM); beyond that the map just enlarges them.
 		maxZoom: 6,
 		// Keep the globe upright; tilting it is easy to do by accident with two fingers.
 		pitchWithRotate: false,

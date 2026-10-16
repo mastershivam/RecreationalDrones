@@ -1,7 +1,7 @@
 import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
-import { BASEMAP_URL, COUNTRIES_URL, basemapFlavor, basemapLayers, buildStyle } from './map-style';
+import { BASEMAP_MAX_ZOOM, BASEMAP_TILES, COUNTRIES_URL, basemapFlavor, basemapLayers, buildStyle } from './map-style';
 
 const colors = {
 	ocean: '#040b1c',
@@ -66,9 +66,17 @@ describe('buildStyle', () => {
 	});
 
 	it('loads tiles, countries and fonts from this site', () => {
-		expect(style.sources.protomaps).toMatchObject({ url: `pmtiles://${origin}${BASEMAP_URL}` });
+		expect(style.sources.protomaps).toMatchObject({ tiles: [`${origin}${BASEMAP_TILES}`] });
 		expect(style.sources.countries).toMatchObject({ data: `${origin}${COUNTRIES_URL}` });
 		expect(style.glyphs).toBe(`${origin}/fonts/{fontstack}/{range}.pbf`);
+	});
+
+	it('reads plain per-tile files, not a .pmtiles archive, which Workers static assets cannot serve by byte range', () => {
+		const source = style.sources.protomaps as { url?: string; tiles: string[]; maxzoom: number };
+		expect(source.url).toBeUndefined();
+		expect(source.tiles[0]).toContain('{z}/{x}/{y}');
+		expect(source.tiles[0]).not.toContain('pmtiles');
+		expect(source.maxzoom).toBe(BASEMAP_MAX_ZOOM);
 	});
 
 	it('credits OpenStreetMap and Protomaps, as their licences require', () => {
@@ -98,8 +106,8 @@ describe('buildStyle', () => {
 });
 
 describe('shipped files', () => {
-	it('has a basemap PMTiles file', () => {
-		const file = join(publicDir, BASEMAP_URL);
+	it('has the basemap PMTiles source, which the build unpacks into tiles', () => {
+		const file = join(publicDir, '../data/basemap.pmtiles');
 		expect(existsSync(file)).toBe(true);
 		expect(readFileSync(file).subarray(0, 7).toString()).toBe('PMTiles');
 	});

@@ -3,8 +3,11 @@ import type { FilterSpecification, GeoJSONSourceSpecification, LayerSpecificatio
 import { nightGeoJSON } from './daynight';
 import { GLOBE_PROJECTION, coveredCountriesFilter, type MapColors } from './map-config';
 
-// Both files are served from this site (public/). To move the tiles to R2 later, change BASEMAP_URL.
-export const BASEMAP_URL = '/tiles/basemap.pmtiles';
+// Both are served from this site. The tiles are unpacked from data/basemap.pmtiles at build time (see
+// src/lib/unpack-tiles.ts), because Cloudflare Workers static assets can't serve the byte ranges a
+// .pmtiles file needs. Tiles exist for zoom 0 to BASEMAP_MAX_ZOOM.
+export const BASEMAP_TILES = '/tiles/{z}/{x}/{y}.mvt';
+export const BASEMAP_MAX_ZOOM = 5;
 export const COUNTRIES_URL = '/data/countries.geojson';
 
 const ATTRIBUTION =
@@ -77,7 +80,13 @@ export function buildStyle(c: MapColors, guides: Record<string, unknown>, origin
 		projection: GLOBE_PROJECTION,
 		glyphs: `${origin}/fonts/{fontstack}/{range}.pbf`,
 		sources: {
-			protomaps: { type: 'vector', url: `pmtiles://${origin}${BASEMAP_URL}`, attribution: ATTRIBUTION },
+			protomaps: {
+				type: 'vector',
+				tiles: [`${origin}${BASEMAP_TILES}`],
+				minzoom: 0,
+				maxzoom: BASEMAP_MAX_ZOOM,
+				attribution: ATTRIBUTION,
+			},
 			countries: { type: 'geojson', data: `${origin}${COUNTRIES_URL}` },
 			night: { type: 'geojson', data: nightGeoJSON(now) as GeoJSONSourceSpecification['data'] },
 		},

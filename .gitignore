@@ -22,3 +22,9 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# unpacked from data/basemap.pmtiles by npm run unpack:tiles
+public/tiles/
+
+# wrangler local state
+.wrangler/

@@ -2,6 +2,8 @@
 
 The site should feel like an expedition, with an immersive dark globe and bold accents, while remaining something people can rely on before they fly. Adventure shapes the look; accuracy and legibility come first.
 
+Name, logo, colour names and component rules are in [BRAND.md](BRAND.md). It is a proposal until the name and logo are approved.
+
 ## Principles
 
 1. **Trust before flair.** Every rule shows its source and last-verified date. Anything unchecked reads "Not yet verified" in the warning color, never a guess. Decoration must never make a rule harder to read.

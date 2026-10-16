@@ -5,7 +5,7 @@ The site should feel like an expedition, with an immersive dark globe and bold a
 ## Principles
 
 1. **Trust before flair.** Every rule shows its source and last-verified date. Anything unchecked reads "Not yet verified" in the warning color, never a guess. Decoration must never make a rule harder to read.
-2. **The globe is the product.** The home page is the globe. Keep chrome small and let the globe fill the screen. Anything that overlaps it must be translucent and compact.
+2. **The globe is the product.** The home page is the globe. Keep chrome small and let the globe fill the screen. Anything that overlaps it must be translucent and compact, and information appears in place (see Country popups) rather than sending people away from it.
 3. **One accent, used for meaning.** Amber (`--color-accent`) marks "we have a guide for this" on the map, plus primary actions. Don't use it for decoration, so the covered countries keep standing out.
 4. **Dark and calm.** One dark theme. Surfaces are layered (bg → surface → raised) with thin borders instead of heavy shadows.
 5. **Readable first.** Body text is at least 7:1 on its background and secondary text 4.5:1. Links stay underlined, so color is never the only cue.
@@ -23,6 +23,16 @@ Design for a 375px-wide phone first, then widen.
 - The globe fits the screen on load (`initialZoom`), ignores tilting (`pitchWithRotate: false`), and taps look for a country within `TAP_RADIUS_PX` of the finger. Never require pixel-perfect taps.
 - Overlays on the globe stay small and fade away on the first drag.
 - Write hints for touch and mouse alike ("tap" rather than "click").
+
+## Country popups
+
+Key facts show in a popup on the globe, not on a new page. The full guide page still exists for detail and search engines.
+
+- **Hover** (mouse only) shows a read-only preview. It has no links, so it can't be clicked into.
+- **Click or tap** pins the popup in place. It adds the official source, the date checked and a "Full guide" link, and closes with the X, or by clicking elsewhere on the map.
+- Show only the key facts (who must register, minimum age, Remote ID, insurance). Unchecked ones read "Not yet verified", never blank.
+- On phones the pinned popup docks to the bottom of the map, so it can't be cut off. It sits above the attribution link, which must stay visible.
+- Popup text is built from guide data, so it goes through `popupHtml`, which escapes it. Never put raw guide text into HTML.
 
 ## Day and night
 

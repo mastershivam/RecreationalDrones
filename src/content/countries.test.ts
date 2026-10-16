@@ -3,7 +3,7 @@ import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
 import { parse } from 'yaml';
 import { countrySchema } from '../lib/country-schema';
-import { guideUrls } from '../lib/guides';
+import { guideSummaries } from '../lib/guides';
 
 const dir = join(import.meta.dirname, 'countries');
 const guides = readdirSync(dir)
@@ -29,7 +29,10 @@ describe('country guides', () => {
 	});
 
 	it('has no two guides for the same country', () => {
-		const entries = guides.map(({ file, frontmatter }) => ({ id: file.replace(/\.mdx$/, ''), data: frontmatter }));
-		expect(() => guideUrls(entries)).not.toThrow();
+		const entries = guides.map(({ file, frontmatter }) => ({
+			id: file.replace(/\.mdx$/, ''),
+			data: countrySchema.parse(frontmatter),
+		}));
+		expect(() => guideSummaries(entries)).not.toThrow();
 	});
 });

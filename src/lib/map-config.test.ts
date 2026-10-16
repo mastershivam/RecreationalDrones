@@ -28,6 +28,11 @@ describe('coveredCountriesFilter', () => {
 });
 
 describe('guideForFeature', () => {
+	it('works with any kind of guide entry, not only URLs', () => {
+		const entry = { name: 'United Kingdom' };
+		expect(guideForFeature({ properties: { ADM0_A3: 'GBR' } }, { GBR: entry })).toBe(entry);
+	});
+
 	it('returns the guide URL for a covered country', () => {
 		expect(guideForFeature({ properties: { ADM0_A3: 'GBR' } }, guides)).toBe('/countries/united-kingdom/');
 	});

@@ -42,7 +42,7 @@ export function basemapLayers(flavor: Flavor): LayerSpecification[] {
 }
 
 // Night shading and the glowing "we have a guide" countries. These sit above land and borders but under labels.
-function overlayLayers(c: MapColors, guides: Record<string, string>): LayerSpecification[] {
+function overlayLayers(c: MapColors, guides: Record<string, unknown>): LayerSpecification[] {
 	const covered = {
 		source: 'countries',
 		filter: coveredCountriesFilter(guides) as unknown as FilterSpecification,
@@ -69,7 +69,7 @@ function overlayLayers(c: MapColors, guides: Record<string, string>): LayerSpeci
 }
 
 // `origin` is the site's origin, since MapLibre needs absolute URLs for tiles and fonts.
-export function buildStyle(c: MapColors, guides: Record<string, string>, origin: string, now = new Date()): StyleSpecification {
+export function buildStyle(c: MapColors, guides: Record<string, unknown>, origin: string, now = new Date()): StyleSpecification {
 	const base = basemapLayers(basemapFlavor(c));
 	const firstLabel = base.findIndex((l) => l.type === 'symbol');
 	return {

@@ -1,15 +1,15 @@
 export const GLOBE_PROJECTION = { type: 'globe' } as const;
 
 // Matches the countries layer features whose ADM0_A3 has a guide.
-export function coveredCountriesFilter(guides: Record<string, string>) {
+export function coveredCountriesFilter(guides: Record<string, unknown>) {
 	return ['in', ['get', 'ADM0_A3'], ['literal', Object.keys(guides)]] as const;
 }
 
-// Guide URL for a clicked map feature, or undefined if the country has no guide.
-export function guideForFeature(
+// The guide entry for a map feature, or undefined if the country has no guide.
+export function guideForFeature<T>(
 	feature: { properties?: Record<string, unknown> } | undefined,
-	guides: Record<string, string>,
-): string | undefined {
+	guides: Record<string, T>,
+): T | undefined {
 	const iso3 = feature?.properties?.ADM0_A3;
 	return typeof iso3 === 'string' ? guides[iso3] : undefined;
 }

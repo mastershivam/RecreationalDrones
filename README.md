@@ -24,15 +24,17 @@ Create `src/content/countries/<slug>.mdx`. The frontmatter schema is in `src/lib
 - Use `null` for any rule you haven't checked against an official source. The page then shows "Not yet verified" instead of a guess.
 - Every guide needs at least one official `sources` URL and a `lastVerified` date.
 
-## Deploy (Cloudflare Pages)
+## Deploy (Cloudflare Workers)
 
-Connect the repo in the Cloudflare dashboard (Workers & Pages → Create → Pages → Connect to Git) and use these settings:
+The site is static files served by Cloudflare Workers static assets (see `wrangler.toml`). In the Cloudflare dashboard, go to Workers & Pages → Create → Import a repository, pick this repo, and use:
 
 - Build command: `npm run build`
-- Output directory: `dist`
+- Deploy command: `npx wrangler deploy`
 - Environment variable: `NODE_VERSION=22`
 
-GitHub Actions (`.github/workflows/ci.yml`) type-checks and builds every push and PR. Cloudflare handles the deploy.
+The Worker name in the dashboard must match `name` in `wrangler.toml` (`recreationaldrones`). To deploy from your machine instead, run `npm run build && npx wrangler deploy` after `npx wrangler login`.
+
+GitHub Actions (`.github/workflows/ci.yml`) runs tests, type-checks and builds every push and PR. Cloudflare handles the deploy.
 
 ## Status
 

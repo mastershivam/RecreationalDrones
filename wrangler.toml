@@ -1,3 +1,6 @@
-name = "recreational-drones"
+name = "recreationaldrones"
 compatibility_date = "2026-10-01"
-pages_build_output_dir = "dist"
+
+# Static site: Workers serves the built files from dist/ with no code to run.
+[assets]
+directory = "./dist"

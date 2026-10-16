@@ -1,0 +1,181 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import { guideUrls } from '../lib/guides';
+
+// iso3 -> guide URL, read by the map script below.
+const guides = guideUrls(await getCollection('countries'));
+---
+
+<Base title="Recreational drone rules map" fill>
+	<div class="stage">
+		<div id="map" data-guides={JSON.stringify(guides)}></div>
+		<div class="intro card">
+			<h1>Where can you fly?</h1>
+			<p class="muted">Drag to spin the globe. Tap a glowing country for its drone rules.</p>
+			<p class="muted legend"><span class="swatch"></span>Shaded areas are in night right now.</p>
+		</div>
+	</div>
+</Base>
+
+<script>
+	import { Map, setWorkerUrl, type FilterSpecification, type GeoJSONSource } from 'maplibre-gl';
+	import workerUrl from 'maplibre-gl/dist/maplibre-gl-worker.mjs?url';
+	import 'maplibre-gl/dist/maplibre-gl.css';
+	import {
+		GLOBE_PROJECTION,
+		basemapPaint,
+		coveredCountriesFilter,
+		guideForFeature,
+		initialZoom,
+		readMapColors,
+		tapBox,
+	} from '../lib/map-config';
+	import { nightGeoJSON } from '../lib/daynight';
+
+	// MapLibre looks for its worker next to its own module, which breaks once bundled.
+	setWorkerUrl(workerUrl);
+
+	const el = document.getElementById('map')!;
+	const guides: Record<string, string> = JSON.parse(el.dataset.guides!);
+	const colors = readMapColors((name) => getComputedStyle(document.documentElement).getPropertyValue(name));
+
+	// Placeholder basemap; phase 2 swaps this for a Protomaps PMTiles basemap on R2.
+	const map = new Map({
+		container: el,
+		style: 'https://demotiles.maplibre.org/style.json',
+		center: [-4, 42],
+		zoom: initialZoom(el.clientWidth, el.clientHeight),
+		// Keep the globe upright; tilting it is easy to do by accident with two fingers.
+		pitchWithRotate: false,
+		touchPitch: false,
+	});
+
+	const intro = document.querySelector('.intro')!;
+	map.once('dragstart', () => intro.classList.add('hidden'));
+
+	map.on('style.load', () => map.setProjection(GLOBE_PROJECTION));
+
+	map.on('load', () => {
+		el.classList.add('ready');
+		for (const { layer, property, value } of basemapPaint(colors)) {
+			if (map.getLayer(layer)) map.setPaintProperty(layer, property, value);
+		}
+
+		// Night side of the Earth, refreshed every minute. Sits under borders and labels.
+		map.addSource('night', { type: 'geojson', data: nightGeoJSON(new Date()) });
+		map.addLayer(
+			{
+				id: 'night-fill',
+				type: 'fill',
+				source: 'night',
+				filter: ['==', ['get', 'kind'], 'night'],
+				paint: { 'fill-color': colors.night, 'fill-opacity': 0.4 },
+			},
+			'geolines',
+		);
+		// A wide blurred line softens the edge into a twilight gradient.
+		map.addLayer(
+			{
+				id: 'night-edge',
+				type: 'line',
+				source: 'night',
+				filter: ['==', ['get', 'kind'], 'terminator'],
+				paint: { 'line-color': colors.night, 'line-width': 36, 'line-blur': 36, 'line-opacity': 0.3 },
+			},
+			'geolines',
+		);
+		setInterval(() => (map.getSource('night') as GeoJSONSource).setData(nightGeoJSON(new Date())), 60_000);
+
+		const covered = {
+			source: 'maplibre',
+			'source-layer': 'countries',
+			filter: coveredCountriesFilter(guides) as unknown as FilterSpecification,
+		};
+		map.addLayer({
+			id: 'covered-countries',
+			type: 'fill',
+			...covered,
+			paint: { 'fill-color': colors.accent, 'fill-opacity': 0.55 },
+		});
+		map.addLayer({
+			id: 'covered-countries-outline',
+			type: 'line',
+			...covered,
+			paint: { 'line-color': colors.accent, 'line-width': 1.5 },
+		});
+
+		// Query a small box around the tap so a fingertip doesn't have to be pixel-perfect.
+		map.on('click', (e) => {
+			const hit = map.queryRenderedFeatures(tapBox(e.point), { layers: ['covered-countries'] })[0];
+			const url = guideForFeature(hit, guides);
+			if (url) window.location.href = url;
+		});
+		map.on('mouseenter', 'covered-countries', () => (map.getCanvas().style.cursor = 'pointer'));
+		map.on('mouseleave', 'covered-countries', () => (map.getCanvas().style.cursor = ''));
+	});
+</script>
+
+<style>
+	.stage {
+		position: relative;
+		flex: 1;
+		min-height: 420px;
+		/* Let the map handle all touch gestures instead of scrolling the page. */
+		touch-action: none;
+	}
+	#map {
+		position: absolute;
+		inset: 0;
+		background: var(--color-ocean);
+	}
+	/* Hide the demo style's light colors until the dark recolor has been applied. */
+	#map:not(.ready) :global(canvas) {
+		opacity: 0;
+	}
+	.intro {
+		position: absolute;
+		top: var(--space-2);
+		left: var(--space-2);
+		right: var(--space-2);
+		max-width: 20rem;
+		padding: var(--space-2) var(--space-3);
+		background: color-mix(in srgb, var(--color-surface) 85%, transparent);
+		backdrop-filter: blur(6px);
+		transition: opacity 0.4s;
+	}
+	.intro.hidden {
+		opacity: 0;
+		pointer-events: none;
+	}
+	.intro h1 {
+		margin: 0 0 var(--space-1);
+		font-size: var(--text-lg);
+	}
+	.intro p {
+		margin: 0;
+		font-size: var(--text-sm);
+		line-height: 1.4;
+	}
+	.legend {
+		display: flex;
+		align-items: center;
+		gap: var(--space-2);
+		margin-top: var(--space-1);
+	}
+	.swatch {
+		flex: none;
+		width: 0.9rem;
+		height: 0.9rem;
+		border-radius: 50%;
+		background: var(--color-night);
+		border: 1px solid var(--color-land-border);
+	}
+	@media (min-width: 640px) {
+		.intro {
+			top: var(--space-3);
+			left: var(--space-3);
+			padding: var(--space-3) var(--space-4);
+		}
+	}
+</style>

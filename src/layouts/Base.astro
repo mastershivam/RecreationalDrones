@@ -1,0 +1,73 @@
+---
+import '../styles/global.css';
+
+interface Props {
+	title: string;
+	description?: string;
+	// Let the page content fill the space between header and footer (the globe).
+	fill?: boolean;
+}
+const { title, description = 'Where and how you can fly a recreational drone, country by country.', fill = false } = Astro.props;
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+		<meta name="description" content={description} />
+		<meta name="theme-color" content="#0a0e1a" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<title>{title}</title>
+	</head>
+	<body>
+		<header>
+			<a class="brand" href="/">Recreational Drones</a>
+			<nav>
+				<a href="/">Map</a>
+				<a href="/countries/">Countries</a>
+			</nav>
+		</header>
+		<main class:list={{ fill }}>
+			<slot />
+		</main>
+		<footer>
+			Guidance only, not legal advice. Rules change; always verify with the official source linked on each country
+			page before you fly.
+		</footer>
+	</body>
+</html>
+
+<style>
+	header {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		justify-content: space-between;
+		gap: var(--space-3);
+		padding: var(--space-2) max(var(--space-3), env(safe-area-inset-right)) var(--space-2) max(var(--space-3), env(safe-area-inset-left));
+		padding-top: max(var(--space-2), env(safe-area-inset-top));
+		border-bottom: 1px solid var(--color-border);
+	}
+	.brand {
+		color: var(--color-text);
+		font-weight: 700;
+		text-decoration: none;
+		letter-spacing: 0.02em;
+	}
+	/* Padding makes each link a comfortable touch target (44px). */
+	nav a {
+		display: inline-block;
+		padding: var(--space-2) var(--space-2);
+		margin-left: var(--space-1);
+	}
+	main.fill {
+		display: flex;
+		flex-direction: column;
+	}
+	footer {
+		padding: var(--space-2) max(var(--space-3), env(safe-area-inset-right)) max(var(--space-2), env(safe-area-inset-bottom)) max(var(--space-3), env(safe-area-inset-left));
+		font-size: var(--text-sm);
+		color: var(--color-text-muted);
+		border-top: 1px solid var(--color-border);
+	}
+</style>

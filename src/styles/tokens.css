@@ -1,0 +1,38 @@
+/* Single source of truth for the design system. See DESIGN.md.
+   The map reads these at runtime and tests check their contrast, so change
+   values here only. Colors must be 6-digit hex. */
+:root {
+	color-scheme: dark;
+
+	--color-bg: #0a0e1a;
+	--color-surface: #121a2e;
+	--color-surface-raised: #1a2440;
+	--color-border: #2a3658;
+	--color-text: #eef1fa;
+	--color-text-muted: #a4aecb;
+	--color-accent: #ff9f1c;
+	--color-on-accent: #1a1100;
+	--color-link: #6fd3ff;
+	--color-warning: #ffd166;
+
+	/* Map */
+	--color-ocean: #040b1c;
+	--color-land: #3f5f94;
+	--color-land-border: #9bb3dd;
+	--color-night: #02040a;
+
+	--font-sans: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+	--text-sm: 0.875rem;
+	--text-base: 1rem;
+	--text-lg: 1.25rem;
+	--text-xl: 2rem;
+
+	--space-1: 0.25rem;
+	--space-2: 0.5rem;
+	--space-3: 1rem;
+	--space-4: 1.5rem;
+	--space-5: 3rem;
+
+	--radius: 0.75rem;
+	--content-width: 46rem;
+}

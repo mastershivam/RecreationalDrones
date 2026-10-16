@@ -36,8 +36,20 @@ GitHub Actions (`.github/workflows/ci.yml`) type-checks and builds every push an
 
 ## Status
 
-Phase 1 (foundations) is done. The basemap is MapLibre's low-resolution demo style, which is a placeholder. Phase 2 replaces it with a Protomaps PMTiles basemap on R2 and adds airport restriction layers.
+Phase 1 (foundations) is done, and the basemap is now Protomaps. Next is airport restriction layers, and optionally moving the tiles to R2 for deeper zoom.
+
+## Map data
+
+Everything the map loads is served from this site, so there are no third-party requests.
+
+| File | What it is | How to rebuild |
+|---|---|---|
+| `public/tiles/basemap.pmtiles` | Protomaps basemap (OpenStreetMap data), zoom 0-5, about 15 MB | `pmtiles extract https://build.protomaps.com/<YYYYMMDD>.pmtiles public/tiles/basemap.pmtiles --maxzoom=5` ([pmtiles CLI](https://github.com/protomaps/go-pmtiles/releases)) |
+| `public/data/countries.geojson` | Country shapes the map uses to highlight and link guides (Natural Earth, public domain) | `npm run build:countries` |
+| `public/fonts/` | Noto Sans glyphs for labels (Latin ranges only, OFL licence) | Copy from [protomaps/basemaps-assets](https://github.com/protomaps/basemaps-assets) |
+
+The tiles stop at zoom 5, and the map enlarges them beyond that, so detail gets soft when zoomed right in. Cloudflare Pages limits files to 25 MB. For deeper zoom, host a bigger extract on R2 and change `BASEMAP_URL` in `src/lib/map-style.ts`.
 
 ## Licensing
 
-Map data © OpenStreetMap contributors (ODbL) once OSM-derived layers are added. Check each national dataset's licence before redistributing it.
+Basemap © OpenStreetMap contributors (ODbL) via Protomaps, credited on the map. Natural Earth is public domain. Check each national dataset's licence before redistributing it.

@@ -23,6 +23,8 @@ const pairs: [string, string, number, string][] = [
 	['color-accent', 'color-bg', 3, 'accent UI and covered countries'],
 	['color-land-border', 'color-land', 1.5, 'country borders stay visible'],
 	['color-land', 'color-ocean', 3, 'land stands out from the sea'],
+	['color-text', 'color-land', 4.5, 'country labels on land'],
+	['color-text-muted', 'color-ocean', 4.5, 'ocean labels'],
 	['color-accent', 'color-land', 3, 'covered countries stand out from land'],
 ];
 

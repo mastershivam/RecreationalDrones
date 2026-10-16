@@ -2,7 +2,6 @@ import { describe, expect, it } from 'vitest';
 import {
 	GLOBE_PROJECTION,
 	MAP_COLOR_TOKENS,
-	basemapPaint,
 	coveredCountriesFilter,
 	guideForFeature,
 	initialZoom,
@@ -48,6 +47,7 @@ const colors = {
 	ocean: '#000001',
 	land: '#000002',
 	landBorder: '#000003',
+	text: '#000008',
 	textMuted: '#000004',
 	accent: '#000005',
 	night: '#000006',
@@ -67,30 +67,6 @@ describe('readMapColors', () => {
 	});
 });
 
-describe('basemapPaint', () => {
-	it('recolors the ocean and land from the palette', () => {
-		const paint = basemapPaint(colors);
-		expect(paint).toContainEqual({ layer: 'background', property: 'background-color', value: colors.ocean });
-		expect(paint).toContainEqual({ layer: 'countries-fill', property: 'fill-color', value: colors.land });
-	});
-
-	it('recolors every fill layer of the demo style, so no light shapes remain', () => {
-		const fills = basemapPaint(colors).filter((p) => p.property === 'fill-color').map((p) => p.layer);
-		expect(fills).toEqual(['countries-fill', 'crimea-fill']);
-	});
-
-	it('gives labels a halo that matches the ocean, so they stay readable on dark land', () => {
-		const paint = basemapPaint(colors);
-		for (const layer of ['geolines-label', 'countries-label']) {
-			expect(paint).toContainEqual({ layer, property: 'text-halo-color', value: colors.ocean });
-		}
-	});
-
-	it('only uses colors from the palette', () => {
-		const allowed = Object.values(colors);
-		for (const { value } of basemapPaint(colors)) expect(allowed).toContain(value);
-	});
-});
 
 
 describe('initialZoom', () => {

@@ -18,6 +18,7 @@ export interface MapColors {
 	ocean: string;
 	land: string;
 	landBorder: string;
+	text: string;
 	textMuted: string;
 	accent: string;
 	night: string;
@@ -27,6 +28,7 @@ export const MAP_COLOR_TOKENS: Record<keyof MapColors, string> = {
 	ocean: '--color-ocean',
 	land: '--color-land',
 	landBorder: '--color-land-border',
+	text: '--color-text',
 	textMuted: '--color-text-muted',
 	accent: '--color-accent',
 	night: '--color-night',
@@ -41,23 +43,6 @@ export function readMapColors(read: (name: string) => string): MapColors {
 	});
 	return Object.fromEntries(entries) as unknown as MapColors;
 }
-
-// Recolors the demo style's layers to the dark theme.
-export function basemapPaint(c: MapColors) {
-	return [
-		{ layer: 'background', property: 'background-color', value: c.ocean },
-		{ layer: 'countries-fill', property: 'fill-color', value: c.land },
-		{ layer: 'crimea-fill', property: 'fill-color', value: c.land },
-		{ layer: 'countries-boundary', property: 'line-color', value: c.landBorder },
-		{ layer: 'coastline', property: 'line-color', value: c.landBorder },
-		{ layer: 'geolines', property: 'line-color', value: c.landBorder },
-		{ layer: 'geolines-label', property: 'text-color', value: c.textMuted },
-		{ layer: 'countries-label', property: 'text-color', value: c.textMuted },
-		{ layer: 'geolines-label', property: 'text-halo-color', value: c.ocean },
-		{ layer: 'countries-label', property: 'text-halo-color', value: c.ocean },
-	] as const;
-}
-
 
 // Zoom at which the whole globe fits the smaller screen dimension, with a little margin.
 // A globe is about 512 / pi pixels across at zoom 0, and doubles with each zoom level.

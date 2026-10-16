@@ -14,12 +14,14 @@ Follow [DESIGN.md](DESIGN.md) for any UI change. Use the tokens in `src/styles/t
 
 ## Testing
 
-Write unit tests for each step as you go, not at the end. Every step of a plan ships with tests for the logic it adds, and `npm test` must pass before you move on to the next step.
+Every commit is preceded by creating all missing unit, end-to-end and regression tests, then running them all. See CLAUDE.md section 5 for the rule.
 
-- Tests use Vitest and sit next to the code they cover (`foo.ts` → `foo.test.ts`).
+- **Unit** tests use Vitest and sit next to the code they cover (`foo.ts` → `foo.test.ts`). Run with `npm test`.
+- **End-to-end** tests use Playwright, sit in `e2e/` and are named `*.e2e.ts` (so Vitest ignores them). Run with `npm run test:e2e`. They build the site and serve it with `wrangler dev`, the real Workers runtime, in Chrome (desktop and a phone-sized project). They do not use the Astro dev server, because production behaves differently (it ignores HTTP range requests, for example). Locally they use the Chrome that is installed. In CI, Playwright installs Chromium. The home page has two test hooks: `data-ready="true"` on `#map` when every tile has loaded, and `?e2e` in the URL to expose the map as `window.__map`.
+- **Regression** tests pin a fixed bug. Name the bug in the test (see the `unpack-tiles` tests for examples) so nobody removes it by mistake.
 - Keep logic out of `.astro` files where you can. Put it in `src/lib/` so it can be unit-tested.
 - Check that a new test can fail: break the code, watch the test fail, then restore the code.
-- Before finishing, run `npm test`, `npx astro check` and `npm run build`. CI runs all three.
+- Before every commit, run `npm test`, the end-to-end tests, `npx astro check` and `npm run build`. CI runs the same checks.
 
 ## Documentation
 

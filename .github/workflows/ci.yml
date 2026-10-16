@@ -19,3 +19,14 @@ jobs:
       # Fails on any country guide that breaks the schema in src/lib/country-schema.ts.
       - run: npx astro check
       - run: npm run build
+      # End-to-end tests run the built site in the real Workers runtime (wrangler dev) in a headless browser.
+      - run: npx playwright install --with-deps chromium
+      - run: npm run test:e2e
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: playwright-report
+          path: |
+            playwright-report/
+            test-results/
+          retention-days: 7

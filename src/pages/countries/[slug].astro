@@ -1,7 +1,7 @@
 ---
-import { getCollection, render } from 'astro:content';
+import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
-import Unverified from '../../components/Unverified.astro';
+import CountryGuide from '../../components/CountryGuide.astro';
 
 export async function getStaticPaths() {
 	const countries = await getCollection('countries');
@@ -9,51 +9,11 @@ export async function getStaticPaths() {
 }
 
 const { country } = Astro.props;
-const { Content } = await render(country);
 const d = country.data;
 ---
 
 <Base title={`Drone rules in ${d.name}`} description={`Recreational drone rules for ${d.name}: registration, weight limits, and official sources.`}>
 	<article class="prose">
-		<h1>Drone rules in {d.name}</h1>
-		<p class="muted">Last verified {d.lastVerified.toISOString().slice(0, 10)}</p>
-		<dl class="card">
-			<dt>Authority</dt>
-			<dd><a href={d.authorityUrl}>{d.authority}</a></dd>
-			<dt>Who must register</dt>
-			<dd>{d.whoMustRegister ?? <Unverified />}</dd>
-			<dt>Registration</dt>
-			<dd>{d.registrationUrl ? <a href={d.registrationUrl}>Register with {d.authority}</a> : <Unverified />}</dd>
-			<dt>Lowest registration weight</dt>
-			<dd>{d.registrationWeightGrams !== null ? `${d.registrationWeightGrams} g` : <Unverified />}</dd>
-			<dt>Minimum operator age</dt>
-			<dd>{d.minOperatorAge ?? <Unverified />}</dd>
-			<dt>Remote ID</dt>
-			<dd>{d.remoteId ?? <Unverified />}</dd>
-			<dt>Insurance</dt>
-			<dd>{d.insurance ?? <Unverified />}</dd>
-		</dl>
-		<Content />
-		<h2>Sources</h2>
-		<ul>{d.sources.map((url) => <li><a href={url}>{url}</a></li>)}</ul>
+		<CountryGuide country={country} />
 	</article>
 </Base>
-
-<style>
-	dl {
-		margin: var(--space-3) 0;
-	}
-	dt {
-		font-weight: 600;
-		color: var(--color-text-muted);
-		font-size: var(--text-sm);
-		text-transform: uppercase;
-		letter-spacing: 0.04em;
-	}
-	dd {
-		margin: 0 0 var(--space-3);
-	}
-	dd:last-child {
-		margin-bottom: 0;
-	}
-</style>

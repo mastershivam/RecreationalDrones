@@ -5,13 +5,13 @@ export function coveredCountriesFilter(guides: Record<string, unknown>) {
 	return ['in', ['get', 'ADM0_A3'], ['literal', Object.keys(guides)]] as const;
 }
 
-// The guide entry for a map feature, or undefined if the country has no guide.
-export function guideForFeature<T>(
+// The country code (ADM0_A3) of a map feature, but only if that country has a guide.
+export function coveredCountryCode(
 	feature: { properties?: Record<string, unknown> } | undefined,
-	guides: Record<string, T>,
-): T | undefined {
+	guides: Record<string, unknown>,
+): string | undefined {
 	const iso3 = feature?.properties?.ADM0_A3;
-	return typeof iso3 === 'string' ? guides[iso3] : undefined;
+	return typeof iso3 === 'string' && Object.hasOwn(guides, iso3) ? iso3 : undefined;
 }
 
 export interface MapColors {

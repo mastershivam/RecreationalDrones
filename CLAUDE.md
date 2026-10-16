@@ -60,15 +60,27 @@ For multi-step tasks, state a brief plan:
 
 Strong success criteria let you loop independently. Weak criteria ("make it work") require constant clarification.
 
-## 5. Always Write Unit Tests
+## 5. Test Before Every Commit
 
-**Every feature ships with unit tests, written as you build it.**
+**Before every commit, create all missing tests, then run them all. Commit only if everything passes.**
 
-- Write tests for each feature or step as you go, not at the end.
-- `npm test` must pass before moving to the next step.
-- Keep logic out of `.astro` files where possible; put it in `src/lib/` so it can be unit-tested.
-- Confirm a new test can fail: break the code, watch it fail, restore it.
-- See AGENTS.md → Testing for the commands and conventions.
+Three kinds of test, all required:
+- **Unit:** every function or module you added or changed. Keep logic out of `.astro` files; put it in `src/lib/` so it can be unit-tested.
+- **End to end:** every user-facing behaviour you added or changed, driven through a real browser (globe loads, popups, navigation, mobile layout).
+- **Regression:** every bug you fix gets a test that fails without the fix and passes with it. Keep these forever.
+
+Process, in order:
+1. Look at the diff and list every behaviour it adds, changes or fixes.
+2. Write each missing test of all three kinds. If a kind has no harness yet, set it up as part of this commit.
+3. Run the full suite: `npm test`, the end-to-end tests, `npx astro check` and `npm run build`. See AGENTS.md → Testing for the commands.
+4. If anything fails, fix the code and re-run. Never commit with a failing test.
+5. Only then commit, and say in the commit message or summary which tests were added.
+
+Rules:
+- Never delete, skip, loosen or weaken a test just to get it passing. If a test is wrong, say so and explain the fix.
+- Confirm each new test can fail: break the code, watch it fail, restore it.
+- Docs-only changes need no new tests, but still run the existing suite before committing.
+- If the user tells you to commit without tests, say what is untested, then follow their instruction.
 
 ## 6. Follow the Design Principles
 

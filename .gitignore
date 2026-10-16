@@ -28,3 +28,7 @@ public/tiles/
 
 # wrangler local state
 .wrangler/
+
+# playwright
+test-results/
+playwright-report/

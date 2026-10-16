@@ -21,18 +21,18 @@ Design for a 375px-wide phone first, then widen.
 - Use `dvh`, not `vh`, for full-height layouts, so phone browser toolbars don't cut content off. The home page globe fills the space between header and footer through the `fill` prop on `Base.astro`.
 - Respect safe areas (`env(safe-area-inset-*)`) on notched phones.
 - The globe fits the screen on load (`initialZoom`), ignores tilting (`pitchWithRotate: false`), and taps look for a country within `TAP_RADIUS_PX` of the finger. Never require pixel-perfect taps.
-- Overlays on the globe stay small and fade away on the first drag.
+- Overlays on the globe stay small and fade away on the first drag. The country modal is the exception: it is meant to be large, and fits the screen (with a close button of at least 44px).
 - Write hints for touch and mouse alike ("tap" rather than "click").
 
 ## Country popups
 
-Key facts show in a popup on the globe, not on a new page. The full guide page still exists for detail and search engines.
+Country information shows on the globe, not on a new page. Clicking never navigates away.
 
-- **Hover** (mouse only) shows a read-only preview. It has no links, so it can't be clicked into.
-- **Click or tap** pins the popup in place. It adds the official source, the date checked and a "Full guide" link, and closes with the X, or by clicking elsewhere on the map.
-- Show only the key facts (who must register, minimum age, Remote ID, insurance). Unchecked ones read "Not yet verified", never blank.
-- On phones the pinned popup docks to the bottom of the map, so it can't be cut off. It sits above the attribution link, which must stay visible.
-- Popup text is built from guide data, so it goes through `popupHtml`, which escapes it. Never put raw guide text into HTML.
+- **Hover** (mouse only) shows a small read-only preview of the key facts. It has no links, so it can't be clicked into.
+- **Click or tap** opens a large modal with the whole guide: the same content as the country's guide page (facts, written guide, sources). The page and the modal render one shared component, `CountryGuide.astro`, so they can't drift apart. The guide pages still exist for sharing and for search engines.
+- The modal is a native `<dialog>`, so it traps focus, closes with Escape, and returns focus afterwards. It also closes with the X or by clicking the dimmed area. Its content scrolls inside it, and it never grows past the screen.
+- Unchecked facts read "Not yet verified", never blank.
+- Preview text is built from guide data through `popupHtml`, which escapes it. Never put raw guide text into HTML.
 
 ## Day and night
 

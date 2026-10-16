@@ -3,7 +3,7 @@ import {
 	GLOBE_PROJECTION,
 	MAP_COLOR_TOKENS,
 	coveredCountriesFilter,
-	guideForFeature,
+	coveredCountryCode,
 	initialZoom,
 	readMapColors,
 	tapBox,
@@ -27,24 +27,24 @@ describe('coveredCountriesFilter', () => {
 	});
 });
 
-describe('guideForFeature', () => {
-	it('works with any kind of guide entry, not only URLs', () => {
-		const entry = { name: 'United Kingdom' };
-		expect(guideForFeature({ properties: { ADM0_A3: 'GBR' } }, { GBR: entry })).toBe(entry);
+describe('coveredCountryCode', () => {
+	it('returns the code of a country that has a guide', () => {
+		expect(coveredCountryCode({ properties: { ADM0_A3: 'GBR' } }, guides)).toBe('GBR');
 	});
 
-	it('returns the guide URL for a covered country', () => {
-		expect(guideForFeature({ properties: { ADM0_A3: 'GBR' } }, guides)).toBe('/countries/united-kingdom/');
+	it('does not care what the guide entries contain', () => {
+		expect(coveredCountryCode({ properties: { ADM0_A3: 'GBR' } }, { GBR: { name: 'United Kingdom' } })).toBe('GBR');
 	});
 
 	it.each([
 		['an uncovered country', { properties: { ADM0_A3: 'FRA' } }],
+		['a code that only exists on Object.prototype', { properties: { ADM0_A3: 'toString' } }],
 		['a feature without ADM0_A3', { properties: {} }],
 		['a feature without properties', {}],
 		['no feature', undefined],
 		['a non-string code', { properties: { ADM0_A3: 42 } }],
 	])('returns undefined for %s', (_, feature) => {
-		expect(guideForFeature(feature, guides)).toBeUndefined();
+		expect(coveredCountryCode(feature, guides)).toBeUndefined();
 	});
 });
 

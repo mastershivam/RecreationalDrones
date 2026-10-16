@@ -9,6 +9,7 @@ npm install
 npm run dev        # http://localhost:4321
 npm run build      # outputs to dist/
 npm test           # Vitest unit tests, including every country guide's frontmatter
+npm run test:e2e   # Playwright end-to-end tests in Chrome, against the real Workers runtime
 npx astro check    # type-checks and validates every country guide
 ```
 

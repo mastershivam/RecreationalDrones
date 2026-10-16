@@ -1,9 +1,6 @@
-// The key facts the map's popup shows for a country; everything else lives on the guide page.
+// The key facts the map's hover preview shows for a country. Clicking opens the full guide instead.
 export interface GuideSummary {
 	name: string;
-	url: string;
-	authority: string;
-	authorityUrl: string;
 	whoMustRegister: string | null;
 	minOperatorAge: number | null;
 	remoteId: string | null;
@@ -16,8 +13,6 @@ interface GuideEntry {
 	data: {
 		iso3: string;
 		name: string;
-		authority: string;
-		authorityUrl: string;
 		whoMustRegister: string | null;
 		minOperatorAge: number | null;
 		remoteId: string | null;
@@ -26,7 +21,7 @@ interface GuideEntry {
 	};
 }
 
-// Maps each country's iso3 code to its popup summary for the map.
+// Maps each country's iso3 code to its preview summary for the map.
 // Throws on duplicates, since the map can only show one guide per country.
 export function guideSummaries(entries: GuideEntry[]): Record<string, GuideSummary> {
 	const summaries: Record<string, GuideSummary> = {};
@@ -34,9 +29,6 @@ export function guideSummaries(entries: GuideEntry[]): Record<string, GuideSumma
 		if (summaries[data.iso3]) throw new Error(`Duplicate iso3 ${data.iso3} in guide "${id}"`);
 		summaries[data.iso3] = {
 			name: data.name,
-			url: `/countries/${id}/`,
-			authority: data.authority,
-			authorityUrl: data.authorityUrl,
 			whoMustRegister: data.whoMustRegister,
 			minOperatorAge: data.minOperatorAge,
 			remoteId: data.remoteId,

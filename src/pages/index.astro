@@ -1,10 +1,12 @@
 ---
 import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
+import CountryGuide from '../components/CountryGuide.astro';
 import { guideSummaries } from '../lib/guides';
 
-// iso3 -> key facts for the popup, read by the map script below.
-const guides = guideSummaries(await getCollection('countries'));
+const countries = await getCollection('countries');
+// iso3 -> key facts for the hover preview, read by the map script below.
+const guides = guideSummaries(countries);
 ---
 
 <Base title="Recreational drone rules map" fill>
@@ -12,17 +14,34 @@ const guides = guideSummaries(await getCollection('countries'));
 		<div id="map" data-guides={JSON.stringify(guides)}></div>
 		<div class="intro card">
 			<h1>Where can you fly?</h1>
-			<p class="muted">Drag to spin the globe. Hover or tap a glowing country for its key drone rules.</p>
+			<p class="muted">Drag to spin the globe. Hover over a glowing country for a preview, or click or tap it for the full guide.</p>
 			<p class="muted legend"><span class="swatch"></span>Shaded areas are in night right now.</p>
 		</div>
 	</div>
+
+	<!-- The large popup: opened by clicking a country, filled from the matching template below. -->
+	<dialog id="country-dialog" aria-label="Country guide">
+		<div class="dialog-panel">
+			<button type="button" class="dialog-close" aria-label="Close">×</button>
+			<div class="dialog-body"></div>
+		</div>
+	</dialog>
+
+	<!-- Each country's full guide, rendered at build time, so opening it needs no request. -->
+	{
+		countries.map((country) => (
+			<template id={`guide-${country.data.iso3}`}>
+				<CountryGuide country={country} />
+			</template>
+		))
+	}
 </Base>
 
 <script>
 	import { Map, Popup, setWorkerUrl, type GeoJSONSource } from 'maplibre-gl';
 	import workerUrl from 'maplibre-gl/dist/maplibre-gl-worker.mjs?url';
 	import 'maplibre-gl/dist/maplibre-gl.css';
-	import { guideForFeature, initialZoom, readMapColors, tapBox } from '../lib/map-config';
+	import { coveredCountryCode, initialZoom, readMapColors, tapBox } from '../lib/map-config';
 	import type { GuideSummary } from '../lib/guides';
 	import { buildStyle } from '../lib/map-style';
 	import { popupHtml } from '../lib/popup';
@@ -47,53 +66,60 @@ const guides = guideSummaries(await getCollection('countries'));
 		touchPitch: false,
 	});
 
+	// Hooks for the end-to-end tests: `data-ready` says every tile has loaded, and ?e2e exposes the map
+	// so tests can find where a country is on screen.
+	map.once('idle', () => (el.dataset.ready = 'true'));
+	if (location.search.includes('e2e')) (window as unknown as { __map: Map }).__map = map;
+
 	const intro = document.querySelector('.intro')!;
 	map.once('dragstart', () => intro.classList.add('hidden'));
 
 	// Night moves around the globe, so refresh the shading every minute.
 	setInterval(() => (map.getSource('night') as GeoJSONSource).setData(nightGeoJSON(new Date())), 60_000);
 
-	const query = (box: Parameters<typeof map.queryRenderedFeatures>[0]) =>
-		guideForFeature(map.queryRenderedFeatures(box, { layers: ['covered-countries'] })[0], guides);
+	const covered = (box: Parameters<typeof map.queryRenderedFeatures>[0]) =>
+		coveredCountryCode(map.queryRenderedFeatures(box, { layers: ['covered-countries'] })[0], guides);
 
-	// Hovering shows a read-only preview; clicking or tapping pins a popup that has links in it.
+	// Hovering shows a small read-only preview.
 	const preview = new Popup({ closeButton: false, closeOnClick: false, offset: 14, maxWidth: '20rem', className: 'country-popup preview' });
-	let pinned: Popup | null = null;
-	let previewing: GuideSummary | undefined;
+	let previewing: string | undefined;
 	const canHover = matchMedia('(hover: hover)').matches;
-
-	map.on('mousemove', (e) => {
-		const guide = query(e.point);
-		map.getCanvas().style.cursor = guide ? 'pointer' : '';
-		if (!canHover || pinned || !guide) {
-			preview.remove();
-			previewing = undefined;
-			return;
-		}
-		preview.setLngLat(e.lngLat);
-		if (guide !== previewing) {
-			previewing = guide;
-			preview.setHTML(popupHtml(guide, false)).addTo(map);
-		}
-	});
-	map.getCanvas().addEventListener('mouseleave', () => {
+	const hidePreview = () => {
 		preview.remove();
 		previewing = undefined;
+	};
+
+	map.on('mousemove', (e) => {
+		const iso3 = covered(e.point);
+		map.getCanvas().style.cursor = iso3 ? 'pointer' : '';
+		if (!canHover || !iso3) return hidePreview();
+		preview.setLngLat(e.lngLat);
+		if (iso3 !== previewing) {
+			previewing = iso3;
+			preview.setHTML(popupHtml(guides[iso3])).addTo(map);
+		}
 	});
+	map.getCanvas().addEventListener('mouseleave', hidePreview);
+
+	// Clicking or tapping opens the full guide in a large popup, so nobody has to leave the map.
+	const dialog = document.getElementById('country-dialog') as HTMLDialogElement;
+	const panel = dialog.querySelector('.dialog-panel')!;
+	const body = dialog.querySelector('.dialog-body')!;
+	dialog.querySelector('.dialog-close')!.addEventListener('click', () => dialog.close());
+	// The dialog element itself is only hit by clicks on the dimmed area around the panel.
+	dialog.addEventListener('click', (e) => e.target === dialog && dialog.close());
 
 	// Query a small box around the tap so a fingertip doesn't have to be pixel-perfect.
 	map.on('click', (e) => {
-		pinned?.remove();
-		pinned = null;
-		const guide = query(tapBox(e.point));
-		preview.remove();
-		previewing = undefined;
-		if (!guide) return;
-		pinned = new Popup({ offset: 14, maxWidth: '20rem', className: 'country-popup' })
-			.setLngLat(e.lngLat)
-			.setHTML(popupHtml(guide, true))
-			.addTo(map);
-		pinned.on('close', () => (pinned = null));
+		const iso3 = covered(tapBox(e.point));
+		const guide = iso3 && (document.getElementById(`guide-${iso3}`) as HTMLTemplateElement | null);
+		if (!iso3 || !guide) return;
+		hidePreview();
+		body.replaceChildren(guide.content.cloneNode(true));
+		dialog.setAttribute('aria-label', `Drone rules in ${guides[iso3].name}`);
+		dialog.showModal();
+		body.scrollTop = 0;
+		panel.scrollTop = 0;
 	});
 </script>
 
@@ -155,7 +181,7 @@ const guides = guideSummaries(await getCollection('countries'));
 			padding: var(--space-3) var(--space-4);
 		}
 	}
-	/* The popup is created by MapLibre, so these styles must be global. */
+	/* The hover preview is created by MapLibre, so these styles must be global. */
 	:global(.country-popup .maplibregl-popup-content) {
 		background: var(--color-surface);
 		color: var(--color-text);
@@ -170,36 +196,11 @@ const guides = guideSummaries(await getCollection('countries'));
 	:global(.country-popup .maplibregl-popup-tip) {
 		display: none;
 	}
-	:global(.country-popup .maplibregl-popup-content) {
-		max-height: 60vh;
-		max-height: 60dvh;
-		overflow-y: auto;
-	}
-	/* On phones there isn't room beside the tapped point, so dock the popup to the bottom of the map.
-	   !important is needed to override the position MapLibre sets directly on the element. */
-	@media (max-width: 640px) {
-		:global(.country-popup.maplibregl-popup) {
-			top: auto !important;
-			left: var(--space-2) !important;
-			right: var(--space-2);
-			/* Sits above the attribution link, which must stay visible. */
-			bottom: 3rem;
-			transform: none !important;
-			max-width: none !important;
-		}
-	}
 	:global(.country-popup.preview) {
 		pointer-events: none;
 	}
-	:global(.country-popup .maplibregl-popup-close-button) {
-		color: var(--color-text-muted);
-		font-size: var(--text-lg);
-		/* A finger-sized target for closing the popup. */
-		width: 2.75rem;
-		height: 2.75rem;
-	}
 	:global(.country-popup .popup-title) {
-		margin: 0 var(--space-4) var(--space-2) 0;
+		margin: 0 0 var(--space-2);
 		font-size: var(--text-base);
 	}
 	:global(.country-popup dl) {
@@ -220,10 +221,59 @@ const guides = guideSummaries(await getCollection('countries'));
 		color: var(--color-text-muted);
 		font-size: 0.75rem;
 	}
-	:global(.country-popup .popup-link) {
-		display: inline-block;
-		margin-top: var(--space-2);
-		padding: var(--space-2) 0;
-		font-weight: 600;
+
+	/* The large popup. The dialog itself is transparent and unpadded, so a click on it is a click on the backdrop. */
+	dialog {
+		width: min(46rem, calc(100% - var(--space-3)));
+		max-width: none;
+		max-height: none;
+		padding: 0;
+		border: 0;
+		background: transparent;
+		color: var(--color-text);
+		overflow: visible;
+	}
+	dialog::backdrop {
+		background: color-mix(in srgb, var(--color-night) 75%, transparent);
+	}
+	.dialog-panel {
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		max-height: calc(100vh - var(--space-4));
+		max-height: calc(100dvh - var(--space-4));
+		background: var(--color-surface);
+		border: 1px solid var(--color-border);
+		border-radius: var(--radius);
+		box-shadow: 0 16px 48px rgb(0 0 0 / 0.6);
+	}
+	.dialog-body {
+		overflow-y: auto;
+		padding: var(--space-4);
+		overscroll-behavior: contain;
+		overflow-wrap: anywhere;
+	}
+	.dialog-body :global(h1) {
+		margin: 0 var(--space-5) var(--space-1) 0;
+		font-size: var(--text-lg);
+	}
+	.dialog-close {
+		position: absolute;
+		top: var(--space-1);
+		right: var(--space-1);
+		/* A finger-sized target. */
+		width: 2.75rem;
+		height: 2.75rem;
+		border: 0;
+		border-radius: 50%;
+		background: transparent;
+		color: var(--color-text-muted);
+		font-size: var(--text-xl);
+		line-height: 1;
+		cursor: pointer;
+	}
+	.dialog-close:hover {
+		background: var(--color-surface-raised);
+		color: var(--color-text);
 	}
 </style>

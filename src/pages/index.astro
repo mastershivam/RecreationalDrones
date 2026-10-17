@@ -88,8 +88,6 @@ const bounds = mainlandBounds(JSON.parse(readFileSync('public/data/countries.geo
 	import { buildStyle } from '../lib/map-style';
 	import { popupHtml, summaryHtml } from '../lib/popup';
 	import { searchCountries } from '../lib/search';
-	import { mountFlow } from '../lib/flow-canvas';
-	import { flowOpacity } from '../lib/flow-field';
 	import { countryAt, locateErrorMessage, locatedMessage } from '../lib/geo';
 	import type { Bounds } from '../lib/country-bounds';
 	import { nightGeoJSON } from '../lib/daynight';
@@ -122,16 +120,6 @@ const bounds = mainlandBounds(JSON.parse(readFileSync('public/data/countries.geo
 	// so tests can find where a country is on screen.
 	map.once('idle', () => (el.dataset.ready = 'true'));
 	if (location.search.includes('e2e')) (window as unknown as { __map: Map }).__map = map;
-
-	// The flow-field backdrop: lines drifting over the globe, above the map's canvas and below its popups and markers.
-	// It thins out as you zoom in, and is gone by the zoom at which zones appear.
-	const flow = Object.assign(document.createElement('canvas'), { className: 'flow' });
-	flow.setAttribute('aria-hidden', 'true');
-	map.getCanvas().after(flow);
-	mountFlow(flow);
-	const fadeFlow = () => (flow.style.opacity = String(flowOpacity(map.getZoom())));
-	fadeFlow();
-	map.on('zoom', fadeFlow);
 
 	const intro = document.querySelector('.intro')!;
 	map.once('dragstart', () => intro.classList.add('hidden'));
@@ -357,14 +345,6 @@ const bounds = mainlandBounds(JSON.parse(readFileSync('public/data/countries.geo
 </script>
 
 <style>
-	/* The flow-field canvas is made by script inside the map, so its style must be global. */
-	:global(.flow) {
-		position: absolute;
-		inset: 0;
-		width: 100%;
-		height: 100%;
-		pointer-events: none;
-	}
 	.stage {
 		position: relative;
 		flex: 1;

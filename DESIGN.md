@@ -14,40 +14,6 @@ Name, logo, colour names and component rules are in [BRAND.md](BRAND.md). It is 
 6. **Works everywhere.** Mobile first. Respect `prefers-reduced-motion`. Every control is reachable by keyboard with a visible focus ring, and by touch (see Mobile).
 7. **Light on the wire.** System fonts, no external font or tracking requests, no UI libraries. It must stay cheap to host. The one allowed exception is Cloudflare's cookieless Web Analytics beacon, once a token is set (see the launch checklist).
 
-## Flow field
-
-The look of the site is a **flow field**: fine lines drifting along a smooth noise field, like air or current. It is atmosphere, so it never carries data, never follows real wind, and never implies anything about whether flying is allowed.
-
-- **On the map,** the lines drift over the globe and the space round it. The canvas sits inside the map, above its canvas and below its popups, markers and panels, so nothing readable is ever under a line. It fades out between zoom 3 and zoom 6 (`flowOpacity`), so it is gone before zones appear, and it cannot be tapped.
-- **On every other page,** a fixed canvas sits behind the content, strongest at the top and fading out down the page (the map page has its own). Cards are solid, so the text a person reads is never on a line.
-- **Colors** are `--color-flow-1` and `--color-flow-2`, which mean nothing. Never use level, zone or accent colors for flow lines, or they would carry meaning.
-- **Reduced motion:** the field is drawn once as a still picture and does not move, and it follows the setting if it changes while the page is open.
-- **Cost:** about 500 particles on a desktop and 320 on a phone, a canvas capped at 1.5x pixel density, and it pauses when the tab is hidden. If it ever slows the globe, lower `particleCount` before anything else.
-- **Where the code is:** the maths is in `src/lib/flow-field.ts` (seeded, so a test can repeat a field exactly) and the drawing in `src/lib/flow-canvas.ts`.
-
-## Launch checklist: what makes it a real site
-
-Each of these is tested in `e2e/launch-checklist.e2e.ts`, so a change that breaks one fails the build.
-
-1. **Custom 404:** `404.astro`, served with a 404 status and kept out of search (`noindex`).
-2. **A main action above the fold:** on the map, the search box and the location button. On a guide, the "Register online" button under the title (it goes to the official source if we have no registration page).
-3. **A title per page:** the page name, then "· Recreational Drones". Every title is unique and at most 75 characters.
-4. **A description per page:** unique, at most 160 characters. A guide's is built from its data (`guideDescription`).
-5. **Social image:** `public/og-image.png`, 1200 × 630, made by `node brand/build-icons.mjs`, with `og:*` and `twitter:*` tags and a canonical link on every page.
-6. **Icons:** `favicon.svg`, `favicon.ico`, `favicon-32.png`, `apple-touch-icon.png`, `icon-192.png`, `icon-512.png` and `site.webmanifest`, all from `brand/favicon.svg`.
-7. **robots.txt:** allows the site, keeps crawlers off the 15 MB tile file, names the sitemap.
-8. **sitemap.xml:** every page, with a guide's last-checked day. The address comes from `SITE_URL` in `src/lib/site.ts`: change it when a custom domain is attached.
-9. **Alt text on every image:** a test fails on any `<img>` without it, and on any decorative canvas that is not `aria-hidden`.
-10. **Mobile:** designed for 375 px first, and every browser test runs on a phone-sized project too.
-11. **A sticky mobile action:** on a guide, the register button stays at the bottom of a phone screen while you read. The map has no such button because its search box is always on screen.
-12. **Fast:** the guide and countries pages are about 26 KB and paint in well under 2 seconds on a throttled phone connection (a test checks it). The map page shows its search box and intro in under 2 seconds, but the globe itself downloads about 1 MB compressed (the map code and country shapes), so on a slow connection it finishes later. Built files are cached for a year (`public/_headers`).
-13. **Form error states:** the site has no forms. The search says "No guide for that country yet", and the location button has a message for each way it can fail. If a form is added, give it error states before it ships.
-14. **Thank-you page:** not needed, since there is no form. A mistake is reported on GitHub, from a link on every guide.
-15. **Privacy page:** `/privacy/`, linked from every footer. It says what is and is not collected, and a test fails if analytics is switched on without the page saying so.
-16. **Cookie banner:** none, because the site sets no cookies and stores nothing. A test checks that a visit sets no cookies, no local or session storage, and loads nothing from another site. If that ever changes, add a banner in the same commit.
-17. **Analytics:** the code is there and off. Cloudflare Web Analytics is cookieless, and it needs a token from the Cloudflare dashboard in `ANALYTICS_TOKEN` (`src/lib/site.ts`). Until then there are no analytics, and the privacy page says so.
-18. **Real contact details:** `/contact/`, which points to the project's GitHub issue tracker (no email is published), and a "Report a mistake" link on every guide that opens a new issue with the country filled in.
-
 ## Mobile
 
 Design for a 375px-wide phone first, then widen.

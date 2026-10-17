@@ -26,9 +26,6 @@
 	--color-land: #3f5f94;
 	--color-land-border: #9bb3dd;
 	--color-night: #02040a;
-	/* The flow-field backdrop. Decoration only, so neither color means anything. */
-	--color-flow-1: #6fd3ff;
-	--color-flow-2: #9bb3dd;
 	/* Zone layer. Not amber: amber means "we have a guide". Zones also differ by line style and symbol. */
 	--color-zone-airport: #ff9ab0;
 	--color-zone-approval: #d2b4ff;

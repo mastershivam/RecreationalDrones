@@ -21,6 +21,8 @@ const BOX: Record<string, { lon: [number, number]; lat: [number, number] }> = {
 	NPL: { lon: [79.9, 88.3], lat: [26.3, 30.5] },
 	THA: { lon: [97.3, 105.7], lat: [5.5, 20.5] },
 	GBR: { lon: [-8.7, 1.8], lat: [49.8, 60.9] },
+	CAN: { lon: [-141.1, -52.5], lat: [41.6, 83.2] },
+	AUS: { lon: [96.5, 168], lat: [-54.9, -9.0] },
 };
 
 describe('zone data files', () => {

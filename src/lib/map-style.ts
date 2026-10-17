@@ -1,7 +1,8 @@
 import { layers, namedFlavor, type Flavor } from '@protomaps/basemaps';
-import type { FilterSpecification, GeoJSONSourceSpecification, LayerSpecification, StyleSpecification } from 'maplibre-gl';
+import type { ExpressionSpecification, FilterSpecification, GeoJSONSourceSpecification, LayerSpecification, StyleSpecification } from 'maplibre-gl';
 import { nightGeoJSON } from './daynight';
 import { GLOBE_PROJECTION, coveredCountriesFilter, type MapColors } from './map-config';
+import { levelColorExpression, type Level } from './restrictiveness';
 import { TILE_PATH } from './tile-server';
 import { ZONE_MIN_ZOOM, zoneLayerFilters } from './zones';
 
@@ -56,12 +57,13 @@ export function basemapLayers(flavor: Flavor): LayerSpecification[] {
 	});
 }
 
-// Night shading and the glowing "we have a guide" countries. These sit above land and borders but under labels.
-function overlayLayers(c: MapColors, guides: Record<string, unknown>): LayerSpecification[] {
+// Night shading and the glowing countries that have a guide, colored by how restrictive their rules are. These sit above land and borders but under labels.
+function overlayLayers(c: MapColors, guides: Record<string, { level: Level }>): LayerSpecification[] {
 	const covered = {
 		source: 'countries',
 		filter: coveredCountriesFilter(guides) as unknown as FilterSpecification,
 	};
+	const levelFill = levelColorExpression(guides, (level) => c[`level${level}`], c.accent) as ExpressionSpecification;
 	return [
 		{
 			id: 'night-fill',
@@ -78,8 +80,8 @@ function overlayLayers(c: MapColors, guides: Record<string, unknown>): LayerSpec
 			filter: ['==', ['get', 'kind'], 'terminator'],
 			paint: { 'line-color': c.night, 'line-width': 36, 'line-blur': 36, 'line-opacity': 0.3 },
 		},
-		{ id: 'covered-countries', type: 'fill', ...covered, paint: { 'fill-color': c.accent, 'fill-opacity': 0.55 } },
-		{ id: 'covered-countries-outline', type: 'line', ...covered, paint: { 'line-color': c.accent, 'line-width': 1.5 } },
+		{ id: 'covered-countries', type: 'fill', ...covered, paint: { 'fill-color': levelFill, 'fill-opacity': 0.55 } },
+		{ id: 'covered-countries-outline', type: 'line', ...covered, paint: { 'line-color': levelFill, 'line-width': 1.5 } },
 		...zoneLayers(c),
 	] as LayerSpecification[];
 }
@@ -111,7 +113,7 @@ function zoneLayers(c: MapColors): LayerSpecification[] {
 }
 
 // `origin` is the site's origin, since MapLibre needs absolute URLs for tiles and fonts.
-export function buildStyle(c: MapColors, guides: Record<string, unknown>, origin: string, now = new Date()): StyleSpecification {
+export function buildStyle(c: MapColors, guides: Record<string, { level: Level }>, origin: string, now = new Date()): StyleSpecification {
 	const base = basemapLayers(basemapFlavor(c));
 	const firstLabel = base.findIndex((l) => l.type === 'symbol');
 	return {

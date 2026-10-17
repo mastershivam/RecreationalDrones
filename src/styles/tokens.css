@@ -11,6 +11,12 @@
 	--color-text: #eef1fa;
 	--color-text-muted: #a4aecb;
 	--color-accent: #ff9f1c;
+	/* How restrictive a country's rules are, 1 (least) to 4 (most). They fall in lightness as well as changing hue, so
+	   they stay apart for people who cannot tell the hues apart. Each is also named in text wherever it appears. */
+	--color-level-1: #f2fbff;
+	--color-level-2: #7fe3d0;
+	--color-level-3: #ff9a3c;
+	--color-level-4: #ff6f91;
 	--color-on-accent: #1a1100;
 	--color-link: #6fd3ff;
 	--color-warning: #ffd166;

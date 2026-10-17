@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
+import { LEVELS, levelText } from '../../lib/restrictiveness';
 
 const countries = (await getCollection('countries')).sort((a, b) => a.data.name.localeCompare(b.data.name));
 ---
@@ -8,12 +9,19 @@ const countries = (await getCollection('countries')).sort((a, b) => a.data.name.
 <Base title="Drone rules by country">
 	<div class="prose">
 		<h1>Drone rules by country</h1>
+		<h2>How we rate the rules</h2>
+		<p>
+			Each country gets a level from 1 to 4 for someone flying for fun. It is our judgement from the official sources, and each guide says why.
+		</p>
+		<ol class="levels">
+			{LEVELS.map((l) => <li><strong>{l.level} of 4: {l.label}.</strong> {l.criteria}</li>)}
+		</ol>
 		<ul class="countries">
 			{
 				countries.map((c) => (
 					<li class="card">
 						<a href={`/countries/${c.id}/`}>{c.data.name}</a>
-						<span class="muted">{c.data.authority} · last verified {c.data.lastVerified.toISOString().slice(0, 10)}</span>
+						<span class="muted">{levelText(c.data.restrictiveness)} · {c.data.authority} · last verified {c.data.lastVerified.toISOString().slice(0, 10)}</span>
 					</li>
 				))
 			}

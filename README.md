@@ -71,7 +71,7 @@ Then push. To change the tiles later, extract a new file and run the last comman
 
 **Plan limits to know about.** A map load makes dozens of tile requests, and each one runs the Worker and reads R2. On the free Workers plan that is capped at 100,000 Worker requests a day, which is roughly a few thousand map loads. The Workers Paid plan ($5 a month) raises it to 10 million a month. R2 reads (10 million a month free) are unlikely to be the limit. If traffic outgrows this, serve the bucket publicly on a custom domain instead and change the URL in `src/lib/map-style.ts`.
 
-**Known blemish.** The country highlight uses Natural Earth 50m shapes, which are coarser than the OpenStreetMap coastline, so at zoom 6 and 7 the amber can spill a little over the sea.
+**Known blemish.** The country highlight uses Natural Earth 50m shapes, which are coarser than the OpenStreetMap coastline, so at zoom 6 and 7 the highlight can spill a little over the sea.
 
 See [TODO.md](TODO.md) for what's planned next.
 

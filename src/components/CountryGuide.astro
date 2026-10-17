@@ -1,6 +1,7 @@
 ---
 import { render, type CollectionEntry } from 'astro:content';
 import Unverified from './Unverified.astro';
+import { levelText } from '../lib/restrictiveness';
 
 interface Props {
 	country: CollectionEntry<'countries'>;
@@ -17,6 +18,8 @@ const d = country.data;
 <dl class="card">
 	<dt>Authority</dt>
 	<dd><a href={d.authorityUrl}>{d.authority}</a></dd>
+	<dt>Rules</dt>
+	<dd>{levelText(d.restrictiveness)}. {d.restrictivenessReason}</dd>
 	<dt>Who must register</dt>
 	<dd>{d.whoMustRegister ?? <Unverified />}</dd>
 	<dt>Registration fee</dt>

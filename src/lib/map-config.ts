@@ -21,6 +21,10 @@ export interface MapColors {
 	text: string;
 	textMuted: string;
 	accent: string;
+	level1: string;
+	level2: string;
+	level3: string;
+	level4: string;
 	night: string;
 	zoneAirport: string;
 	zoneApproval: string;
@@ -33,6 +37,10 @@ export const MAP_COLOR_TOKENS: Record<keyof MapColors, string> = {
 	text: '--color-text',
 	textMuted: '--color-text-muted',
 	accent: '--color-accent',
+	level1: '--color-level-1',
+	level2: '--color-level-2',
+	level3: '--color-level-3',
+	level4: '--color-level-4',
 	night: '--color-night',
 	zoneAirport: '--color-zone-airport',
 	zoneApproval: '--color-zone-approval',

@@ -55,6 +55,10 @@ const colors = {
 	text: '#000008',
 	textMuted: '#000004',
 	accent: '#000005',
+	level1: '#000009',
+	level2: '#00000a',
+	level3: '#00000b',
+	level4: '#00000c',
 	night: '#000006',
 };
 

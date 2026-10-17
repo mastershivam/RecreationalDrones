@@ -12,11 +12,15 @@ const colors = {
 	text: '#eef1fa',
 	textMuted: '#a4aecb',
 	accent: '#ff9f1c',
+	level1: '#f2fbff',
+	level2: '#7fe3d0',
+	level3: '#ff9a3c',
+	level4: '#ff6f91',
 	night: '#02040a',
 	zoneAirport: '#ff9ab0',
 	zoneApproval: '#d2b4ff',
 };
-const guides = { GBR: '/countries/united-kingdom/' };
+const guides = { GBR: { level: 2 as const }, NPL: { level: 3 as const } };
 const origin = 'https://example.org';
 const publicDir = join(import.meta.dirname, '../../public');
 
@@ -112,7 +116,15 @@ describe('buildStyle', () => {
 
 	it('highlights only countries that have a guide', () => {
 		const covered = style.layers.find((l) => l.id === 'covered-countries') as any;
-		expect(covered.filter).toEqual(['in', ['get', 'ADM0_A3'], ['literal', ['GBR']]]);
+		expect(covered.filter).toEqual(['in', ['get', 'ADM0_A3'], ['literal', ['GBR', 'NPL']]]);
+	});
+
+	it('paints each guided country in the color of its level, in the fill and the outline', () => {
+		for (const id of ['covered-countries', 'covered-countries-outline']) {
+			const l = style.layers.find((x) => x.id === id) as any;
+			const paint = l.paint[id === 'covered-countries' ? 'fill-color' : 'line-color'];
+			expect(paint, id).toEqual(['match', ['get', 'ADM0_A3'], ['GBR'], colors.level2, ['NPL'], colors.level3, colors.accent]);
+		}
 	});
 
 	it('shades night from the time it is given', () => {

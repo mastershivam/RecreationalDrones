@@ -180,6 +180,24 @@ describe('Thailand guide', () => {
 	});
 });
 
+describe('restrictiveness levels', () => {
+	const rated = guides.map(({ file, frontmatter }) => ({ file, data: countrySchema.parse(frontmatter) }));
+	const level = (iso3: string) => rated.find((g) => g.data.iso3 === iso3)!.data.restrictiveness;
+
+	it.each(rated)('$file says why it got its level', ({ data }) => {
+		expect(data.restrictivenessReason.length).toBeGreaterThan(20);
+	});
+
+	it('rates the countries that need an in-person step or a second authority at level 3', () => {
+		expect(level('NPL')).toBe(3);
+		expect(level('THA')).toBe(3);
+	});
+
+	it('rates online registration with an online test at level 2', () => {
+		for (const iso3 of ['GBR', 'USA', 'DEU', 'FRA']) expect(level(iso3), iso3).toBe(2);
+	});
+});
+
 describe('United States guide', () => {
 	const file = readFileSync(join(dir, 'united-states.mdx'), 'utf8');
 	const data = countrySchema.parse(parse(file.match(/^---\n([\s\S]*?)\n---/)![1]));
@@ -254,5 +272,109 @@ describe('EU guides', () => {
 
 	it.each(euGuides)('$file leaves the minimum age unverified, because a state may lower it', ({ data }) => {
 		expect(data.minOperatorAge).toBeNull();
+	});
+});
+
+describe('Canada guide', () => {
+	const file = readFileSync(join(dir, 'canada.mdx'), 'utf8');
+	const data = countrySchema.parse(parse(file.match(/^---\n([\s\S]*?)\n---/)![1]));
+
+	it('is keyed to the code the map uses for Canada, and cites Transport Canada only', () => {
+		expect(data.iso3).toBe('CAN');
+		expect(data.authority).toBe('Transport Canada');
+		for (const url of data.sources) expect(new URL(url).hostname).toBe('tc.canada.ca');
+	});
+
+	it('registers drones of 250 g or more, and says under 250 g needs neither registration nor a certificate', () => {
+		expect(data.registrationWeightGrams).toBe(250);
+		expect(data.whoMustRegister).toContain('250 g');
+		expect(data.whoMustRegister).toContain('Under 250 g needs neither');
+	});
+
+	it('gives the basic exam facts: age 14, 35 questions, 65% to pass, 24 hours between tries', () => {
+		expect(data.minOperatorAge).toBe(14);
+		for (const fact of ['35 multiple-choice', '65% to pass', '24 hours']) expect(file).toContain(fact);
+	});
+
+	it('says a foreign pilot cannot register and needs a Foreign SFOC-RPAS and a Canadian certificate, so it is level 3', () => {
+		expect(data.restrictiveness).toBe(3);
+		expect(file).toContain('**cannot register**');
+		expect(file).toContain('Foreign SFOC-RPAS');
+		expect(file).toContain('Canadian drone pilot certificate');
+	});
+
+	it('gives the distances Transport Canada gives: 30 m from people, 5.6 km from airports, 1.9 km from heliports', () => {
+		for (const fact of ['**30 m (100 ft)**', '**5.6 km (3 nautical miles)**', '**1.9 km (1 nautical mile)**']) expect(file).toContain(fact);
+	});
+
+	it('leaves the fee unverified, since the page text does not give one', () => {
+		expect(data.registrationFee).toBeNull();
+		expect(file).toContain('## Not covered yet');
+	});
+});
+
+describe('Australia guide', () => {
+	const file = readFileSync(join(dir, 'australia.mdx'), 'utf8');
+	const data = countrySchema.parse(parse(file.match(/^---\n([\s\S]*?)\n---/)![1]));
+
+	it('is keyed to the code the map uses for Australia, and names CASA', () => {
+		expect(data.iso3).toBe('AUS');
+		expect(data.authority).toContain('Civil Aviation Safety Authority');
+	});
+
+	it('is level 1, because CASA asks nothing of people who fly for fun', () => {
+		expect(data.restrictiveness).toBe(1);
+		expect(data.whoMustRegister).toContain('flies only for fun');
+		expect(file).toContain('There is no age limit');
+	});
+
+	it('gives the recreational limits: 120 m, 30 m from people, daylight, line of sight', () => {
+		for (const fact of ['**120 m**', '**30 m**', '**daylight**', '**sight**']) expect(file).toContain(fact);
+	});
+
+	it('gives the airport distances for drones over and under 250 g', () => {
+		for (const fact of ['**5.5 km (3 nautical miles)**', '**45 m**', '**1.4 km**']) expect(file).toContain(fact);
+	});
+
+	it('says it was read from Internet Archive copies, because casa.gov.au blocks automated downloads', () => {
+		expect(file).toContain('Internet Archive');
+	});
+
+	it('gives no fine amount, since two CASA pages disagree', () => {
+		const penalties = file.slice(file.indexOf('## Penalties'), file.indexOf('## Not covered yet'));
+		expect(penalties).not.toMatch(/\$\s?\d/);
+	});
+});
+
+describe('Japan guide', () => {
+	const file = readFileSync(join(dir, 'japan.mdx'), 'utf8');
+	const data = countrySchema.parse(parse(file.match(/^---\n([\s\S]*?)\n---/)![1]));
+
+	it('is keyed to the code the map uses for Japan, and cites JCAB and the registration portal', () => {
+		expect(data.iso3).toBe('JPN');
+		expect(data.authority).toContain('Civil Aviation Bureau');
+		expect(data.registrationUrl).toBe('https://www.mlit.go.jp/koku/drone/en/');
+	});
+
+	it('registers drones of 100 g or more, including a visitor’s, and requires Remote ID', () => {
+		expect(data.registrationWeightGrams).toBe(100);
+		expect(data.whoMustRegister).toContain('100 g');
+		expect(data.whoMustRegister).toContain('including a drone brought in by a visitor');
+		expect(data.remoteId).toContain('Required');
+	});
+
+	it('gives the three fees from the FAQ, and does not guess which one a visitor pays', () => {
+		for (const fact of ['900 yen', '1,450 yen', '2,400 yen', 'does not say that outright']) expect(file).toContain(fact);
+	});
+
+	it('is level 3, because airports and densely inhabited districts need permission first', () => {
+		expect(data.restrictiveness).toBe(3);
+		expect(file).toContain('densely inhabited districts');
+	});
+
+	it('says the airport distance and the PDF leaflets were not read', () => {
+		const notCovered = file.slice(file.indexOf('## Not covered yet'));
+		expect(notCovered).toContain('How far the airport areas reach');
+		expect(notCovered).toContain('PDF leaflets');
 	});
 });

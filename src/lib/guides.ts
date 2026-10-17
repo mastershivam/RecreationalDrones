@@ -1,8 +1,11 @@
 // The key facts the map's hover preview shows for a country. Clicking opens the full guide instead.
+import type { Level } from './restrictiveness';
+
 export interface GuideSummary {
 	name: string;
 	// The guide page's path segment, for the "full guide" link.
 	slug: string;
+	level: Level;
 	whoMustRegister: string | null;
 	registrationFee: string | null;
 	registrationUrl: string | null;
@@ -14,6 +17,7 @@ interface GuideEntry {
 	data: {
 		iso3: string;
 		name: string;
+		restrictiveness: Level;
 		whoMustRegister: string | null;
 		registrationFee: string | null;
 		registrationUrl: string | null;
@@ -30,6 +34,7 @@ export function guideSummaries(entries: GuideEntry[]): Record<string, GuideSumma
 		summaries[data.iso3] = {
 			name: data.name,
 			slug: id,
+			level: data.restrictiveness,
 			whoMustRegister: data.whoMustRegister,
 			registrationFee: data.registrationFee,
 			registrationUrl: data.registrationUrl,

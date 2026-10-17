@@ -6,6 +6,7 @@ const guide: GuideSummary = {
 	name: 'United Kingdom',
 	whoMustRegister: 'Drones from 250 g need a Flyer ID and an Operator ID.',
 	slug: 'united-kingdom',
+	level: 2,
 	registrationFee: null,
 	registrationUrl: 'https://www.caa.co.uk/drones/register/',
 	lastVerified: '2026-10-13',
@@ -29,6 +30,11 @@ describe('popupHtml', () => {
 		expect(html).toContain('<dt>Registration fee</dt><dd>£12.34 a year</dd>');
 		expect(html).not.toContain('Remote ID');
 		expect(html).not.toContain('Insurance');
+	});
+
+	it('names the level in words, so color is never the only cue', () => {
+		expect(popupHtml(guide)).toContain('<dt>Rules</dt><dd>2 of 4: Register online</dd>');
+		expect(summaryHtml({ ...guide, level: 3 })).toContain('3 of 4: Complex registration');
 	});
 
 	it('marks unchecked facts as not yet verified instead of leaving them blank', () => {
@@ -65,7 +71,7 @@ describe('summaryHtml', () => {
 
 	it('is short: it leaves out Remote ID, insurance and minimum age', () => {
 		const html = summaryHtml(guide);
-		expect(html.length).toBeLessThan(1000);
+		expect(html.length).toBeLessThan(1100);
 		expect(html).not.toContain('<dt>Remote ID');
 		expect(html).not.toContain('<dt>Insurance');
 	});

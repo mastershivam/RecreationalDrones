@@ -6,6 +6,7 @@ const entry = (id: string, iso3: string, overrides = {}) => ({
 	data: {
 		iso3,
 		name: 'Testland',
+		restrictiveness: 2 as const,
 		whoMustRegister: 'Everyone',
 		registrationFee: '$5',
 		registrationUrl: 'https://example.org/register',
@@ -25,6 +26,7 @@ describe('guideSummaries', () => {
 		expect(GBR).toMatchObject({
 			name: 'Testland',
 			slug: 'united-kingdom',
+			level: 2,
 			whoMustRegister: 'Everyone',
 			registrationFee: '$5',
 			registrationUrl: 'https://example.org/register',

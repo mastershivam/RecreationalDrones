@@ -1,4 +1,5 @@
 import type { GuideSummary } from './guides';
+import { levelText } from './restrictiveness';
 
 const ESCAPES: Record<string, string> = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' };
 
@@ -14,7 +15,7 @@ function row(label: string, value: string | null): string {
 
 // HTML for the read-only preview shown when hovering a country. Clicking opens the summary in a modal.
 export function popupHtml(g: GuideSummary): string {
-	const facts = [row('Who must register', g.whoMustRegister), row('Registration fee', g.registrationFee)].join('');
+	const facts = [row('Rules', levelText(g.level)), row('Who must register', g.whoMustRegister), row('Registration fee', g.registrationFee)].join('');
 	return `<h2 class="popup-title">${escapeHtml(g.name)}</h2><dl>${facts}</dl><p class="popup-meta">Checked ${escapeHtml(g.lastVerified)} · click for the summary</p>`;
 }
 
@@ -24,7 +25,7 @@ export function summaryHtml(g: GuideSummary): string {
 	return (
 		`<h1>Drone rules in ${escapeHtml(g.name)}</h1>` +
 		`<p class="muted">Last verified ${escapeHtml(g.lastVerified)}</p>` +
-		`<dl class="card">${row('Who must register', g.whoMustRegister)}${row('Registration fee', g.registrationFee)}<dt>Where to register</dt><dd>${where}</dd></dl>` +
+		`<dl class="card">${row('Rules', levelText(g.level))}${row('Who must register', g.whoMustRegister)}${row('Registration fee', g.registrationFee)}<dt>Where to register</dt><dd>${where}</dd></dl>` +
 		`<p><a class="guide-link" href="/countries/${encodeURIComponent(g.slug)}/">Read the full guide</a> for pilot tests, Remote ID, insurance and where you can fly.</p>`
 	);
 }

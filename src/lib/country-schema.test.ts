@@ -8,6 +8,8 @@ const valid = {
 	authorityUrl: 'https://example.org/',
 	registrationUrl: null,
 	whoMustRegister: null,
+	restrictiveness: 2,
+	restrictivenessReason: 'Register online with an online test.',
 	registrationFee: null,
 	registrationWeightGrams: 250,
 	minOperatorAge: null,
@@ -31,6 +33,9 @@ describe('countrySchema', () => {
 		['negative weight', { registrationWeightGrams: -1 }],
 		['fractional age', { minOperatorAge: 17.5 }],
 		['invalid date', { lastVerified: 'not a date' }],
+		['level 0', { restrictiveness: 0 }],
+		['level 5', { restrictiveness: 5 }],
+		['no reason for the level', { restrictivenessReason: '' }],
 	])('rejects %s', (_, override) => {
 		expect(countrySchema.safeParse({ ...valid, ...override }).success).toBe(false);
 	});

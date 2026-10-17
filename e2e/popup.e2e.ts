@@ -99,7 +99,7 @@ test.describe('full guide popup', () => {
 
 	test('leaves the details to the guide page, so it can be read in a few seconds', async ({ page }) => {
 		await openUk(page);
-		await expect(dialog(page).locator('dt')).toHaveText(['Who must register', 'Registration fee', 'Where to register']);
+		await expect(dialog(page).locator('dt')).toHaveText(['Rules', 'Who must register', 'Registration fee', 'Where to register']);
 		await dialog(page).getByRole('link', { name: 'Read the full guide' }).click();
 		await expect(page).toHaveURL(/\/countries\/united-kingdom\/$/);
 		await expect(page.getByRole('heading', { name: 'Sources' })).toBeVisible();

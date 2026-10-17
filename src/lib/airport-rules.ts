@@ -40,6 +40,27 @@ export const AIRPORT_RULES: Record<string, AirportRule | { none: string }> = {
 		authority: 'CAAT "Flying a drone in Thailand"',
 		note: "CAAT's leaflet says not to fly within 9 km of an aerodrome.",
 	},
+	CAN: {
+		iso2: 'CA',
+		// 3 nautical miles, Transport Canada's distance from a certified airport.
+		radiusMeters: 3 * 1852,
+		indicative: true,
+		ruleUrl: 'https://tc.canada.ca/en/aviation/drone-safety/learn-rules-you-fly-your-drone/where-fly-your-drone',
+		authority: 'Transport Canada, "Where to fly your drone"',
+		note: 'Transport Canada says not to fly closer than 5.6 km (3 nautical miles) to an airport listed as certified in the Canada Flight Supplement, or 1.9 km (1 nautical mile) to a certified heliport, unless you follow an established procedure. This circle is drawn at every airport in the open data, certified or not, so it shows more places than the rule covers. Heliports are not shown. Military aerodromes need permission from the Department of National Defence.',
+	},
+	AUS: {
+		iso2: 'AU',
+		// 3 nautical miles, CASA's distance from a controlled airport for a drone over 250 g.
+		radiusMeters: 5500,
+		indicative: true,
+		ruleUrl: 'https://www.casa.gov.au/drones/drone-rules/flying-near-airports',
+		authority: 'CASA, "Flying near airports"',
+		note: "CASA says a drone over 250 g must not fly within 5.5 km (3 nautical miles) of a controlled airport (one with a control tower), measured from the runway centreline, nor in the runway's approach and departure paths, which reach 7 km. Near an airport without a tower you may fly, but must move away from any crewed aircraft. This circle is drawn at every airport in the open data, so it shows more places than the rule covers. Check a CASA-verified drone safety app.",
+	},
+	JPN: {
+		none: "JCAB prohibits flying in the airspace around airports without permission, but shows it as an area on a map and the page we read gives no distance. A fixed circle would mislead.",
+	},
 	USA: {
 		none: "The FAA sets no single distance. Controlled airspace round an airport (Class B, C, D and surface Class E) varies in shape and size and needs FAA authorization, so a fixed circle would mislead.",
 	},

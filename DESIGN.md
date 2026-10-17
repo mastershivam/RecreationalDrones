@@ -8,7 +8,7 @@ Name, logo, colour names and component rules are in [BRAND.md](BRAND.md). It is 
 
 1. **Trust before flair.** Every rule shows its source and last-verified date. Anything unchecked reads "Not yet verified" in the warning color, never a guess. Decoration must never make a rule harder to read.
 2. **The globe is the product.** The home page is the globe. Keep chrome small and let the globe fill the screen. Anything that overlaps it must be translucent and compact, and information appears in place (see Country popups) rather than sending people away from it.
-3. **One accent, used for meaning.** Amber (`--color-accent`) marks "we have a guide for this" on the map, plus primary actions. Don't use it for decoration, so the covered countries keep standing out.
+3. **One accent, used for meaning.** Amber (`--color-accent`) marks primary actions. On the map, a country with a guide glows in the color of its rules level (see Rules levels). Don't use either for decoration, so the covered countries keep standing out.
 4. **Dark and calm.** One dark theme. Surfaces are layered (bg → surface → raised) with thin borders instead of heavy shadows.
 5. **Readable first.** Body text is at least 7:1 on its background and secondary text 4.5:1. Links stay underlined, so color is never the only cue.
 6. **Works everywhere.** Mobile first. Respect `prefers-reduced-motion`. Every control is reachable by keyboard with a visible focus ring, and by touch (see Mobile).
@@ -30,11 +30,25 @@ Design for a 375px-wide phone first, then widen.
 
 Country information shows on the globe, not on a new page. Clicking never navigates away.
 
-- **Hover** (mouse only) shows a small read-only preview of the key facts. It has no links, so it can't be clicked into.
+- **Hover** (mouse only) shows a small read-only preview: the level, who must register and the fee. It has no links, so it can't be clicked into.
 - **Click or tap** opens a large modal with the whole guide: the same content as the country's guide page (facts, written guide, sources). The page and the modal render one shared component, `CountryGuide.astro`, so they can't drift apart. The guide pages still exist for sharing and for search engines.
 - The modal is a native `<dialog>`, so it traps focus, closes with Escape, and returns focus afterwards. It also closes with the X or by clicking the dimmed area. Its content scrolls inside it, and it never grows past the screen.
 - Unchecked facts read "Not yet verified", never blank.
 - Preview text is built from guide data through `popupHtml`, which escapes it. Never put raw guide text into HTML.
+
+## Rules levels
+
+Each guide has a `restrictiveness` level from 1 to 4 and a `restrictivenessReason`, and the map paints the country in that level's color. It is our judgement from the official sources, so the criteria are written in one place, `src/lib/restrictiveness.ts`, and shown on the map's Key and the countries page.
+
+1. **No registration:** no registration and no test for recreational flyers.
+2. **Register online:** register online, with at most an online test. No in-person step and no permission before flying.
+3. **Complex registration:** more than an online form and an online test: an in-person step, a second authority, a local phone number, or permission before flying.
+4. **Fully restricted:** flying for fun is banned or needs a government licence.
+
+- **Colors** are `--color-level-1` to `--color-level-4`. They fall in lightness as well as changing hue (adjacent levels differ by at least 1.2:1, tested), so they stay apart for people who cannot tell the hues apart. Each is tested against land.
+- **Color is never the only cue (principle 5).** The level is written out ("2 of 4: Register online") in the hover preview, the summary, the guide page and the countries page, and the Key names all four.
+- **A level is a judgement, so say why.** The guide's `restrictivenessReason` is one plain sentence, from the sources the guide cites. For the EU, the level is EASA's common baseline; a state's own steps are not yet read and may raise it.
+- **Not a verdict.** A level says how much paperwork there is, never whether you may fly somewhere (see Voice).
 
 ## Zones layer
 
@@ -42,7 +56,7 @@ Places that matter for flying are drawn on the globe from the zone files in `dat
 
 - **Airport circles for every country.** A country with a guide gets a circle round each airport, sized by its own authority's rule. `src/lib/airport-rules.ts` holds the rules, and a test fails until a new guide has one. Where the real zone is not a circle (the UK's), the circle is the smallest size the authority documents, the zone says it is *indicative*, and its note says what the circle leaves out.
 - **Shown only from zoom 6.** Before that a 5 km circle is a few pixels, and a world of dots is noise that would catch taps meant for a country.
-- **Color is never the only cue.** Airport zones are dashed outlines in `--color-zone-airport` with a dot at the middle. Places that need approval are solid outlines in `--color-zone-approval`. A model aircraft field is a ring in body-text color. The panel's key draws each one the same way. Zones are never amber, which means "we have a guide" (principle 3). Both zone colors are tested for contrast against land and sea.
+- **Color is never the only cue.** Airport zones are dashed outlines in `--color-zone-airport` with a dot at the middle. Places that need approval are solid outlines in `--color-zone-approval`. A model aircraft field is a ring in body-text color. The panel's key draws each one the same way. Zones never use the level colors or amber, which mean "we have a guide" and "act" (principle 3). Both zone colors are tested for contrast against land and sea.
 - **The filter** is a small `Zones` panel with a labelled box per group (airport zones, approval needed or restricted, model aircraft fields), all on to start with. It is open on a desktop and a closed tab on a phone, its rows are at least 44px tall, and it sits clear of MapLibre's attribution bar, which spreads across the bottom of a narrow screen.
 - **Popups.** Hover (mouse only) shows a read-only preview with what the place is, its note, the source's domain and the date, but no link. Click or tap opens a small popup with the same text and a link to the source. A zone under the pointer wins over the country under it, and a country's full guide opens from anywhere else in it. Where zones overlap, the popup lists each, up to three.
 - **Wording.** A zone says what a place is and who says so, never that you may fly there. A model aircraft field says it is not an approval. Data that cannot load says so plainly ("Zones could not be loaded. The map still works.") and never looks like "no zones here".

@@ -41,7 +41,7 @@ const bounds = mainlandBounds(JSON.parse(readFileSync('public/data/countries.geo
 					LEVELS.map((l) => (
 						<li>
 							<span class="chip" style={`background: var(--color-level-${l.level})`} aria-hidden="true" />
-							<span><strong>{l.level} of 4: {l.label}.</strong> {l.criteria}</span>
+							<span><strong>{l.label}.</strong> {l.criteria}</span>
 						</li>
 					))
 				}

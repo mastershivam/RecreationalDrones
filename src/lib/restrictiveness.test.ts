@@ -14,9 +14,9 @@ describe('LEVELS', () => {
 });
 
 describe('levelText', () => {
-	it('says the level out of four with its name, so color is never the only cue', () => {
-		expect(levelText(2)).toBe('2 of 4: Register online');
-		expect(levelText(3)).toBe('3 of 4: Complex registration');
+	it('names the level in words, so color is never the only cue', () => {
+		expect(levelText(2)).toBe('Basic restrictions');
+		expect(levelText(3)).toBe('Complex restrictions');
 	});
 });
 

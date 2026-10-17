@@ -14,7 +14,7 @@ const countries = (await getCollection('countries')).sort((a, b) => a.data.name.
 			Each country gets a level from 1 to 4 for someone flying for fun. It is our judgement from the official sources, and each guide says why.
 		</p>
 		<ol class="levels">
-			{LEVELS.map((l) => <li><strong>{l.level} of 4: {l.label}.</strong> {l.criteria}</li>)}
+			{LEVELS.map((l) => <li><strong>{l.label}.</strong> {l.criteria}</li>)}
 		</ol>
 		<ul class="countries">
 			{

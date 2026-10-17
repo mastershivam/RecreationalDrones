@@ -27,7 +27,7 @@ test.describe('rules levels on the map', () => {
 		if (!(await panel.evaluate((d: HTMLDetailsElement) => d.open))) await panel.locator('summary').click();
 		const items = panel.locator('.levels li');
 		await expect(items).toHaveCount(4);
-		for (const [i, label] of ['1 of 4: No registration', '2 of 4: Register online', '3 of 4: Complex registration', '4 of 4: Fully restricted'].entries()) {
+		for (const [i, label] of ['No restrictions', 'Basic restrictions', 'Complex restrictions', 'Fully restricted'].entries()) {
 			await expect(items.nth(i)).toContainText(label);
 		}
 		await expect(items.nth(2)).toContainText('in-person step');
@@ -38,22 +38,22 @@ test.describe('rules levels on the map', () => {
 		await page.getByRole('combobox', { name: 'Search for a country' }).fill('nepal');
 		await page.getByRole('option', { name: 'Nepal' }).click();
 		const dialog = page.locator('#country-dialog');
-		await expect(dialog).toContainText('3 of 4: Complex registration', { timeout: 15_000 });
+		await expect(dialog).toContainText('Complex restrictions', { timeout: 15_000 });
 	});
 });
 
 test.describe('rules levels on the pages', () => {
 	test('a guide page gives its level and the reason for it', async ({ page }) => {
 		await page.goto('/countries/nepal/');
-		await expect(page.locator('dd', { hasText: '3 of 4: Complex registration' })).toContainText('in person in Kathmandu');
+		await expect(page.locator('dd', { hasText: 'Complex restrictions' })).toContainText('in person in Kathmandu');
 	});
 
 	test('the countries page explains the four levels and shows each country’s', async ({ page }) => {
 		await page.goto('/countries/');
 		await expect(page.getByRole('heading', { name: 'How we rate the rules' })).toBeVisible();
 		await expect(page.locator('ol.levels li')).toHaveCount(4);
-		await expect(page.locator('.countries li', { hasText: 'Thailand' })).toContainText('3 of 4: Complex registration');
-		await expect(page.locator('.countries li', { hasText: 'Germany' })).toContainText('2 of 4: Register online');
+		await expect(page.locator('.countries li', { hasText: 'Thailand' })).toContainText('Complex restrictions');
+		await expect(page.locator('.countries li', { hasText: 'Germany' })).toContainText('Basic restrictions');
 	});
 
 	test('does not scroll sideways', async ({ page }) => {

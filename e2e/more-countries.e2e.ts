@@ -3,9 +3,9 @@ import { activate, focusOn, highlightedAt, openGlobe, pointAt } from './helpers'
 
 // Each country: a point inside it, a neighbour with no guide, how far in to zoom, and what its guide says.
 const COUNTRIES = [
-	{ name: 'Canada', slug: 'canada', iso3: 'CAN', at: [-100, 55], neighbour: [-102, 24], zoom: 3, level: '3 of 4: Complex registration', fact: 'Foreign SFOC-RPAS' },
-	{ name: 'Australia', slug: 'australia', iso3: 'AUS', at: [134, -25], neighbour: [114, -1], zoom: 3, level: '1 of 4: No registration', fact: 'There is no age limit' },
-	{ name: 'Japan', slug: 'japan', iso3: 'JPN', at: [138.5, 36.5], neighbour: [128, 36.5], zoom: 5, level: '3 of 4: Complex registration', fact: '900 yen' },
+	{ name: 'Canada', slug: 'canada', iso3: 'CAN', at: [-100, 55], neighbour: [-102, 24], zoom: 3, level: 'Complex restrictions', fact: 'Foreign SFOC-RPAS' },
+	{ name: 'Australia', slug: 'australia', iso3: 'AUS', at: [134, -25], neighbour: [114, -1], zoom: 3, level: 'No restrictions', fact: 'There is no age limit' },
+	{ name: 'Japan', slug: 'japan', iso3: 'JPN', at: [138.5, 36.5], neighbour: [128, 36.5], zoom: 5, level: 'Complex restrictions', fact: '900 yen' },
 ] as const;
 
 async function show(page: Page, c: (typeof COUNTRIES)[number]) {

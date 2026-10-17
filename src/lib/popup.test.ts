@@ -33,8 +33,8 @@ describe('popupHtml', () => {
 	});
 
 	it('names the level in words, so color is never the only cue', () => {
-		expect(popupHtml(guide)).toContain('<dt>Rules</dt><dd>2 of 4: Register online</dd>');
-		expect(summaryHtml({ ...guide, level: 3 })).toContain('3 of 4: Complex registration');
+		expect(popupHtml(guide)).toContain('<dt>Rules</dt><dd>Basic restrictions</dd>');
+		expect(summaryHtml({ ...guide, level: 3 })).toContain('Complex restrictions');
 	});
 
 	it('marks unchecked facts as not yet verified instead of leaving them blank', () => {

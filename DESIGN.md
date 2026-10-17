@@ -40,13 +40,13 @@ Country information shows on the globe, not on a new page. Clicking never naviga
 
 Each guide has a `restrictiveness` level from 1 to 4 and a `restrictivenessReason`, and the map paints the country in that level's color. It is our judgement from the official sources, so the criteria are written in one place, `src/lib/restrictiveness.ts`, and shown on the map's Key and the countries page.
 
-1. **No registration:** no registration and no test for recreational flyers.
-2. **Register online:** register online, with at most an online test. No in-person step and no permission before flying.
-3. **Complex registration:** more than an online form and an online test: an in-person step, a second authority, a local phone number, or permission before flying.
+1. **No restrictions:** no registration and no test for recreational flyers. The flying rules (height, distance from people) still apply.
+2. **Basic restrictions:** register online, with at most an online test. No in-person step and no permission before flying.
+3. **Complex restrictions:** more than an online form and an online test: an in-person step, a second authority, a local phone number, or permission before flying.
 4. **Fully restricted:** flying for fun is banned or needs a government licence.
 
 - **Colors** are `--color-level-1` to `--color-level-4`. They fall in lightness as well as changing hue (adjacent levels differ by at least 1.2:1, tested), so they stay apart for people who cannot tell the hues apart. Each is tested against land.
-- **Color is never the only cue (principle 5).** The level is written out ("2 of 4: Register online") in the hover preview, the summary, the guide page and the countries page, and the Key names all four.
+- **Color is never the only cue (principle 5).** The level is written out ("Basic restrictions") in the hover preview, the summary, the guide page and the countries page, and the Key names all four.
 - **A level is a judgement, so say why.** The guide's `restrictivenessReason` is one plain sentence, from the sources the guide cites. For the EU, the level is EASA's common baseline; a state's own steps are not yet read and may raise it.
 - **Not a verdict.** A level says how much paperwork there is, never whether you may fly somewhere (see Voice).
 

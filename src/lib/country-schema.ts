@@ -10,6 +10,8 @@ export const countrySchema = z.object({
 	authorityUrl: z.url(),
 	registrationUrl: z.url().nullable(),
 	whoMustRegister: z.string().nullable(),
+	// What registering costs, in a few words (for example "$5, valid 3 years"). Shown on the map's summary.
+	registrationFee: z.string().nullable(),
 	registrationWeightGrams: z.number().nonnegative().nullable(),
 	minOperatorAge: z.number().int().positive().nullable(),
 	remoteId: z.string().nullable(),

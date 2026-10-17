@@ -35,8 +35,9 @@ test.describe('hover preview', () => {
 		const preview = page.locator('.country-popup.preview');
 		await expect(preview).toContainText('United Kingdom');
 		await expect(preview).toContainText('Who must register');
-		await expect(preview).toContainText('Minimum age');
-		await expect(preview).toContainText('click for the full guide');
+		await expect(preview).toContainText('Registration fee');
+		await expect(preview).toContainText('£12.34 a year');
+		await expect(preview).toContainText('click for the summary');
 	});
 
 	test('is read-only, with no links to chase', async ({ page }) => {
@@ -47,11 +48,16 @@ test.describe('hover preview', () => {
 		await expect(page.locator('.country-popup.preview a')).toHaveCount(0);
 	});
 
-	test('marks unchecked facts as not yet verified', async ({ page }) => {
+	test('is short: no Remote ID, insurance or minimum age', async ({ page }) => {
+		// The hover preview is for a 10-second look; the rest lives on the guide page.
 		await openGlobe(page);
 		const uk = await ukPoint(page);
 		await page.mouse.move(uk.x, uk.y);
-		await expect(page.locator('.country-popup.preview .unverified')).toHaveCount(2); // Remote ID and insurance
+		const preview = page.locator('.country-popup.preview');
+		await expect(preview).toBeVisible();
+		await expect(preview).not.toContainText('Remote ID');
+		await expect(preview).not.toContainText('Insurance');
+		await expect(preview).not.toContainText('Minimum age');
 	});
 
 	test('goes away when the pointer leaves the country', async ({ page }) => {
@@ -75,13 +81,14 @@ test.describe('hover preview', () => {
 });
 
 test.describe('full guide popup', () => {
-	test('opens on click or tap, with the whole guide in it', async ({ page }) => {
+	test('opens on click or tap, with the summary and a link to the full guide', async ({ page }) => {
 		await openUk(page);
 		await expect(dialog(page).getByRole('heading', { level: 1 })).toHaveText('Drone rules in United Kingdom');
 		await expect(dialog(page)).toContainText('Flyer ID');
 		await expect(dialog(page)).toContainText('Last verified');
-		await expect(dialog(page).getByRole('link', { name: /Civil Aviation Authority/ }).first()).toHaveAttribute('href', /caa\.co\.uk/);
-		await expect(dialog(page).getByRole('heading', { name: 'Sources' })).toBeAttached();
+		await expect(dialog(page)).toContainText('£12.34 a year');
+		await expect(dialog(page).getByRole('link', { name: 'Register online' })).toHaveAttribute('href', /caa\.co\.uk/);
+		await expect(dialog(page).getByRole('link', { name: 'Read the full guide' })).toHaveAttribute('href', '/countries/united-kingdom/');
 	});
 
 	test('stays on the map instead of opening a new page', async ({ page }) => {
@@ -90,9 +97,12 @@ test.describe('full guide popup', () => {
 		expect(new URL(page.url()).pathname).toBe('/');
 	});
 
-	test('says so when a rule has not been checked, instead of leaving it blank', async ({ page }) => {
+	test('leaves the details to the guide page, so it can be read in a few seconds', async ({ page }) => {
 		await openUk(page);
-		await expect(dialog(page).locator('.unverified')).toHaveCount(2);
+		await expect(dialog(page).locator('dt')).toHaveText(['Who must register', 'Registration fee', 'Where to register']);
+		await dialog(page).getByRole('link', { name: 'Read the full guide' }).click();
+		await expect(page).toHaveURL(/\/countries\/united-kingdom\/$/);
+		await expect(page.getByRole('heading', { name: 'Sources' })).toBeVisible();
 	});
 
 	test('closes with the close button', async ({ page }) => {
@@ -134,18 +144,18 @@ test.describe('full guide popup', () => {
 		await expect(dialog(page).getByRole('button', { name: 'Close' })).toBeInViewport({ ratio: 1 });
 	});
 
-	test('scrolls inside itself so every part of the guide can be read', async ({ page }) => {
+	test('keeps its last line, the link to the full guide, reachable', async ({ page }) => {
 		// Regression: on a phone a tall popup was cut off, hiding the end of it.
 		await openUk(page);
-		const sources = dialog(page).getByRole('heading', { name: 'Sources' });
-		await sources.scrollIntoViewIfNeeded();
-		await expect(sources).toBeInViewport();
+		const link = dialog(page).getByRole('link', { name: 'Read the full guide' });
+		await link.scrollIntoViewIfNeeded();
+		await expect(link).toBeInViewport();
 		await expect(dialog(page).getByRole('button', { name: 'Close' })).toBeInViewport({ ratio: 1 });
 	});
 
 	test('starts at the top each time it is opened', async ({ page }) => {
 		await openUk(page);
-		await dialog(page).getByRole('heading', { name: 'Sources' }).scrollIntoViewIfNeeded();
+		await dialog(page).getByRole('link', { name: 'Read the full guide' }).scrollIntoViewIfNeeded();
 		await dialog(page).getByRole('button', { name: 'Close' }).click();
 		await reopenUk(page);
 		await expect(dialog(page).getByRole('heading', { level: 1 })).toBeInViewport();

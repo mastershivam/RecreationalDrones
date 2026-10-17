@@ -1,10 +1,11 @@
 // The key facts the map's hover preview shows for a country. Clicking opens the full guide instead.
 export interface GuideSummary {
 	name: string;
+	// The guide page's path segment, for the "full guide" link.
+	slug: string;
 	whoMustRegister: string | null;
-	minOperatorAge: number | null;
-	remoteId: string | null;
-	insurance: string | null;
+	registrationFee: string | null;
+	registrationUrl: string | null;
 	lastVerified: string;
 }
 
@@ -14,9 +15,8 @@ interface GuideEntry {
 		iso3: string;
 		name: string;
 		whoMustRegister: string | null;
-		minOperatorAge: number | null;
-		remoteId: string | null;
-		insurance: string | null;
+		registrationFee: string | null;
+		registrationUrl: string | null;
 		lastVerified: Date;
 	};
 }
@@ -29,10 +29,10 @@ export function guideSummaries(entries: GuideEntry[]): Record<string, GuideSumma
 		if (summaries[data.iso3]) throw new Error(`Duplicate iso3 ${data.iso3} in guide "${id}"`);
 		summaries[data.iso3] = {
 			name: data.name,
+			slug: id,
 			whoMustRegister: data.whoMustRegister,
-			minOperatorAge: data.minOperatorAge,
-			remoteId: data.remoteId,
-			insurance: data.insurance,
+			registrationFee: data.registrationFee,
+			registrationUrl: data.registrationUrl,
 			lastVerified: data.lastVerified.toISOString().slice(0, 10),
 		};
 	}

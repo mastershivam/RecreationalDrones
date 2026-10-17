@@ -8,6 +8,7 @@ const valid = {
 	authorityUrl: 'https://example.org/',
 	registrationUrl: null,
 	whoMustRegister: null,
+	registrationFee: null,
 	registrationWeightGrams: 250,
 	minOperatorAge: null,
 	remoteId: null,
@@ -37,5 +38,11 @@ describe('countrySchema', () => {
 	it('requires nullable fields to be present, so unverified rules are explicit', () => {
 		const { remoteId: _, ...missing } = valid;
 		expect(countrySchema.safeParse(missing).success).toBe(false);
+	});
+
+	it('requires a registration fee, or an explicit null', () => {
+		const { registrationFee: _, ...missing } = valid;
+		expect(countrySchema.safeParse(missing).success).toBe(false);
+		expect(countrySchema.safeParse({ ...valid, registrationFee: '$5, valid 3 years' }).success).toBe(true);
 	});
 });

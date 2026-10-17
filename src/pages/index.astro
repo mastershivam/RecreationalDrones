@@ -1,25 +1,35 @@
 ---
 import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
-import CountryGuide from '../components/CountryGuide.astro';
+import { readFileSync } from 'node:fs';
 import { guideSummaries } from '../lib/guides';
+import { mainlandBounds } from '../lib/country-bounds';
 
 const countries = await getCollection('countries');
 // iso3 -> key facts for the hover preview, read by the map script below.
 const guides = guideSummaries(countries);
+// Where each guided country is, so searching for it can fly the globe there.
+const bounds = mainlandBounds(JSON.parse(readFileSync('public/data/countries.geojson', 'utf8')).features, Object.keys(guides));
 ---
 
 <Base title="Recreational drone rules map" fill>
 	<div class="stage">
-		<div id="map" data-guides={JSON.stringify(guides)}></div>
-		<div class="intro card">
-			<h1>Where can you fly?</h1>
-			<p class="muted">Drag to spin the globe. Hover over a glowing country for a preview, or click or tap it for the full guide.</p>
-			<p class="muted legend"><span class="swatch"></span>Shaded areas are in night right now.</p>
+		<div id="map" data-guides={JSON.stringify(guides)} data-bounds={JSON.stringify(bounds)}></div>
+		<div class="top">
+			<form class="search" role="search" autocomplete="off">
+				<label class="visually-hidden" for="country-search">Search for a country</label>
+				<input id="country-search" type="search" placeholder="Search for a country" role="combobox" aria-expanded="false" aria-controls="search-results" aria-autocomplete="list" />
+				<ul id="search-results" role="listbox" aria-label="Matching countries" hidden></ul>
+			</form>
+			<div class="intro card">
+				<h1>Where can you fly?</h1>
+				<p class="muted">Search for a country, or drag to spin the globe. Click or tap a glowing country for a summary.</p>
+				<p class="muted legend"><span class="swatch"></span>Shaded areas are in night right now.</p>
+			</div>
 		</div>
 	</div>
 
-	<!-- The large popup: opened by clicking a country, filled from the matching template below. -->
+	<!-- The large popup: opened by clicking a country or searching for one, and filled with its summary. -->
 	<dialog id="country-dialog" aria-label="Country guide">
 		<div class="dialog-panel">
 			<button type="button" class="dialog-close" aria-label="Close">×</button>
@@ -27,14 +37,6 @@ const guides = guideSummaries(countries);
 		</div>
 	</dialog>
 
-	<!-- Each country's full guide, rendered at build time, so opening it needs no request. -->
-	{
-		countries.map((country) => (
-			<template id={`guide-${country.data.iso3}`}>
-				<CountryGuide country={country} />
-			</template>
-		))
-	}
 </Base>
 
 <script>
@@ -45,7 +47,9 @@ const guides = guideSummaries(countries);
 	import { coveredCountryCode, initialZoom, readMapColors, tapBox } from '../lib/map-config';
 	import type { GuideSummary } from '../lib/guides';
 	import { buildStyle } from '../lib/map-style';
-	import { popupHtml } from '../lib/popup';
+	import { popupHtml, summaryHtml } from '../lib/popup';
+	import { searchCountries } from '../lib/search';
+	import type { Bounds } from '../lib/country-bounds';
 	import { nightGeoJSON } from '../lib/daynight';
 
 	// MapLibre looks for its worker next to its own module, which breaks once bundled.
@@ -55,6 +59,7 @@ const guides = guideSummaries(countries);
 
 	const el = document.getElementById('map')!;
 	const guides: Record<string, GuideSummary> = JSON.parse(el.dataset.guides!);
+	const bounds: Record<string, Bounds> = JSON.parse(el.dataset.bounds!);
 	const colors = readMapColors((name) => getComputedStyle(document.documentElement).getPropertyValue(name));
 
 	const map = new Map({
@@ -114,15 +119,91 @@ const guides = guideSummaries(countries);
 
 	// Query a small box around the tap so a fingertip doesn't have to be pixel-perfect.
 	map.on('click', (e) => {
-		const iso3 = covered(tapBox(e.point));
-		const guide = iso3 && (document.getElementById(`guide-${iso3}`) as HTMLTemplateElement | null);
-		if (!iso3 || !guide) return;
+		// The exact point first: with neighbours that all have guides, the padded box can hold the wrong country.
+		const iso3 = covered(e.point) ?? covered(tapBox(e.point));
+		if (iso3) openSummary(iso3);
+	});
+
+	function openSummary(iso3: string) {
 		hidePreview();
-		body.replaceChildren(guide.content.cloneNode(true));
+		body.innerHTML = summaryHtml(guides[iso3]);
 		dialog.setAttribute('aria-label', `Drone rules in ${guides[iso3].name}`);
 		dialog.showModal();
 		body.scrollTop = 0;
 		panel.scrollTop = 0;
+	}
+
+	// Search: type a country, pick it, and the globe spins there and opens its summary.
+	const searchInput = document.getElementById('country-search') as HTMLInputElement;
+	const results = document.getElementById('search-results') as HTMLUListElement;
+	const closeResults = () => {
+		results.hidden = true;
+		searchInput.setAttribute('aria-expanded', 'false');
+	};
+	function goTo(iso3: string) {
+		closeResults();
+		searchInput.value = guides[iso3].name;
+		searchInput.blur();
+		intro.classList.add('hidden');
+		hidePreview();
+		const camera = map.cameraForBounds(bounds[iso3], { padding: 60, maxZoom: 5 });
+		const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+		map.once('moveend', () => openSummary(iso3));
+		if (!camera) return openSummary(iso3);
+		// flyTo zooms out, turns the globe and zooms back in; with reduced motion, jump straight there.
+		if (reduced) map.jumpTo(camera);
+		else map.flyTo({ ...camera, duration: 3500, essential: true });
+	}
+	const showResults = () => {
+		const hits = searchCountries(searchInput.value, guides);
+		results.replaceChildren(
+			...hits.map((h, i) => {
+				const li = document.createElement('li');
+				li.role = 'option';
+				li.id = `search-result-${i}`;
+				li.dataset.iso3 = h.iso3;
+				li.textContent = h.name;
+				return li;
+			}),
+		);
+		if (searchInput.value.trim() && !hits.length) {
+			const li = document.createElement('li');
+			li.className = 'none';
+			li.textContent = 'No guide for that country yet';
+			results.append(li);
+		}
+		results.hidden = !results.children.length;
+		searchInput.setAttribute('aria-expanded', String(!results.hidden));
+		searchInput.removeAttribute('aria-activedescendant');
+	};
+	searchInput.addEventListener('input', showResults);
+	searchInput.addEventListener('focus', showResults);
+	// pointerdown, not click: the input loses focus first, and that must not hide the list before it is used.
+	results.addEventListener('pointerdown', (e) => {
+		const iso3 = (e.target as HTMLElement).closest<HTMLElement>('[data-iso3]')?.dataset.iso3;
+		if (!iso3) return;
+		e.preventDefault();
+		goTo(iso3);
+	});
+	searchInput.addEventListener('blur', closeResults);
+	searchInput.addEventListener('keydown', (e) => {
+		const options = [...results.querySelectorAll<HTMLElement>('[data-iso3]')];
+		const current = options.findIndex((o) => o.id === searchInput.getAttribute('aria-activedescendant'));
+		if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+			if (!options.length) return;
+			e.preventDefault();
+			const next = options[(current + (e.key === 'ArrowDown' ? 1 : -1) + options.length) % options.length];
+			options.forEach((o) => o.removeAttribute('aria-selected'));
+			next.setAttribute('aria-selected', 'true');
+			searchInput.setAttribute('aria-activedescendant', next.id);
+		} else if (e.key === 'Escape') closeResults();
+	});
+	// Enter picks the highlighted match, or the first one.
+	searchInput.form!.addEventListener('submit', (e) => {
+		e.preventDefault();
+		const options = [...results.querySelectorAll<HTMLElement>('[data-iso3]')];
+		const picked = options.find((o) => o.getAttribute('aria-selected') === 'true') ?? options[0];
+		if (picked) goTo(picked.dataset.iso3!);
 	});
 </script>
 
@@ -139,12 +220,63 @@ const guides = guideSummaries(countries);
 		inset: 0;
 		background: var(--color-ocean);
 	}
-	.intro {
+	.top {
 		position: absolute;
 		top: var(--space-2);
 		left: var(--space-2);
 		right: var(--space-2);
 		max-width: 20rem;
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-2);
+		/* The hidden intro still takes up room; it must not block dragging the globe. */
+		pointer-events: none;
+	}
+	.search,
+	.intro {
+		pointer-events: auto;
+	}
+	.search {
+		position: relative;
+	}
+	.search input {
+		width: 100%;
+		min-height: 2.75rem;
+		padding: 0 var(--space-3);
+		border: 1px solid var(--color-border);
+		border-radius: var(--radius);
+		background: var(--color-surface);
+		color: var(--color-text);
+		font: inherit;
+		font-size: var(--text-base);
+	}
+	.search ul {
+		position: absolute;
+		z-index: 2;
+		top: 100%;
+		left: 0;
+		right: 0;
+		margin: var(--space-1) 0 0;
+		padding: var(--space-1);
+		list-style: none;
+		background: var(--color-surface);
+		border: 1px solid var(--color-border);
+		border-radius: var(--radius);
+	}
+	.search li {
+		padding: var(--space-2) var(--space-3);
+		border-radius: var(--radius);
+		cursor: pointer;
+	}
+	.search li[aria-selected='true'],
+	.search li[data-iso3]:hover {
+		background: var(--color-surface-raised);
+	}
+	.search li.none {
+		color: var(--color-text-muted);
+		cursor: default;
+	}
+	.intro {
 		padding: var(--space-2) var(--space-3);
 		background: color-mix(in srgb, var(--color-surface) 85%, transparent);
 		backdrop-filter: blur(6px);
@@ -178,9 +310,11 @@ const guides = guideSummaries(countries);
 		border: 1px solid var(--color-land-border);
 	}
 	@media (min-width: 640px) {
-		.intro {
+		.top {
 			top: var(--space-3);
 			left: var(--space-3);
+		}
+		.intro {
 			padding: var(--space-3) var(--space-4);
 		}
 	}
@@ -218,6 +352,23 @@ const guides = guideSummaries(countries);
 	}
 	:global(.country-popup dd) {
 		margin: 0;
+	}
+	:global(.country-popup p) {
+		margin: 0 0 var(--space-2);
+	}
+	/* The tap popup has a close button, so its title leaves room for it. */
+	:global(.country-popup:not(.preview) .popup-title) {
+		margin-right: var(--space-5);
+	}
+	:global(.country-popup .maplibregl-popup-close-button) {
+		width: 2.75rem;
+		height: 2.75rem;
+		color: var(--color-text);
+		font-size: var(--text-lg);
+		border-radius: var(--radius);
+	}
+	:global(.country-popup .maplibregl-popup-close-button:hover) {
+		background: var(--color-surface-raised);
 	}
 	:global(.country-popup .popup-meta) {
 		margin: var(--space-3) 0 0;
@@ -258,6 +409,21 @@ const guides = guideSummaries(countries);
 	.dialog-body :global(h1) {
 		margin: 0 var(--space-5) var(--space-1) 0;
 		font-size: var(--text-lg);
+	}
+	.dialog-body :global(dt) {
+		color: var(--color-text-muted);
+		font-size: var(--text-sm);
+		text-transform: uppercase;
+		letter-spacing: 0.04em;
+	}
+	.dialog-body :global(dd) {
+		margin: 0 0 var(--space-3);
+	}
+	.dialog-body :global(dd:last-child) {
+		margin-bottom: 0;
+	}
+	.dialog-body :global(.guide-link) {
+		font-weight: 600;
 	}
 	.dialog-close {
 		position: absolute;

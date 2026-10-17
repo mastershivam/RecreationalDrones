@@ -28,9 +28,9 @@ test.describe('Thailand on the globe', () => {
 		const preview = page.locator('.country-popup.preview');
 		await expect(preview).toContainText('Thailand');
 		await expect(preview).toContainText('without a camera that weigh more than 2 kg');
-		await expect(preview).toContainText('1,000,000 baht');
-		// Minimum age and Remote ID have not been checked yet.
-		await expect(preview.locator('.unverified')).toHaveCount(2);
+		// CAAT's pages give no fee, so it is marked as not yet verified, not left blank.
+		await expect(preview.locator('.unverified')).toHaveCount(1);
+		await expect(preview).toContainText('Registration fee');
 	});
 
 	test('opens the full guide on click or tap', async ({ page }) => {
@@ -40,8 +40,8 @@ test.describe('Thailand on the globe', () => {
 		const dialog = page.locator('#country-dialog');
 		await expect(dialog).toBeVisible();
 		await expect(dialog.getByRole('heading', { level: 1 })).toHaveText('Drone rules in Thailand');
-		await expect(dialog).toContainText('uasportal.caat.or.th');
-		await expect(dialog).toContainText('90 m (300 ft)');
+		await expect(dialog.getByRole('link', { name: 'Register online' })).toHaveAttribute('href', 'https://uasportal.caat.or.th/');
+		await expect(dialog.locator('.unverified')).toHaveCount(1);
 		expect(new URL(page.url()).pathname).toBe('/');
 	});
 

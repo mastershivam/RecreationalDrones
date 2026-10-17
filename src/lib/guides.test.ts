@@ -7,9 +7,8 @@ const entry = (id: string, iso3: string, overrides = {}) => ({
 		iso3,
 		name: 'Testland',
 		whoMustRegister: 'Everyone',
-		minOperatorAge: 16,
-		remoteId: null,
-		insurance: null,
+		registrationFee: '$5',
+		registrationUrl: 'https://example.org/register',
 		lastVerified: new Date('2026-10-13T00:00:00Z'),
 		...overrides,
 	},
@@ -21,14 +20,14 @@ describe('guideSummaries', () => {
 		expect(Object.keys(out)).toEqual(['GBR', 'FRA']);
 	});
 
-	it('carries the key facts through, keeping unverified ones as null', () => {
+	it('carries the key facts through, and the page slug for the full-guide link', () => {
 		const { GBR } = guideSummaries([entry('united-kingdom', 'GBR')]);
 		expect(GBR).toMatchObject({
 			name: 'Testland',
+			slug: 'united-kingdom',
 			whoMustRegister: 'Everyone',
-			minOperatorAge: 16,
-			remoteId: null,
-			insurance: null,
+			registrationFee: '$5',
+			registrationUrl: 'https://example.org/register',
 		});
 	});
 

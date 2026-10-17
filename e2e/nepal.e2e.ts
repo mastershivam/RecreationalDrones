@@ -27,9 +27,8 @@ test.describe('Nepal on the globe', () => {
 		const preview = page.locator('.country-popup.preview');
 		await expect(preview).toContainText('Nepal');
 		await expect(preview).toContainText('over 2 kg');
-		await expect(preview).toContainText('Unique Identification Number');
-		// Only the minimum age is still unverified.
-		await expect(preview.locator('.unverified')).toHaveCount(1);
+		await expect(preview).toContainText('USD 50 plus 13% VAT');
+		await expect(preview.locator('.unverified')).toHaveCount(0);
 	});
 
 	test('opens the full guide on click or tap', async ({ page }) => {
@@ -40,7 +39,7 @@ test.describe('Nepal on the globe', () => {
 		await expect(dialog).toBeVisible();
 		await expect(dialog.getByRole('heading', { level: 1 })).toHaveText('Drone rules in Nepal');
 		await expect(dialog).toContainText('USD 50 plus 13% VAT');
-		await expect(dialog).toContainText('RPA/Form/001');
+		await expect(dialog.getByRole('link', { name: 'Read the full guide' })).toHaveAttribute('href', '/countries/nepal/');
 		expect(new URL(page.url()).pathname).toBe('/');
 	});
 

@@ -179,3 +179,80 @@ describe('Thailand guide', () => {
 		for (const url of data.sources) expect(new URL(url).hostname).toBe('www.caat.or.th');
 	});
 });
+
+describe('United States guide', () => {
+	const file = readFileSync(join(dir, 'united-states.mdx'), 'utf8');
+	const data = countrySchema.parse(parse(file.match(/^---\n([\s\S]*?)\n---/)![1]));
+
+	it('is keyed to the code the map uses for the United States', () => {
+		expect(data.iso3).toBe('USA');
+	});
+
+	it('names the FAA as the authority and links DroneZone', () => {
+		expect(data.authority).toContain('Federal Aviation Administration');
+		expect(new URL(data.authorityUrl).hostname).toBe('www.faa.gov');
+		expect(new URL(data.registrationUrl!).hostname).toBe('faadronezone-access.faa.gov');
+	});
+
+	it('registers drones of 250 g or more, and says work drones under 250 g register too', () => {
+		expect(data.registrationWeightGrams).toBe(250);
+		expect(data.whoMustRegister).toContain('250 g');
+		expect(data.whoMustRegister).toContain('for work');
+		expect(data.registrationFee).toBe('$5, valid 3 years');
+	});
+
+	it('gives the $5, three-year fee and the TRUST test', () => {
+		expect(file).toContain('**$5**');
+		expect(file).toContain('**3 years**');
+		expect(file).toContain('TRUST');
+	});
+
+	it('says foreign remote pilot certificates are not recognised', () => {
+		expect(file).toContain('does **not recognise a foreign remote pilot certificate**');
+	});
+
+	it('leaves the unchecked recreational age and insurance unverified', () => {
+		expect(data.minOperatorAge).toBeNull();
+		expect(data.insurance).toBeNull();
+	});
+
+	it('says what it does not cover', () => {
+		expect(file).toContain('## Not covered yet');
+		expect(file).toContain('State and local rules');
+	});
+});
+
+describe('EU guides', () => {
+	const EU = 'AUT BEL BGR HRV CYP CZE DNK EST FIN FRA DEU GRC HUN IRL ITA LVA LTU LUX MLT NLD POL PRT ROU SVK SVN ESP SWE'.split(' ');
+	const rules = readFileSync(join(import.meta.dirname, '../components/EasaRules.mdx'), 'utf8');
+	const euGuides = guides
+		.map(({ file, frontmatter }) => ({ file, data: countrySchema.parse(frontmatter), text: readFileSync(join(dir, file), 'utf8') }))
+		.filter(({ data }) => EU.includes(data.iso3));
+
+	it('has a guide for each of the 27 member states, and no other', () => {
+		expect(euGuides.map((g) => g.data.iso3).sort()).toEqual([...EU].sort());
+	});
+
+	it('gives the EASA rules once, in a shared file, with the numbers EASA publishes', () => {
+		for (const fact of ['250 g', '120 m', '30 m', '150 m', '**16**', '12', '20 kg', 'A1', 'A2', 'A3']) {
+			expect(rules, fact).toContain(fact);
+		}
+	});
+
+	it.each(euGuides)('$file includes the shared rules and says what is not covered', ({ text }) => {
+		expect(text).toContain("import EasaRules from '../../components/EasaRules.mdx';");
+		expect(text).toContain('<EasaRules />');
+		expect(text).toContain('## Not covered yet');
+	});
+
+	it.each(euGuides)('$file cites EASA and links its own authority', ({ data }) => {
+		expect(data.sources.some((url) => new URL(url).hostname === 'www.easa.europa.eu')).toBe(true);
+		expect(data.registrationWeightGrams).toBe(0);
+		// A registration link is optional (a page that did not load is left out), but if given it is a source.
+		if (data.registrationUrl) expect(data.sources).toContain(data.registrationUrl);
+	});
+
+	it.each(euGuides)('$file leaves the minimum age unverified, because a state may lower it', ({ data }) => {
+		expect(data.minOperatorAge).toBeNull();
+	});
+});

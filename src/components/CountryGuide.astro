@@ -19,6 +19,8 @@ const d = country.data;
 	<dd><a href={d.authorityUrl}>{d.authority}</a></dd>
 	<dt>Who must register</dt>
 	<dd>{d.whoMustRegister ?? <Unverified />}</dd>
+	<dt>Registration fee</dt>
+	<dd>{d.registrationFee ?? <Unverified />}</dd>
 	<dt>Registration</dt>
 	<dd>{d.registrationUrl ? <a href={d.registrationUrl}>Register with {d.authority}</a> : <Unverified />}</dd>
 	<dt>Lowest registration weight</dt>

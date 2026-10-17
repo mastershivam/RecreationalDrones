@@ -18,59 +18,76 @@ const bounds = mainlandBounds(JSON.parse(readFileSync('public/data/countries.geo
 	<div class="stage">
 		<div id="map" data-guides={JSON.stringify(guides)} data-bounds={JSON.stringify(bounds)}></div>
 		<div class="top">
+			<div class="intro">
+				<h1>Where can you fly?</h1>
+				<p class="hint">Search a country, spin the globe, or tap a glowing country.</p>
+				<p class="legend">
+					<svg viewBox="0 0 20 20" aria-hidden="true"><path d="M13 2.5a7.5 7.5 0 1 0 4.5 13.4A8.5 8.5 0 0 1 13 2.5z" /></svg>
+					Shaded areas are in night right now.
+				</p>
+			</div>
 			<form class="search" role="search" autocomplete="off">
 				<label class="visually-hidden" for="country-search">Search for a country</label>
 				<input id="country-search" type="search" placeholder="Search for a country" role="combobox" aria-expanded="false" aria-controls="search-results" aria-autocomplete="list" />
-				<button type="button" id="locate" aria-label="Use my location" title="Use my location. It stays in your browser and is never sent anywhere.">
+				<kbd class="kbd" aria-hidden="true">/</kbd>
+				<button type="button" id="locate" aria-label="Near me: use my location" title="Use my location. It stays in your browser and is never sent anywhere.">
 					<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="6" /><circle cx="12" cy="12" r="1.5" /><path d="M12 2v4M12 18v4M2 12h4M18 12h4" /></svg>
+					<span class="locate-label" aria-hidden="true">Near me</span>
 				</button>
 				<ul id="search-results" role="listbox" aria-label="Matching countries" hidden></ul>
 			</form>
+			<ul class="chips" id="chips" aria-label="Recent and popular countries"></ul>
 			<p class="locate-status card" id="locate-status" role="status" hidden></p>
-			<div class="intro card">
-				<h1>Where can you fly?</h1>
-				<p class="muted">Search for a country, or drag to spin the globe. Click or tap a glowing country for a summary.</p>
-				<p class="muted legend"><span class="swatch"></span>Shaded areas are in night right now.</p>
-			</div>
+			<noscript><p class="locate-status card">The map needs JavaScript. <a href="/countries/">Browse every country</a> instead.</p></noscript>
 		</div>
-		<details class="layers card" id="layers">
-			<summary>Key</summary>
-			<h2>How strict are the rules?</h2>
-			<ul class="levels">
-				{
-					LEVELS.map((l) => (
-						<li>
-							<span class="chip" style={`background: var(--color-level-${l.level})`} aria-hidden="true" />
-							<span><strong>{l.label}.</strong> {l.criteria}</span>
-						</li>
-					))
-				}
-			</ul>
-			<h2>Zones</h2>
-			<p class="muted">Zoom in close to see them. A zone says what a place is and who says so; check the source before you fly.</p>
-			<fieldset>
-				<legend class="visually-hidden">Show on the map</legend>
-				{
-					ZONE_GROUPS.map((g) => (
-						<label>
-							<input type="checkbox" name="zone-group" value={g.id} checked />
-							<svg class={`key ${g.id}`} viewBox="0 0 20 20" aria-hidden="true">
-								{g.id === 'airport' && <circle cx="10" cy="10" r="8" />}
-								{g.id === 'approval' && <rect x="2" y="3" width="16" height="14" />}
-								{g.id === 'site' && <circle cx="10" cy="10" r="5" />}
-							</svg>
-							{g.label}
-						</label>
-					))
-				}
-			</fieldset>
-			<p class="muted" id="zones-status" role="status"></p>
-		</details>
+		<div class="panels">
+			<div class="key-bar" id="key" role="group" aria-label="Key: how strict are the rules?">
+				<p class="key-definition card" id="key-definition" role="status" hidden></p>
+				<ul class="key-chips">
+					{
+						LEVELS.map((l) => (
+							<li>
+								<button type="button" class="key-chip" aria-pressed="false" data-text={l.criteria}>
+									<span class="chip" style={`background: var(--color-level-${l.level})`} aria-hidden="true" />{l.label}
+								</button>
+							</li>
+						))
+					}
+					<li>
+						<button type="button" class="key-chip" aria-pressed="false" data-text="No guide yet. Not covered, which does not mean unrestricted.">
+							<span class="chip uncovered-chip" aria-hidden="true" />Not covered yet
+						</button>
+					</li>
+				</ul>
+			</div>
+			<details class="layers card" id="layers">
+				<summary>Zones</summary>
+				<p class="muted">Zoom in close to see them. A zone says what a place is and who says so; check the source before you fly.</p>
+				<fieldset>
+					<legend class="visually-hidden">Show on the map</legend>
+					{
+						ZONE_GROUPS.map((g) => (
+							<label>
+								<input type="checkbox" name="zone-group" value={g.id} checked />
+								<svg class={`key ${g.id}`} viewBox="0 0 20 20" aria-hidden="true">
+									{g.id === 'airport' && <circle cx="10" cy="10" r="8" />}
+									{g.id === 'approval' && <rect x="2" y="3" width="16" height="14" />}
+									{g.id === 'site' && <circle cx="10" cy="10" r="5" />}
+								</svg>
+								{g.label}
+							</label>
+						))
+					}
+				</fieldset>
+				<p class="muted" id="zones-status" role="status"></p>
+			</details>
+		</div>
 	</div>
 
 	<!-- The large popup: opened by clicking a country or searching for one, and filled with its summary. -->
 	<dialog id="country-dialog" aria-label="Country guide">
 		<div class="dialog-panel">
+			<div class="sheet-handle" aria-hidden="true"></div>
 			<button type="button" class="dialog-close" aria-label="Close">×</button>
 			<div class="dialog-body"></div>
 		</div>
@@ -88,10 +105,14 @@ const bounds = mainlandBounds(JSON.parse(readFileSync('public/data/countries.geo
 	import { buildStyle } from '../lib/map-style';
 	import { popupHtml, summaryHtml } from '../lib/popup';
 	import { searchCountries } from '../lib/search';
+	import { chipCountries, pushRecent } from '../lib/recent';
+	import { changedSince, markSeen, parseSaved, toggleSaved, type Saved } from '../lib/saved';
+	import { weightAnswer } from '../lib/weight';
+	import { countryFromSearch, searchWithCountry } from '../lib/deeplink';
 	import { countryAt, locateErrorMessage, locatedMessage } from '../lib/geo';
 	import type { Bounds } from '../lib/country-bounds';
 	import { nightGeoJSON } from '../lib/daynight';
-	import { ZONE_LAYER_IDS, enabledKinds, zoneLayerFilters, zonesPopupHtml, zoneFeatures, type ZoneProps } from '../lib/zones';
+	import { ZONE_LAYER_IDS, ZONE_MIN_ZOOM, enabledKinds, zoneLayerFilters, zonesPopupHtml, zoneFeatures, type ZoneProps } from '../lib/zones';
 	import { COUNTRIES_URL, ZONES_URL } from '../lib/map-style';
 
 	// MapLibre looks for its worker next to its own module, which breaks once bundled.
@@ -107,7 +128,8 @@ const bounds = mainlandBounds(JSON.parse(readFileSync('public/data/countries.geo
 	const map = new Map({
 		container: el,
 		style: buildStyle(colors, guides, location.origin),
-		center: [-4, 42],
+		// Centred far enough north that Europe sits below the headline and search.
+		center: [-4, 50],
 		zoom: initialZoom(el.clientWidth, el.clientHeight),
 		// The basemap tiles stop at zoom 7 in production (5 in the small test file); the map enlarges them beyond that.
 		maxZoom: 8,
@@ -124,9 +146,31 @@ const bounds = mainlandBounds(JSON.parse(readFileSync('public/data/countries.geo
 	const intro = document.querySelector('.intro')!;
 	map.once('dragstart', () => intro.classList.add('hidden'));
 
-	// Zones load after the globe is up, since the globe does not need them. If they fail, say so plainly.
+	// Slow idle spin that stops for good at the first touch, key or search. Off with reduced motion and in the tests,
+	// where the globe must stay where they put it.
+	const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+	let spinning = !reduceMotion && !location.search.includes('e2e');
+	let lastFrame = performance.now();
+	const startedAt = lastFrame;
+	const spin = (now: number) => {
+		if (!spinning) return;
+		const { lng, lat } = map.getCenter();
+		// The gap is capped so a tab coming back from the background does not jump.
+		map.setCenter([lng + Math.min(now - lastFrame, 50) * 0.003, lat]);
+		lastFrame = now;
+		// Stop on its own after 20 seconds, so an idle tab does not redraw the globe all day.
+		if (now - startedAt < 20_000) requestAnimationFrame(spin);
+	};
+	const stopSpin = () => (spinning = false);
+	if (spinning) requestAnimationFrame(spin);
+	for (const type of ['pointerdown', 'wheel', 'keydown']) document.addEventListener(type, stopSpin, { once: true, capture: true });
+
+	// Zones (1.7 MB and growing) are fetched only once the map is close enough to draw them. If that fails, say so plainly.
 	const zonesStatus = document.getElementById('zones-status')!;
-	map.once('load', async () => {
+	let zonesRequested = false;
+	async function loadZones() {
+		if (zonesRequested || map.getZoom() < ZONE_MIN_ZOOM) return;
+		zonesRequested = true;
 		try {
 			const response = await fetch(ZONES_URL);
 			if (!response.ok) throw new Error(String(response.status));
@@ -136,11 +180,25 @@ const bounds = mainlandBounds(JSON.parse(readFileSync('public/data/countries.geo
 			zonesStatus.textContent = 'Zones could not be loaded. The map still works.';
 			el.dataset.zones = 'failed';
 		}
-	});
+	}
+	map.on('zoom', loadZones);
+	map.once('load', loadZones);
 
-	// The filter: each box switches a group of zone kinds on or off. A closed panel is a small tab on a phone.
+	// The zone filter is a small closed tab on a phone and open on a desktop.
+	(document.getElementById('layers') as HTMLDetailsElement).open = matchMedia('(min-width: 640px)').matches;
+	// The key is a row of chips; tapping one says what it means, tapping it again puts the words away.
+	const definition = document.getElementById('key-definition')!;
+	const chips = [...document.querySelectorAll<HTMLButtonElement>('.key-chip')];
+	for (const chip of chips) {
+		chip.addEventListener('click', () => {
+			const open = chip.getAttribute('aria-pressed') !== 'true';
+			for (const other of chips) other.setAttribute('aria-pressed', String(open && other === chip));
+			definition.textContent = open ? `${chip.textContent!.trim()}. ${chip.dataset.text}` : '';
+			definition.hidden = !open;
+		});
+	}
+	// The filter: each box switches a group of zone kinds on or off.
 	const layersPanel = document.getElementById('layers') as HTMLDetailsElement;
-	layersPanel.open = matchMedia('(min-width: 640px)').matches;
 	layersPanel.addEventListener('change', () => {
 		const on = [...layersPanel.querySelectorAll<HTMLInputElement>('input[name="zone-group"]:checked')].map((box) => box.value);
 		for (const [id, filter] of Object.entries(zoneLayerFilters(enabledKinds(on)))) map.setFilter(id, filter);
@@ -167,9 +225,19 @@ const bounds = mainlandBounds(JSON.parse(readFileSync('public/data/countries.geo
 	const zonesAt = (box: Parameters<typeof map.queryRenderedFeatures>[0]) =>
 		map.queryRenderedFeatures(box, { layers: ZONE_LAYER_IDS }).map((f) => f.properties as unknown as ZoneProps);
 
+	// The country under the pointer lifts (feature state; see map-style.ts).
+	let lifted: string | undefined;
+	const lift = (iso3?: string) => {
+		if (iso3 === lifted) return;
+		if (lifted) map.setFeatureState({ source: 'countries', id: lifted }, { hover: false });
+		if (iso3) map.setFeatureState({ source: 'countries', id: iso3 }, { hover: true });
+		lifted = iso3;
+	};
+
 	map.on('mousemove', (e) => {
 		const zones = zonesAt(tapBox(e.point, 4));
 		const iso3 = zones.length ? undefined : covered(e.point);
+		lift(iso3);
 		map.getCanvas().style.cursor = zones.length || iso3 ? 'pointer' : '';
 		if (!canHover || (!zones.length && !iso3)) return hidePreview();
 		preview.setLngLat(e.lngLat);
@@ -179,7 +247,10 @@ const bounds = mainlandBounds(JSON.parse(readFileSync('public/data/countries.geo
 			preview.setHTML(zones.length ? zonesPopupHtml(zones, { link: false }) : popupHtml(guides[iso3!])).addTo(map);
 		}
 	});
-	map.getCanvas().addEventListener('mouseleave', hidePreview);
+	map.getCanvas().addEventListener('mouseleave', () => {
+		lift();
+		hidePreview();
+	});
 
 	// Clicking or tapping opens the full guide in a large popup, so nobody has to leave the map.
 	const dialog = document.getElementById('country-dialog') as HTMLDialogElement;
@@ -188,6 +259,33 @@ const bounds = mainlandBounds(JSON.parse(readFileSync('public/data/countries.geo
 	dialog.querySelector('.dialog-close')!.addEventListener('click', () => dialog.close());
 	// The dialog element itself is only hit by clicks on the dimmed area around the panel.
 	dialog.addEventListener('click', (e) => e.target === dialog && dialog.close());
+	// "My drone weighs X g": answered from the open country's registration weight.
+	body.addEventListener('input', (e) => {
+		const field = e.target as HTMLInputElement;
+		if (!field.matches('.weight input')) return;
+		const threshold = field.dataset.threshold ? Number(field.dataset.threshold) : null;
+		field.closest('.weight')!.querySelector('.weight-answer')!.textContent = field.value ? weightAnswer(Number(field.value), threshold) : '';
+	});
+	// On a phone the sheet can be dragged down by its handle to close it.
+	const handle = dialog.querySelector<HTMLElement>('.sheet-handle')!;
+	let dragFrom: number | undefined;
+	handle.addEventListener('pointerdown', (e) => {
+		dragFrom = e.clientY;
+		handle.setPointerCapture(e.pointerId);
+	});
+	handle.addEventListener('pointermove', (e) => {
+		if (dragFrom !== undefined) panel.setAttribute('style', `transform: translateY(${Math.max(0, e.clientY - dragFrom)}px); transition: none`);
+	});
+	const endDrag = (e: PointerEvent) => {
+		if (dragFrom === undefined) return;
+		const far = e.clientY - dragFrom > 100;
+		dragFrom = undefined;
+		panel.removeAttribute('style');
+		if (far) dialog.close();
+	};
+	handle.addEventListener('pointerup', endDrag);
+	handle.addEventListener('pointercancel', endDrag);
+	dialog.addEventListener('close', () => history.replaceState(null, '', location.pathname + searchWithCountry(location.search) + location.hash));
 
 	// Query a small box around the tap so a fingertip doesn't have to be pixel-perfect. A zone opens a small popup
 	// with a link to its source; a guided country with no zone under the tap opens the full guide.
@@ -216,9 +314,69 @@ const bounds = mainlandBounds(JSON.parse(readFileSync('public/data/countries.geo
 		openSummary(iso3);
 	});
 
+	// The countries opened last, kept in this browser only, shown as chips under the search.
+	const POPULAR = ['GBR', 'USA', 'JPN', 'AUS'];
+	let recent: string[] = [];
+	try {
+		recent = JSON.parse(localStorage.getItem('recent-countries') ?? '[]');
+		if (!Array.isArray(recent)) recent = [];
+	} catch {}
+	// Saved countries: iso3 -> the date the guide was last checked when the visitor saved or last opened it.
+	let saved: Saved = {};
+	try {
+		saved = parseSaved(localStorage.getItem('saved-countries'));
+	} catch {}
+	const keepSaved = () => {
+		try {
+			localStorage.setItem('saved-countries', JSON.stringify(saved));
+		} catch {}
+	};
+	const chipList = document.getElementById('chips')!;
+	function renderChips() {
+		const changed = changedSince(saved, guides);
+		chipList.replaceChildren(
+			...chipCountries(Object.keys(saved), recent, POPULAR, guides).map((iso3) => {
+				const li = document.createElement('li');
+				const button = document.createElement('button');
+				button.type = 'button';
+				button.textContent = Object.hasOwn(saved, iso3) ? `★ ${guides[iso3].name}${changed.includes(iso3) ? ' (updated)' : ''}` : guides[iso3].name;
+				button.addEventListener('click', () => goTo(iso3));
+				li.append(button);
+				return li;
+			}),
+		);
+	}
+	renderChips();
+
+	let current = '';
 	function openSummary(iso3: string) {
 		hidePreview();
+		recent = pushRecent(recent, iso3);
+		try {
+			localStorage.setItem('recent-countries', JSON.stringify(recent));
+		} catch {}
+		saved = markSeen(saved, iso3, guides[iso3].lastVerified);
+		keepSaved();
+		renderChips();
+		current = iso3;
+		history.replaceState(null, '', location.pathname + searchWithCountry(location.search, iso3) + location.hash);
+		// A short pulse on the country that was picked.
+		map.setFeatureState({ source: 'countries', id: iso3 }, { picked: true });
+		setTimeout(() => map.setFeatureState({ source: 'countries', id: iso3 }, { picked: false }), 700);
 		body.innerHTML = summaryHtml(guides[iso3]);
+		const saveButton = body.querySelector<HTMLButtonElement>('.save')!;
+		const showSaved = () => {
+			const on = Object.hasOwn(saved, iso3);
+			saveButton.setAttribute('aria-pressed', String(on));
+			saveButton.textContent = on ? 'Saved. Tap to remove' : 'Save this country';
+		};
+		showSaved();
+		saveButton.addEventListener('click', () => {
+			saved = toggleSaved(saved, iso3, guides[iso3].lastVerified);
+			keepSaved();
+			showSaved();
+			renderChips();
+		});
 		dialog.setAttribute('aria-label', `Drone rules in ${guides[iso3].name}`);
 		dialog.showModal();
 		body.scrollTop = 0;
@@ -233,6 +391,7 @@ const bounds = mainlandBounds(JSON.parse(readFileSync('public/data/countries.geo
 		searchInput.setAttribute('aria-expanded', 'false');
 	};
 	function goTo(iso3: string) {
+		stopSpin();
 		closeResults();
 		searchInput.value = guides[iso3].name;
 		searchInput.blur();
@@ -247,19 +406,27 @@ const bounds = mainlandBounds(JSON.parse(readFileSync('public/data/countries.geo
 	function flyThen(camera: { center?: unknown; zoom?: number }, done: () => void) {
 		map.once('moveend', done);
 		if (matchMedia('(prefers-reduced-motion: reduce)').matches) map.jumpTo(camera as never);
-		else map.flyTo({ ...camera, duration: 3500, essential: true } as never);
+		else map.flyTo({ ...camera, duration: 3500, essential: true, easing: (t: number) => 1 - (1 - t) ** 3 } as never);
 	}
 
 	// "Use my location": the position is used in this page only, to find the country, and is never sent anywhere.
 	const locateButton = document.getElementById('locate') as HTMLButtonElement;
 	const locateStatus = document.getElementById('locate-status')!;
+	// "Near me" is spelled out until the button has been used once; after that the icon is enough.
+	try {
+		if (localStorage.getItem('located')) locateButton.classList.add('used');
+	} catch {}
 	let here: Marker | undefined;
 	const say = (text: string) => {
 		locateStatus.textContent = text;
 		locateStatus.hidden = false;
 	};
 	locateButton.addEventListener('click', () => {
+		try {
+			localStorage.setItem('located', '1');
+		} catch {}
 		if (!('geolocation' in navigator)) return say(locateErrorMessage(2));
+		stopSpin();
 		closeResults();
 		say('Finding your location…');
 		locateButton.disabled = true;
@@ -342,6 +509,26 @@ const bounds = mainlandBounds(JSON.parse(readFileSync('public/data/countries.geo
 		const picked = options.find((o) => o.getAttribute('aria-selected') === 'true') ?? options[0];
 		if (picked) goTo(picked.dataset.iso3!);
 	});
+
+	// "/" jumps to the search, unless a field already has the keys.
+	document.addEventListener('keydown', (e) => {
+		const typing = (e.target as Element).closest('input, textarea, select, [contenteditable]');
+		if (e.key !== '/' || typing || e.metaKey || e.ctrlKey || e.altKey || dialog.open) return;
+		e.preventDefault();
+		searchInput.focus();
+	});
+
+	// A shared link such as /?country=JPN opens that country straight away.
+	const linked = countryFromSearch(location.search, guides);
+	if (linked) {
+		stopSpin();
+		intro.classList.add('hidden');
+		map.once('load', () => {
+			const camera = bounds[linked] && map.cameraForBounds(bounds[linked], { padding: 60, maxZoom: 5 });
+			if (camera) map.jumpTo(camera as never);
+			openSummary(linked);
+		});
+	}
 </script>
 
 <style>
@@ -357,58 +544,95 @@ const bounds = mainlandBounds(JSON.parse(readFileSync('public/data/countries.geo
 		inset: 0;
 		background: var(--color-ocean);
 	}
+	/* The headline and the search sit in the middle of the top of the globe, over it, with no card behind them. */
 	.top {
 		position: absolute;
-		top: var(--space-2);
-		left: var(--space-2);
-		right: var(--space-2);
-		max-width: 20rem;
+		top: var(--space-3);
+		left: 50%;
+		transform: translateX(-50%);
+		width: min(38rem, calc(100% - var(--space-4)));
 		display: flex;
 		flex-direction: column;
+		align-items: stretch;
 		gap: var(--space-2);
-		/* The hidden intro still takes up room; it must not block dragging the globe. */
+		text-align: center;
+		/* The headline must not block dragging the globe. */
 		pointer-events: none;
 	}
 	.search,
-	.locate-status,
-	.intro {
+	.chips,
+	.locate-status {
 		pointer-events: auto;
 	}
 	.search {
 		position: relative;
+		/* Above the chips, so the list of matches is never under them. */
+		z-index: 3;
+		text-align: left;
 	}
 	.search input {
 		width: 100%;
-		padding-right: 3.25rem;
-		min-height: 2.75rem;
-		padding: 0 var(--space-3);
-		border: 1px solid var(--color-border);
+		min-height: 3.5rem;
+		padding: 0 8.5rem 0 var(--space-4);
+		border: 0;
 		border-radius: var(--radius-pill);
-		background: var(--color-surface);
+		background: var(--color-surface-raised);
 		color: var(--color-text);
 		font: inherit;
-		font-size: var(--text-base);
+		font-size: var(--text-lg);
+	}
+	.search input::placeholder {
+		color: var(--color-text-muted);
+	}
+	.kbd {
+		position: absolute;
+		top: 50%;
+		right: 7.25rem;
+		transform: translateY(-50%);
+		padding: 0 var(--space-2);
+		border-radius: var(--radius);
+		background: var(--color-surface);
+		color: var(--color-text-muted);
+		font: inherit;
+		font-size: var(--text-sm);
+		pointer-events: none;
+	}
+	/* No keyboard shortcut on a touch screen. */
+	@media (hover: none) {
+		.kbd {
+			display: none;
+		}
 	}
 	#locate {
 		position: absolute;
-		top: 0;
-		right: 0;
-		display: grid;
-		place-items: center;
-		width: 2.75rem;
+		top: 0.375rem;
+		right: 0.375rem;
+		display: flex;
+		align-items: center;
+		gap: var(--space-1);
 		height: 2.75rem;
+		min-width: 2.75rem;
+		padding: 0 var(--space-2);
+		justify-content: center;
 		border: 0;
-		border-radius: 50%;
+		border-radius: var(--radius-pill);
 		background: transparent;
 		color: var(--color-link);
+		font: inherit;
+		font-size: var(--text-sm);
+		font-weight: 600;
 		cursor: pointer;
-		transition: background-color 0.15s;
+		transition: background-color 0.15s, transform 0.15s;
+	}
+	#locate.used .locate-label {
+		display: none;
 	}
 	#locate:hover {
-		background: var(--color-surface-raised);
+		background: var(--color-surface);
 	}
 	#locate:active {
 		background: var(--color-border);
+		transform: scale(0.96);
 	}
 	#locate:disabled {
 		cursor: progress;
@@ -422,11 +646,39 @@ const bounds = mainlandBounds(JSON.parse(readFileSync('public/data/countries.geo
 		stroke-width: 1.75;
 		stroke-linecap: round;
 	}
+	.chips {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		gap: var(--space-2);
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+	.chips :global(button) {
+		min-height: 2.75rem;
+		padding: 0 var(--space-3);
+		border: 0;
+		border-radius: var(--radius-pill);
+		background: var(--color-surface);
+		color: var(--color-text);
+		font: inherit;
+		font-size: var(--text-sm);
+		cursor: pointer;
+		transition: background-color 0.15s, transform 0.15s;
+	}
+	.chips :global(button:hover) {
+		background: var(--color-surface-raised);
+	}
+	.chips :global(button:active) {
+		background: var(--color-border);
+		transform: scale(0.96);
+	}
 	.locate-status {
 		margin: 0;
 		padding: var(--space-2) var(--space-3);
 		font-size: var(--text-sm);
-		background: color-mix(in srgb, var(--color-surface) 90%, transparent);
+		text-align: left;
 	}
 	/* The marker is made by MapLibre, so its style must be global. */
 	:global(.you-are-here) {
@@ -446,7 +698,6 @@ const bounds = mainlandBounds(JSON.parse(readFileSync('public/data/countries.geo
 		padding: var(--space-1);
 		list-style: none;
 		background: var(--color-surface);
-		border: 1px solid var(--color-border);
 		border-radius: var(--radius-lg);
 	}
 	.search li {
@@ -462,52 +713,107 @@ const bounds = mainlandBounds(JSON.parse(readFileSync('public/data/countries.geo
 		color: var(--color-text-muted);
 		cursor: default;
 	}
+	/* The first screen's headline. It folds away on the first drag, and its lines arrive one after another. */
 	.intro {
-		padding: var(--space-2) var(--space-3);
-		background: color-mix(in srgb, var(--color-surface) 85%, transparent);
-		backdrop-filter: blur(6px);
-		transition: opacity 0.4s;
+		max-height: 16rem;
+		color: var(--map-text);
+		text-shadow: 0 0 var(--space-3) var(--color-ocean), 0 0 var(--space-1) var(--color-ocean);
+		transition: opacity 0.4s, max-height 0.4s, margin 0.4s;
 	}
 	.intro.hidden {
 		opacity: 0;
+		max-height: 0;
+		overflow: hidden;
+		margin: 0;
 		pointer-events: none;
 	}
 	.intro h1 {
-		margin: 0 0 var(--space-1);
-		font-size: var(--text-lg);
+		margin: 0;
+		font-size: var(--text-hero);
+		line-height: 1.05;
+		letter-spacing: -0.03em;
+		animation: rise 0.6s ease-out both;
 	}
 	.intro p {
-		margin: 0;
-		font-size: var(--text-sm);
+		margin: var(--space-1) 0 0;
+		font-size: var(--text-base);
 		line-height: 1.4;
+		color: var(--map-text-muted);
+		animation: rise 0.6s ease-out 0.08s both;
 	}
-	.legend {
+	.intro .legend {
 		display: flex;
 		align-items: center;
+		justify-content: center;
 		gap: var(--space-2);
-		margin-top: var(--space-1);
+		font-size: var(--text-sm);
+		animation-delay: 0.16s;
 	}
-	.swatch {
+	.legend svg {
 		flex: none;
-		width: 0.9rem;
-		height: 0.9rem;
-		border-radius: 50%;
-		background: var(--color-night);
-		border: 1px solid var(--color-land-border);
+		width: 1.1rem;
+		height: 1.1rem;
+		fill: var(--color-night);
+		stroke: var(--color-land-border);
+		stroke-width: 1.25;
 	}
-	/* The zone filter: a small panel that is a closed tab on a phone, so the globe stays clear. */
-	.layers {
+	.search,
+	.chips {
+		animation: rise 0.6s ease-out 0.24s both;
+	}
+	@keyframes rise {
+		from {
+			opacity: 0;
+			transform: translateY(0.75rem);
+		}
+	}
+	/* On a phone the introduction shrinks to one line. */
+	@media (max-width: 639px) {
+		.intro .legend {
+			display: none;
+		}
+		.intro p {
+			font-size: var(--text-sm);
+		}
+		.search input {
+			padding-right: 7rem;
+		}
+		/* Three chips are enough on a phone; more would cover the globe. */
+		.chips :global(li:nth-child(n + 4)) {
+			display: none;
+		}
+	}
+	/* The key and the zone filter: two separate panels, so neither can resize or move the other. On a phone they are
+	   two tabs stacked in the bottom-left corner, the key at the bottom. On a desktop the filter sits bottom-left and
+	   the key bottom-right, since the key is the taller one and the right side is clear all the way up. */
+	.panels {
 		position: absolute;
 		left: max(var(--space-2), env(safe-area-inset-left));
+		right: max(var(--space-2), env(safe-area-inset-right));
 		/* Clear of MapLibre's attribution bar, which wraps across the bottom of a narrow screen. */
 		bottom: calc(var(--space-5) + env(safe-area-inset-bottom));
-		max-width: 20rem;
-		/* Open, the key is tall; on a short screen it scrolls instead of reaching the intro. */
-		max-height: 55%;
+		/* Never taller than the room above that bar, so a stack of two open panels cannot run off the top. */
+		max-height: calc(100% - var(--space-5) - env(safe-area-inset-bottom) - 3.5rem);
+		display: flex;
+		flex-direction: column-reverse;
+		align-items: flex-start;
+		gap: var(--space-2);
+		/* Only the panels catch taps; the space between them is part of the globe. */
+		pointer-events: none;
+	}
+	.layers {
+		pointer-events: auto;
+		/* A fixed width, so what is inside a panel can never change its size. */
+		width: min(20rem, 100%);
+		/* If the two do not fit, the filter gives way and scrolls inside itself. */
+		flex: 0 1 auto;
+		min-height: 2.75rem;
+		/* Only on a very short screen does a panel scroll instead of reaching the intro. */
+		max-height: calc(100vh - 14rem);
+		max-height: calc(100dvh - 14rem);
 		overflow-y: auto;
 		padding: 0;
-		background: color-mix(in srgb, var(--color-surface) 85%, transparent);
-		backdrop-filter: blur(6px);
+		background: var(--color-surface);
 	}
 	.layers summary {
 		display: flex;
@@ -521,21 +827,7 @@ const bounds = mainlandBounds(JSON.parse(readFileSync('public/data/countries.geo
 		margin: var(--space-2) 0 var(--space-1);
 		padding: 0 var(--space-3);
 		font-size: var(--text-sm);
-		text-transform: uppercase;
-		letter-spacing: 0.04em;
 		color: var(--color-text-muted);
-	}
-	.levels {
-		list-style: none;
-		margin: 0;
-		padding: 0 var(--space-3);
-		font-size: var(--text-sm);
-		line-height: 1.4;
-	}
-	.levels li {
-		display: flex;
-		gap: var(--space-2);
-		margin-bottom: var(--space-2);
 	}
 	.chip {
 		flex: none;
@@ -593,23 +885,76 @@ const bounds = mainlandBounds(JSON.parse(readFileSync('public/data/countries.geo
 		stroke-width: 2;
 		fill: var(--color-ocean);
 	}
+	/* "Not covered yet" is drawn on the map as the quieter fill, with a dashed edge here so it is not mistaken for a level. */
+	/* The key: a row of chips that never changes size. A definition floats above it when a chip is tapped. */
+	.key-bar {
+		pointer-events: auto;
+		position: relative;
+		flex: none;
+		width: min(40rem, 100%);
+	}
+	.key-chips {
+		display: flex;
+		flex-wrap: wrap;
+		gap: var(--space-1);
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+	.key-chip {
+		display: flex;
+		align-items: center;
+		gap: var(--space-2);
+		min-height: 2.75rem;
+		padding: 0 var(--space-3);
+		border: 0;
+		border-radius: var(--radius-pill);
+		background: var(--color-surface);
+		color: var(--color-text);
+		font: inherit;
+		font-size: var(--text-sm);
+		cursor: pointer;
+		transition: background-color 0.15s, transform 0.15s;
+	}
+	.key-chip:hover,
+	.key-chip[aria-pressed='true'] {
+		background: var(--color-surface-raised);
+	}
+	.key-chip:active {
+		transform: scale(0.97);
+	}
+	.key-definition {
+		position: absolute;
+		bottom: 100%;
+		left: 0;
+		right: 0;
+		margin: 0 0 var(--space-2);
+		padding: var(--space-2) var(--space-3);
+		font-size: var(--text-sm);
+		line-height: 1.4;
+	}
+	.uncovered-chip {
+		background: var(--color-uncovered);
+		border-style: dashed;
+	}
 	@media (min-width: 640px) {
-		.layers {
+		.panels {
 			left: var(--space-3);
+			right: var(--space-3);
 		}
-		.top {
-			top: var(--space-3);
-			left: var(--space-3);
-		}
-		.intro {
-			padding: var(--space-3) var(--space-4);
+	}
+	@media (min-width: 1024px) {
+		.panels {
+			/* Reversed, so the key (first in the page) is on the right and the filter on the left. */
+			flex-direction: row-reverse;
+			align-items: flex-end;
+			justify-content: space-between;
 		}
 	}
 	/* The hover preview is created by MapLibre, so these styles must be global. */
 	:global(.country-popup .maplibregl-popup-content) {
 		background: var(--color-surface);
 		color: var(--color-text);
-		border: 1px solid var(--color-border);
 		border-radius: var(--radius-lg);
 		padding: var(--space-3);
 		font-family: var(--font-sans);
@@ -637,8 +982,6 @@ const bounds = mainlandBounds(JSON.parse(readFileSync('public/data/countries.geo
 	:global(.country-popup dt) {
 		color: var(--color-text-muted);
 		font-size: var(--text-xs);
-		text-transform: uppercase;
-		letter-spacing: 0.04em;
 		margin-top: var(--space-2);
 	}
 	:global(.country-popup dd) {
@@ -650,8 +993,6 @@ const bounds = mainlandBounds(JSON.parse(readFileSync('public/data/countries.geo
 	:global(.country-popup .zone-kind) {
 		color: var(--color-text-muted);
 		font-size: var(--text-xs);
-		text-transform: uppercase;
-		letter-spacing: 0.04em;
 	}
 	:global(.country-popup .zone + .zone) {
 		margin-top: var(--space-3);
@@ -694,29 +1035,112 @@ const bounds = mainlandBounds(JSON.parse(readFileSync('public/data/countries.geo
 		font-size: var(--text-xs);
 	}
 
-	/* The large popup. The dialog itself is transparent and unpadded, so a click on it is a click on the backdrop. */
+	/* The country sheet. The dialog itself is transparent and unpadded, so a click on it is a click on the backdrop.
+	   On a phone it is a sheet that rises from the bottom; on a desktop it slides in from the right. */
 	dialog {
-		width: min(46rem, calc(100% - var(--space-3)));
+		position: fixed;
+		inset: auto 0 0 0;
+		width: 100%;
 		max-width: none;
 		max-height: none;
+		margin: 0;
 		padding: 0;
 		border: 0;
 		background: transparent;
 		color: var(--color-text);
 		overflow: visible;
 	}
+	dialog[open] {
+		animation: sheet-up 0.3s ease-out;
+	}
 	dialog::backdrop {
 		background: color-mix(in srgb, var(--color-night) 75%, transparent);
+	}
+	@keyframes sheet-up {
+		from {
+			transform: translateY(100%);
+		}
+	}
+	@keyframes sheet-in {
+		from {
+			transform: translateX(100%);
+		}
+	}
+	@media (min-width: 640px) {
+		dialog {
+			inset: 0 0 0 auto;
+			width: min(32rem, 100%);
+		}
+		dialog[open] {
+			animation-name: sheet-in;
+		}
 	}
 	.dialog-panel {
 		position: relative;
 		display: flex;
 		flex-direction: column;
-		max-height: calc(100vh - var(--space-4));
-		max-height: calc(100dvh - var(--space-4));
+		max-height: 92vh;
+		max-height: 92dvh;
 		background: var(--color-surface);
-		border: 1px solid var(--color-border);
+		border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+	}
+	@media (min-width: 640px) {
+		.dialog-panel {
+			height: 100vh;
+			height: 100dvh;
+			max-height: none;
+			border-radius: var(--radius-lg) 0 0 var(--radius-lg);
+		}
+	}
+	/* A grip at the top of the phone sheet: drag it down to close. */
+	.sheet-handle {
+		flex: none;
+		display: none;
+		place-items: center;
+		height: 1.75rem;
+		touch-action: none;
+		cursor: grab;
+	}
+	@media (max-width: 639px) {
+		.sheet-handle {
+			display: grid;
+		}
+	}
+	.sheet-handle::after {
+		content: '';
+		width: 2.5rem;
+		height: 0.3rem;
+		border-radius: var(--radius-pill);
+		background: var(--color-border);
+	}
+	.dialog-body :global(.weight) {
+		margin: var(--space-3) 0;
+	}
+	.dialog-body :global(.weight input) {
+		width: 6rem;
+		min-height: 2.75rem;
+		padding: 0 var(--space-2);
+		border: 0;
 		border-radius: var(--radius);
+		background: var(--color-surface-raised);
+		color: var(--color-text);
+		font: inherit;
+	}
+	.dialog-body :global(.weight-answer) {
+		margin: var(--space-1) 0 0;
+	}
+	.dialog-body :global(.save) {
+		min-height: 2.75rem;
+		padding: 0 var(--space-3);
+		border: 0;
+		border-radius: var(--radius-pill);
+		background: var(--color-surface-raised);
+		color: var(--color-text);
+		font: inherit;
+		cursor: pointer;
+	}
+	.dialog-body :global(.save[aria-pressed='true']) {
+		background: var(--color-border);
 	}
 	.dialog-body {
 		overflow-y: auto;
@@ -725,14 +1149,22 @@ const bounds = mainlandBounds(JSON.parse(readFileSync('public/data/countries.geo
 		overflow-wrap: anywhere;
 	}
 	.dialog-body :global(h1) {
-		margin: 0 var(--space-5) var(--space-1) 0;
+		margin: 0 var(--space-5) var(--space-2) 0;
+		font-size: var(--text-xl);
+		line-height: 1.1;
+		letter-spacing: -0.02em;
+	}
+	.dialog-body :global(.verdict) {
+		margin: 0 0 var(--space-3);
 		font-size: var(--text-lg);
+		line-height: 1.35;
+	}
+	.dialog-body :global(dd .button) {
+		margin-top: var(--space-1);
 	}
 	.dialog-body :global(dt) {
 		color: var(--color-text-muted);
 		font-size: var(--text-sm);
-		text-transform: uppercase;
-		letter-spacing: 0.04em;
 	}
 	.dialog-body :global(dd) {
 		margin: 0 0 var(--space-3);

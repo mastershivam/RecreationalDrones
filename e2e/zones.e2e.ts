@@ -13,6 +13,8 @@ const HYDE_PARK: [number, number] = [-0.1657, 51.5073];
 
 async function openZones(page: Page) {
 	await openGlobe(page);
+	// Zones are fetched only once the map is close enough to draw them.
+	await focusOn(page, KATHMANDU, 6);
 	await expect(page.locator('#map[data-zones="ready"]')).toBeAttached({ timeout: 30_000 });
 }
 
@@ -266,10 +268,25 @@ test.describe('zone popups', () => {
 	});
 });
 
+test.describe('zones are fetched lazily', () => {
+	test('not at all while the globe is zoomed out, and once it is close enough to draw them', async ({ page }) => {
+		// Regression: the 1.7 MB zones file used to download on every visit, even for people who never zoomed in.
+		const requests: string[] = [];
+		page.on('request', (r) => r.url().includes('/data/zones.json') && requests.push(r.url()));
+		await openGlobe(page);
+		await page.waitForTimeout(500);
+		expect(requests).toHaveLength(0);
+		await focusOn(page, KATHMANDU, 6);
+		await expect(page.locator('#map[data-zones="ready"]')).toBeAttached({ timeout: 30_000 });
+		expect(requests).toHaveLength(1);
+	});
+});
+
 test.describe('when zones cannot be loaded', () => {
 	test('says so plainly, and the map still works', async ({ page }) => {
 		await page.route('**/data/zones.json', (route) => route.fulfill({ status: 500, body: 'no' }));
 		await openGlobe(page);
+		await focusOn(page, KATHMANDU, 6);
 		await expect(page.locator('#zones-status')).toHaveText('Zones could not be loaded. The map still works.');
 		await expect(page.locator('#map[data-zones="failed"]')).toBeAttached();
 		await expect(page.locator('#map[data-ready="true"]')).toBeAttached();

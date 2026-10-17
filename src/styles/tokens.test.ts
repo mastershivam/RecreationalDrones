@@ -4,8 +4,12 @@ import { describe, expect, it } from 'vitest';
 import { contrastRatio } from '../lib/contrast';
 
 const css = readFileSync(join(import.meta.dirname, 'tokens.css'), 'utf8');
+// The light theme's overrides, which sit after this marker in tokens.css.
+const lightCss = css.slice(css.indexOf('prefers-color-scheme: light'));
+const find = (source: string, name: string) => source.match(new RegExp(`--${name}:\\s*(#[0-9a-fA-F]{6})\\s*;`))?.[1];
+const lightColor = (name: string): string => find(lightCss, name) ?? color(name);
 const color = (name: string): string => {
-	const value = css.match(new RegExp(`--${name}:\\s*(#[0-9a-fA-F]{6})\\s*;`))?.[1];
+	const value = find(css, name);
 	if (!value) throw new Error(`--${name} missing or not a 6-digit hex color in tokens.css`);
 	return value;
 };
@@ -23,13 +27,16 @@ const pairs: [string, string, number, string][] = [
 	['color-accent', 'color-bg', 3, 'accent UI and covered countries'],
 	['color-land-border', 'color-land', 1.5, 'country borders stay visible'],
 	['color-land', 'color-ocean', 3, 'land stands out from the sea'],
-	['color-text', 'color-land', 4.5, 'country labels on land'],
-	['color-text-muted', 'color-ocean', 4.5, 'ocean labels'],
+	['map-text', 'color-land', 4.5, 'country labels on land'],
+	['map-text-muted', 'color-ocean', 4.5, 'ocean labels'],
+	['map-text', 'color-ocean', 7, 'the headline over the globe'],
+	['map-text-muted', 'color-ocean', 4.5, 'the hint over the globe'],
 	['color-accent', 'color-land', 3, 'covered countries stand out from land'],
 	['color-level-1', 'color-land', 3, 'level 1 countries stand out from land'],
 	['color-level-2', 'color-land', 3, 'level 2 countries stand out from land'],
 	['color-level-3', 'color-land', 3, 'level 3 countries stand out from land'],
 	['color-level-4', 'color-land', 2.4, 'level 4 countries stand out from land (the lowest of the four)'],
+	...[1, 2, 3, 4].map((n): [string, string, number, string] => ['color-on-accent', `color-level-${n}`, 4.5, `text on the level ${n} badge`]),
 	['color-zone-airport', 'color-land', 3, 'airport zones show on land'],
 	['color-zone-airport', 'color-ocean', 3, 'airport zones show over the sea'],
 	['color-zone-approval', 'color-land', 3, 'approval zones show on land'],
@@ -46,5 +53,31 @@ describe('design tokens', () => {
 describe('restrictiveness levels', () => {
 	it.each([1, 2, 3])('level %d and level %d differ in lightness by at least 1.2:1', (n) => {
 		expect(contrastRatio(color(`color-level-${n}`), color(`color-level-${n + 1}`))).toBeGreaterThanOrEqual(1.2);
+	});
+});
+
+// The light theme only changes the page and its panels. Every pair that sits on the page must stay readable there too.
+const lightPairs: [string, string, number][] = [
+	['color-text', 'color-bg', 7],
+	['color-text', 'color-surface', 7],
+	['color-text', 'color-surface-raised', 7],
+	['color-text-muted', 'color-bg', 4.5],
+	['color-text-muted', 'color-surface', 4.5],
+	['color-text-muted', 'color-surface-raised', 4.5],
+	['color-link', 'color-bg', 4.5],
+	['color-link', 'color-surface', 4.5],
+	['color-warning', 'color-surface', 4.5],
+	['color-warning', 'color-bg', 4.5],
+	['color-focus', 'color-bg', 3],
+	['color-on-accent', 'color-accent', 4.5],
+	...[1, 2, 3, 4].map((n): [string, string, number] => ['color-on-accent', `color-level-${n}`, 4.5]),
+];
+describe('light theme', () => {
+	it('overrides the page colors and leaves the globe dark', () => {
+		expect(lightCss).toContain('--color-bg');
+		for (const globe of ['color-ocean', 'color-land', 'color-night', 'map-text']) expect(find(lightCss, globe), globe).toBeUndefined();
+	});
+	it.each(lightPairs)('%s on %s is at least %d:1', (fg, bg, min) => {
+		expect(contrastRatio(lightColor(fg), lightColor(bg))).toBeGreaterThanOrEqual(min);
 	});
 });

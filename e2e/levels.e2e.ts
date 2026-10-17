@@ -23,14 +23,12 @@ test.describe('rules levels on the map', () => {
 
 	test('has a key that names all four levels in words, not just colors', async ({ page }) => {
 		await openGlobe(page);
-		const panel = page.locator('#layers');
-		if (!(await panel.evaluate((d: HTMLDetailsElement) => d.open))) await panel.locator('summary').click();
-		const items = panel.locator('.levels li');
-		await expect(items).toHaveCount(4);
+		const chips = page.locator('#key .key-chip');
 		for (const [i, label] of ['No restrictions', 'Basic restrictions', 'Complex restrictions', 'Fully restricted'].entries()) {
-			await expect(items.nth(i)).toContainText(label);
+			await expect(chips.nth(i)).toContainText(label);
 		}
-		await expect(items.nth(2)).toContainText('in-person step');
+		await chips.nth(2).click();
+		await expect(page.locator('#key-definition')).toContainText('in-person step');
 	});
 
 	test('says the level in words in the hover preview and the summary', async ({ page }) => {

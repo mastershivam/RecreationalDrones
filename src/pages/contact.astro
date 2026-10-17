@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import { reportErrorUrl } from '../lib/report';
 import { ISSUES_URL } from '../lib/site';
+import { linkAttrs } from '../lib/external-link';
 
 const countries = (await getCollection('countries')).sort((a, b) => a.data.name.localeCompare(b.data.name));
 ---
@@ -12,7 +13,7 @@ const countries = (await getCollection('countries')).sort((a, b) => a.data.name.
 		<h1>Contact</h1>
 
 		<p>
-			The best way to reach us is the project's <a href={ISSUES_URL}>issue tracker on GitHub</a>. Anyone with a GitHub
+			The best way to reach us is the project's <a href={ISSUES_URL} {...linkAttrs(ISSUES_URL)}>issue tracker on GitHub</a>. Anyone with a GitHub
 			account can write there. We do not publish an email address.
 		</p>
 
@@ -23,7 +24,7 @@ const countries = (await getCollection('countries')).sort((a, b) => a.data.name.
 			also pick a country here:
 		</p>
 		<ul class="reports">
-			{countries.map((c) => <li><a href={reportErrorUrl(c.data.name, c.id)}>{c.data.name}</a></li>)}
+			{countries.map((c) => <li><a href={reportErrorUrl(c.data.name, c.id)} {...linkAttrs(reportErrorUrl(c.data.name, c.id))}>{c.data.name}</a></li>)}
 		</ul>
 
 		<h2>What we cannot do</h2>

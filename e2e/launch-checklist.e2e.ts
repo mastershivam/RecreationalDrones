@@ -27,7 +27,7 @@ test.describe('every page has its own title, description and sharing tags', () =
 			expect(get(/<link rel="canonical" href="([^"]+)"/), path).toMatch(new RegExp(`^https://[^/]+${path.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}$`));
 			expect(get(/<meta property="og:title" content="([^"]*)"/), path).toBe(title);
 			expect(get(/<meta property="og:description" content="([^"]*)"/), path).toBe(description);
-			expect(get(/<meta property="og:image" content="([^"]*)"/), path).toMatch(/\/og-image\.png$/);
+			expect(get(/<meta property="og:image" content="([^"]*)"/), path).toMatch(/\/og(-image|\/[a-z-]+)\.png$/);
 			expect(get(/<meta name="twitter:card" content="([^"]*)"/), path).toBe('summary_large_image');
 			expect(html, path).toContain('lang="en"');
 			titles.add(title);

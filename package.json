@@ -11,14 +11,17 @@
     "preview": "astro preview",
     "astro": "astro",
     "test": "vitest run",
+    "test:changed": "node scripts/test-changed.mjs",
     "build:countries": "node scripts/build-countries.ts",
     "build:zones": "node scripts/build-airport-zones.ts",
+    "build:og": "node brand/build-og.mjs",
     "build:fields": "node scripts/build-model-fields.ts",
     "test:e2e": "playwright test"
   },
   "dependencies": {
     "@astrojs/markdown-satteri": "^0.4.3",
     "@astrojs/mdx": "^8.0.3",
+    "@fontsource-variable/inter-tight": "^5.3.0",
     "@protomaps/basemaps": "^5.7.2",
     "astro": "^7.3.8",
     "maplibre-gl": "^6.14.0",

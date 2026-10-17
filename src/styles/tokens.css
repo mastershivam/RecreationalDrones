@@ -11,26 +11,32 @@
 	--color-text: #eef1fa;
 	--color-text-muted: #a4aecb;
 	--color-accent: #ff9f1c;
+	/* The keyboard focus ring. */
+	--color-focus: #ff9f1c;
 	/* How restrictive a country's rules are, 1 (least) to 4 (most). They fall in lightness as well as changing hue, so
 	   they stay apart for people who cannot tell the hues apart. Each is also named in text wherever it appears. */
-	--color-level-1: #f2fbff;
-	--color-level-2: #7fe3d0;
+	--color-level-1: #c8f7d8;
+	--color-level-2: #f5c542;
 	--color-level-3: #ff9a3c;
 	--color-level-4: #ff6f91;
 	--color-on-accent: #1a1100;
 	--color-link: #6fd3ff;
 	--color-warning: #ffd166;
 
-	/* Map */
+	/* Map. The globe stays dark in every theme, so its text has its own colors. */
+	--map-text: #eef1fa;
+	--map-text-muted: #a4aecb;
 	--color-ocean: #040b1c;
 	--color-land: #3f5f94;
 	--color-land-border: #9bb3dd;
+	/* Countries we have no guide for yet: quieter than land that has one, so the gap is visible and not mistaken for "no rules". */
+	--color-uncovered: #2a3a5c;
 	--color-night: #02040a;
 	/* Zone layer. Not amber: amber means "we have a guide". Zones also differ by line style and symbol. */
 	--color-zone-airport: #ff9ab0;
 	--color-zone-approval: #d2b4ff;
 
-	--font-sans: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+	--font-sans: 'Inter Tight Variable', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
 	--text-xs: 0.75rem;
 	--text-sm: 0.875rem;
 	--text-base: 1rem;
@@ -38,6 +44,8 @@
 	--text-xl: 2rem;
 	/* Page titles: large, and fluid between a phone and a desktop. */
 	--text-2xl: clamp(2.25rem, 1.4rem + 4vw, 3.75rem);
+	/* The home page headline, over the globe. */
+	--text-hero: clamp(2rem, 5vw, 4.5rem);
 
 	--space-1: 0.25rem;
 	--space-2: 0.5rem;
@@ -49,4 +57,21 @@
 	--radius-lg: 1.5rem;
 	--radius-pill: 999px;
 	--content-width: 46rem;
+}
+
+/* Follows the visitor's system. Only the page and its panels change; the globe and its map colors stay dark. */
+@media (prefers-color-scheme: light) {
+	:root {
+		color-scheme: light;
+
+		--color-bg: #f4f6fb;
+		--color-surface: #ffffff;
+		--color-surface-raised: #e6ebf5;
+		--color-border: #c3ccdf;
+		--color-text: #0b1020;
+		--color-text-muted: #44506b;
+		--color-focus: #b35a00;
+		--color-link: #0b5fa5;
+		--color-warning: #8a5300;
+	}
 }

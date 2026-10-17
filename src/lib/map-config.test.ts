@@ -79,6 +79,11 @@ describe('readMapColors', () => {
 
 
 describe('initialZoom', () => {
+	it('oversizes the globe on a big screen so it crops at the edges', () => {
+		const zoom = initialZoom(1440, 800);
+		expect((512 / Math.PI) * 2 ** zoom).toBeGreaterThan(800);
+	});
+
 	it('fits the whole globe on a phone in portrait', () => {
 		const zoom = initialZoom(375, 600);
 		const globePx = (512 / Math.PI) * 2 ** zoom;

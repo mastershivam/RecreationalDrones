@@ -18,6 +18,7 @@ export interface MapColors {
 	ocean: string;
 	land: string;
 	landBorder: string;
+	uncovered: string;
 	text: string;
 	textMuted: string;
 	accent: string;
@@ -34,8 +35,9 @@ export const MAP_COLOR_TOKENS: Record<keyof MapColors, string> = {
 	ocean: '--color-ocean',
 	land: '--color-land',
 	landBorder: '--color-land-border',
-	text: '--color-text',
-	textMuted: '--color-text-muted',
+	uncovered: '--color-uncovered',
+	text: '--map-text',
+	textMuted: '--map-text-muted',
 	accent: '--color-accent',
 	level1: '--color-level-1',
 	level2: '--color-level-2',
@@ -56,10 +58,12 @@ export function readMapColors(read: (name: string) => string): MapColors {
 	return Object.fromEntries(entries) as unknown as MapColors;
 }
 
-// Zoom at which the whole globe fits the smaller screen dimension, with a little margin.
+// Zoom at which the whole globe fits the smaller screen dimension, with a little margin. On a big screen the globe is
+// a little oversized instead, so it runs off the edges and is the page, not a picture on it.
 // A globe is about 512 / pi pixels across at zoom 0, and doubles with each zoom level.
 export function initialZoom(width: number, height: number): number {
-	const fit = (0.9 * Math.min(width, height) * Math.PI) / 512;
+	const margin = Math.max(width, height) >= 1000 ? 1.15 : 0.9;
+	const fit = (margin * Math.min(width, height) * Math.PI) / 512;
 	return Math.min(3, Math.max(0.5, Math.log2(fit)));
 }
 

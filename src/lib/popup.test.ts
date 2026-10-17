@@ -7,8 +7,10 @@ const guide: GuideSummary = {
 	whoMustRegister: 'Drones from 250 g need a Flyer ID and an Operator ID.',
 	slug: 'united-kingdom',
 	level: 2,
+	reason: 'Register online with the CAA; no in-person step.',
 	registrationFee: null,
 	registrationUrl: 'https://www.caa.co.uk/drones/register/',
+	weightGrams: 250,
 	lastVerified: '2026-10-13',
 };
 
@@ -65,13 +67,31 @@ describe('summaryHtml', () => {
 		expect(html).toContain('<h1>Drone rules in United Kingdom</h1>');
 		expect(html).toContain('Drones from 250 g need');
 		expect(html).toContain('£12.34 a year');
-		expect(html).toContain('<a href="https://www.caa.co.uk/drones/register/">Register online</a>');
+		expect(html).toContain('<a class="button" href="https://www.caa.co.uk/drones/register/" target="_blank" rel="noopener noreferrer">Register online</a>');
 		expect(html).toContain('href="/countries/united-kingdom/"');
+	});
+
+	it('opens with the level as a badge, then the verdict in one sentence', () => {
+		const html = summaryHtml(guide);
+		expect(html).toContain('<p class="level-badge level-2"><span class="level-number" aria-hidden="true">2</span>Basic restrictions</p>');
+		expect(html.indexOf('level-badge')).toBeLessThan(html.indexOf('<h1>'));
+		expect(html).toContain('<p class="verdict">Register online with the CAA; no in-person step.</p>');
+	});
+
+	it('has a weight check that carries the guide\u2019s threshold, and a save button', () => {
+		const html = summaryHtml(guide);
+		expect(html).toContain('data-threshold="250"');
+		expect(html).toContain('class="save" aria-pressed="false"');
+		expect(summaryHtml({ ...guide, weightGrams: null })).toContain('data-threshold=""');
+	});
+
+	it('escapes the verdict', () => {
+		expect(summaryHtml({ ...guide, reason: '<i onclick=1>' })).not.toContain('<i onclick');
 	});
 
 	it('is short: it leaves out Remote ID, insurance and minimum age', () => {
 		const html = summaryHtml(guide);
-		expect(html.length).toBeLessThan(1100);
+		expect(html.length).toBeLessThan(2000);
 		expect(html).not.toContain('<dt>Remote ID');
 		expect(html).not.toContain('<dt>Insurance');
 	});

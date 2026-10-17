@@ -1,0 +1,140 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import { levelText } from '../lib/restrictiveness';
+import type { TripCountry } from '../lib/trip';
+
+const countries = (await getCollection('countries')).sort((a, b) => a.data.name.localeCompare(b.data.name));
+const rows: TripCountry[] = countries.map((c) => ({
+	id: c.id,
+	name: c.data.name,
+	levelText: levelText(c.data.restrictiveness),
+	whoMustRegister: c.data.whoMustRegister,
+	fee: c.data.registrationFee,
+	weight: c.data.registrationWeightGrams,
+	age: c.data.minOperatorAge,
+	remoteId: c.data.remoteId,
+	insurance: c.data.insurance,
+	registerUrl: c.data.registrationUrl,
+}));
+---
+
+<Base title="Plan a trip or compare countries" description="Pick the countries on your trip and see their drone rules side by side: who must register, the fee, Remote ID and insurance.">
+	<div class="prose">
+		<h1>Plan a trip</h1>
+		<p>Pick two or more countries to see their rules side by side. The address keeps your choice, so you can share it.</p>
+		<form id="trip" data-rows={JSON.stringify(rows)} hidden>
+			<fieldset>
+				<legend class="visually-hidden">Countries on your trip</legend>
+				{rows.map((r) => <label class="pill"><input type="checkbox" name="c" value={r.id} />{r.name}</label>)}
+			</fieldset>
+		</form>
+		<noscript><p>This page needs JavaScript. <a href="/countries/">Browse the countries</a> one at a time instead.</p></noscript>
+		<div class="table-wrap" id="trip-table" tabindex="0" role="region" aria-label="Rules side by side"></div>
+	</div>
+</Base>
+
+<script>
+	import { TRIP_ROWS, parseTrip, tripSearch, type TripCountry } from '../lib/trip';
+
+	const form = document.getElementById('trip') as HTMLFormElement;
+	const rows: TripCountry[] = JSON.parse(form.dataset.rows!);
+	const byId = new Map(rows.map((r) => [r.id, r]));
+	const target = document.getElementById('trip-table')!;
+	const boxes = [...form.querySelectorAll<HTMLInputElement>('input[name="c"]')];
+
+	function cell(tag: 'th' | 'td', value: string | null) {
+		const el = document.createElement(tag);
+		if (value === null) {
+			el.className = 'unverified';
+			el.textContent = 'Not yet verified';
+		} else el.textContent = value;
+		return el;
+	}
+
+	function draw() {
+		const chosen = boxes.filter((b) => b.checked).map((b) => byId.get(b.value)!);
+		history.replaceState(null, '', location.pathname + tripSearch(chosen.map((c) => c.id)));
+		if (!chosen.length) return target.replaceChildren();
+		const table = document.createElement('table');
+		const head = table.createTHead().insertRow();
+		head.append(cell('th', ''));
+		for (const c of chosen) {
+			const th = cell('th', null);
+			th.className = '';
+			th.scope = 'col';
+			const link = Object.assign(document.createElement('a'), { href: `/countries/${c.id}/`, textContent: c.name });
+			th.replaceChildren(link);
+			head.append(th);
+		}
+		const body = table.createTBody();
+		for (const r of TRIP_ROWS) {
+			const tr = body.insertRow();
+			const label = cell('th', r.label);
+			label.scope = 'row';
+			tr.append(label, ...chosen.map((c) => cell('td', r.value(c))));
+		}
+		const reg = body.insertRow();
+		const regLabel = cell('th', 'Register');
+		regLabel.scope = 'row';
+		reg.append(regLabel);
+		for (const c of chosen) {
+			const td = document.createElement('td');
+			if (c.registerUrl) td.append(Object.assign(document.createElement('a'), { href: c.registerUrl, target: '_blank', rel: 'noopener noreferrer', textContent: 'Register online' }));
+			else td.append(Object.assign(document.createElement('span'), { className: 'unverified', textContent: 'Not yet verified' }));
+			reg.append(td);
+		}
+		target.replaceChildren(table);
+	}
+
+	for (const id of parseTrip(location.search, new Set(byId.keys()))) boxes.find((b) => b.value === id)!.checked = true;
+	form.addEventListener('change', draw);
+	form.hidden = false;
+	draw();
+</script>
+
+<style>
+	fieldset {
+		display: flex;
+		flex-wrap: wrap;
+		gap: var(--space-2);
+		margin: var(--space-3) 0;
+		padding: 0;
+		border: 0;
+	}
+	.pill {
+		display: inline-flex;
+		align-items: center;
+		gap: var(--space-2);
+		min-height: 2.75rem;
+		padding: 0 var(--space-3);
+		border-radius: var(--radius-pill);
+		background: var(--color-surface);
+		cursor: pointer;
+	}
+	.pill:has(input:checked) {
+		background: var(--color-surface-raised);
+		font-weight: 700;
+	}
+	.table-wrap {
+		overflow-x: auto;
+	}
+	:global(.table-wrap table) {
+		border-collapse: collapse;
+		min-width: 100%;
+	}
+	:global(.table-wrap th),
+	:global(.table-wrap td) {
+		padding: var(--space-2) var(--space-3);
+		text-align: left;
+		vertical-align: top;
+		background: var(--color-surface);
+		border-bottom: var(--space-1) solid var(--color-bg);
+		min-width: 12rem;
+	}
+	:global(.table-wrap tbody th) {
+		min-width: 0;
+		color: var(--color-text-muted);
+		font-weight: 600;
+	}
+</style>

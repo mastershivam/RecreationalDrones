@@ -53,7 +53,7 @@ test.describe('page chrome', () => {
 		expect(await meta('property="og:title"')).toBe('Drone rules in Nepal · Recreational Drones');
 		expect(await meta('property="og:description"')).toContain('Drone rules in Nepal');
 		expect(await meta('property="og:type"')).toBe('website');
-		expect(await meta('property="og:image"')).toMatch(/\/og-image\.png$/);
+		expect(await meta('property="og:image"')).toMatch(/\/og\/nepal\.png$/);
 		expect(await meta('name="twitter:card"')).toBe('summary_large_image');
 	});
 });

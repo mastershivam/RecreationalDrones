@@ -22,6 +22,8 @@ async function openUk(page: Page) {
 	await openGlobe(page);
 	await activate(page, await ukPoint(page));
 	await expect(dialog(page)).toBeVisible();
+	// The sheet slides in; measure it where it comes to rest.
+	await dialog(page).evaluate((d) => Promise.all(d.getAnimations().map((a) => a.finished)));
 }
 
 test.describe('hover preview', () => {

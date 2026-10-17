@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import { ISSUES_URL } from '../lib/site';
+import { linkAttrs } from '../lib/external-link';
 ---
 
 <Base title="Privacy" description="What this site does and does not collect: no accounts, no cookies, no tracking of individual visitors, and your location never leaves your browser.">
@@ -23,7 +24,7 @@ import { ISSUES_URL } from '../lib/site';
 			guides people read. Cloudflare says it does not track individual visitors, and it does not use cookies or save
 			anything in your browser. It gives us totals, such as which pages were viewed, which countries visits came
 			from, and which kinds of device and browser were used. See
-			<a href="https://developers.cloudflare.com/web-analytics/">how Cloudflare Web Analytics works</a>.
+			<a href="https://developers.cloudflare.com/web-analytics/" {...linkAttrs("https://developers.cloudflare.com/web-analytics/")}>how Cloudflare Web Analytics works</a>.
 		</p>
 
 		<h2>Your location</h2>
@@ -39,7 +40,7 @@ import { ISSUES_URL } from '../lib/site';
 			The site runs on Cloudflare. As with any website, the host receives your IP address and the details of each
 			request (the page asked for, your browser and device type) in order to send you the page, and it may keep
 			standard server logs. We do not use that information, and we do not get it. See
-			<a href="https://www.cloudflare.com/privacypolicy/">Cloudflare's privacy policy</a>.
+			<a href="https://www.cloudflare.com/privacypolicy/" {...linkAttrs("https://www.cloudflare.com/privacypolicy/")}>Cloudflare's privacy policy</a>.
 		</p>
 
 		<h2>Links to other sites</h2>
@@ -56,7 +57,7 @@ import { ISSUES_URL } from '../lib/site';
 
 		<h2>Changes</h2>
 		<p>
-			If this ever changes, we will update this page first and say what is collected and why. The history of this page is in <a href={ISSUES_URL.replace('/issues', '')}>the project on GitHub</a>.
+			If this ever changes, we will update this page first and say what is collected and why. The history of this page is in <a href={ISSUES_URL.replace('/issues', '')} {...linkAttrs(ISSUES_URL)}>the project on GitHub</a>.
 		</p>
 	</div>
 </Base>

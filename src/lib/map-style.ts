@@ -2,6 +2,7 @@ import { layers, namedFlavor, type Flavor } from '@protomaps/basemaps';
 import type { ExpressionSpecification, FilterSpecification, GeoJSONSourceSpecification, LayerSpecification, StyleSpecification } from 'maplibre-gl';
 import { nightGeoJSON } from './daynight';
 import { GLOBE_PROJECTION, coveredCountriesFilter, type MapColors } from './map-config';
+import { linkAttrsHtml } from './external-link';
 import { levelColorExpression, type Level } from './restrictiveness';
 import { TILE_PATH } from './tile-server';
 import { ZONE_MIN_ZOOM, zoneLayerFilters } from './zones';
@@ -13,7 +14,7 @@ export const COUNTRIES_URL = '/data/countries.geojson';
 export const ZONES_URL = '/data/zones.json';
 
 const ATTRIBUTION =
-	'<a href="https://protomaps.com">Protomaps</a> © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>';
+	`<a href="https://protomaps.com"${linkAttrsHtml('https://protomaps.com')}>Protomaps</a> © <a href="https://www.openstreetmap.org/copyright"${linkAttrsHtml('https://www.openstreetmap.org/copyright')}>OpenStreetMap</a>`;
 
 // Protomaps' dark theme recolored to our palette: flat land, dark sea, readable labels.
 export function basemapFlavor(c: MapColors): Flavor {
@@ -34,9 +35,11 @@ export function basemapFlavor(c: MapColors): Flavor {
 			urban_area: c.land,
 		},
 		boundaries: c.landBorder,
+		city_label_halo: c.ocean,
+		subplace_label_halo: c.ocean,
+		state_label_halo: c.ocean,
 		country_label: c.text,
 		state_label: c.text,
-		state_label_halo: c.land,
 		ocean_label: c.textMuted,
 	};
 }
@@ -53,7 +56,8 @@ export function basemapLayers(flavor: Flavor): LayerSpecification[] {
 		if (!layout?.['icon-image']) return [layer];
 		if (!KEEP_WITHOUT_ICON.has(layer.id)) return [];
 		const textOnly = Object.fromEntries(Object.entries(layout).filter(([key]) => !ICON_PROPERTIES.includes(key)));
-		return [{ ...layer, layout: textOnly } as LayerSpecification];
+		// English names only: Protomaps' default adds the local name beneath (Moscow in Cyrillic), which needs glyphs we do not ship.
+		return [{ ...layer, layout: { ...textOnly, 'text-field': ['get', 'name:en'] } } as LayerSpecification];
 	});
 }
 
@@ -80,7 +84,13 @@ function overlayLayers(c: MapColors, guides: Record<string, { level: Level }>): 
 			filter: ['==', ['get', 'kind'], 'terminator'],
 			paint: { 'line-color': c.night, 'line-width': 36, 'line-blur': 36, 'line-opacity': 0.3 },
 		},
-		{ id: 'covered-countries', type: 'fill', ...covered, paint: { 'fill-color': levelFill, 'fill-opacity': 0.55 } },
+		{
+			id: 'covered-countries',
+			type: 'fill',
+			...covered,
+			// A country lifts when hovered, and pulses once when picked (feature state, set by the page).
+			paint: { 'fill-color': levelFill, 'fill-opacity': ['case', ['boolean', ['feature-state', 'picked'], false], 0.95, ['boolean', ['feature-state', 'hover'], false], 0.75, 0.55], 'fill-opacity-transition': { duration: 300 } },
+		},
 		{ id: 'covered-countries-outline', type: 'line', ...covered, paint: { 'line-color': levelFill, 'line-width': 1.5 } },
 		...zoneLayers(c),
 	] as LayerSpecification[];
@@ -116,16 +126,26 @@ function zoneLayers(c: MapColors): LayerSpecification[] {
 export function buildStyle(c: MapColors, guides: Record<string, { level: Level }>, origin: string, now = new Date()): StyleSpecification {
 	const base = basemapLayers(basemapFlavor(c));
 	const firstLabel = base.findIndex((l) => l.type === 'symbol');
+	// Countries with no guide yet are quieter than land that has one, so the gap reads as "not covered", never "no
+	// rules". They go under the borders, which must stay visible.
+	const firstBorder = base.findIndex((l) => l.id.startsWith('boundaries'));
+	const uncovered = {
+		id: 'uncovered-countries',
+		type: 'fill',
+		source: 'countries',
+		filter: ['!', coveredCountriesFilter(guides)],
+		paint: { 'fill-color': c.uncovered, 'fill-opacity': 0.9 },
+	} as unknown as LayerSpecification;
 	return {
 		version: 8,
 		projection: GLOBE_PROJECTION,
 		glyphs: `${origin}/fonts/{fontstack}/{range}.pbf`,
 		sources: {
 			protomaps: { type: 'vector', url: `pmtiles://${origin}${TILE_PATH}`, attribution: ATTRIBUTION },
-			countries: { type: 'geojson', data: `${origin}${COUNTRIES_URL}` },
+			countries: { type: 'geojson', data: `${origin}${COUNTRIES_URL}`, promoteId: 'ADM0_A3' },
 			night: { type: 'geojson', data: nightGeoJSON(now) as GeoJSONSourceSpecification['data'] },
-			zones: { type: 'geojson', data: { type: 'FeatureCollection', features: [] }, attribution: 'Airports: <a href="https://ourairports.com">OurAirports</a>' },
+			zones: { type: 'geojson', data: { type: 'FeatureCollection', features: [] }, attribution: `Airports: <a href="https://ourairports.com"${linkAttrsHtml('https://ourairports.com')}>OurAirports</a>` },
 		},
-		layers: [...base.slice(0, firstLabel), ...overlayLayers(c, guides), ...base.slice(firstLabel)],
+		layers: [...base.slice(0, firstBorder), uncovered, ...base.slice(firstBorder, firstLabel), ...overlayLayers(c, guides), ...base.slice(firstLabel)],
 	};
 }

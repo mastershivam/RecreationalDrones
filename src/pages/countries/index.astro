@@ -2,8 +2,21 @@
 import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import { LEVELS, levelText } from '../../lib/restrictiveness';
+import { staleItems } from '../../lib/stale';
+import type { CountryRow } from '../../lib/country-filter';
+import { REGIONS, regionOf } from '../../lib/regions';
 
 const countries = (await getCollection('countries')).sort((a, b) => a.data.name.localeCompare(b.data.name));
+const today = new Date();
+const stale = new Set(staleItems(countries.map((c) => ({ label: c.id, checkedOn: c.data.lastVerified })), today).map((i) => i.label));
+const rows: CountryRow[] = countries.map((c) => ({
+	id: c.id,
+	name: c.data.name,
+	level: c.data.restrictiveness,
+	weight: c.data.registrationWeightGrams,
+	checked: c.data.lastVerified.toISOString().slice(0, 10),
+	region: regionOf(c.id),
+}));
 ---
 
 <Base title="Drone rules by country" description="Every country we have a guide for, with how strict its drone rules are, who regulates them and when they were last checked.">
@@ -16,18 +29,64 @@ const countries = (await getCollection('countries')).sort((a, b) => a.data.name.
 		<ol class="levels">
 			{LEVELS.map((l) => <li><strong>{l.label}.</strong> {l.criteria}</li>)}
 		</ol>
+		<form class="filters" hidden role="search" autocomplete="off" data-rows={JSON.stringify(rows)}>
+			<label class="visually-hidden" for="filter-text">Search the countries</label>
+			<input id="filter-text" type="search" placeholder="Search the countries" />
+			<fieldset>
+				<legend class="visually-hidden">Show these levels</legend>
+				{LEVELS.map((l) => <label class={`pill level-${l.level}`}><input type="checkbox" name="level" value={l.level} />{l.label}</label>)}
+			</fieldset>
+			<label>Region <select id="filter-region"><option value="">all</option>{REGIONS.map((r) => <option>{r}</option>)}</select></label>
+			<label>Sort by <select id="filter-sort"><option value="name">name</option><option value="level">least restrictive first</option><option value="checked">longest since checked</option></select></label>
+			<p class="muted" id="filter-count" role="status"></p>
+		</form>
 		<ul class="countries">
 			{
 				countries.map((c) => (
-					<li class="card">
+					<li class="card" id={`row-${c.id}`}>
 						<a href={`/countries/${c.id}/`}>{c.data.name}</a>
-						<span class="muted">{levelText(c.data.restrictiveness)} · {c.data.authority} · last verified {c.data.lastVerified.toISOString().slice(0, 10)}</span>
+						<span class={`level-badge level-${c.data.restrictiveness}`}>{levelText(c.data.restrictiveness)}</span>
+						<span class="muted">
+							{c.data.authority} · from {c.data.registrationWeightGrams !== null ? `${c.data.registrationWeightGrams} g` : 'weight not yet verified'} · {c.data.registrationFee ?? 'fee not yet verified'} · last verified {c.data.lastVerified.toISOString().slice(0, 10)}
+							{stale.has(c.id) && <strong class="unverified"> · due for a re-check</strong>}
+						</span>
 					</li>
 				))
 			}
 		</ul>
 	</div>
 </Base>
+
+<script>
+	import { visibleCountries, type CountryRow, type SortKey } from '../../lib/country-filter';
+	import type { Level } from '../../lib/restrictiveness';
+
+	const form = document.querySelector<HTMLFormElement>('.filters')!;
+	const rows: CountryRow[] = JSON.parse(form.dataset.rows!);
+	const list = document.querySelector('.countries')!;
+	const text = form.querySelector<HTMLInputElement>('#filter-text')!;
+	const sort = form.querySelector<HTMLSelectElement>('#filter-sort')!;
+	const region = form.querySelector<HTMLSelectElement>('#filter-region')!;
+	const count = form.querySelector('#filter-count')!;
+	const items = new Map([...list.children].map((li) => [li.id.slice('row-'.length), li as HTMLElement]));
+
+	function update() {
+		const levels = new Set([...form.querySelectorAll<HTMLInputElement>('input[name="level"]:checked')].map((box) => Number(box.value) as Level));
+		const shown = visibleCountries(rows, text.value, levels, sort.value as SortKey, region.value);
+		for (const li of items.values()) li.hidden = true;
+		// Appending in order both shows each row and sorts it.
+		for (const id of shown) {
+			items.get(id)!.hidden = false;
+			list.append(items.get(id)!);
+		}
+		count.textContent = `${shown.length} of ${rows.length} countries`;
+	}
+	form.addEventListener('input', update);
+	form.addEventListener('submit', (e) => e.preventDefault());
+	// Without JavaScript the controls would do nothing, so they stay hidden.
+	form.hidden = false;
+	update();
+</script>
 
 <style>
 	.countries {
@@ -49,6 +108,70 @@ const countries = (await getCollection('countries')).sort((a, b) => a.data.name.
 		font-size: var(--text-lg);
 	}
 	.countries span {
+		font-size: var(--text-sm);
+	}
+	.countries .level-badge {
+		align-self: flex-start;
+		margin: 0;
+		padding: var(--space-1) var(--space-3);
+		font-size: var(--text-sm);
+	}
+	.countries li[hidden] {
+		display: none;
+	}
+	.filters {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: var(--space-2) var(--space-3);
+		margin-top: var(--space-4);
+	}
+	.filters input[type='search'] {
+		flex: 1 1 14rem;
+		min-height: 2.75rem;
+		padding: 0 var(--space-3);
+		border: 0;
+		border-radius: var(--radius-pill);
+		background: var(--color-surface-raised);
+		color: var(--color-text);
+		font: inherit;
+	}
+	.filters fieldset {
+		display: flex;
+		flex-wrap: wrap;
+		gap: var(--space-2);
+		margin: 0;
+		padding: 0;
+		border: 0;
+	}
+	/* A pill is a checkbox you can tap; its color is the level's, and it is written out as well. */
+	.pill {
+		display: inline-flex;
+		align-items: center;
+		gap: var(--space-2);
+		min-height: 2.75rem;
+		padding: 0 var(--space-3);
+		border-radius: var(--radius-pill);
+		background: var(--color-surface);
+		cursor: pointer;
+	}
+	.pill:has(input:checked) {
+		background: var(--level);
+		color: var(--color-on-accent);
+		font-weight: 700;
+	}
+	.filters select {
+		min-height: 2.75rem;
+		border: 0;
+		border-radius: var(--radius-pill);
+		padding: 0 var(--space-3);
+		background: var(--color-surface-raised);
+		color: var(--color-text);
+		font: inherit;
+	}
+	.filters p {
+		flex-basis: 100%;
+		margin: 0;
 		font-size: var(--text-sm);
 	}
 </style>

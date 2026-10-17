@@ -1,5 +1,6 @@
 import type { GuideSummary } from './guides';
 import { levelText } from './restrictiveness';
+import { linkAttrsHtml } from './external-link';
 
 const ESCAPES: Record<string, string> = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' };
 
@@ -21,11 +22,15 @@ export function popupHtml(g: GuideSummary): string {
 
 // HTML for the modal: the few facts that matter, where to register, and a link to the page with the rest.
 export function summaryHtml(g: GuideSummary): string {
-	const where = g.registrationUrl === null ? UNVERIFIED : `<a href="${escapeHtml(g.registrationUrl)}">Register online</a>`;
+	const where = g.registrationUrl === null ? UNVERIFIED : `<a class="button" href="${escapeHtml(g.registrationUrl)}"${linkAttrsHtml(g.registrationUrl)}>Register online</a>`;
 	return (
+		`<p class="level-badge level-${g.level}"><span class="level-number" aria-hidden="true">${g.level}</span>${escapeHtml(levelText(g.level))}</p>` +
 		`<h1>Drone rules in ${escapeHtml(g.name)}</h1>` +
+		`<p class="verdict">${escapeHtml(g.reason)}</p>` +
 		`<p class="muted">Last verified ${escapeHtml(g.lastVerified)}</p>` +
 		`<dl class="card">${row('Rules', levelText(g.level))}${row('Who must register', g.whoMustRegister)}${row('Registration fee', g.registrationFee)}<dt>Where to register</dt><dd>${where}</dd></dl>` +
+		`<form class="weight"><label>My drone weighs <input type="number" name="grams" inputmode="numeric" data-threshold="${g.weightGrams ?? ''}" /> g</label><p class="weight-answer muted" role="status"></p></form>` +
+		`<p><button type="button" class="save" aria-pressed="false">Save this country</button></p>` +
 		`<p><a class="guide-link" href="/countries/${encodeURIComponent(g.slug)}/">Read the full guide</a> for pilot tests, Remote ID, insurance and where you can fly.</p>`
 	);
 }

@@ -26,6 +26,10 @@ jobs:
       - run: npm run build:zones
       # Fails the job, and so opens no pull request, if a rebuilt file breaks the zone schema or the data tests.
       - run: npm test
+      # Pull requests opened with the default token do not start the CI workflow, so run its browser tests here.
+      - run: npm run build
+      - run: npx playwright install --with-deps chromium
+      - run: npm run test:e2e
       - uses: peter-evans/create-pull-request@v7
         with:
           branch: refresh/airport-zones

@@ -44,7 +44,8 @@ function baseHeaders(etag: string): Headers {
 	return new Headers({
 		'Accept-Ranges': 'bytes',
 		'Content-Type': 'application/octet-stream',
-		'Cache-Control': 'public, max-age=86400',
+		// Revalidate by ETag every time: a replaced file must never be read with the old file's cached header bytes.
+		'Cache-Control': 'public, no-cache',
 		ETag: etag,
 	});
 }

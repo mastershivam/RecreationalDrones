@@ -76,7 +76,7 @@ test.describe('Nepal guide page', () => {
 		await expect(page.getByText('security clearance letter from the Ministry of Home Affairs').first()).toBeVisible();
 		await expect(page.getByRole('heading', { name: 'Where and how you can fly' })).toBeVisible();
 		await expect(page.getByText('100 m (328 ft)')).toBeVisible();
-		await expect(page.getByText('0 g', { exact: true })).toBeVisible();
+		await expect(page.locator('dd').getByText('0 g', { exact: true })).toBeVisible();
 	});
 
 	test('says what is not covered yet and marks unchecked rules', async ({ page }) => {

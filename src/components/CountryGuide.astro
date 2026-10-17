@@ -3,6 +3,9 @@ import { render, type CollectionEntry } from 'astro:content';
 import Unverified from './Unverified.astro';
 import { levelText } from '../lib/restrictiveness';
 import { reportErrorUrl } from '../lib/report';
+import { linkAttrs } from '../lib/external-link';
+import { outline } from '../lib/outline';
+import { readFileSync } from 'node:fs';
 
 interface Props {
 	country: CollectionEntry<'countries'>;
@@ -12,16 +15,32 @@ interface Props {
 const { country } = Astro.props;
 const { Content } = await render(country);
 const d = country.data;
+const shape = outline(JSON.parse(readFileSync('public/data/countries.geojson', 'utf8')).features, d.iso3);
 // The one thing most visitors came to do. If we have no registration page for the country, go to the authority.
 const cta = d.registrationUrl ? { href: d.registrationUrl, label: 'Register online' } : { href: d.authorityUrl, label: 'Go to the official source' };
 ---
 
+<p class={`level-badge level-${d.restrictiveness}`}><span class="level-number" aria-hidden="true">{d.restrictiveness}</span>{levelText(d.restrictiveness)}</p>
+{
+	shape && (
+		<svg class={`outline level-${d.restrictiveness}`} viewBox={`0 0 ${shape.width} ${shape.height}`} role="img" aria-label={`Outline of ${d.name}`}>
+			<path d={shape.d} />
+		</svg>
+	)
+}
 <h1>Drone rules in {d.name}</h1>
 <p class="muted">Last verified {d.lastVerified.toISOString().slice(0, 10)}</p>
-<p class="cta"><a class="button" href={cta.href}>{cta.label}</a></p>
+<p class="cta"><a class="button" href={cta.href} {...linkAttrs(cta.href)}>{cta.label}</a></p>
+<ul class="quick-facts" aria-label="Quick facts">
+	<li><span class="muted">Registration from</span><strong>{d.registrationWeightGrams !== null ? `${d.registrationWeightGrams} g` : <Unverified />}</strong></li>
+	<li><span class="muted">Fee</span><strong>{d.registrationFee ?? <Unverified />}</strong></li>
+	<li><span class="muted">Minimum age</span><strong>{d.minOperatorAge ?? <Unverified />}</strong></li>
+	<li><span class="muted">Remote ID</span><strong>{d.remoteId ?? <Unverified />}</strong></li>
+	<li><span class="muted">Insurance</span><strong>{d.insurance ?? <Unverified />}</strong></li>
+</ul>
 <dl class="card">
 	<dt>Authority</dt>
-	<dd><a href={d.authorityUrl}>{d.authority}</a></dd>
+	<dd><a href={d.authorityUrl} {...linkAttrs(d.authorityUrl)}>{d.authority}</a></dd>
 	<dt>Rules</dt>
 	<dd>{levelText(d.restrictiveness)}. {d.restrictivenessReason}</dd>
 	<dt>Who must register</dt>
@@ -29,7 +48,7 @@ const cta = d.registrationUrl ? { href: d.registrationUrl, label: 'Register onli
 	<dt>Registration fee</dt>
 	<dd>{d.registrationFee ?? <Unverified />}</dd>
 	<dt>Registration</dt>
-	<dd>{d.registrationUrl ? <a href={d.registrationUrl}>Register with {d.authority}</a> : <Unverified />}</dd>
+	<dd>{d.registrationUrl ? <a href={d.registrationUrl} {...linkAttrs(d.registrationUrl)}>Register with {d.authority}</a> : <Unverified />}</dd>
 	<dt>Lowest registration weight</dt>
 	<dd>{d.registrationWeightGrams !== null ? `${d.registrationWeightGrams} g` : <Unverified />}</dd>
 	<dt>Minimum operator age</dt>
@@ -64,12 +83,45 @@ const cta = d.registrationUrl ? { href: d.registrationUrl, label: 'Register onli
 </section>
 <Content />
 <h2>Sources</h2>
-<ul>{d.sources.map((url) => <li><a href={url}>{url}</a></li>)}</ul>
-<p class="report"><a href={reportErrorUrl(d.name, country.id)}>Report a mistake in this guide</a></p>
+<ul>{d.sources.map((url) => <li><a href={url} {...linkAttrs(url)}>{url}</a></li>)}</ul>
+<p class="report"><a href={reportErrorUrl(d.name, country.id)} {...linkAttrs(reportErrorUrl(d.name, country.id))}>Report a mistake in this guide</a></p>
 <!-- On a phone the button stays at the bottom of the screen while you read, so the action is never far away. -->
-<div class="cta-bar"><a class="button" href={cta.href}>{cta.label}</a></div>
+<div class="cta-bar"><a class="button" href={cta.href} {...linkAttrs(cta.href)}>{cta.label}</a></div>
 
 <style>
+	/* A small silhouette of the country, in its level's color. */
+	.outline {
+		float: right;
+		width: 7rem;
+		height: auto;
+		margin: 0 0 var(--space-2) var(--space-3);
+		fill: var(--level);
+		stroke: var(--level);
+		stroke-width: 0.5;
+		stroke-linejoin: round;
+		opacity: 0.9;
+	}
+	/* The five facts people look for first, in one strip. */
+	.quick-facts {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
+		gap: var(--space-2);
+		margin: var(--space-3) 0;
+		padding: 0;
+		list-style: none;
+	}
+	.quick-facts li {
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-1);
+		padding: var(--space-2) var(--space-3);
+		border-radius: var(--radius);
+		background: var(--color-surface);
+		font-size: var(--text-sm);
+	}
+	.quick-facts strong {
+		font-size: var(--text-base);
+	}
 	.cta {
 		margin: var(--space-3) 0;
 	}
@@ -101,8 +153,6 @@ const cta = d.registrationUrl ? { href: d.registrationUrl, label: 'Register onli
 		font-weight: 600;
 		color: var(--color-text-muted);
 		font-size: var(--text-sm);
-		text-transform: uppercase;
-		letter-spacing: 0.04em;
 	}
 	dd {
 		margin: 0 0 var(--space-3);

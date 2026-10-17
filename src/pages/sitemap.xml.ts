@@ -9,6 +9,7 @@ export const GET: APIRoute = async () => {
 	const entries = [
 		{ path: '/' },
 		{ path: '/countries/' },
+		{ path: '/trip/' },
 		...countries.map((c) => ({ path: `/countries/${c.id}/`, lastmod: c.data.lastVerified })).sort((a, b) => a.path.localeCompare(b.path)),
 		{ path: '/privacy/' },
 		{ path: '/contact/' },

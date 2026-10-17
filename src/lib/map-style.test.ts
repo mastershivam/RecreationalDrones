@@ -9,11 +9,12 @@ const colors = {
 	ocean: '#040b1c',
 	land: '#3f5f94',
 	landBorder: '#9bb3dd',
+	uncovered: '#2a3a5c',
 	text: '#eef1fa',
 	textMuted: '#a4aecb',
 	accent: '#ff9f1c',
-	level1: '#f2fbff',
-	level2: '#7fe3d0',
+	level1: '#c8f7d8',
+	level2: '#f5c542',
 	level3: '#ff9a3c',
 	level4: '#ff6f91',
 	night: '#02040a',
@@ -57,6 +58,11 @@ describe('basemapLayers', () => {
 		expect(city).toBeDefined();
 		expect((city.layout as Record<string, unknown>)['text-field']).toBeDefined();
 		expect(Object.keys(city.layout as object).filter((k) => k.startsWith('icon-'))).toEqual([]);
+	});
+
+	it('labels cities in English only, with no second line in the local script', () => {
+		const city = basemapLayers(basemapFlavor(colors)).find((l) => l.id === 'places_locality')!;
+		expect((city.layout as Record<string, unknown>)['text-field']).toEqual(['get', 'name:en']);
 	});
 
 	it('drops the layers that are only icons, such as road shields and points of interest', () => {
@@ -112,6 +118,23 @@ describe('buildStyle', () => {
 		expect(night).toBeLessThan(covered);
 		expect(ids.indexOf('covered-countries-outline')).toBeLessThan(firstLabel);
 		expect(style.layers.slice(0, firstLabel).some((l) => l.type === 'symbol')).toBe(false);
+	});
+
+	it('quietens countries with no guide yet, under the borders so they stay visible', () => {
+		const uncovered = style.layers.find((l) => l.id === 'uncovered-countries') as any;
+		expect(uncovered.paint['fill-color']).toBe(colors.uncovered);
+		expect(uncovered.filter).toEqual(['!', ['in', ['get', 'ADM0_A3'], ['literal', ['GBR', 'NPL']]]]);
+		expect(ids.indexOf('uncovered-countries')).toBeLessThan(ids.indexOf('boundaries_country'));
+	});
+
+	it('lets a covered country lift on hover and when picked', () => {
+		const covered = style.layers.find((l) => l.id === 'covered-countries') as any;
+		expect(JSON.stringify(covered.paint['fill-opacity'])).toContain('hover');
+		expect((style.sources.countries as { promoteId: string }).promoteId).toBe('ADM0_A3');
+	});
+
+	it('gives city labels a halo so they stay readable', () => {
+		expect(basemapFlavor(colors).city_label_halo).toBe(colors.ocean);
 	});
 
 	it('highlights only countries that have a guide', () => {

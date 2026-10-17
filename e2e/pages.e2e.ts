@@ -20,8 +20,8 @@ test.describe('pages', () => {
 
 	test('says so when a rule has not been checked, instead of leaving it blank', async ({ page }) => {
 		await page.goto('/countries/united-kingdom/');
-		await expect(page.locator('.unverified')).toHaveCount(2);
-		await expect(page.locator('.unverified').first()).toHaveText(/Not yet verified/);
+		await expect(page.locator('dl .unverified')).toHaveCount(2);
+		await expect(page.locator('dl .unverified').first()).toHaveText(/Not yet verified/);
 	});
 
 	for (const path of PAGES) {

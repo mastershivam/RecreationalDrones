@@ -6,9 +6,13 @@ export interface GuideSummary {
 	// The guide page's path segment, for the "full guide" link.
 	slug: string;
 	level: Level;
+	// Why it got that level, in one sentence: the verdict the summary opens with.
+	reason: string;
 	whoMustRegister: string | null;
 	registrationFee: string | null;
 	registrationUrl: string | null;
+	// Lowest weight, in grams, where registration starts; null when not yet verified.
+	weightGrams: number | null;
 	lastVerified: string;
 }
 
@@ -18,9 +22,11 @@ interface GuideEntry {
 		iso3: string;
 		name: string;
 		restrictiveness: Level;
+		restrictivenessReason: string;
 		whoMustRegister: string | null;
 		registrationFee: string | null;
 		registrationUrl: string | null;
+		registrationWeightGrams: number | null;
 		lastVerified: Date;
 	};
 }
@@ -35,9 +41,11 @@ export function guideSummaries(entries: GuideEntry[]): Record<string, GuideSumma
 			name: data.name,
 			slug: id,
 			level: data.restrictiveness,
+			reason: data.restrictivenessReason,
 			whoMustRegister: data.whoMustRegister,
 			registrationFee: data.registrationFee,
 			registrationUrl: data.registrationUrl,
+			weightGrams: data.registrationWeightGrams,
 			lastVerified: data.lastVerified.toISOString().slice(0, 10),
 		};
 	}

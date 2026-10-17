@@ -1,5 +1,5 @@
 import { expect, test } from '@playwright/test';
-import { openGlobe } from './helpers';
+import { isOutsideRequest, openGlobe } from './helpers';
 
 const locate = (page: import('@playwright/test').Page) => page.getByRole('button', { name: 'Use my location' });
 const status = (page: import('@playwright/test').Page) => page.locator('#locate-status');
@@ -35,7 +35,7 @@ test.describe('use my location, in a country with a guide', () => {
 		await expect(dialog(page)).toBeVisible({ timeout: 15_000 });
 		for (const url of urls) {
 			expect(url, url).not.toMatch(/35\.6|139\.6/);
-			expect(new URL(url).origin, url).toBe(new URL(page.url()).origin);
+			expect(isOutsideRequest(url, new URL(page.url()).origin), url).toBe(false);
 		}
 	});
 

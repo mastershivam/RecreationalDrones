@@ -97,7 +97,7 @@ describe('handleTileRequest', () => {
 		const response = await handleTileRequest(request({ Range: 'bytes=0-9' }), fakeBucket(file));
 		expect(response.headers.get('Accept-Ranges')).toBe('bytes');
 		expect(response.headers.get('ETag')).toBe('"v1"');
-		expect(response.headers.get('Cache-Control')).toContain('max-age');
+		expect(response.headers.get('Cache-Control')).toContain('no-cache');
 	});
 
 	it('answers 416 with the file size when the range starts past the end', async () => {

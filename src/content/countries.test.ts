@@ -56,9 +56,40 @@ describe('Nepal guide', () => {
 	});
 
 	it('leaves unchecked rules unverified rather than guessing', () => {
+		// The UASR sets 18 for a remote pilot licence but not whether recreational flyers need one.
 		expect(data.minOperatorAge).toBeNull();
-		expect(data.remoteId).toBeNull();
-		expect(data.registrationWeightGrams).toBeNull();
+	});
+
+	it('says every drone must register, whatever its weight, as UASR 101.5 does', () => {
+		expect(data.registrationWeightGrams).toBe(0);
+		expect(data.whoMustRegister).toContain('whatever its weight');
+		expect(file).toContain('Category A');
+		expect(file).toContain('under 250 g');
+	});
+
+	it('says the UASR has no Remote ID rule, only a UIN shown on the drone', () => {
+		expect(data.remoteId).toContain('do not mention Remote ID');
+		expect(data.remoteId).toContain('Unique Identification Number');
+	});
+
+	it('says permission to fly comes from CAAN, with Home Ministry security clearance', () => {
+		expect(file).toContain('## Permission to fly');
+		expect(file).toContain('permission from CAAN');
+		expect(file).toContain('security clearance letter from the Ministry of Home Affairs');
+	});
+
+	it("gives CAAN's standard limits on height, distance and airports", () => {
+		expect(file).toContain('100 m (328 ft)');
+		expect(file).toContain('**300 m**');
+		expect(file).toContain('**30 m**');
+		expect(file).toContain('**5 km**');
+	});
+
+	it('lists the no-fly areas it could not confirm, rather than guessing them', () => {
+		const notCovered = file.slice(file.indexOf('## Not covered yet'));
+		expect(notCovered).toContain('national parks');
+		expect(notCovered).toContain('Kathmandu valley');
+		expect(notCovered).toContain('Everest region');
 	});
 
 	it('gives the official fee and forms, which have to match the CAAN documents', () => {

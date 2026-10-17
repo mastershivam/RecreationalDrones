@@ -27,8 +27,9 @@ test.describe('Nepal on the globe', () => {
 		const preview = page.locator('.country-popup.preview');
 		await expect(preview).toContainText('Nepal');
 		await expect(preview).toContainText('over 2 kg');
-		// Minimum age and Remote ID have not been checked yet.
-		await expect(preview.locator('.unverified')).toHaveCount(2);
+		await expect(preview).toContainText('Unique Identification Number');
+		// Only the minimum age is still unverified.
+		await expect(preview.locator('.unverified')).toHaveCount(1);
 	});
 
 	test('opens the full guide on click or tap', async ({ page }) => {
@@ -66,7 +67,17 @@ test.describe('Nepal guide page', () => {
 	test('names CAAN as the authority and cites its documents', async ({ page }) => {
 		await page.goto('/countries/nepal/');
 		await expect(page.getByRole('link', { name: 'Civil Aviation Authority of Nepal (CAAN)' }).first()).toHaveAttribute('href', 'https://caanepal.gov.np/');
-		await expect(page.locator('a[href*="caanepal.gov.np/storage"]')).toHaveCount(2);
+		await expect(page.locator('a[href*="caanepal.gov.np/storage"]')).toHaveCount(4);
+		await expect(page.locator('a[href*="caanepal.gov.np/functions/general-aviation/drones"]')).toHaveCount(1);
+	});
+
+	test('explains permission to fly and the flying limits', async ({ page }) => {
+		await page.goto('/countries/nepal/');
+		await expect(page.getByRole('heading', { name: 'Permission to fly' })).toBeVisible();
+		await expect(page.getByText('security clearance letter from the Ministry of Home Affairs').first()).toBeVisible();
+		await expect(page.getByRole('heading', { name: 'Where and how you can fly' })).toBeVisible();
+		await expect(page.getByText('100 m (328 ft)')).toBeVisible();
+		await expect(page.getByText('0 g', { exact: true })).toBeVisible();
 	});
 
 	test('says what is not covered yet and marks unchecked rules', async ({ page }) => {

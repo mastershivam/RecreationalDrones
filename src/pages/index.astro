@@ -4,6 +4,7 @@ import Base from '../layouts/Base.astro';
 import { readFileSync } from 'node:fs';
 import { guideSummaries } from '../lib/guides';
 import { mainlandBounds } from '../lib/country-bounds';
+import { ZONE_GROUPS } from '../lib/zones';
 
 const countries = await getCollection('countries');
 // iso3 -> key facts for the hover preview, read by the map script below.
@@ -27,6 +28,27 @@ const bounds = mainlandBounds(JSON.parse(readFileSync('public/data/countries.geo
 				<p class="muted legend"><span class="swatch"></span>Shaded areas are in night right now.</p>
 			</div>
 		</div>
+		<details class="layers card" id="layers">
+			<summary>Zones</summary>
+			<p class="muted">Zoom in close to see them. A zone says what a place is and who says so; check the source before you fly.</p>
+			<fieldset>
+				<legend class="visually-hidden">Show on the map</legend>
+				{
+					ZONE_GROUPS.map((g) => (
+						<label>
+							<input type="checkbox" name="zone-group" value={g.id} checked />
+							<svg class={`key ${g.id}`} viewBox="0 0 20 20" aria-hidden="true">
+								{g.id === 'airport' && <circle cx="10" cy="10" r="8" />}
+								{g.id === 'approval' && <rect x="2" y="3" width="16" height="14" />}
+								{g.id === 'site' && <circle cx="10" cy="10" r="5" />}
+							</svg>
+							{g.label}
+						</label>
+					))
+				}
+			</fieldset>
+			<p class="muted" id="zones-status" role="status"></p>
+		</details>
 	</div>
 
 	<!-- The large popup: opened by clicking a country or searching for one, and filled with its summary. -->
@@ -51,6 +73,8 @@ const bounds = mainlandBounds(JSON.parse(readFileSync('public/data/countries.geo
 	import { searchCountries } from '../lib/search';
 	import type { Bounds } from '../lib/country-bounds';
 	import { nightGeoJSON } from '../lib/daynight';
+	import { ZONE_LAYER_IDS, enabledKinds, zoneLayerFilters, zonesPopupHtml, zoneFeatures, type ZoneProps } from '../lib/zones';
+	import { ZONES_URL } from '../lib/map-style';
 
 	// MapLibre looks for its worker next to its own module, which breaks once bundled.
 	setWorkerUrl(workerUrl);
@@ -82,6 +106,30 @@ const bounds = mainlandBounds(JSON.parse(readFileSync('public/data/countries.geo
 	const intro = document.querySelector('.intro')!;
 	map.once('dragstart', () => intro.classList.add('hidden'));
 
+	// Zones load after the globe is up, since the globe does not need them. If they fail, say so plainly.
+	const zonesStatus = document.getElementById('zones-status')!;
+	map.once('load', async () => {
+		try {
+			const response = await fetch(ZONES_URL);
+			if (!response.ok) throw new Error(String(response.status));
+			(map.getSource('zones') as GeoJSONSource).setData(zoneFeatures(await response.json()) as never);
+			map.once('idle', () => (el.dataset.zones = 'ready'));
+		} catch {
+			zonesStatus.textContent = 'Zones could not be loaded. The map still works.';
+			el.dataset.zones = 'failed';
+		}
+	});
+
+	// The filter: each box switches a group of zone kinds on or off. A closed panel is a small tab on a phone.
+	const layersPanel = document.getElementById('layers') as HTMLDetailsElement;
+	layersPanel.open = matchMedia('(min-width: 640px)').matches;
+	layersPanel.addEventListener('change', () => {
+		const on = [...layersPanel.querySelectorAll<HTMLInputElement>('input[name="zone-group"]:checked')].map((box) => box.value);
+		for (const [id, filter] of Object.entries(zoneLayerFilters(enabledKinds(on)))) map.setFilter(id, filter);
+		zoneClick?.remove();
+		hidePreview();
+	});
+
 	// Night moves around the globe, so refresh the shading every minute.
 	setInterval(() => (map.getSource('night') as GeoJSONSource).setData(nightGeoJSON(new Date())), 60_000);
 
@@ -97,14 +145,20 @@ const bounds = mainlandBounds(JSON.parse(readFileSync('public/data/countries.geo
 		previewing = undefined;
 	};
 
+	// The zones under a point, nearest layer first. A zone wins over the country under it.
+	const zonesAt = (box: Parameters<typeof map.queryRenderedFeatures>[0]) =>
+		map.queryRenderedFeatures(box, { layers: ZONE_LAYER_IDS }).map((f) => f.properties as unknown as ZoneProps);
+
 	map.on('mousemove', (e) => {
-		const iso3 = covered(e.point);
-		map.getCanvas().style.cursor = iso3 ? 'pointer' : '';
-		if (!canHover || !iso3) return hidePreview();
+		const zones = zonesAt(tapBox(e.point, 4));
+		const iso3 = zones.length ? undefined : covered(e.point);
+		map.getCanvas().style.cursor = zones.length || iso3 ? 'pointer' : '';
+		if (!canHover || (!zones.length && !iso3)) return hidePreview();
 		preview.setLngLat(e.lngLat);
-		if (iso3 !== previewing) {
-			previewing = iso3;
-			preview.setHTML(popupHtml(guides[iso3])).addTo(map);
+		const key = zones.length ? zones.map((z) => z.id).join() : iso3;
+		if (key !== previewing) {
+			previewing = key;
+			preview.setHTML(zones.length ? zonesPopupHtml(zones, { link: false }) : popupHtml(guides[iso3!])).addTo(map);
 		}
 	});
 	map.getCanvas().addEventListener('mouseleave', hidePreview);
@@ -117,8 +171,20 @@ const bounds = mainlandBounds(JSON.parse(readFileSync('public/data/countries.geo
 	// The dialog element itself is only hit by clicks on the dimmed area around the panel.
 	dialog.addEventListener('click', (e) => e.target === dialog && dialog.close());
 
-	// Query a small box around the tap so a fingertip doesn't have to be pixel-perfect.
+	// Query a small box around the tap so a fingertip doesn't have to be pixel-perfect. A zone opens a small popup
+	// with a link to its source; a guided country with no zone under the tap opens the full guide.
+	let zoneClick: Popup | undefined;
 	map.on('click', (e) => {
+		zoneClick?.remove();
+		const zones = zonesAt(tapBox(e.point));
+		if (zones.length) {
+			hidePreview();
+			zoneClick = new Popup({ offset: 14, maxWidth: '20rem', className: 'country-popup' })
+				.setLngLat(e.lngLat)
+				.setHTML(zonesPopupHtml(zones, { link: true }))
+				.addTo(map);
+			return;
+		}
 		// The exact point first: with neighbours that all have guides, the padded box can hold the wrong country.
 		const iso3 = covered(e.point) ?? covered(tapBox(e.point));
 		if (iso3) openSummary(iso3);
@@ -145,6 +211,7 @@ const bounds = mainlandBounds(JSON.parse(readFileSync('public/data/countries.geo
 		searchInput.value = guides[iso3].name;
 		searchInput.blur();
 		intro.classList.add('hidden');
+		zoneClick?.remove();
 		hidePreview();
 		const camera = map.cameraForBounds(bounds[iso3], { padding: 60, maxZoom: 5 });
 		const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -309,7 +376,77 @@ const bounds = mainlandBounds(JSON.parse(readFileSync('public/data/countries.geo
 		background: var(--color-night);
 		border: 1px solid var(--color-land-border);
 	}
+	/* The zone filter: a small panel that is a closed tab on a phone, so the globe stays clear. */
+	.layers {
+		position: absolute;
+		left: max(var(--space-2), env(safe-area-inset-left));
+		/* Clear of MapLibre's attribution bar, which wraps across the bottom of a narrow screen. */
+		bottom: calc(var(--space-5) + env(safe-area-inset-bottom));
+		max-width: 20rem;
+		padding: 0;
+		background: color-mix(in srgb, var(--color-surface) 85%, transparent);
+		backdrop-filter: blur(6px);
+	}
+	.layers summary {
+		display: flex;
+		align-items: center;
+		min-height: 2.75rem;
+		padding: 0 var(--space-3);
+		font-weight: 600;
+		cursor: pointer;
+	}
+	.layers p {
+		margin: 0;
+		padding: 0 var(--space-3) var(--space-2);
+		font-size: var(--text-sm);
+		line-height: 1.4;
+	}
+	.layers fieldset {
+		margin: 0;
+		padding: 0 var(--space-3);
+		border: 0;
+	}
+	.layers label {
+		display: flex;
+		align-items: center;
+		gap: var(--space-2);
+		/* A finger-sized row. */
+		min-height: 2.75rem;
+		font-size: var(--text-sm);
+		cursor: pointer;
+	}
+	.layers input {
+		flex: none;
+		width: 1.25rem;
+		height: 1.25rem;
+		accent-color: var(--color-accent);
+	}
+	/* A small picture of how each kind is drawn on the map, so the key does not depend on color alone. */
+	.key {
+		flex: none;
+		width: 1.25rem;
+		height: 1.25rem;
+		fill: none;
+		stroke: currentColor;
+		stroke-width: 1.5;
+	}
+	.key.airport {
+		color: var(--color-zone-airport);
+		stroke-dasharray: 3 2;
+	}
+	.key.approval {
+		color: var(--color-zone-approval);
+		fill: color-mix(in srgb, currentColor 18%, transparent);
+	}
+	.key.site {
+		color: var(--color-text);
+		stroke-width: 2;
+		fill: var(--color-ocean);
+	}
 	@media (min-width: 640px) {
+		.layers {
+			left: var(--space-3);
+		}
 		.top {
 			top: var(--space-3);
 			left: var(--space-3);
@@ -355,6 +492,17 @@ const bounds = mainlandBounds(JSON.parse(readFileSync('public/data/countries.geo
 	}
 	:global(.country-popup p) {
 		margin: 0 0 var(--space-2);
+	}
+	:global(.country-popup .zone-kind) {
+		color: var(--color-text-muted);
+		font-size: var(--text-xs);
+		text-transform: uppercase;
+		letter-spacing: 0.04em;
+	}
+	:global(.country-popup .zone + .zone) {
+		margin-top: var(--space-3);
+		padding-top: var(--space-3);
+		border-top: 1px solid var(--color-border);
 	}
 	/* The tap popup has a close button, so its title leaves room for it. */
 	:global(.country-popup:not(.preview) .popup-title) {

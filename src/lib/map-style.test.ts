@@ -2,7 +2,8 @@ import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
 import { TILE_PATH } from './tile-server';
-import { COUNTRIES_URL, basemapFlavor, basemapLayers, buildStyle } from './map-style';
+import { COUNTRIES_URL, ZONES_URL, basemapFlavor, basemapLayers, buildStyle } from './map-style';
+import { ZONE_LAYER_IDS, ZONE_MIN_ZOOM } from './zones';
 
 const colors = {
 	ocean: '#040b1c',
@@ -12,6 +13,8 @@ const colors = {
 	textMuted: '#a4aecb',
 	accent: '#ff9f1c',
 	night: '#02040a',
+	zoneAirport: '#ff9ab0',
+	zoneApproval: '#d2b4ff',
 };
 const guides = { GBR: '/countries/united-kingdom/' };
 const origin = 'https://example.org';
@@ -115,6 +118,53 @@ describe('buildStyle', () => {
 	it('shades night from the time it is given', () => {
 		const night = (style.sources.night as { data: { features: { properties: { kind: string } }[] } }).data;
 		expect(night.features.map((f) => f.properties.kind)).toEqual(['night', 'terminator']);
+	});
+});
+
+describe('zone layers', () => {
+	const layer = (id: string) => style.layers.find((l) => l.id === id) as any;
+
+	it('has the layers the filter switches, above the highlighted countries and below every label', () => {
+		expect(ids).toEqual(expect.arrayContaining(ZONE_LAYER_IDS));
+		for (const id of ZONE_LAYER_IDS) {
+			expect(ids.indexOf(id), id).toBeGreaterThan(ids.indexOf('covered-countries-outline'));
+			expect(ids.indexOf(id), id).toBeLessThan(firstLabel);
+		}
+	});
+
+	it('starts with an empty source, filled by the page once the globe is up', () => {
+		expect(style.sources.zones).toMatchObject({ type: 'geojson', data: { type: 'FeatureCollection', features: [] } });
+		expect(ZONES_URL).toBe('/data/zones.json');
+	});
+
+	it('credits OurAirports, whose airport positions the circles use', () => {
+		expect((style.sources.zones as { attribution: string }).attribution).toContain('OurAirports');
+	});
+
+	it('keeps zones off the world view, where they are smaller than a pixel', () => {
+		for (const id of ZONE_LAYER_IDS) expect(layer(id).minzoom, id).toBe(ZONE_MIN_ZOOM);
+	});
+
+	it('draws airport circles dashed and approval outlines solid, so the kind is not told by color alone', () => {
+		expect(layer('zones-airport-line').paint['line-dasharray']).toEqual([2, 2]);
+		expect(layer('zones-approval-line').paint['line-dasharray']).toBeUndefined();
+		expect(layer('zones-airport-line').paint['line-color']).toBe(colors.zoneAirport);
+		expect(layer('zones-approval-line').paint['line-color']).toBe(colors.zoneApproval);
+	});
+
+	it('never colors a zone with the accent, which means "we have a guide"', () => {
+		for (const id of ZONE_LAYER_IDS) expect(JSON.stringify(layer(id).paint), id).not.toContain(colors.accent);
+	});
+
+	it('draws a model aircraft field as a ring in body-text color, unlike an airport dot', () => {
+		const paint = layer('zones-points').paint;
+		expect(JSON.stringify(paint['circle-stroke-color'])).toContain(colors.text);
+		expect(paint['circle-stroke-width']).toEqual(['match', ['get', 'kind'], 'flying-site', 2, 0]);
+	});
+
+	it('starts with every kind switched on', () => {
+		expect(JSON.stringify(layer('zones-fill').filter)).toContain('airport-buffer');
+		expect(JSON.stringify(layer('zones-points').filter)).toContain('flying-site');
 	});
 });
 

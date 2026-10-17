@@ -1,0 +1,26 @@
+{
+	"type": "FeatureCollection",
+	"meta": {
+		"iso3": "GBR",
+		"sourceUrl": "https://royalparks.org.uk/sites/default/files/2024-12/Drone%20Policy%202024.pdf",
+		"sourceHash": "88dc8a807a94ded96dd78953135614044166f78f710ffa0fb8e0fdfd030b3f4b",
+		"verifiedOn": "2026-10-17",
+		"licence": "Facts cited from a Royal Parks policy; the policy text is not copied. The position is from OpenStreetMap.",
+		"attribution": "Policy: The Royal Parks, The Use of Unmanned Aerial Systems in The Royal Parks. Position: © OpenStreetMap contributors (ODbL), node 8664000290."
+	},
+	"features": [
+		{
+			"type": "Feature",
+			"geometry": { "type": "Point", "coordinates": [-0.26969, 51.45026] },
+			"properties": {
+				"id": "royal-parks:richmond-park-flying-field",
+				"kind": "flying-site",
+				"name": "Richmond Park Flying Field",
+				"status": "active",
+				"osm": "node/8664000290",
+				"ruleUrl": "https://royalparks.org.uk/sites/default/files/2024-12/Drone%20Policy%202024.pdf",
+				"note": "The Royal Parks name this area of Richmond Park as the one currently identified as suitable for recreational drone use, subject to the Park Regulations and CAA rules. VR and FPV goggles are not allowed. This is the position of an information board at the field, not its boundary. Elsewhere in the Royal Parks, flying becomes a prohibited act once a constable asks you to stop or a notice says so."
+			}
+		}
+	]
+}

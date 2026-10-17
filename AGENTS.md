@@ -23,6 +23,13 @@ Every commit is preceded by creating all missing unit, end-to-end and regression
 - Check that a new test can fail: break the code, watch the test fail, then restore the code.
 - Before every commit, run `npm test`, the end-to-end tests, `npx astro check` and `npm run build`. CI runs the same checks.
 
+## Adding a country
+
+1. Write the guide in `src/content/countries/<name>.mdx`, from the authority's own documents (see an existing one).
+2. Add its airport rule to `src/lib/airport-rules.ts`: the radius the authority gives, the document it comes from, and a note saying what the rule is and what it leaves out. If the authority gives no distance, write `{ none: 'why' }`.
+3. Run `npm run build:zones` to make `data/zones/<iso3>-airports.geojson`, and add a bounding box for the country to `BOX` in `src/lib/zones-data.test.ts`.
+4. Run the tests. `src/lib/zones-data.test.ts` fails until steps 2 and 3 are done.
+
 ## Documentation
 
 Full documentation: https://docs.astro.build

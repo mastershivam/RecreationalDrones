@@ -32,3 +32,6 @@ data/basemap-deep.pmtiles
 # playwright
 test-results/
 playwright-report/
+
+# OpenStreetMap extracts (large), downloaded by npm run build:fields
+data/osm/

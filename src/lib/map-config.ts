@@ -22,6 +22,8 @@ export interface MapColors {
 	textMuted: string;
 	accent: string;
 	night: string;
+	zoneAirport: string;
+	zoneApproval: string;
 }
 
 export const MAP_COLOR_TOKENS: Record<keyof MapColors, string> = {
@@ -32,6 +34,8 @@ export const MAP_COLOR_TOKENS: Record<keyof MapColors, string> = {
 	textMuted: '--color-text-muted',
 	accent: '--color-accent',
 	night: '--color-night',
+	zoneAirport: '--color-zone-airport',
+	zoneApproval: '--color-zone-approval',
 };
 
 // Reads the map colors from CSS custom properties; `read` is getComputedStyle(...).getPropertyValue in the browser.

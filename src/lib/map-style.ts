@@ -3,10 +3,13 @@ import type { FilterSpecification, GeoJSONSourceSpecification, LayerSpecificatio
 import { nightGeoJSON } from './daynight';
 import { GLOBE_PROJECTION, coveredCountriesFilter, type MapColors } from './map-config';
 import { TILE_PATH } from './tile-server';
+import { ZONE_MIN_ZOOM, zoneLayerFilters } from './zones';
 
 // The basemap is one .pmtiles file, read in small pieces with HTTP byte ranges. In production the Worker serves
 // it from a private R2 bucket (src/worker.ts); the countries file is a plain static asset.
 export const COUNTRIES_URL = '/data/countries.geojson';
+// Zones are loaded by the page after the globe is up, so the source starts empty. See src/pages/data/zones.json.ts.
+export const ZONES_URL = '/data/zones.json';
 
 const ATTRIBUTION =
 	'<a href="https://protomaps.com">Protomaps</a> © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>';
@@ -77,6 +80,33 @@ function overlayLayers(c: MapColors, guides: Record<string, unknown>): LayerSpec
 		},
 		{ id: 'covered-countries', type: 'fill', ...covered, paint: { 'fill-color': c.accent, 'fill-opacity': 0.55 } },
 		{ id: 'covered-countries-outline', type: 'line', ...covered, paint: { 'line-color': c.accent, 'line-width': 1.5 } },
+		...zoneLayers(c),
+	] as LayerSpecification[];
+}
+
+// Airport circles (dashed), outlines of places that need approval (solid) and dots for airports and fields. Colors
+// carry the kind and line style and symbol repeat it, so no one has to tell colors apart. Zones are never amber.
+function zoneLayers(c: MapColors): LayerSpecification[] {
+	const filters = zoneLayerFilters(['airport-buffer', 'check-first', 'restricted', 'flying-site']);
+	const common = { source: 'zones', minzoom: ZONE_MIN_ZOOM };
+	const byKind = (airport: string, approval: string, site: string) => ['match', ['get', 'kind'], 'airport-buffer', airport, 'flying-site', site, approval];
+	return [
+		{ id: 'zones-fill', type: 'fill', ...common, filter: filters['zones-fill'], paint: { 'fill-color': byKind(c.zoneAirport, c.zoneApproval, c.text), 'fill-opacity': 0.18 } },
+		{ id: 'zones-airport-line', type: 'line', ...common, filter: filters['zones-airport-line'], paint: { 'line-color': c.zoneAirport, 'line-width': 1.5, 'line-dasharray': [2, 2] } },
+		{ id: 'zones-approval-line', type: 'line', ...common, filter: filters['zones-approval-line'], paint: { 'line-color': c.zoneApproval, 'line-width': 2 } },
+		{
+			id: 'zones-points',
+			type: 'circle',
+			...common,
+			filter: filters['zones-points'],
+			paint: {
+				'circle-radius': ['match', ['get', 'kind'], 'flying-site', 6, 3],
+				// A field is a hollow ring in body-text color, so it is never mistaken for an airport dot.
+				'circle-color': byKind(c.zoneAirport, c.zoneApproval, c.ocean),
+				'circle-stroke-color': byKind(c.zoneAirport, c.zoneApproval, c.text),
+				'circle-stroke-width': ['match', ['get', 'kind'], 'flying-site', 2, 0],
+			},
+		},
 	] as LayerSpecification[];
 }
 
@@ -92,6 +122,7 @@ export function buildStyle(c: MapColors, guides: Record<string, unknown>, origin
 			protomaps: { type: 'vector', url: `pmtiles://${origin}${TILE_PATH}`, attribution: ATTRIBUTION },
 			countries: { type: 'geojson', data: `${origin}${COUNTRIES_URL}` },
 			night: { type: 'geojson', data: nightGeoJSON(now) as GeoJSONSourceSpecification['data'] },
+			zones: { type: 'geojson', data: { type: 'FeatureCollection', features: [] }, attribution: 'Airports: <a href="https://ourairports.com">OurAirports</a>' },
 		},
 		layers: [...base.slice(0, firstLabel), ...overlayLayers(c, guides), ...base.slice(firstLabel)],
 	};

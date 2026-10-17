@@ -20,6 +20,9 @@
 	--color-land: #3f5f94;
 	--color-land-border: #9bb3dd;
 	--color-night: #02040a;
+	/* Zone layer. Not amber: amber means "we have a guide". Zones also differ by line style and symbol. */
+	--color-zone-airport: #ff9ab0;
+	--color-zone-approval: #d2b4ff;
 
 	--font-sans: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
 	--text-xs: 0.75rem;

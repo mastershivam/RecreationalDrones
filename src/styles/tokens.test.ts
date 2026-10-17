@@ -26,6 +26,10 @@ const pairs: [string, string, number, string][] = [
 	['color-text', 'color-land', 4.5, 'country labels on land'],
 	['color-text-muted', 'color-ocean', 4.5, 'ocean labels'],
 	['color-accent', 'color-land', 3, 'covered countries stand out from land'],
+	['color-zone-airport', 'color-land', 3, 'airport zones show on land'],
+	['color-zone-airport', 'color-ocean', 3, 'airport zones show over the sea'],
+	['color-zone-approval', 'color-land', 3, 'approval zones show on land'],
+	['color-zone-approval', 'color-ocean', 3, 'approval zones show over the sea'],
 ];
 
 describe('design tokens', () => {

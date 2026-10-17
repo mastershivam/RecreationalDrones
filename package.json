@@ -12,6 +12,8 @@
     "astro": "astro",
     "test": "vitest run",
     "build:countries": "node scripts/build-countries.ts",
+    "build:zones": "node scripts/build-airport-zones.ts",
+    "build:fields": "node scripts/build-model-fields.ts",
     "test:e2e": "playwright test"
   },
   "dependencies": {

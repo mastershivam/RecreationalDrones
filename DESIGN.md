@@ -36,6 +36,18 @@ Country information shows on the globe, not on a new page. Clicking never naviga
 - Unchecked facts read "Not yet verified", never blank.
 - Preview text is built from guide data through `popupHtml`, which escapes it. Never put raw guide text into HTML.
 
+## Zones layer
+
+Places that matter for flying are drawn on the globe from the zone files in `data/zones/` (see the README, Map data). The page loads them after the globe is up, as `/data/zones.json`, which the build makes from every zone file and fails on any file that breaks the schema.
+
+- **Airport circles for every country.** A country with a guide gets a circle round each airport, sized by its own authority's rule. `src/lib/airport-rules.ts` holds the rules, and a test fails until a new guide has one. Where the real zone is not a circle (the UK's), the circle is the smallest size the authority documents, the zone says it is *indicative*, and its note says what the circle leaves out.
+- **Shown only from zoom 6.** Before that a 5 km circle is a few pixels, and a world of dots is noise that would catch taps meant for a country.
+- **Color is never the only cue.** Airport zones are dashed outlines in `--color-zone-airport` with a dot at the middle. Places that need approval are solid outlines in `--color-zone-approval`. A model aircraft field is a ring in body-text color. The panel's key draws each one the same way. Zones are never amber, which means "we have a guide" (principle 3). Both zone colors are tested for contrast against land and sea.
+- **The filter** is a small `Zones` panel with a labelled box per group (airport zones, approval needed or restricted, model aircraft fields), all on to start with. It is open on a desktop and a closed tab on a phone, its rows are at least 44px tall, and it sits clear of MapLibre's attribution bar, which spreads across the bottom of a narrow screen.
+- **Popups.** Hover (mouse only) shows a read-only preview with what the place is, its note, the source's domain and the date, but no link. Click or tap opens a small popup with the same text and a link to the source. A zone under the pointer wins over the country under it, and a country's full guide opens from anywhere else in it. Where zones overlap, the popup lists each, up to three.
+- **Wording.** A zone says what a place is and who says so, never that you may fly there. A model aircraft field says it is not an approval. Data that cannot load says so plainly ("Zones could not be loaded. The map still works.") and never looks like "no zones here".
+- **Not on the map yet:** temporary restrictions and NOTAMs, which change within hours. The site links to the authority's live source instead.
+
 ## Day and night
 
 The globe shades the night side of the Earth, computed from the current time ([daynight.ts](src/lib/daynight.ts)) and refreshed every minute. Daylight countries show at full brightness. Night uses `--color-night` as a translucent overlay with a soft edge.

@@ -48,6 +48,39 @@ test.describe('first screen', () => {
 	});
 });
 
+test.describe('space and zoom limit', () => {
+	test('cannot zoom out further than the whole globe with room around it', async ({ page }) => {
+		await openGlobe(page);
+		const box = (await page.locator('#map').boundingBox())!;
+		await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2);
+		for (let i = 0; i < 6; i++) await page.mouse.wheel(0, 1500);
+		await page.waitForTimeout(800);
+		const { min, zoom, lat } = await page.evaluate(() => {
+			const map = (window as any).__map;
+			return { min: map.getMinZoom(), zoom: map.getZoom(), lat: map.getCenter().lat };
+		});
+		expect(min).toBeGreaterThan(0.2);
+		// On a globe the reported zoom is smaller than the one the limit is set in, by log2(cos latitude).
+		expect(zoom).toBeGreaterThanOrEqual(min + Math.log2(Math.cos((lat * Math.PI) / 180)) - 0.01);
+		expect(zoom).toBeLessThan(min);
+	});
+
+	test('has a starfield behind a clear map, and the stars move unless motion is reduced', async ({ page }) => {
+		await openGlobe(page);
+		await expect(page.locator('#map')).toHaveCSS('background-color', 'rgba(0, 0, 0, 0)');
+		await expect(page.locator('.space .stars')).toHaveCount(3);
+		for (const layer of await page.locator('.space .stars').all()) await expect(layer).toHaveCSS('animation-name', 'drift, twinkle');
+	});
+
+	test('keeps the stars still for people who ask for less motion', async ({ browser }) => {
+		const context = await browser.newContext({ reducedMotion: 'reduce', baseURL: test.info().project.use.baseURL });
+		const page = await context.newPage();
+		await page.goto('/?e2e');
+		await expect(page.locator('.space .stars').first()).toHaveCSS('animation-name', 'none');
+		await context.close();
+	});
+});
+
 test.describe('shareable country link', () => {
 	test('?country=JPN opens that summary, and closing it clears the address', async ({ page }) => {
 		await page.goto('/?e2e&country=JPN');

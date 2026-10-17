@@ -57,6 +57,13 @@ const imageAlt = shareImage?.alt ?? 'A globe over Europe and Africa with a small
 		<meta name="twitter:description" content={description} />
 		<meta name="twitter:image" content={image} />
 		<title>{fullTitle}</title>
+		<!-- Applies a chosen theme before the page paints, so it does not flash the other one first. -->
+		<script is:inline>
+			try {
+				const theme = localStorage.getItem('theme');
+				if (theme === 'light' || theme === 'dark') document.documentElement.dataset.theme = theme;
+			} catch {}
+		</script>
 		{jsonLd.map((data) => <script is:inline type="application/ld+json" set:html={JSON.stringify(data).replaceAll('<', '\\u003c')} />)}
 		{ANALYTICS_TOKEN && <script is:inline defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon={JSON.stringify({ token: ANALYTICS_TOKEN })}></script>}
 	</head>
@@ -67,6 +74,12 @@ const imageAlt = shareImage?.alt ?? 'A globe over Europe and Africa with a small
 			<nav>
 				{links.map((l) => <a href={l.href} aria-current={isCurrent(pathname, l.href) ? 'page' : undefined}>{l.label}</a>)}
 			</nav>
+			<button type="button" id="theme-toggle" class="theme-toggle" aria-label="Switch to light mode">
+				<svg viewBox="0 0 24 24" aria-hidden="true">
+					<path class="moon" d="M20 14.5A8 8 0 0 1 9.5 4 8.5 8.5 0 1 0 20 14.5z" />
+					<g class="sun"><circle cx="12" cy="12" r="4" /><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8" /></g>
+				</svg>
+			</button>
 		</header>
 		<main id="main" class:list={{ fill }}>
 			<slot />
@@ -83,6 +96,31 @@ const imageAlt = shareImage?.alt ?? 'A globe over Europe and Africa with a small
 		</footer>
 	</body>
 </html>
+
+<script>
+	import { nextTheme, themeLabel, type Theme } from '../lib/theme';
+
+	const button = document.getElementById('theme-toggle') as HTMLButtonElement;
+	const system = matchMedia('(prefers-color-scheme: light)');
+	const current = (): Theme => (document.documentElement.dataset.theme as Theme | undefined) ?? (system.matches ? 'light' : 'dark');
+	const show = () => {
+		button.setAttribute('aria-label', themeLabel(current()));
+		button.dataset.theme = current();
+	};
+	button.addEventListener('click', () => {
+		const theme = nextTheme(current());
+		document.documentElement.dataset.theme = theme;
+		try {
+			localStorage.setItem('theme', theme);
+		} catch {}
+		// The browser's own toolbar color follows the page.
+		const bg = getComputedStyle(document.documentElement).getPropertyValue('--color-bg').trim();
+		for (const meta of document.querySelectorAll('meta[name="theme-color"]')) meta.setAttribute('content', bg);
+		show();
+	});
+	system.addEventListener('change', show);
+	show();
+</script>
 
 <style>
 	/* Off screen until a keyboard user tabs to it, then the first thing they see. */
@@ -136,6 +174,38 @@ const imageAlt = shareImage?.alt ?? 'A globe over Europe and Africa with a small
 	nav a[aria-current='page'] {
 		color: var(--color-text);
 		font-weight: 700;
+	}
+	header nav {
+		margin-left: auto;
+	}
+	.theme-toggle {
+		display: grid;
+		place-items: center;
+		width: 2.75rem;
+		height: 2.75rem;
+		border: 0;
+		border-radius: 50%;
+		background: transparent;
+		color: var(--color-text);
+		cursor: pointer;
+		transition: background-color 0.15s, transform 0.15s;
+	}
+	.theme-toggle:hover {
+		background: var(--color-surface-raised);
+	}
+	.theme-toggle svg {
+		width: 1.4rem;
+		height: 1.4rem;
+		fill: none;
+		stroke: currentColor;
+		stroke-width: 1.75;
+		stroke-linecap: round;
+		stroke-linejoin: round;
+	}
+	/* The icon shows what a press switches to: the sun while it is dark, the moon while it is light. */
+	.theme-toggle[data-theme='light'] .sun,
+	.theme-toggle:not([data-theme='light']) .moon {
+		display: none;
 	}
 	main.fill {
 		display: flex;

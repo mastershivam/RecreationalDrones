@@ -16,6 +16,7 @@ const bounds = mainlandBounds(JSON.parse(readFileSync('public/data/countries.geo
 
 <Base title="Recreational Drones: drone rules by country, on a map" description="Search a country or spin the globe to see how strict its drone rules are, how to register, and where to check before you fly." fill>
 	<div class="stage">
+		<div class="space" aria-hidden="true"><div class="stars far"></div><div class="stars mid"></div><div class="stars near"></div></div>
 		<div id="map" data-guides={JSON.stringify(guides)} data-bounds={JSON.stringify(bounds)}></div>
 		<div class="top">
 			<div class="intro">
@@ -40,6 +41,9 @@ const bounds = mainlandBounds(JSON.parse(readFileSync('public/data/countries.geo
 			<p class="locate-status card" id="locate-status" role="status" hidden></p>
 			<noscript><p class="locate-status card">The map needs JavaScript. <a href="/countries/">Browse every country</a> instead.</p></noscript>
 		</div>
+		<button type="button" id="rotate" class="rotate" aria-pressed="false" aria-label="Auto-rotate the globe" title="Auto-rotate the globe">
+			<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.6-5.9" /><path d="M20 4v5h-5" /></svg>
+		</button>
 		<div class="panels">
 			<div class="key-bar" id="key" role="group" aria-label="Key: how strict are the rules?">
 				<p class="key-definition card" id="key-definition" role="status" hidden></p>
@@ -100,7 +104,7 @@ const bounds = mainlandBounds(JSON.parse(readFileSync('public/data/countries.geo
 	import workerUrl from 'maplibre-gl/dist/maplibre-gl-worker.mjs?url';
 	import 'maplibre-gl/dist/maplibre-gl.css';
 	import { Protocol } from 'pmtiles';
-	import { coveredCountryCode, initialZoom, readMapColors, tapBox } from '../lib/map-config';
+	import { coveredCountryCode, initialZoom, minZoom, readMapColors, tapBox } from '../lib/map-config';
 	import type { GuideSummary } from '../lib/guides';
 	import { buildStyle } from '../lib/map-style';
 	import { popupHtml, summaryHtml } from '../lib/popup';
@@ -131,6 +135,7 @@ const bounds = mainlandBounds(JSON.parse(readFileSync('public/data/countries.geo
 		// Centred far enough north that Europe sits below the headline and search.
 		center: [-4, 50],
 		zoom: initialZoom(el.clientWidth, el.clientHeight),
+		minZoom: minZoom(el.clientWidth, el.clientHeight),
 		// The basemap tiles stop at zoom 7 in production (5 in the small test file); the map enlarges them beyond that.
 		maxZoom: 8,
 		// Keep the globe upright; tilting it is easy to do by accident with two fingers.
@@ -146,24 +151,59 @@ const bounds = mainlandBounds(JSON.parse(readFileSync('public/data/countries.geo
 	const intro = document.querySelector('.intro')!;
 	map.once('dragstart', () => intro.classList.add('hidden'));
 
-	// Slow idle spin that stops for good at the first touch, key or search. Off with reduced motion and in the tests,
-	// where the globe must stay where they put it.
+	// Slow spin of the globe, switched by the rotate button. With no saved choice it starts on its own for 20 seconds and
+	// then rests; switched on by hand it keeps going. A touch, key or search on the globe switches it off. Off with
+	// reduced motion and in the tests, where the globe must stay where they put it.
 	const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
-	let spinning = !reduceMotion && !location.search.includes('e2e');
-	let lastFrame = performance.now();
-	const startedAt = lastFrame;
+	const rotate = document.getElementById('rotate') as HTMLButtonElement;
+	let rotateChoice: string | null = null;
+	try {
+		rotateChoice = localStorage.getItem('autorotate');
+	} catch {}
+	let spinning = false;
+	let spinEnds = Infinity;
+	let lastFrame = 0;
 	const spin = (now: number) => {
 		if (!spinning) return;
+		if (now > spinEnds) return setSpinning(false);
 		const { lng, lat } = map.getCenter();
 		// The gap is capped so a tab coming back from the background does not jump.
 		map.setCenter([lng + Math.min(now - lastFrame, 50) * 0.003, lat]);
 		lastFrame = now;
-		// Stop on its own after 20 seconds, so an idle tab does not redraw the globe all day.
-		if (now - startedAt < 20_000) requestAnimationFrame(spin);
+		requestAnimationFrame(spin);
 	};
-	const stopSpin = () => (spinning = false);
-	if (spinning) requestAnimationFrame(spin);
-	for (const type of ['pointerdown', 'wheel', 'keydown']) document.addEventListener(type, stopSpin, { once: true, capture: true });
+	function setSpinning(on: boolean, until = Infinity) {
+		const was = spinning;
+		spinning = on;
+		spinEnds = until;
+		rotate.setAttribute('aria-pressed', String(on));
+		if (on && !was) {
+			lastFrame = performance.now();
+			requestAnimationFrame(spin);
+		}
+	}
+	const stopSpin = () => setSpinning(false);
+	if (!reduceMotion && rotateChoice === 'on') setSpinning(true);
+	else if (!reduceMotion && rotateChoice === null && !location.search.includes('e2e')) setSpinning(true, performance.now() + 20_000);
+	rotate.addEventListener('click', () => {
+		const on = !spinning;
+		setSpinning(on);
+		try {
+			localStorage.setItem('autorotate', on ? 'on' : 'off');
+		} catch {}
+	});
+	// Taking hold of the globe stops it. (The buttons around it do not count.)
+	map.on('mousedown', stopSpin);
+	map.on('touchstart', stopSpin);
+	map.on('wheel', stopSpin);
+	document.addEventListener(
+		'keydown',
+		(e) => {
+			// Tab moves focus and the rotate button's own keys switch it; neither should switch it off first.
+			if (e.key !== 'Tab' && !(e.target as Element).closest('#rotate')) stopSpin();
+		},
+		{ capture: true },
+	);
 
 	// Zones (1.7 MB and growing) are fetched only once the map is close enough to draw them. If that fails, say so plainly.
 	const zonesStatus = document.getElementById('zones-status')!;
@@ -542,7 +582,72 @@ const bounds = mainlandBounds(JSON.parse(readFileSync('public/data/countries.geo
 	#map {
 		position: absolute;
 		inset: 0;
-		background: var(--color-ocean);
+		/* Clear, so the space behind the globe shows around it. */
+		background: transparent;
+	}
+	/* Space: deep blue-black with two faint clouds of color and three layers of stars that drift and twinkle. */
+	.space {
+		position: absolute;
+		inset: 0;
+		overflow: hidden;
+		background:
+			radial-gradient(60% 50% at 18% 22%, color-mix(in srgb, var(--map-nebula-1) 55%, transparent), transparent),
+			radial-gradient(55% 45% at 85% 78%, color-mix(in srgb, var(--map-nebula-2) 50%, transparent), transparent), var(--color-night);
+	}
+	/* Each layer is bigger than the screen by one tile and slides by exactly one tile, so the loop has no seam. */
+	.stars {
+		--tile: 400px;
+		position: absolute;
+		top: calc(var(--tile) * -1);
+		left: calc(var(--tile) * -1);
+		width: calc(100% + var(--tile));
+		height: calc(100% + var(--tile));
+		background-repeat: repeat;
+		background-size: var(--tile) var(--tile);
+		animation:
+			drift var(--drift) linear infinite,
+			twinkle var(--twinkle) ease-in-out infinite alternate;
+	}
+	.stars.far {
+		--tile: 300px;
+		--drift: 240s;
+		--twinkle: 5s;
+		background-image:
+			radial-gradient(1px 1px at 20px 30px, var(--map-text), transparent), radial-gradient(1px 1px at 90px 140px, var(--map-text), transparent),
+			radial-gradient(1px 1px at 160px 60px, var(--map-text-muted), transparent), radial-gradient(1px 1px at 230px 210px, var(--map-text), transparent),
+			radial-gradient(1px 1px at 270px 100px, var(--map-text-muted), transparent), radial-gradient(1px 1px at 50px 250px, var(--map-text), transparent),
+			radial-gradient(1px 1px at 130px 280px, var(--map-text-muted), transparent), radial-gradient(1px 1px at 200px 150px, var(--map-text), transparent);
+	}
+	.stars.mid {
+		--tile: 450px;
+		--drift: 160s;
+		--twinkle: 3.5s;
+		background-image:
+			radial-gradient(1.5px 1.5px at 60px 80px, var(--map-text), transparent), radial-gradient(1.5px 1.5px at 190px 300px, var(--map-text), transparent),
+			radial-gradient(1.5px 1.5px at 330px 120px, var(--map-text-muted), transparent), radial-gradient(1.5px 1.5px at 400px 380px, var(--map-text), transparent),
+			radial-gradient(1.5px 1.5px at 260px 220px, var(--map-text-muted), transparent), radial-gradient(1.5px 1.5px at 20px 400px, var(--map-text), transparent);
+	}
+	.stars.near {
+		--tile: 700px;
+		--drift: 100s;
+		--twinkle: 2.5s;
+		background-image:
+			radial-gradient(2.5px 2.5px at 110px 160px, var(--map-text), transparent), radial-gradient(2px 2px at 520px 80px, var(--map-text), transparent),
+			radial-gradient(2.5px 2.5px at 330px 520px, var(--map-text), transparent), radial-gradient(2px 2px at 640px 440px, var(--map-text-muted), transparent),
+			radial-gradient(3px 3px at 220px 360px, color-mix(in srgb, var(--map-atmosphere) 60%, var(--map-text)), transparent);
+	}
+	@keyframes drift {
+		to {
+			transform: translate(var(--tile), var(--tile));
+		}
+	}
+	@keyframes twinkle {
+		from {
+			opacity: 0.45;
+		}
+		to {
+			opacity: 1;
+		}
 	}
 	/* The headline and the search sit in the middle of the top of the globe, over it, with no card behind them. */
 	.top {
@@ -645,6 +750,42 @@ const bounds = mainlandBounds(JSON.parse(readFileSync('public/data/countries.geo
 		stroke: currentColor;
 		stroke-width: 1.75;
 		stroke-linecap: round;
+	}
+	/* The rotate button floats at the right edge of the globe, clear of the headline, search and key. */
+	.rotate {
+		position: absolute;
+		top: 50%;
+		right: max(var(--space-2), env(safe-area-inset-right));
+		transform: translateY(-50%);
+		display: grid;
+		place-items: center;
+		width: 2.75rem;
+		height: 2.75rem;
+		border: 0;
+		border-radius: 50%;
+		background: var(--color-surface);
+		color: var(--color-text);
+		cursor: pointer;
+		transition: background-color 0.15s, color 0.15s;
+	}
+	.rotate:hover {
+		background: var(--color-surface-raised);
+	}
+	.rotate:active {
+		background: var(--color-border);
+	}
+	.rotate[aria-pressed='true'] {
+		background: var(--color-accent);
+		color: var(--color-on-accent);
+	}
+	.rotate svg {
+		width: 1.4rem;
+		height: 1.4rem;
+		fill: none;
+		stroke: currentColor;
+		stroke-width: 1.9;
+		stroke-linecap: round;
+		stroke-linejoin: round;
 	}
 	.chips {
 		display: flex;

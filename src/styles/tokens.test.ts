@@ -72,6 +72,17 @@ const lightPairs: [string, string, number][] = [
 	['color-on-accent', 'color-accent', 4.5],
 	...[1, 2, 3, 4].map((n): [string, string, number] => ['color-on-accent', `color-level-${n}`, 4.5]),
 ];
+// The theme toggle forces the light values with a second block, which must not drift from the system-driven one.
+const declarations = (selector: string) => css.slice(css.indexOf(selector)).match(/\{([^}]*)\}/)![1].split(';').map((d) => d.trim()).filter(Boolean);
+describe('light theme blocks', () => {
+	it('hold the same values whether the system or the toggle chose light', () => {
+		const bySystem = declarations(":root:not([data-theme='dark'])");
+		const byToggle = declarations(":root[data-theme='light']");
+		expect(byToggle.length).toBeGreaterThan(5);
+		expect(byToggle).toEqual(bySystem);
+	});
+});
+
 describe('light theme', () => {
 	it('overrides the page colors and leaves the globe dark', () => {
 		expect(lightCss).toContain('--color-bg');

@@ -5,6 +5,7 @@ import {
 	coveredCountriesFilter,
 	coveredCountryCode,
 	initialZoom,
+	minZoom,
 	readMapColors,
 	tapBox,
 } from './map-config';
@@ -102,6 +103,22 @@ describe('initialZoom', () => {
 	it('stays within sensible bounds', () => {
 		expect(initialZoom(10, 10)).toBe(0.5);
 		expect(initialZoom(10000, 10000)).toBe(3);
+	});
+});
+
+describe('minZoom', () => {
+	it('lets the whole globe fit with room around it, and no further out', () => {
+		for (const [w, h] of [[375, 600], [1440, 800], [800, 1200]]) {
+			const globePx = (512 / Math.PI) * 2 ** minZoom(w, h);
+			expect(globePx).toBeLessThanOrEqual(Math.min(w, h));
+			expect(globePx).toBeGreaterThan(Math.min(w, h) * 0.7);
+		}
+	});
+	it('is never further out than the starting view', () => {
+		for (const [w, h] of [[375, 600], [1440, 800]]) expect(minZoom(w, h)).toBeLessThanOrEqual(initialZoom(w, h));
+	});
+	it('has a floor on tiny screens', () => {
+		expect(minZoom(10, 10)).toBe(0.3);
 	});
 });
 

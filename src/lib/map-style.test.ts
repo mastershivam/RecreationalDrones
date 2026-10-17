@@ -18,6 +18,7 @@ const colors = {
 	level3: '#ff9a3c',
 	level4: '#ff6f91',
 	night: '#02040a',
+	atmosphere: '#4aa3ff',
 	zoneAirport: '#ff9ab0',
 	zoneApproval: '#d2b4ff',
 };
@@ -78,6 +79,10 @@ describe('basemapLayers', () => {
 });
 
 describe('buildStyle', () => {
+	it('glows with an atmosphere round the globe', () => {
+		expect(style.sky).toMatchObject({ 'sky-color': colors.atmosphere });
+	});
+
 	it('is a globe', () => {
 		expect(style.projection).toEqual({ type: 'globe' });
 	});

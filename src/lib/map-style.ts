@@ -139,6 +139,8 @@ export function buildStyle(c: MapColors, guides: Record<string, { level: Level }
 	return {
 		version: 8,
 		projection: GLOBE_PROJECTION,
+		// The glow of the atmosphere round the globe's edge. The space behind it is the page's own starfield.
+		sky: { 'sky-color': c.atmosphere, 'horizon-color': c.atmosphere, 'fog-color': c.atmosphere, 'sky-horizon-blend': 0.6, 'atmosphere-blend': 0.8 },
 		glyphs: `${origin}/fonts/{fontstack}/{range}.pbf`,
 		sources: {
 			protomaps: { type: 'vector', url: `pmtiles://${origin}${TILE_PATH}`, attribution: ATTRIBUTION },

@@ -132,3 +132,94 @@ test.describe('light theme', () => {
 		expect(seen.dark.headline).toBe(seen.light.headline);
 	});
 });
+
+test.describe('auto-rotate button', () => {
+	const lng = (page: import('@playwright/test').Page) => page.evaluate(() => (window as any).__map.getCenter().lng as number);
+
+	test('starts the globe turning, and stops it, and the choice is remembered', async ({ page }) => {
+		await page.goto('/?e2e');
+		const button = page.getByRole('button', { name: 'Auto-rotate the globe' });
+		await expect(button).toHaveAttribute('aria-pressed', 'false');
+		await button.click();
+		await expect(button).toHaveAttribute('aria-pressed', 'true');
+		const start = await lng(page);
+		await expect.poll(() => lng(page)).not.toBe(start);
+		await button.click();
+		await expect(button).toHaveAttribute('aria-pressed', 'false');
+		const stopped = await lng(page);
+		await page.waitForTimeout(300);
+		expect(await lng(page)).toBe(stopped);
+		await button.click();
+		await page.reload();
+		await expect(button).toHaveAttribute('aria-pressed', 'true');
+	});
+
+	test('switches off when the globe is grabbed, and works from the keyboard', async ({ page }) => {
+		await page.goto('/?e2e');
+		const button = page.getByRole('button', { name: 'Auto-rotate the globe' });
+		await button.focus();
+		await page.keyboard.press('Enter');
+		await expect(button).toHaveAttribute('aria-pressed', 'true');
+		await page.keyboard.press('Enter');
+		await expect(button).toHaveAttribute('aria-pressed', 'false');
+		await button.click();
+		const map = (await page.locator('#map').boundingBox())!;
+		await page.mouse.move(map.x + map.width / 2, map.y + map.height / 2);
+		await page.mouse.down();
+		await page.mouse.up();
+		await expect(button).toHaveAttribute('aria-pressed', 'false');
+	});
+
+	test('is a finger-sized button that does not cover the middle of the globe', async ({ page }) => {
+		await page.goto('/?e2e');
+		const box = (await page.locator('#rotate').boundingBox())!;
+		expect(box.width).toBeGreaterThanOrEqual(44);
+		expect(box.height).toBeGreaterThanOrEqual(44);
+		const map = (await page.locator('#map').boundingBox())!;
+		expect(box.x + box.width).toBeLessThanOrEqual(map.x + map.width);
+		expect(box.x).toBeGreaterThan(map.x + map.width / 2 + 100);
+	});
+});
+
+test.describe('light and dark toggle', () => {
+	test.use({ colorScheme: 'dark' });
+
+	test('switches the page, says what it will do next, and is remembered without a flash', async ({ page }) => {
+		await page.goto('/countries/');
+		const bg = () => page.evaluate(() => getComputedStyle(document.body).backgroundColor);
+		const dark = await bg();
+		await page.getByRole('button', { name: 'Switch to light mode' }).click();
+		await expect(page.locator('html')).toHaveAttribute('data-theme', 'light');
+		expect(await bg()).not.toBe(dark);
+		await expect(page.getByRole('button', { name: 'Switch to dark mode' })).toBeVisible();
+		await page.reload();
+		await expect(page.locator('html')).toHaveAttribute('data-theme', 'light');
+		await page.getByRole('button', { name: 'Switch to dark mode' }).click();
+		expect(await bg()).toBe(dark);
+	});
+
+	test('keeps the globe and its headline dark-themed in both', async ({ page }) => {
+		await page.addInitScript(() => localStorage.setItem('theme', 'light'));
+		await page.goto('/?e2e');
+		const headline = await page.locator('.intro h1').evaluate((el) => getComputedStyle(el).color);
+		expect(headline).toBe('rgb(238, 241, 250)');
+	});
+
+	test('is a finger-sized button on every page', async ({ page }) => {
+		await page.goto('/trip/');
+		const box = (await page.getByRole('button', { name: /Switch to/ }).boundingBox())!;
+		expect(box.width).toBeGreaterThanOrEqual(44);
+		expect(box.height).toBeGreaterThanOrEqual(44);
+	});
+});
+
+test.describe('light and dark toggle, starting from a light system', () => {
+	test.use({ colorScheme: 'light' });
+
+	test('offers dark first, and can force it', async ({ page }) => {
+		await page.goto('/countries/');
+		const light = await page.evaluate(() => getComputedStyle(document.body).backgroundColor);
+		await page.getByRole('button', { name: 'Switch to dark mode' }).click();
+		expect(await page.evaluate(() => getComputedStyle(document.body).backgroundColor)).not.toBe(light);
+	});
+});

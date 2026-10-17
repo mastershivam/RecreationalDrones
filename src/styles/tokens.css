@@ -26,6 +26,10 @@
 	/* Map. The globe stays dark in every theme, so its text has its own colors. */
 	--map-text: #eef1fa;
 	--map-text-muted: #a4aecb;
+	/* Space behind the globe: the glow round its edge, and two faint clouds of color. */
+	--map-atmosphere: #4aa3ff;
+	--map-nebula-1: #3a1f78;
+	--map-nebula-2: #0e4a78;
 	--color-ocean: #040b1c;
 	--color-land: #3f5f94;
 	--color-land-border: #9bb3dd;
@@ -59,9 +63,10 @@
 	--content-width: 46rem;
 }
 
-/* Follows the visitor's system. Only the page and its panels change; the globe and its map colors stay dark. */
+/* Follows the visitor's system, unless they chose with the header's toggle (data-theme on <html>). Only the page and its
+   panels change; the globe and its map colors stay dark. The two blocks must hold the same values (tokens.test.ts). */
 @media (prefers-color-scheme: light) {
-	:root {
+	:root:not([data-theme='dark']) {
 		color-scheme: light;
 
 		--color-bg: #f4f6fb;
@@ -74,4 +79,17 @@
 		--color-link: #0b5fa5;
 		--color-warning: #8a5300;
 	}
+}
+:root[data-theme='light'] {
+	color-scheme: light;
+
+	--color-bg: #f4f6fb;
+	--color-surface: #ffffff;
+	--color-surface-raised: #e6ebf5;
+	--color-border: #c3ccdf;
+	--color-text: #0b1020;
+	--color-text-muted: #44506b;
+	--color-focus: #b35a00;
+	--color-link: #0b5fa5;
+	--color-warning: #8a5300;
 }

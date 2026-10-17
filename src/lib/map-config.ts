@@ -27,6 +27,7 @@ export interface MapColors {
 	level3: string;
 	level4: string;
 	night: string;
+	atmosphere: string;
 	zoneAirport: string;
 	zoneApproval: string;
 }
@@ -44,6 +45,7 @@ export const MAP_COLOR_TOKENS: Record<keyof MapColors, string> = {
 	level3: '--color-level-3',
 	level4: '--color-level-4',
 	night: '--color-night',
+	atmosphere: '--map-atmosphere',
 	zoneAirport: '--color-zone-airport',
 	zoneApproval: '--color-zone-approval',
 };
@@ -65,6 +67,12 @@ export function initialZoom(width: number, height: number): number {
 	const margin = Math.max(width, height) >= 1000 ? 1.15 : 0.9;
 	const fit = (margin * Math.min(width, height) * Math.PI) / 512;
 	return Math.min(3, Math.max(0.5, Math.log2(fit)));
+}
+
+// The furthest the map may zoom out: the whole globe with a little room around it, and no further, so it never
+// shrinks to a dot in the middle of the screen.
+export function minZoom(width: number, height: number): number {
+	return Math.max(0.3, Math.log2((0.8 * Math.min(width, height) * Math.PI) / 512));
 }
 
 // Fingers are bigger than cursors, so taps look for countries within this many pixels.

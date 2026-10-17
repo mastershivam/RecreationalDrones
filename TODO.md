@@ -11,10 +11,11 @@
 ## From the original plan
 
 - [ ] Airport and restricted-airspace layers (OurAirports, OpenStreetMap, and national UAS zone data where the licence allows).
-- [ ] Add more countries in batches (the UK and Nepal have guides so far), starting with the high-traffic ones: US, Canada, Australia, Japan, UAE, and the EU states (use EASA's common framework, with local differences on top).
+- [ ] Add more countries in batches (the UK, Nepal and Thailand have guides so far), starting with the high-traffic ones: US, Canada, Australia, Japan, UAE, and the EU states (use EASA's common framework, with local differences on top).
 - [ ] Verify the unchecked UK rules: Remote ID and insurance.
 - [x] **Finish Nepal's guide.** Registration, categories, permission to fly, flying limits, pilot licence and Remote ID are now covered from CAAN's UAS Requirements (Issue 01, April 2021), its drones page and its drone application form (checked 2026-10-17, via Internet Archive copies, because the caanepal.gov.np certificate does not validate from here).
 - [ ] **Nepal: the remaining gaps.** Still unverified: the official list of prohibited and restricted areas (national parks, Kathmandu valley, Everest region), whether recreational flyers need a remote pilot licence (and so the minimum age), and insurance for drones under 2 kg. Read the Ministry of Home Affairs Drone Operation Procedure, 2019, or ask CAAN. Also check whether `drone.caanepal.gov.np` (linked from CAAN's drones page) is the online registration portal, and if so set it as `registrationUrl`. Don't use blog posts for these, because they contradict each other (for example USD 10 vs CAAN's USD 50 fee).
+- [ ] **Thailand: the remaining gaps.** Registration, the pilot certificate, insurance and flying limits are covered from CAAT's two leaflets and its registration page (read 2026-10-17; caat.or.th blocks automated downloads, so they were saved from a browser). Still unverified: the NBTC's radio-frequency permission (read the NBTC's own drone criteria and registration pages), fees, minimum age, Remote ID, penalties, the list of banned areas, and whether drones under 2 kg without a camera are exempt.
 - [ ] "Report an error" form (Worker + D1 + Turnstile).
 - [ ] Stale-guide check that flags any guide not verified for six months or more.
 - [ ] Search across country guides (Pagefind).

@@ -114,3 +114,68 @@ describe('Nepal guide', () => {
 	});
 });
 
+
+describe('Thailand guide', () => {
+	const file = readFileSync(join(dir, 'thailand.mdx'), 'utf8');
+	const data = countrySchema.parse(parse(file.match(/^---\n([\s\S]*?)\n---/)![1]));
+
+	it('is keyed to the code the map uses for Thailand', () => {
+		expect(data.iso3).toBe('THA');
+	});
+
+	it('names the Civil Aviation Authority of Thailand as the authority and links its UAS Portal', () => {
+		expect(data.authority).toContain('Civil Aviation Authority of Thailand');
+		expect(new URL(data.authorityUrl).hostname).toBe('www.caat.or.th');
+		expect(data.registrationUrl).toBe('https://uasportal.caat.or.th/');
+	});
+
+	it('says which drones must register, as CAAT lists them: camera, over 2 kg, over 25 kg', () => {
+		expect(data.whoMustRegister).toContain('camera');
+		expect(data.whoMustRegister).toContain('2 kg');
+		expect(data.whoMustRegister).toContain('25 kg');
+		expect(data.registrationWeightGrams).toBe(0);
+	});
+
+	it('gives the insurance minimum, 1,000,000 baht for drones under 25 kg', () => {
+		expect(data.insurance).toContain('1,000,000 baht');
+		expect(data.insurance).toContain('25 kg');
+	});
+
+	it('leaves minimum age and Remote ID unverified, because CAAT does not state them', () => {
+		expect(data.minOperatorAge).toBeNull();
+		expect(data.remoteId).toBeNull();
+	});
+
+	it("gives CAAT's flying limits: 90 m, 9 km from an aerodrome, daylight", () => {
+		expect(file).toContain('**90 m (300 ft)**');
+		expect(file).toContain('**9 km**');
+		expect(file).toContain('daylight');
+	});
+
+	it('gives the registration number sizes, 3 mm and 25 mm', () => {
+		expect(file).toContain('**3 mm**');
+		expect(file).toContain('**25 mm**');
+	});
+
+	it('explains the pilot certificate: online exam, valid for 2 years, 24-hour retake wait', () => {
+		expect(file).toContain('## Pilot certificate');
+		expect(file).toContain('valid for **2 years**');
+		expect(file).toContain('24 hours');
+	});
+
+	it('says permits for advanced flights come from CAAT by email', () => {
+		expect(file).toContain('uas_ur@caat.or.th');
+	});
+
+	it('says what it does not cover, including the NBTC radio rules it has not read', () => {
+		const notCovered = file.slice(file.indexOf('## Not covered yet'));
+		expect(notCovered).toContain('NBTC');
+		expect(notCovered).toContain('Fees');
+		expect(notCovered).toContain('Remote ID');
+	});
+
+	it("cites CAAT's own pages as its sources", () => {
+		expect(data.sources.length).toBe(3);
+		for (const url of data.sources) expect(new URL(url).hostname).toBe('www.caat.or.th');
+	});
+});

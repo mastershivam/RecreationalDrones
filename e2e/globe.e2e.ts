@@ -1,7 +1,7 @@
 import { existsSync } from 'node:fs';
 import { join } from 'node:path';
 import { expect, test } from '@playwright/test';
-import { highlightedAt, openGlobe, renderedCount } from './helpers';
+import { highlightedAt, isOutsideRequest, openGlobe, renderedCount } from './helpers';
 
 test.describe('globe', () => {
 	test('draws the basemap itself, not only the overlays', async ({ page }) => {
@@ -38,18 +38,18 @@ test.describe('globe', () => {
 	test('loads without failed requests or console errors', async ({ page }) => {
 		const problems: string[] = [];
 		page.on('response', (r) => r.status() >= 400 && problems.push(`${r.status()} ${r.url()}`));
-		page.on('console', (m) => m.type() === 'error' && problems.push(`console: ${m.text()}`));
+		// The analytics beacon reports to Cloudflare, which refuses a test address that is not a registered site.
+		// Chrome words that as a console error, so ignore errors that come from the analytics address.
+		const fromAnalytics = (m: import('@playwright/test').ConsoleMessage) => (m.text() + m.location().url).includes('cloudflareinsights');
+		page.on('console', (m) => m.type() === 'error' && !fromAnalytics(m) && problems.push(`console: ${m.text()}`));
 		page.on('pageerror', (e) => problems.push(`page error: ${e.message}`));
 		await openGlobe(page);
 		expect(problems).toEqual([]);
 	});
 
-	test('makes no third-party requests', async ({ page, baseURL }) => {
+	test('makes no third-party requests, apart from the Cloudflare analytics beacon', async ({ page, baseURL }) => {
 		const outside: string[] = [];
-		page.on('request', (r) => {
-			const url = new URL(r.url());
-			if (!['data:', 'blob:'].includes(url.protocol) && url.origin !== new URL(baseURL!).origin) outside.push(r.url());
-		});
+		page.on('request', (r) => isOutsideRequest(r.url(), new URL(baseURL!).origin) && outside.push(r.url()));
 		await openGlobe(page);
 		expect(outside).toEqual([]);
 	});

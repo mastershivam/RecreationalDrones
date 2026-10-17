@@ -1,4 +1,5 @@
 import { expect, test } from '@playwright/test';
+import { isOutsideRequest } from './helpers';
 
 // A page-by-page check of what makes the site a real one: titles, descriptions, sharing, icons, crawlers, no
 // cookies, alt text, the register button, and speed on a slow phone connection.
@@ -115,11 +116,11 @@ test.describe('trust pages', () => {
 
 test.describe('no cookies, no storage, no trackers', () => {
 	for (const path of ['/', '/countries/', '/countries/japan/', '/privacy/']) {
-		test(`${path} sets no cookies, stores nothing and loads nothing from other sites`, async ({ page, context }) => {
+		test(`${path} sets no cookies, stores nothing and loads nothing from other sites but the analytics beacon`, async ({ page, context }) => {
 			const outside: string[] = [];
 			const origin = new URL(test.info().project.use.baseURL!).origin;
 			page.on('request', (r) => {
-				if (r.url().startsWith('http') && new URL(r.url()).origin !== origin) outside.push(r.url());
+				if (isOutsideRequest(r.url(), origin)) outside.push(r.url());
 			});
 			await page.goto(path === '/' ? '/?e2e' : path);
 			if (path === '/') await expect(page.locator('#map[data-ready="true"]')).toBeAttached({ timeout: 30_000 });

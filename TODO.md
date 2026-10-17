@@ -23,7 +23,7 @@
 - [ ] "Report an error" form (Worker + D1 + Turnstile).
 - [x] Stale-guide check that flags any guide not verified for six months or more: `scripts/check-stale.ts`, run weekly by the refresh workflow, which opens an issue.
 - [ ] Search across country guides (Pagefind).
-- [ ] **Turn on Cloudflare Web Analytics (cookieless).** The code is ready and off. In the Cloudflare dashboard (Analytics & logs, Web Analytics) add a site for the live address, copy its token into `ANALYTICS_TOKEN` in `src/lib/site.ts`, and update `src/pages/privacy.astro` to say analytics is on (a test fails until you do). I could not do it from here: the logged-in token has no analytics permission.
+- [x] **Turn on Cloudflare Web Analytics (cookieless).** Done 2026-10-17: the token is `ANALYTICS_TOKEN` in `src/lib/site.ts`, and the privacy page says analytics is on. Still to check once the site is live: the Cloudflare dashboard shows visits.
 
 ## Later
 

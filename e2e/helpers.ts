@@ -1,4 +1,5 @@
 import { expect, type Page } from '@playwright/test';
+import { ANALYTICS_HOSTS } from '../src/lib/site';
 
 // Fields of the MapLibre map that the tests use.
 interface TestMap {
@@ -73,3 +74,11 @@ export function renderedCount(page: Page, layers: string[]) {
 		layers,
 	);
 }
+
+// Whether a request goes to some other site. The Cloudflare analytics beacon is the one allowed exception.
+export function isOutsideRequest(url: string, siteOrigin: string): boolean {
+	const parsed = new URL(url);
+	if (!['http:', 'https:'].includes(parsed.protocol)) return false;
+	return parsed.origin !== siteOrigin && !ANALYTICS_HOSTS.includes(parsed.hostname);
+}
+

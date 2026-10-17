@@ -59,6 +59,11 @@ All design values live in [src/styles/tokens.css](src/styles/tokens.css), the si
 - **Cards:** use `.card` for grouped facts (e.g. the rules list on a country page).
 - **Unverified values:** use `<Unverified />` ([src/components/Unverified.astro](src/components/Unverified.astro)). Don't write your own wording.
 - **Muted text:** `.muted` for secondary information such as dates and hints.
+- **Navigation:** the link for the page you are on has `aria-current="page"`, set by `isCurrent` in [src/lib/nav.ts](src/lib/nav.ts), and is bold as well as recolored. The first tab stop on every page is a "Skip to content" link to `main#main`.
+- **Reading width:** paragraphs and list items inside `.prose` stop at 65 characters. Headings use `text-wrap: balance`.
+- **Not found:** `src/pages/404.astro` is served, with a 404 status, for any unknown address (`not_found_handling` in `wrangler.toml`).
+- **Interaction states:** every link or button that reacts to the pointer also has a pressed state, and transitions are short (150 ms). The reduced-motion rule in `global.css` turns them off.
+- **Shadows:** none by default (principle 4). A floating preview may use a shadow built from a token with `color-mix`, never a raw `rgb()` color. A test fails on any hard-coded color or font size in a page or component.
 
 ## Voice
 

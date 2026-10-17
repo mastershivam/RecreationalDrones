@@ -29,4 +29,4 @@
 - [ ] A "check my location" button.
 - [ ] Printable country summary.
 - [ ] Multilingual guides.
-- [ ] Add a custom 404 page.
+- [x] Add a custom 404 page.

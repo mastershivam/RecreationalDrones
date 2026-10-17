@@ -194,7 +194,7 @@ const guides = guideSummaries(countries);
 		font-family: var(--font-sans);
 		font-size: var(--text-sm);
 		line-height: 1.45;
-		box-shadow: 0 8px 24px rgb(0 0 0 / 0.5);
+		box-shadow: 0 8px 24px color-mix(in srgb, var(--color-night) 50%, transparent);
 	}
 	:global(.country-popup .maplibregl-popup-tip) {
 		display: none;
@@ -211,7 +211,7 @@ const guides = guideSummaries(countries);
 	}
 	:global(.country-popup dt) {
 		color: var(--color-text-muted);
-		font-size: 0.75rem;
+		font-size: var(--text-xs);
 		text-transform: uppercase;
 		letter-spacing: 0.04em;
 		margin-top: var(--space-2);
@@ -222,7 +222,7 @@ const guides = guideSummaries(countries);
 	:global(.country-popup .popup-meta) {
 		margin: var(--space-3) 0 0;
 		color: var(--color-text-muted);
-		font-size: 0.75rem;
+		font-size: var(--text-xs);
 	}
 
 	/* The large popup. The dialog itself is transparent and unpadded, so a click on it is a click on the backdrop. */
@@ -248,7 +248,6 @@ const guides = guideSummaries(countries);
 		background: var(--color-surface);
 		border: 1px solid var(--color-border);
 		border-radius: var(--radius);
-		box-shadow: 0 16px 48px rgb(0 0 0 / 0.6);
 	}
 	.dialog-body {
 		overflow-y: auto;
@@ -274,9 +273,13 @@ const guides = guideSummaries(countries);
 		font-size: var(--text-xl);
 		line-height: 1;
 		cursor: pointer;
+		transition: background-color 0.15s;
 	}
 	.dialog-close:hover {
 		background: var(--color-surface-raised);
 		color: var(--color-text);
+	}
+	.dialog-close:active {
+		background: var(--color-border);
 	}
 </style>

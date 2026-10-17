@@ -41,6 +41,13 @@ button:focus-visible {
 h1,
 h2 {
 	line-height: 1.2;
+	/* Stops a heading leaving one word alone on its last line. */
+	text-wrap: balance;
+}
+
+p,
+li {
+	text-wrap: pretty;
 }
 
 h1 {
@@ -56,6 +63,12 @@ h2 {
 	margin: 0 auto;
 	padding: var(--space-4) var(--space-3);
 	overflow-wrap: anywhere;
+}
+
+/* About 65 characters a line, which is the most that reads comfortably. */
+.prose p,
+.prose li {
+	max-width: 65ch;
 }
 
 .card {

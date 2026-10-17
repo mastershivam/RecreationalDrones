@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import { isCurrent } from '../lib/nav';
 
 interface Props {
 	title: string;
@@ -8,6 +9,11 @@ interface Props {
 	fill?: boolean;
 }
 const { title, description = 'Where and how you can fly a recreational drone, country by country.', fill = false } = Astro.props;
+const links = [
+	{ href: '/', label: 'Map' },
+	{ href: '/countries/', label: 'Countries' },
+];
+const { pathname } = Astro.url;
 ---
 
 <html lang="en">
@@ -17,17 +23,22 @@ const { title, description = 'Where and how you can fly a recreational drone, co
 		<meta name="description" content={description} />
 		<meta name="theme-color" content="#0a0e1a" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta property="og:type" content="website" />
+		<meta property="og:site_name" content="Recreational Drones" />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta name="twitter:card" content="summary" />
 		<title>{title}</title>
 	</head>
 	<body>
+		<a class="skip" href="#main">Skip to content</a>
 		<header>
 			<a class="brand" href="/">Recreational Drones</a>
 			<nav>
-				<a href="/">Map</a>
-				<a href="/countries/">Countries</a>
+				{links.map((l) => <a href={l.href} aria-current={isCurrent(pathname, l.href) ? 'page' : undefined}>{l.label}</a>)}
 			</nav>
 		</header>
-		<main class:list={{ fill }}>
+		<main id="main" class:list={{ fill }}>
 			<slot />
 		</main>
 		<footer>
@@ -38,6 +49,22 @@ const { title, description = 'Where and how you can fly a recreational drone, co
 </html>
 
 <style>
+	/* Off screen until a keyboard user tabs to it, then the first thing they see. */
+	.skip {
+		position: absolute;
+		left: var(--space-2);
+		top: var(--space-2);
+		z-index: 10;
+		padding: var(--space-2) var(--space-3);
+		background: var(--color-accent);
+		color: var(--color-on-accent);
+		border-radius: var(--radius);
+		font-weight: 700;
+		transform: translateY(-200%);
+	}
+	.skip:focus {
+		transform: none;
+	}
 	header {
 		display: flex;
 		flex-wrap: wrap;
@@ -59,6 +86,19 @@ const { title, description = 'Where and how you can fly a recreational drone, co
 		display: inline-block;
 		padding: var(--space-2) var(--space-2);
 		margin-left: var(--space-1);
+		border-radius: var(--radius);
+		transition: background-color 0.15s;
+	}
+	nav a:hover {
+		background: var(--color-surface-raised);
+	}
+	nav a:active {
+		background: var(--color-border);
+	}
+	/* The page you are on: bolder and in body text color, so it is not marked by color alone. */
+	nav a[aria-current='page'] {
+		color: var(--color-text);
+		font-weight: 700;
 	}
 	main.fill {
 		display: flex;

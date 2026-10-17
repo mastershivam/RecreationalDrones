@@ -182,6 +182,49 @@ test.describe('zone popups', () => {
 		await expect(page.locator('#country-dialog')).not.toBeVisible();
 	});
 
+	test('opens the country’s summary from a zone popup, instead of leaving the user stranded in it', async ({ page }) => {
+		// The zone popup wins over the country guide under a tap, so it needs its own way in.
+		await openZones(page);
+		await focusOn(page, KATHMANDU, ZOOM);
+		await activate(page, await pointAt(page, KATHMANDU));
+		const popup = page.locator('.country-popup:not(.preview)');
+		await popup.getByRole('button', { name: "See this country's rules" }).click();
+		const dialog = page.locator('#country-dialog');
+		await expect(dialog.getByRole('heading', { level: 1 })).toHaveText('Drone rules in Nepal');
+		await expect(popup).toHaveCount(0);
+	});
+
+	test('gives the hover preview no button, since it cannot be clicked into', async ({ page }) => {
+		test.skip(test.info().project.name === 'mobile', 'touch screens have no hover');
+		await openZones(page);
+		await focusOn(page, KATHMANDU, ZOOM);
+		const point = await pointAt(page, KATHMANDU);
+		await page.mouse.move(point.x, point.y);
+		await expect(page.locator('.country-popup.preview')).toContainText('Tribhuvan');
+		await expect(page.locator('.country-popup.preview button')).toHaveCount(0);
+	});
+
+	test('puts a dot in the middle of a Royal Park outline, so it can be seen and tapped from a distance', async ({ page }) => {
+		await openZones(page);
+		await focusOn(page, HYDE_PARK, ZOOM);
+		const dots = await page.evaluate(
+			() => (window as any).__map.queryRenderedFeatures(undefined, { layers: ['zones-points'] }).filter((f: any) => f.properties.kind === 'check-first').length,
+		);
+		expect(dots).toBeGreaterThan(0);
+	});
+
+	test('lists every zone under a tap, and scrolls the popup if the list is long', async ({ page }) => {
+		await openZones(page);
+		const heathrow: [number, number] = [-0.4614, 51.4706];
+		await focusOn(page, heathrow, ZOOM);
+		await activate(page, await pointAt(page, heathrow));
+		const popup = page.locator('.country-popup:not(.preview)');
+		await expect(popup.locator('section.zone').first()).toBeVisible();
+		await expect(popup).not.toContainText('more here');
+		const box = (await popup.locator('.maplibregl-popup-content').boundingBox())!;
+		expect(box.y + box.height).toBeLessThanOrEqual(page.viewportSize()!.height);
+	});
+
 	test('marks the UK circles as indicative, and says what the circle leaves out', async ({ page }) => {
 		await openZones(page);
 		const heathrow: [number, number] = [-0.4614, 51.4706];

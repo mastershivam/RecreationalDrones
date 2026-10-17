@@ -1,0 +1,62 @@
+name: Refresh data
+
+# Every Monday: rebuild the airport zones from OurAirports and open a pull request if anything changed, and open an
+# issue if a guide or a hand-checked zone file has not been checked against its source for six months.
+# The model aircraft fields are not rebuilt here: `npm run build:fields` needs uv and downloads about 3 GB.
+on:
+  schedule:
+    - cron: '17 6 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+
+jobs:
+  airports:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run build:zones
+      # Fails the job, and so opens no pull request, if a rebuilt file breaks the zone schema or the data tests.
+      - run: npm test
+      - uses: peter-evans/create-pull-request@v7
+        with:
+          branch: refresh/airport-zones
+          title: Refresh airport zones from OurAirports
+          commit-message: Refresh airport zones from OurAirports
+          body: |
+            Rebuilt with `npm run build:zones`. A zone that has left OurAirports is kept and marked `removed`, so check the diff for those.
+
+            Created by the scheduled "Refresh data" workflow.
+          add-paths: data/zones/*-airports.geojson
+
+  stale:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Open or update an issue for anything not checked for six months
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          node scripts/check-stale.ts > stale.md
+          if [ -s stale.md ]; then
+            existing=$(gh issue list --label stale-check --state open --json number --jq '.[0].number')
+            if [ -n "$existing" ]; then
+              gh issue edit "$existing" --body-file stale.md
+            else
+              gh label create stale-check --description "Guides or zones not checked for six months" 2>/dev/null || true
+              gh issue create --title "Guides and zones to check again" --label stale-check --body-file stale.md
+            fi
+          fi

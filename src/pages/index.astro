@@ -21,8 +21,12 @@ const bounds = mainlandBounds(JSON.parse(readFileSync('public/data/countries.geo
 			<form class="search" role="search" autocomplete="off">
 				<label class="visually-hidden" for="country-search">Search for a country</label>
 				<input id="country-search" type="search" placeholder="Search for a country" role="combobox" aria-expanded="false" aria-controls="search-results" aria-autocomplete="list" />
+				<button type="button" id="locate" aria-label="Use my location" title="Use my location. It stays in your browser and is never sent anywhere.">
+					<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="6" /><circle cx="12" cy="12" r="1.5" /><path d="M12 2v4M12 18v4M2 12h4M18 12h4" /></svg>
+				</button>
 				<ul id="search-results" role="listbox" aria-label="Matching countries" hidden></ul>
 			</form>
+			<p class="locate-status card" id="locate-status" role="status" hidden></p>
 			<div class="intro card">
 				<h1>Where can you fly?</h1>
 				<p class="muted">Search for a country, or drag to spin the globe. Click or tap a glowing country for a summary.</p>
@@ -75,7 +79,7 @@ const bounds = mainlandBounds(JSON.parse(readFileSync('public/data/countries.geo
 </Base>
 
 <script>
-	import { Map, Popup, addProtocol, setWorkerUrl, type GeoJSONSource } from 'maplibre-gl';
+	import { Map, Marker, Popup, addProtocol, setWorkerUrl, type GeoJSONSource } from 'maplibre-gl';
 	import workerUrl from 'maplibre-gl/dist/maplibre-gl-worker.mjs?url';
 	import 'maplibre-gl/dist/maplibre-gl.css';
 	import { Protocol } from 'pmtiles';
@@ -84,10 +88,11 @@ const bounds = mainlandBounds(JSON.parse(readFileSync('public/data/countries.geo
 	import { buildStyle } from '../lib/map-style';
 	import { popupHtml, summaryHtml } from '../lib/popup';
 	import { searchCountries } from '../lib/search';
+	import { countryAt, locateErrorMessage, locatedMessage } from '../lib/geo';
 	import type { Bounds } from '../lib/country-bounds';
 	import { nightGeoJSON } from '../lib/daynight';
 	import { ZONE_LAYER_IDS, enabledKinds, zoneLayerFilters, zonesPopupHtml, zoneFeatures, type ZoneProps } from '../lib/zones';
-	import { ZONES_URL } from '../lib/map-style';
+	import { COUNTRIES_URL, ZONES_URL } from '../lib/map-style';
 
 	// MapLibre looks for its worker next to its own module, which breaks once bundled.
 	setWorkerUrl(workerUrl);
@@ -203,6 +208,14 @@ const bounds = mainlandBounds(JSON.parse(readFileSync('public/data/countries.geo
 		if (iso3) openSummary(iso3);
 	});
 
+	// A zone popup's "See this country's rules" button opens that country's summary.
+	document.addEventListener('click', (e) => {
+		const iso3 = (e.target as Element).closest<HTMLElement>('.country-popup [data-iso3]')?.dataset.iso3;
+		if (!iso3 || !Object.hasOwn(guides, iso3)) return;
+		zoneClick?.remove();
+		openSummary(iso3);
+	});
+
 	function openSummary(iso3: string) {
 		hidePreview();
 		body.innerHTML = summaryHtml(guides[iso3]);
@@ -227,13 +240,57 @@ const bounds = mainlandBounds(JSON.parse(readFileSync('public/data/countries.geo
 		zoneClick?.remove();
 		hidePreview();
 		const camera = map.cameraForBounds(bounds[iso3], { padding: 60, maxZoom: 5 });
-		const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-		map.once('moveend', () => openSummary(iso3));
 		if (!camera) return openSummary(iso3);
-		// flyTo zooms out, turns the globe and zooms back in; with reduced motion, jump straight there.
-		if (reduced) map.jumpTo(camera);
-		else map.flyTo({ ...camera, duration: 3500, essential: true });
+		flyThen(camera, () => openSummary(iso3));
 	}
+	// flyTo zooms out, turns the globe and zooms back in; with reduced motion, jump straight there.
+	function flyThen(camera: { center?: unknown; zoom?: number }, done: () => void) {
+		map.once('moveend', done);
+		if (matchMedia('(prefers-reduced-motion: reduce)').matches) map.jumpTo(camera as never);
+		else map.flyTo({ ...camera, duration: 3500, essential: true } as never);
+	}
+
+	// "Use my location": the position is used in this page only, to find the country, and is never sent anywhere.
+	const locateButton = document.getElementById('locate') as HTMLButtonElement;
+	const locateStatus = document.getElementById('locate-status')!;
+	let here: Marker | undefined;
+	const say = (text: string) => {
+		locateStatus.textContent = text;
+		locateStatus.hidden = false;
+	};
+	locateButton.addEventListener('click', () => {
+		if (!('geolocation' in navigator)) return say(locateErrorMessage(2));
+		closeResults();
+		say('Finding your location…');
+		locateButton.disabled = true;
+		navigator.geolocation.getCurrentPosition(
+			async ({ coords }) => {
+				try {
+					const { latitude: lat, longitude: lon } = coords;
+					const response = await fetch(COUNTRIES_URL);
+					if (!response.ok) throw new Error(String(response.status));
+					const country = countryAt(lon, lat, (await response.json()).features);
+					const guide = country && Object.hasOwn(guides, country.iso3) ? country.iso3 : undefined;
+					intro.classList.add('hidden');
+					zoneClick?.remove();
+					hidePreview();
+					here?.remove();
+					here = new Marker({ element: Object.assign(document.createElement('div'), { className: 'you-are-here' }) }).setLngLat([lon, lat]).addTo(map);
+					say(locatedMessage(country, guide !== undefined));
+					flyThen({ center: [lon, lat], zoom: 6 }, () => guide && openSummary(guide));
+				} catch {
+					say(locateErrorMessage(2));
+				} finally {
+					locateButton.disabled = false;
+				}
+			},
+			(error) => {
+				say(locateErrorMessage(error.code));
+				locateButton.disabled = false;
+			},
+			{ timeout: 10_000, maximumAge: 60_000 },
+		);
+	});
 	const showResults = () => {
 		const hits = searchCountries(searchInput.value, guides);
 		results.replaceChildren(
@@ -313,6 +370,7 @@ const bounds = mainlandBounds(JSON.parse(readFileSync('public/data/countries.geo
 		pointer-events: none;
 	}
 	.search,
+	.locate-status,
 	.intro {
 		pointer-events: auto;
 	}
@@ -321,6 +379,7 @@ const bounds = mainlandBounds(JSON.parse(readFileSync('public/data/countries.geo
 	}
 	.search input {
 		width: 100%;
+		padding-right: 3.25rem;
 		min-height: 2.75rem;
 		padding: 0 var(--space-3);
 		border: 1px solid var(--color-border);
@@ -329,6 +388,53 @@ const bounds = mainlandBounds(JSON.parse(readFileSync('public/data/countries.geo
 		color: var(--color-text);
 		font: inherit;
 		font-size: var(--text-base);
+	}
+	#locate {
+		position: absolute;
+		top: 0;
+		right: 0;
+		display: grid;
+		place-items: center;
+		width: 2.75rem;
+		height: 2.75rem;
+		border: 0;
+		border-radius: var(--radius);
+		background: transparent;
+		color: var(--color-link);
+		cursor: pointer;
+		transition: background-color 0.15s;
+	}
+	#locate:hover {
+		background: var(--color-surface-raised);
+	}
+	#locate:active {
+		background: var(--color-border);
+	}
+	#locate:disabled {
+		cursor: progress;
+		color: var(--color-text-muted);
+	}
+	#locate svg {
+		width: 1.5rem;
+		height: 1.5rem;
+		fill: none;
+		stroke: currentColor;
+		stroke-width: 1.75;
+		stroke-linecap: round;
+	}
+	.locate-status {
+		margin: 0;
+		padding: var(--space-2) var(--space-3);
+		font-size: var(--text-sm);
+		background: color-mix(in srgb, var(--color-surface) 90%, transparent);
+	}
+	/* The marker is made by MapLibre, so its style must be global. */
+	:global(.you-are-here) {
+		width: 1rem;
+		height: 1rem;
+		border-radius: 50%;
+		background: var(--color-link);
+		border: 2px solid var(--color-text);
 	}
 	.search ul {
 		position: absolute;
@@ -561,6 +667,21 @@ const bounds = mainlandBounds(JSON.parse(readFileSync('public/data/countries.geo
 	}
 	:global(.country-popup .maplibregl-popup-close-button:hover) {
 		background: var(--color-surface-raised);
+	}
+	/* A long stack of overlapping zones scrolls inside the popup instead of running off the screen. */
+	:global(.country-popup .maplibregl-popup-content) {
+		max-height: 60dvh;
+		overflow-y: auto;
+	}
+	:global(.country-popup .zone-country) {
+		min-height: 2.75rem;
+		padding: 0;
+		border: 0;
+		background: none;
+		color: var(--color-link);
+		font: inherit;
+		text-decoration: underline;
+		cursor: pointer;
 	}
 	:global(.country-popup .popup-meta) {
 		margin: var(--space-3) 0 0;

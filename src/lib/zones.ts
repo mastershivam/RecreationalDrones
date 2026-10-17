@@ -43,6 +43,8 @@ export function circlePolygon(lon: number, lat: number, radiusMeters: number, st
 
 export interface ZoneProps {
 	id: string;
+	// The country the zone is in, so its popup can open that country's rules.
+	iso3: string;
 	kind: string;
 	name: string;
 	note: string;
@@ -51,6 +53,21 @@ export interface ZoneProps {
 	indicative: boolean;
 	// An outline or circle is drawn as an area; a field is a dot, and so is the middle of an airport circle.
 	shape: 'area' | 'point';
+}
+
+type Geometry = ZoneFile['features'][number]['geometry'];
+
+// A marker position for an outline: the middle of the bounding box of its biggest ring.
+// shortcut: for a very curved outline the middle can fall outside it; the marker is only a place to point at.
+export function markerPosition(geometry: Exclude<Geometry, { type: 'Point' }>): [number, number] {
+	const rings = geometry.type === 'Polygon' ? [geometry.coordinates[0]] : geometry.coordinates.map((polygon) => polygon[0]);
+	const boxes = rings.map((ring) => {
+		const lons = ring.map((p) => p[0]);
+		const lats = ring.map((p) => p[1]);
+		return [Math.min(...lons), Math.min(...lats), Math.max(...lons), Math.max(...lats)];
+	});
+	const [w, s, e, n] = boxes.reduce((a, b) => ((b[2] - b[0]) * (b[3] - b[1]) > (a[2] - a[0]) * (a[3] - a[1]) ? b : a));
+	return [Math.round(((w + e) / 2) * 1e5) / 1e5, Math.round(((s + n) / 2) * 1e5) / 1e5];
 }
 
 // The features the map draws. Zones that have left their source (`removed`) are not drawn.
@@ -62,6 +79,7 @@ export function zoneFeatures(files: ZoneFile[]) {
 				const p = z.properties;
 				const props = {
 					id: p.id,
+					iso3: meta.iso3,
 					kind: p.kind,
 					name: p.name,
 					note: p.note ?? meta.note ?? '',
@@ -70,7 +88,8 @@ export function zoneFeatures(files: ZoneFile[]) {
 					indicative: p.indicative === true,
 				};
 				const feature = (shape: ZoneProps['shape'], geometry: unknown) => ({ type: 'Feature' as const, properties: { ...props, shape }, geometry });
-				if (z.geometry.type !== 'Point') return [feature('area', z.geometry)];
+				// An outline is a few pixels across when zoomed out, so it also gets a dot at its middle.
+				if (z.geometry.type !== 'Point') return [feature('area', z.geometry), feature('point', { type: 'Point', coordinates: markerPosition(z.geometry) })];
 				const [lon, lat] = z.geometry.coordinates;
 				const dot = feature('point', z.geometry);
 				if (!p.radiusMeters) return [dot];
@@ -89,7 +108,7 @@ const LAYERS: Record<string, { shape: ZoneProps['shape']; kinds: string[] }> = {
 	'zones-fill': { shape: 'area', kinds: ['airport-buffer', 'check-first', 'restricted'] },
 	'zones-airport-line': { shape: 'area', kinds: ['airport-buffer'] },
 	'zones-approval-line': { shape: 'area', kinds: ['check-first', 'restricted'] },
-	'zones-points': { shape: 'point', kinds: ['airport-buffer', 'flying-site'] },
+	'zones-points': { shape: 'point', kinds: ['airport-buffer', 'flying-site', 'check-first', 'restricted'] },
 };
 export const ZONE_LAYER_IDS = Object.keys(LAYERS);
 
@@ -117,17 +136,20 @@ export function zonePopupHtml(p: ZoneProps, { link }: { link: boolean }): string
 	const host = url ? new URL(url).hostname : 'unknown';
 	const kind = KIND_LABELS[p.kind] ?? p.kind;
 	const source = link && url ? `<a href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(host)}</a>` : escapeHtml(host);
+	// A button, not a link: the page opens the country's summary in place rather than leaving the map.
+	const country = link && p.iso3 ? `<p><button type="button" class="zone-country" data-iso3="${escapeHtml(p.iso3)}">See this country's rules</button></p>` : '';
 	return (
 		`<h2 class="popup-title">${escapeHtml(p.name)}</h2>` +
 		`<p class="zone-kind">${escapeHtml(kind)}${p.indicative ? ' (indicative)' : ''}</p>` +
 		(p.note ? `<p>${escapeHtml(p.note)}</p>` : '') +
-		`<p class="popup-meta">Source: ${source} · as of ${escapeHtml(p.asOf)}${link ? '' : ' · click or tap for the link'}</p>`
+		`<p class="popup-meta">Source: ${source} · as of ${escapeHtml(p.asOf)}${link ? '' : ' · click or tap for the link'}</p>` +
+		country
 	);
 }
 
-// Zones overlap (two airports near each other), so a popup lists each one under the pointer, up to a few.
-export function zonesPopupHtml(zones: ZoneProps[], options: { link: boolean }, max = 3): string {
+// Zones overlap (two airports near each other), so a popup lists each one under the pointer. The page scrolls the
+// popup if the list is long.
+export function zonesPopupHtml(zones: ZoneProps[], options: { link: boolean }): string {
 	const unique = [...new Map(zones.map((z) => [z.id, z])).values()];
-	const more = unique.length - max;
-	return unique.slice(0, max).map((z) => `<section class="zone">${zonePopupHtml(z, options)}</section>`).join('') + (more > 0 ? `<p class="popup-meta">and ${more} more here</p>` : '');
+	return unique.map((z) => `<section class="zone">${zonePopupHtml(z, options)}</section>`).join('');
 }

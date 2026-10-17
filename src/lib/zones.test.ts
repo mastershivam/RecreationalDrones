@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { ZONE_GROUPS, ZONE_LAYER_IDS, circlePolygon, enabledKinds, zoneFeatures, zoneLayerFilters, zonePopupHtml, zonesPopupHtml, type ZoneFile, type ZoneProps } from './zones';
+import { ZONE_GROUPS, ZONE_LAYER_IDS, circlePolygon, enabledKinds, markerPosition, zoneFeatures, zoneLayerFilters, zonePopupHtml, zonesPopupHtml, type ZoneFile, type ZoneProps } from './zones';
 import { zoneKinds } from './zone-schema';
 
 // Metres between two [lon, lat] positions (haversine), to check circles against.
@@ -55,13 +55,20 @@ describe('zoneFeatures', () => {
 		]);
 	});
 
-	it('draws a field as a dot, and an outline as one area', () => {
+	it('draws a field as a dot, and an outline as an area with a dot at its middle', () => {
 		const field = zone({ id: 'f', kind: 'flying-site', radiusMeters: undefined });
-		const park = zone({ id: 'p', kind: 'check-first', radiusMeters: undefined }, { type: 'Polygon', coordinates: [[[0, 0], [0, 1], [1, 1], [0, 0]]] });
-		expect(zoneFeatures([file([field, park])]).features.map((f) => [f.properties.id, f.properties.shape])).toEqual([
+		const park = zone({ id: 'p', kind: 'check-first', radiusMeters: undefined }, { type: 'Polygon', coordinates: [[[0, 0], [0, 2], [4, 2], [4, 0], [0, 0]]] });
+		const { features } = zoneFeatures([file([field, park])]);
+		expect(features.map((f) => [f.properties.id, f.properties.shape])).toEqual([
 			['f', 'point'],
 			['p', 'area'],
+			['p', 'point'],
 		]);
+		expect(features[2].geometry).toEqual({ type: 'Point', coordinates: [2, 1] });
+	});
+
+	it('carries the country code through, so a popup can open that country', () => {
+		expect(zoneFeatures([file([zone({})], { iso3: 'THA' })]).features.every((f) => f.properties.iso3 === 'THA')).toBe(true);
 	});
 
 	it('leaves out zones that are removed or superseded', () => {
@@ -119,8 +126,21 @@ describe('zone filters', () => {
 	});
 });
 
+describe('markerPosition', () => {
+	const square = (x: number, y: number, size: number): [number, number][] => [[x, y], [x + size, y], [x + size, y + size], [x, y + size], [x, y]];
+
+	it('is the middle of a polygon’s box', () => {
+		expect(markerPosition({ type: 'Polygon', coordinates: [square(10, 20, 4)] })).toEqual([12, 22]);
+	});
+
+	it('uses the biggest part of a multipolygon, not an outlying island', () => {
+		expect(markerPosition({ type: 'MultiPolygon', coordinates: [[square(50, 50, 1)], [square(0, 0, 10)], [square(30, 30, 2)]] })).toEqual([5, 5]);
+	});
+});
+
 const props = (over: Partial<ZoneProps> = {}): ZoneProps => ({
 	id: 'a',
+	iso3: 'NPL',
 	kind: 'airport-buffer',
 	name: 'Tribhuvan International Airport',
 	note: 'Do not fly within 5 km.',
@@ -150,6 +170,15 @@ describe('zonePopupHtml', () => {
 		const html = zonePopupHtml(props(), { link: true });
 		expect(html).toContain('<a href="https://caanepal.gov.np/rule.pdf" target="_blank" rel="noopener noreferrer">caanepal.gov.np</a>');
 		expect(html).not.toContain('click or tap');
+	});
+
+	it('offers the country’s rules in the tap popup, as a button, and not in the hover preview', () => {
+		expect(zonePopupHtml(props(), { link: true })).toContain(`<button type="button" class="zone-country" data-iso3="NPL">See this country's rules</button>`);
+		expect(zonePopupHtml(props(), { link: false })).not.toContain('button');
+	});
+
+	it('escapes the country code in the button', () => {
+		expect(zonePopupHtml(props({ iso3: '"><img src=x>' }), { link: true })).not.toContain('<img');
 	});
 
 	it('marks an approximate zone as indicative', () => {
@@ -193,10 +222,9 @@ describe('zonesPopupHtml', () => {
 		expect(html.match(/<section class="zone">/g)).toHaveLength(2);
 	});
 
-	it('shows the first three and says how many more there are', () => {
-		const html = zonesPopupHtml(many(5), { link: false });
-		expect(html.match(/<section class="zone">/g)).toHaveLength(3);
-		expect(html).toContain('and 2 more here');
-		expect(zonesPopupHtml(many(3), { link: false })).not.toContain('more here');
+	it('lists every zone under the pointer, however many, since the popup scrolls', () => {
+		const html = zonesPopupHtml(many(7), { link: false });
+		expect(html.match(/<section class="zone">/g)).toHaveLength(7);
+		expect(html).not.toContain('more here');
 	});
 });

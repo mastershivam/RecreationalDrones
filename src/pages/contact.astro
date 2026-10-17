@@ -1,0 +1,46 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import { reportErrorUrl } from '../lib/report';
+import { ISSUES_URL } from '../lib/site';
+
+const countries = (await getCollection('countries')).sort((a, b) => a.data.name.localeCompare(b.data.name));
+---
+
+<Base title="Contact" description="How to reach the people behind Recreational Drones, and how to report a mistake in a country guide.">
+	<div class="prose">
+		<h1>Contact</h1>
+
+		<p>
+			The best way to reach us is the project's <a href={ISSUES_URL}>issue tracker on GitHub</a>. Anyone with a GitHub
+			account can write there. We do not publish an email address.
+		</p>
+
+		<h2>Report a mistake in a guide</h2>
+		<p>
+			Rules change, and a guide can be out of date or wrong. Every guide page has a "Report a mistake" link that opens
+			a new issue with the country filled in. Say what is wrong and link the official source that shows it. You can
+			also pick a country here:
+		</p>
+		<ul class="reports">
+			{countries.map((c) => <li><a href={reportErrorUrl(c.data.name, c.id)}>{c.data.name}</a></li>)}
+		</ul>
+
+		<h2>What we cannot do</h2>
+		<ul>
+			<li>We cannot give legal advice or say whether you may fly somewhere. Check the official source linked on each guide.</li>
+			<li>We cannot help with a fine, an incident or an application. Contact the country's aviation authority, which each guide names.</li>
+		</ul>
+	</div>
+</Base>
+
+<style>
+	.reports {
+		columns: 12rem;
+		padding-left: var(--space-4);
+	}
+	.reports a {
+		display: inline-block;
+		padding: var(--space-1) 0;
+	}
+</style>

@@ -19,6 +19,18 @@ export const countrySchema = z.object({
 	minOperatorAge: z.number().int().positive().nullable(),
 	remoteId: z.string().nullable(),
 	insurance: z.string().nullable(),
+	// The short version of registering, for someone who wants the steps rather than the rules. null means not yet written.
+	howToRegister: z
+		.object({
+			// What to have ready before starting.
+			needed: z.array(z.string().min(1)).min(1),
+			steps: z.array(z.string().min(1)).min(1),
+			// How long a registration lasts, or null if the authority's pages we read do not say.
+			validFor: z.string().min(1).nullable(),
+			// What to do once registered.
+			afterwards: z.string().min(1).nullable(),
+		})
+		.nullable(),
 	lastVerified: z.coerce.date(),
 	sources: z.array(z.url()).min(1),
 });

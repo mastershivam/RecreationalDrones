@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import CountryGuide from '../../components/CountryGuide.astro';
+import { guideDescription } from '../../lib/meta';
 
 export async function getStaticPaths() {
 	const countries = await getCollection('countries');
@@ -12,7 +13,7 @@ const { country } = Astro.props;
 const d = country.data;
 ---
 
-<Base title={`Drone rules in ${d.name}`} description={`Recreational drone rules for ${d.name}: registration, weight limits, and official sources.`}>
+<Base title={`Drone rules in ${d.name}`} description={guideDescription(d)}>
 	<article class="prose">
 		<CountryGuide country={country} />
 	</article>

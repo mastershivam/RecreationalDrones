@@ -6,7 +6,7 @@ import { LEVELS, levelText } from '../../lib/restrictiveness';
 const countries = (await getCollection('countries')).sort((a, b) => a.data.name.localeCompare(b.data.name));
 ---
 
-<Base title="Drone rules by country">
+<Base title="Drone rules by country" description="Every country we have a guide for, with how strict its drone rules are, who regulates them and when they were last checked.">
 	<div class="prose">
 		<h1>Drone rules by country</h1>
 		<h2>How we rate the rules</h2>

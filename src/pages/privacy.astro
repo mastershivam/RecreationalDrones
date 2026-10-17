@@ -1,0 +1,57 @@
+---
+import Base from '../layouts/Base.astro';
+import { ISSUES_URL } from '../lib/site';
+---
+
+<Base title="Privacy" description="What this site does and does not collect: no accounts, no cookies and no tracking, and your location never leaves your browser.">
+	<div class="prose">
+		<h1>Privacy</h1>
+		<p class="muted">Last updated 17 October 2026</p>
+
+		<p>
+			Recreational Drones is a free guide to drone rules, run as a personal project. It is built to need as little
+			about you as possible.
+		</p>
+
+		<h2>What we collect</h2>
+		<p>
+			<strong>Nothing about you.</strong> There are no accounts, no forms, no cookies, no advertising and no
+			analytics or tracking scripts on this site. A test checks that a visit sets no cookies and stores nothing in
+			your browser.
+		</p>
+
+		<h2>Your location</h2>
+		<p>
+			The map has a button that finds where you are. It asks your browser for your position only when you press it,
+			and your browser asks your permission first. The position is used in your browser to work out which country you
+			are in. It is not sent to us or to anyone else, and it is not stored. You can refuse, and search for a country
+			instead.
+		</p>
+
+		<h2>Who hosts the site</h2>
+		<p>
+			The site runs on Cloudflare. As with any website, the host receives your IP address and the details of each
+			request (the page asked for, your browser and device type) in order to send you the page, and it may keep
+			standard server logs. We do not use that information, and we do not get it. See
+			<a href="https://www.cloudflare.com/privacypolicy/">Cloudflare's privacy policy</a>.
+		</p>
+
+		<h2>Links to other sites</h2>
+		<p>
+			Each guide links to the official authority it is based on, and some to other sites. Those sites have their own
+			privacy practices, which we do not control.
+		</p>
+
+		<h2>Reporting a mistake</h2>
+		<p>
+			If you report a mistake, you do it on GitHub, which has its own privacy policy. A GitHub issue is public, and
+			shows your GitHub username. See <a href="/contact/">Contact</a>.
+		</p>
+
+		<h2>Changes</h2>
+		<p>
+			If this ever changes, for example if we add analytics, we will update this page first and say what is collected
+			and why. The history of this page is in <a href={ISSUES_URL.replace('/issues', '')}>the project on GitHub</a>.
+		</p>
+	</div>
+</Base>

@@ -14,7 +14,7 @@ const guides = guideSummaries(countries);
 const bounds = mainlandBounds(JSON.parse(readFileSync('public/data/countries.geojson', 'utf8')).features, Object.keys(guides));
 ---
 
-<Base title="Recreational drone rules map" fill>
+<Base title="Recreational Drones: drone rules by country, on a map" description="Search a country or spin the globe to see how strict its drone rules are, how to register, and where to check before you fly." fill>
 	<div class="stage">
 		<div id="map" data-guides={JSON.stringify(guides)} data-bounds={JSON.stringify(bounds)}></div>
 		<div class="top">
@@ -88,6 +88,8 @@ const bounds = mainlandBounds(JSON.parse(readFileSync('public/data/countries.geo
 	import { buildStyle } from '../lib/map-style';
 	import { popupHtml, summaryHtml } from '../lib/popup';
 	import { searchCountries } from '../lib/search';
+	import { mountFlow } from '../lib/flow-canvas';
+	import { flowOpacity } from '../lib/flow-field';
 	import { countryAt, locateErrorMessage, locatedMessage } from '../lib/geo';
 	import type { Bounds } from '../lib/country-bounds';
 	import { nightGeoJSON } from '../lib/daynight';
@@ -120,6 +122,16 @@ const bounds = mainlandBounds(JSON.parse(readFileSync('public/data/countries.geo
 	// so tests can find where a country is on screen.
 	map.once('idle', () => (el.dataset.ready = 'true'));
 	if (location.search.includes('e2e')) (window as unknown as { __map: Map }).__map = map;
+
+	// The flow-field backdrop: lines drifting over the globe, above the map's canvas and below its popups and markers.
+	// It thins out as you zoom in, and is gone by the zoom at which zones appear.
+	const flow = Object.assign(document.createElement('canvas'), { className: 'flow' });
+	flow.setAttribute('aria-hidden', 'true');
+	map.getCanvas().after(flow);
+	mountFlow(flow);
+	const fadeFlow = () => (flow.style.opacity = String(flowOpacity(map.getZoom())));
+	fadeFlow();
+	map.on('zoom', fadeFlow);
 
 	const intro = document.querySelector('.intro')!;
 	map.once('dragstart', () => intro.classList.add('hidden'));
@@ -345,6 +357,14 @@ const bounds = mainlandBounds(JSON.parse(readFileSync('public/data/countries.geo
 </script>
 
 <style>
+	/* The flow-field canvas is made by script inside the map, so its style must be global. */
+	:global(.flow) {
+		position: absolute;
+		inset: 0;
+		width: 100%;
+		height: 100%;
+		pointer-events: none;
+	}
 	.stage {
 		position: relative;
 		flex: 1;
@@ -383,7 +403,7 @@ const bounds = mainlandBounds(JSON.parse(readFileSync('public/data/countries.geo
 		min-height: 2.75rem;
 		padding: 0 var(--space-3);
 		border: 1px solid var(--color-border);
-		border-radius: var(--radius);
+		border-radius: var(--radius-pill);
 		background: var(--color-surface);
 		color: var(--color-text);
 		font: inherit;
@@ -398,7 +418,7 @@ const bounds = mainlandBounds(JSON.parse(readFileSync('public/data/countries.geo
 		width: 2.75rem;
 		height: 2.75rem;
 		border: 0;
-		border-radius: var(--radius);
+		border-radius: 50%;
 		background: transparent;
 		color: var(--color-link);
 		cursor: pointer;
@@ -447,7 +467,7 @@ const bounds = mainlandBounds(JSON.parse(readFileSync('public/data/countries.geo
 		list-style: none;
 		background: var(--color-surface);
 		border: 1px solid var(--color-border);
-		border-radius: var(--radius);
+		border-radius: var(--radius-lg);
 	}
 	.search li {
 		padding: var(--space-2) var(--space-3);
@@ -610,7 +630,7 @@ const bounds = mainlandBounds(JSON.parse(readFileSync('public/data/countries.geo
 		background: var(--color-surface);
 		color: var(--color-text);
 		border: 1px solid var(--color-border);
-		border-radius: var(--radius);
+		border-radius: var(--radius-lg);
 		padding: var(--space-3);
 		font-family: var(--font-sans);
 		font-size: var(--text-sm);
@@ -619,6 +639,10 @@ const bounds = mainlandBounds(JSON.parse(readFileSync('public/data/countries.geo
 	}
 	:global(.country-popup .maplibregl-popup-tip) {
 		display: none;
+	}
+	/* Above the map's own controls (the attribution bar), which otherwise sit over a popup's button near the bottom. */
+	:global(.country-popup) {
+		z-index: 3;
 	}
 	:global(.country-popup.preview) {
 		pointer-events: none;
@@ -663,14 +687,15 @@ const bounds = mainlandBounds(JSON.parse(readFileSync('public/data/countries.geo
 		height: 2.75rem;
 		color: var(--color-text);
 		font-size: var(--text-lg);
-		border-radius: var(--radius);
+		border-radius: var(--radius-lg);
 	}
 	:global(.country-popup .maplibregl-popup-close-button:hover) {
 		background: var(--color-surface-raised);
 	}
-	/* A long stack of overlapping zones scrolls inside the popup instead of running off the screen. */
+	/* A long stack of overlapping zones scrolls inside the popup instead of running off the screen. 40% of the height
+	   always fits above or below the tapped point, since the map is more than 80% of the screen. */
 	:global(.country-popup .maplibregl-popup-content) {
-		max-height: 60dvh;
+		max-height: 40dvh;
 		overflow-y: auto;
 	}
 	:global(.country-popup .zone-country) {

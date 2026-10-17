@@ -11,6 +11,7 @@ const valid = {
 	restrictiveness: 2,
 	restrictivenessReason: 'Register online with an online test.',
 	registrationFee: null,
+	howToRegister: null,
 	registrationWeightGrams: 250,
 	minOperatorAge: null,
 	remoteId: null,
@@ -42,6 +43,18 @@ describe('countrySchema', () => {
 
 	it('requires nullable fields to be present, so unverified rules are explicit', () => {
 		const { remoteId: _, ...missing } = valid;
+		expect(countrySchema.safeParse(missing).success).toBe(false);
+	});
+
+	it('accepts steps for how to register, and rejects an empty list of steps', () => {
+		const how = { needed: ['An email address'], steps: ['Register online.'], validFor: '1 year', afterwards: null };
+		expect(countrySchema.safeParse({ ...valid, howToRegister: how }).success).toBe(true);
+		expect(countrySchema.safeParse({ ...valid, howToRegister: { ...how, steps: [] } }).success).toBe(false);
+		expect(countrySchema.safeParse({ ...valid, howToRegister: { ...how, needed: [] } }).success).toBe(false);
+	});
+
+	it('requires howToRegister to be present, or explicitly null', () => {
+		const { howToRegister: _, ...missing } = valid;
 		expect(countrySchema.safeParse(missing).success).toBe(false);
 	});
 

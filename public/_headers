@@ -1,0 +1,24 @@
+# Headers for the site's static files (Cloudflare Workers static assets).
+
+# Every page: no sniffing, no referrer leaks beyond the origin, and no camera, microphone or similar.
+# The map's location button needs geolocation, so that is allowed for this site only.
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: geolocation=(self), camera=(), microphone=(), payment=(), usb=()
+
+# Built files have a hash in their name, so they never change under the same address: cache them for a year.
+/_astro/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Fonts and icons rarely change.
+/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
+/favicon.svg
+  Cache-Control: public, max-age=86400
+/og-image.png
+  Cache-Control: public, max-age=86400
+
+# Data files change when the site is rebuilt, so let a browser reuse them for an hour and then check.
+/data/*
+  Cache-Control: public, max-age=3600

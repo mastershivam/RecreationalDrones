@@ -50,10 +50,11 @@ test.describe('page chrome', () => {
 	test('has sharing tags with the page title and description', async ({ page }) => {
 		await page.goto('/countries/nepal/');
 		const meta = (selector: string) => page.locator(`head meta[${selector}]`).getAttribute('content');
-		expect(await meta('property="og:title"')).toBe('Drone rules in Nepal');
-		expect(await meta('property="og:description"')).toContain('Recreational drone rules for Nepal');
+		expect(await meta('property="og:title"')).toBe('Drone rules in Nepal · Recreational Drones');
+		expect(await meta('property="og:description"')).toContain('Drone rules in Nepal');
 		expect(await meta('property="og:type"')).toBe('website');
-		expect(await meta('name="twitter:card"')).toBe('summary');
+		expect(await meta('property="og:image"')).toMatch(/\/og-image\.png$/);
+		expect(await meta('name="twitter:card"')).toBe('summary_large_image');
 	});
 });
 

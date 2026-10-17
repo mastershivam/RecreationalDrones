@@ -378,3 +378,66 @@ describe('Japan guide', () => {
 		expect(notCovered).toContain('PDF leaflets');
 	});
 });
+
+describe('how to register', () => {
+	const all = guides.map(({ file, frontmatter }) => ({ file, data: countrySchema.parse(frontmatter) }));
+	const of = (iso3: string) => all.find((g) => g.data.iso3 === iso3)!.data.howToRegister!;
+
+	it.each(all)('$file has steps, and something to have ready', ({ data }) => {
+		expect(data.howToRegister).not.toBeNull();
+		expect(data.howToRegister!.steps.length).toBeGreaterThanOrEqual(2);
+		expect(data.howToRegister!.needed.length).toBeGreaterThanOrEqual(1);
+	});
+
+	it.each(all)('$file never says you may fly, only what to do to register', ({ data }) => {
+		const text = JSON.stringify(data.howToRegister);
+		expect(text).not.toMatch(/you can fly|allowed to fly|safe to fly/i);
+	});
+
+	it('gives the UK’s two IDs, their prices and how long they last', () => {
+		const uk = of('GBR');
+		expect(uk.steps.join(' ')).toContain('Flyer ID');
+		expect(uk.validFor).toBe('Operator ID: 1 year. Flyer ID: 5 years.');
+		expect(all.find((g) => g.data.iso3 === 'GBR')!.data.registrationFee).toBe('Operator ID £12.34 a year; Flyer ID free');
+	});
+
+	it('gives the US fee and term, and the notice a visitor sends instead', () => {
+		expect(of('USA').steps.join(' ')).toContain('pay $5');
+		expect(of('USA').validFor).toContain('3 years');
+		expect(of('USA').steps.join(' ')).toContain('Notice of Identification');
+	});
+
+	it('says a visitor to Canada cannot register a drone and applies for a Foreign SFOC-RPAS instead', () => {
+		expect(of('CAN').steps.join(' ')).toContain('cannot register a drone');
+		expect(of('CAN').steps.join(' ')).toContain('Foreign SFOC-RPAS');
+	});
+
+	it('says Australia needs nothing for flying for fun, and registration for work lasts 12 months', () => {
+		expect(of('AUS').needed.join(' ')).toContain('Nothing, if you fly only for fun');
+		expect(of('AUS').validFor).toContain('12 months');
+	});
+
+	it('says Japan’s registration lasts 3 years and needs a passport for the online check', () => {
+		expect(of('JPN').validFor).toContain('3 years');
+		expect(of('JPN').needed.join(' ')).toContain('passport');
+	});
+
+	it('says a visitor to Nepal goes in person with the drone, and registration is not permission to fly', () => {
+		expect(of('NPL').steps.join(' ')).toContain('in person');
+		expect(of('NPL').afterwards).toContain('does not let you fly');
+	});
+
+	it('gives Thailand’s Thai mobile number, two authorities and the lifetime of the number and the certificate', () => {
+		expect(of('THA').needed.join(' ')).toContain('Thai mobile number');
+		expect(of('THA').steps.join(' ')).toContain('NBTC');
+		expect(of('THA').validFor).toContain('2 years');
+	});
+
+	it('gives all 27 EU states the same EASA steps, and leaves their national requirements unread', () => {
+		const eu = all.filter((g) => ['AUT', 'DEU', 'FRA', 'SWE', 'SVK'].includes(g.data.iso3));
+		for (const { data } of eu) {
+			expect(data.howToRegister!.steps[1]).toContain('once and not each drone');
+			expect(data.howToRegister!.needed[0]).toContain('We have not read the list');
+		}
+	});
+});

@@ -56,6 +56,13 @@ h1 {
 	font-size: var(--text-xl);
 }
 
+/* Page titles are large and tight, so a country's name is the first thing you read. */
+.prose h1 {
+	font-size: var(--text-2xl);
+	line-height: 1.05;
+	letter-spacing: -0.02em;
+}
+
 h2 {
 	font-size: var(--text-lg);
 }
@@ -73,10 +80,32 @@ h2 {
 	max-width: 65ch;
 }
 
+.button {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 2.75rem;
+	padding: 0 var(--space-4);
+	border-radius: var(--radius-pill);
+	background: var(--color-accent);
+	color: var(--color-on-accent);
+	font-weight: 700;
+	text-decoration: none;
+	transition: filter 0.15s;
+}
+
+.button:hover {
+	filter: brightness(1.1);
+}
+
+.button:active {
+	filter: brightness(0.9);
+}
+
 .card {
 	background: var(--color-surface);
 	border: 1px solid var(--color-border);
-	border-radius: var(--radius);
+	border-radius: var(--radius-lg);
 	padding: var(--space-3) var(--space-4);
 }
 

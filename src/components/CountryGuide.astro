@@ -2,6 +2,7 @@
 import { render, type CollectionEntry } from 'astro:content';
 import Unverified from './Unverified.astro';
 import { levelText } from '../lib/restrictiveness';
+import { reportErrorUrl } from '../lib/report';
 
 interface Props {
 	country: CollectionEntry<'countries'>;
@@ -11,10 +12,13 @@ interface Props {
 const { country } = Astro.props;
 const { Content } = await render(country);
 const d = country.data;
+// The one thing most visitors came to do. If we have no registration page for the country, go to the authority.
+const cta = d.registrationUrl ? { href: d.registrationUrl, label: 'Register online' } : { href: d.authorityUrl, label: 'Go to the official source' };
 ---
 
 <h1>Drone rules in {d.name}</h1>
 <p class="muted">Last verified {d.lastVerified.toISOString().slice(0, 10)}</p>
+<p class="cta"><a class="button" href={cta.href}>{cta.label}</a></p>
 <dl class="card">
 	<dt>Authority</dt>
 	<dd><a href={d.authorityUrl}>{d.authority}</a></dd>
@@ -35,11 +39,61 @@ const d = country.data;
 	<dt>Insurance</dt>
 	<dd>{d.insurance ?? <Unverified />}</dd>
 </dl>
+<section class="how-to">
+	<h2>How to register</h2>
+	{
+		d.howToRegister ? (
+			<>
+				<h3>Have ready</h3>
+				<ul>{d.howToRegister.needed.map((item) => <li>{item}</li>)}</ul>
+				<h3>Steps</h3>
+				<ol>{d.howToRegister.steps.map((step) => <li>{step}</li>)}</ol>
+				<dl class="card">
+					<dt>Cost</dt>
+					<dd>{d.registrationFee ?? <Unverified />}</dd>
+					<dt>Lasts</dt>
+					<dd>{d.howToRegister.validFor ?? <Unverified />}</dd>
+					<dt>Afterwards</dt>
+					<dd>{d.howToRegister.afterwards ?? <Unverified />}</dd>
+				</dl>
+			</>
+		) : (
+			<p><Unverified /></p>
+		)
+	}
+</section>
 <Content />
 <h2>Sources</h2>
 <ul>{d.sources.map((url) => <li><a href={url}>{url}</a></li>)}</ul>
+<p class="report"><a href={reportErrorUrl(d.name, country.id)}>Report a mistake in this guide</a></p>
+<!-- On a phone the button stays at the bottom of the screen while you read, so the action is never far away. -->
+<div class="cta-bar"><a class="button" href={cta.href}>{cta.label}</a></div>
 
 <style>
+	.cta {
+		margin: var(--space-3) 0;
+	}
+	.report {
+		margin-top: var(--space-4);
+	}
+	/* Mobile only: pinned to the bottom edge of the screen while the guide is on screen. */
+	.cta-bar {
+		display: none;
+	}
+	@media (max-width: 639px) {
+		.cta-bar {
+			display: block;
+			position: sticky;
+			bottom: 0;
+			margin: var(--space-4) calc(var(--space-3) * -1) calc(var(--space-4) * -1);
+			padding: var(--space-2) var(--space-3) max(var(--space-2), env(safe-area-inset-bottom));
+			background: var(--color-bg);
+		}
+		.cta-bar .button {
+			display: flex;
+			width: 100%;
+		}
+	}
 	dl {
 		margin: var(--space-3) 0;
 	}

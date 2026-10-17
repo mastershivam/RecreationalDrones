@@ -60,7 +60,7 @@ test.describe('Nepal guide page', () => {
 		await expect(page.getByRole('heading', { level: 1 })).toHaveText('Drone rules in Nepal');
 		await expect(page.getByRole('heading', { name: 'Foreign visitors' })).toBeVisible();
 		await expect(page.getByRole('heading', { name: 'Nepali citizens and companies' })).toBeVisible();
-		await expect(page.getByText('Sinamangal, Kathmandu')).toBeVisible();
+		await expect(page.getByText('Sinamangal, Kathmandu').first()).toBeVisible(); // also named in the how-to-register steps
 	});
 
 	test('names CAAN as the authority and cites its documents', async ({ page }) => {

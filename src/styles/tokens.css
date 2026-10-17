@@ -26,6 +26,9 @@
 	--color-land: #3f5f94;
 	--color-land-border: #9bb3dd;
 	--color-night: #02040a;
+	/* The flow-field backdrop. Decoration only, so neither color means anything. */
+	--color-flow-1: #6fd3ff;
+	--color-flow-2: #9bb3dd;
 	/* Zone layer. Not amber: amber means "we have a guide". Zones also differ by line style and symbol. */
 	--color-zone-airport: #ff9ab0;
 	--color-zone-approval: #d2b4ff;
@@ -36,6 +39,8 @@
 	--text-base: 1rem;
 	--text-lg: 1.25rem;
 	--text-xl: 2rem;
+	/* Page titles: large, and fluid between a phone and a desktop. */
+	--text-2xl: clamp(2.25rem, 1.4rem + 4vw, 3.75rem);
 
 	--space-1: 0.25rem;
 	--space-2: 0.5rem;
@@ -43,6 +48,8 @@
 	--space-4: 1.5rem;
 	--space-5: 3rem;
 
-	--radius: 0.75rem;
+	--radius: 1rem;
+	--radius-lg: 1.5rem;
+	--radius-pill: 999px;
 	--content-width: 46rem;
 }

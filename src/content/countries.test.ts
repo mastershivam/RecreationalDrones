@@ -36,3 +36,50 @@ describe('country guides', () => {
 		expect(() => guideSummaries(entries)).not.toThrow();
 	});
 });
+
+describe('Nepal guide', () => {
+	const file = readFileSync(join(dir, 'nepal.mdx'), 'utf8');
+	const data = countrySchema.parse(parse(file.match(/^---\n([\s\S]*?)\n---/)![1]));
+
+	it('is keyed to the code the map uses for Nepal', () => {
+		expect(data.iso3).toBe('NPL');
+	});
+
+	it('names the Civil Aviation Authority of Nepal as the authority', () => {
+		expect(data.authority).toContain('Civil Aviation Authority of Nepal');
+		expect(new URL(data.authorityUrl).hostname).toBe('caanepal.gov.np');
+	});
+
+	it('only states what the official CAAN registration documents say about insurance: over 2 kg', () => {
+		expect(data.insurance).toContain('over 2 kg');
+		expect(data.whoMustRegister).toContain('2 kg');
+	});
+
+	it('leaves unchecked rules unverified rather than guessing', () => {
+		expect(data.minOperatorAge).toBeNull();
+		expect(data.remoteId).toBeNull();
+		expect(data.registrationWeightGrams).toBeNull();
+	});
+
+	it('gives the official fee and forms, which have to match the CAAN documents', () => {
+		expect(file).toContain('USD 50 plus 13% VAT');
+		expect(file).toContain('RPA/Form/001');
+		expect(file).toContain('RPA/Form/002');
+	});
+
+	it('keeps bank account numbers out of the page, since they can go out of date', () => {
+		const body = file.replace(/^---\n[\s\S]*?\n---/, '');
+		expect(body).not.toMatch(/\d{12,}/);
+		expect(body).not.toContain('1690100000133001');
+	});
+
+	it('says what it does not cover, so readers do not assume the rules are complete', () => {
+		expect(file).toContain('Not covered yet');
+	});
+
+	it('cites the official CAAN documents as its sources', () => {
+		expect(data.sources.length).toBeGreaterThanOrEqual(2);
+		for (const url of data.sources) expect(url).toContain('caanepal.gov.np');
+	});
+});
+

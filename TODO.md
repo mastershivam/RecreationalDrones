@@ -11,8 +11,9 @@
 ## From the original plan
 
 - [ ] Airport and restricted-airspace layers (OurAirports, OpenStreetMap, and national UAS zone data where the licence allows).
-- [ ] Add more countries in batches, starting with the high-traffic ones: US, Canada, Australia, Japan, UAE, and the EU states (use EASA's common framework, with local differences on top).
+- [ ] Add more countries in batches (the UK and Nepal have guides so far), starting with the high-traffic ones: US, Canada, Australia, Japan, UAE, and the EU states (use EASA's common framework, with local differences on top).
 - [ ] Verify the unchecked UK rules: Remote ID and insurance.
+- [ ] **Finish Nepal's guide.** Registration is covered from CAAN's own documents (checked 2026-10-17, via copies the Internet Archive saved on 2026-03-13). Still unverified: whether drones under 2 kg must register, the weight limits for categories A and B, permission to fly (sources disagree on whether CAAN, the Home Ministry or another body issues it), where flying is not allowed (national parks, Kathmandu valley, Everest region), minimum age and Remote ID. The sources to read are CAAN's UAS Requirements PDF and its drones page, which could not be opened because the caanepal.gov.np certificate does not validate from here; try again from a browser, or ask CAAN. Don't use blog posts for these, because they contradict each other (for example USD 10 vs CAAN's USD 50 fee).
 - [ ] "Report an error" form (Worker + D1 + Turnstile).
 - [ ] Stale-guide check that flags any guide not verified for six months or more.
 - [ ] Search across country guides (Pagefind).

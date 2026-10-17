@@ -6,6 +6,8 @@ interface TestMap {
 	queryRenderedFeatures(geometry?: unknown, options?: { layers: string[] }): unknown[];
 	getLayer(id: string): unknown;
 	getSource(id: string): unknown;
+	jumpTo(options: { center: [number, number]; zoom: number }): void;
+	once(event: 'idle', listener: () => void): void;
 }
 
 // Opens the home page and waits until the map has loaded every tile and drawn the highlighted countries.
@@ -30,6 +32,26 @@ export async function ukPoint(page: Page) {
 		const map = (window as unknown as { __map: TestMap }).__map;
 		return map.project([-2, 54]);
 	});
+	return { x: box.x + point.x, y: box.y + point.y };
+}
+
+// Moves the map to a place and waits until it has drawn it, so small countries are big enough to hover or tap.
+export async function focusOn(page: Page, lngLat: [number, number], zoom: number) {
+	await page.evaluate(
+		([center, z]) =>
+			new Promise<void>((resolve) => {
+				const map = (window as unknown as { __map: TestMap }).__map;
+				map.once('idle', () => resolve());
+				map.jumpTo({ center: center as [number, number], zoom: z as number });
+			}),
+		[lngLat, zoom] as const,
+	);
+}
+
+// Where a longitude/latitude is on the page, in page coordinates.
+export async function pointAt(page: Page, lngLat: [number, number]) {
+	const box = (await page.locator('#map').boundingBox())!;
+	const point = await page.evaluate((coords) => (window as unknown as { __map: TestMap }).__map.project(coords), lngLat);
 	return { x: box.x + point.x, y: box.y + point.y };
 }
 

@@ -107,6 +107,15 @@ test.describe('404 page', () => {
 		await expect(page.locator('nav a[aria-current]')).toHaveCount(0);
 	});
 
+	test('shows the logo mark beside the site name in the header, as decoration', async ({ page }) => {
+		await page.goto('/countries/');
+		const logo = page.locator('header .brand img');
+		await expect(logo).toHaveAttribute('alt', '');
+		await expect(logo).toBeVisible();
+		expect(await logo.evaluate((img: HTMLImageElement) => img.naturalWidth)).toBeGreaterThan(0);
+		await expect(page.getByRole('link', { name: 'Recreational Drones' })).toHaveAttribute('href', '/');
+	});
+
 	test('does not scroll sideways', async ({ page }) => {
 		await page.goto('/this-page-does-not-exist/');
 		const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);

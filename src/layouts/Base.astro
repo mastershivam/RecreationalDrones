@@ -70,7 +70,7 @@ const imageAlt = shareImage?.alt ?? 'A globe over Europe and Africa with a small
 	<body>
 		<a class="skip" href="#main">Skip to content</a>
 		<header>
-			<a class="brand" href="/">Recreational Drones</a>
+			<a class="brand" href="/"><img src="/logo-mark.svg" alt="" width="32" height="32" />Recreational Drones</a>
 			<nav>
 				{links.map((l) => <a href={l.href} aria-current={isCurrent(pathname, l.href) ? 'page' : undefined}>{l.label}</a>)}
 			</nav>
@@ -149,6 +149,9 @@ const imageAlt = shareImage?.alt ?? 'A globe over Europe and Africa with a small
 		padding-top: max(var(--space-2), env(safe-area-inset-top));
 	}
 	.brand {
+		display: inline-flex;
+		align-items: center;
+		gap: var(--space-2);
 		color: var(--color-text);
 		font-weight: 700;
 		font-size: var(--text-lg);

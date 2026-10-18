@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { ZONE_GROUPS, ZONE_LAYER_IDS, circlePolygon, enabledKinds, markerPosition, zoneFeatures, zoneLayerFilters, zonePopupHtml, zonesPopupHtml, type ZoneFile, type ZoneProps } from './zones';
+import { ZONE_GROUPS, ZONE_LAYER_IDS, circlePolygon, enabledKinds, markerPosition, heightRange, zoneFeatures, zoneLayerFilters, zonePopupHtml, zonesPopupHtml, type ZoneFile, type ZoneProps } from './zones';
 import { zoneKinds } from './zone-schema';
 
 // Metres between two [lon, lat] positions (haversine), to check circles against.
@@ -95,7 +95,7 @@ describe('zone filters', () => {
 	const kindsIn = (filter: unknown) => ((filter as unknown[][])[2] as unknown[][])[2][1];
 
 	it('turns a group of switches into the kinds they cover', () => {
-		expect(enabledKinds(['airport'])).toEqual(['airport-buffer']);
+		expect(enabledKinds(['airport'])).toEqual(['airport-buffer', 'airport-zone']);
 		expect(enabledKinds(['approval', 'site'])).toEqual(['check-first', 'restricted', 'flying-site']);
 		expect(enabledKinds([])).toEqual([]);
 	});
@@ -208,6 +208,13 @@ describe('zonePopupHtml', () => {
 		expect(html).not.toMatch(/you can fly|allowed to fly|safe to fly/i);
 	});
 
+	it('labels an official airport outline as one, and says where in the sky a zone applies without saying how high to fly', () => {
+		const html = zonePopupHtml(props({ kind: 'airport-zone', floorMeters: 0, ceilingMeters: 120 }), { link: false });
+		expect(html).toContain('Airport zone (official outline)');
+		expect(html).toContain('Applies up to 120 m above the ground');
+		expect(html).not.toMatch(/you can fly|allowed to fly|safe to fly|may fly/i);
+	});
+
 	it('labels the kinds plainly', () => {
 		expect(zonePopupHtml(props({ kind: 'check-first' }), { link: false })).toContain('Check first: approval needed');
 		expect(zonePopupHtml(props({ kind: 'restricted' }), { link: false })).toContain('Restricted area');
@@ -226,5 +233,27 @@ describe('zonesPopupHtml', () => {
 		const html = zonesPopupHtml(many(7), { link: false });
 		expect(html.match(/<section class="zone">/g)).toHaveLength(7);
 		expect(html).not.toContain('more here');
+	});
+});
+
+describe('heightRange', () => {
+	it('says nothing when the authority gives no limits', () => {
+		expect(heightRange({})).toBeUndefined();
+	});
+	it('words a ceiling, a floor and both', () => {
+		expect(heightRange({ ceilingMeters: 50 })).toBe('Applies up to 50 m above the ground');
+		expect(heightRange({ floorMeters: 30, ceilingMeters: 120 })).toBe('Applies from 30 to 120 m above the ground');
+		expect(heightRange({ floorMeters: 30 })).toBe('Applies from 30 m above the ground');
+	});
+});
+
+describe('zoneFeatures with an official outline', () => {
+	it('keeps the outline and the height range, and adds a dot at its middle without inventing a circle', () => {
+		const ring = [[0, 0], [0, 2], [2, 2], [0, 0]];
+		const ctr = zone({ id: 'ctr', kind: 'airport-zone', radiusMeters: undefined, ceilingMeters: 100 }, { type: 'Polygon', coordinates: [ring] });
+		const out = zoneFeatures([file([ctr])]).features;
+		expect(out.map((f) => f.properties.shape)).toEqual(['area', 'point']);
+		expect(out[0].properties).toMatchObject({ kind: 'airport-zone', ceilingMeters: 100 });
+		expect((out[0].geometry as { coordinates: unknown[][] }).coordinates[0]).toHaveLength(4);
 	});
 });

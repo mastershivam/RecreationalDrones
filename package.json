@@ -15,6 +15,7 @@
     "build:countries": "node scripts/build-countries.ts",
     "build:zones": "node scripts/build-airport-zones.ts",
     "build:og": "node brand/build-og.mjs",
+    "build:official": "node scripts/build-official-zones.ts",
     "build:fields": "node scripts/build-model-fields.ts",
     "test:e2e": "playwright test"
   },

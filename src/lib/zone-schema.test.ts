@@ -81,6 +81,20 @@ describe('zoneCollectionSchema', () => {
 		expect(ok(collection([feature({}, { type: 'LineString', coordinates: [[0, 0], [1, 1]] })]))).toBe(false);
 	});
 
+	it('takes an official airport outline as an area but not as a point, and needs no radius', () => {
+		const props = { kind: 'airport-zone', radiusMeters: undefined };
+		expect(ok(collection([feature(props, { type: 'Polygon', coordinates: [ring] })]))).toBe(true);
+		expect(ok(collection([feature(props, { type: 'MultiPolygon', coordinates: [[ring]] })]))).toBe(true);
+		expect(ok(collection([feature(props)]))).toBe(false);
+	});
+
+	it('takes heights above the ground, with the floor below the ceiling', () => {
+		expect(ok(collection([feature({ floorMeters: 0, ceilingMeters: 120 })]))).toBe(true);
+		expect(ok(collection([feature({ floorMeters: 120, ceilingMeters: 120 })]))).toBe(false);
+		expect(ok(collection([feature({ floorMeters: -5 })]))).toBe(false);
+		expect(ok(collection([feature({ ceilingMeters: 0 })]))).toBe(false);
+	});
+
 	it('takes an OpenStreetMap reference only in the form node/1, way/1 or relation/1', () => {
 		expect(ok(collection([feature({ osm: 'way/372975520' })]))).toBe(true);
 		expect(ok(collection([feature({ osm: 'relation/1' })]))).toBe(true);

@@ -17,7 +17,7 @@ const EU_NONE = {
 
 export const AIRPORT_RULES: Record<string, AirportRule | { none: string }> = {
 	CHE: {
-		none: "FOCA gives no fixed distance from airports on the pages we read. It lists aerodrome control zones and perimeters on its interactive drone map instead, which we have not copied.",
+		none: "FOCA gives no fixed distance from airports on the pages we read. It publishes the zones themselves instead, as an open data file, and the map draws those outlines (see data/zones/che-official.geojson).",
 	},
 	GBR: {
 		iso2: 'GB',
@@ -84,7 +84,9 @@ export const AIRPORT_RULES: Record<string, AirportRule | { none: string }> = {
 	ITA: EU_NONE,
 	LVA: EU_NONE,
 	LTU: EU_NONE,
-	LUX: EU_NONE,
+	LUX: {
+		none: "Luxembourg's civil aviation directorate gives no single distance from airports. It publishes its UAS zones as an open data file instead, and the map draws those outlines (see data/zones/lux-official.geojson).",
+	},
 	MLT: EU_NONE,
 	NLD: EU_NONE,
 	POL: EU_NONE,

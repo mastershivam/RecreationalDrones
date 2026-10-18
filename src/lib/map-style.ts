@@ -99,9 +99,9 @@ function overlayLayers(c: MapColors, guides: Record<string, { level: Level }>): 
 // Airport circles (dashed), outlines of places that need approval (solid) and dots for airports and fields. Colors
 // carry the kind and line style and symbol repeat it, so no one has to tell colors apart. Zones are never amber.
 function zoneLayers(c: MapColors): LayerSpecification[] {
-	const filters = zoneLayerFilters(['airport-buffer', 'check-first', 'restricted', 'flying-site']);
+	const filters = zoneLayerFilters(['airport-buffer', 'airport-zone', 'check-first', 'restricted', 'flying-site']);
 	const common = { source: 'zones', minzoom: ZONE_MIN_ZOOM };
-	const byKind = (airport: string, approval: string, site: string) => ['match', ['get', 'kind'], 'airport-buffer', airport, 'flying-site', site, approval];
+	const byKind = (airport: string, approval: string, site: string) => ['match', ['get', 'kind'], ['airport-buffer', 'airport-zone'], airport, 'flying-site', site, approval];
 	return [
 		{ id: 'zones-fill', type: 'fill', ...common, filter: filters['zones-fill'], paint: { 'fill-color': byKind(c.zoneAirport, c.zoneApproval, c.text), 'fill-opacity': 0.18 } },
 		{ id: 'zones-airport-line', type: 'line', ...common, filter: filters['zones-airport-line'], paint: { 'line-color': c.zoneAirport, 'line-width': 1.5, 'line-dasharray': [2, 2] } },

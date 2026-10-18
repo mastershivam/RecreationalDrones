@@ -2,7 +2,9 @@ import { z } from 'astro/zod';
 
 // One file of zones per country and source, as a GeoJSON FeatureCollection with a `meta` block saying where it
 // came from. `kind` says what a zone is, never whether flying is allowed there (see DESIGN.md, Voice).
-export const zoneKinds = ['airport-buffer', 'restricted', 'flying-site', 'check-first'] as const;
+// `airport-buffer` is our circle round an airport, from a stated radius. `airport-zone` is the authority's own outline
+// of an airport zone, loaded from its zones file; it is an area, never a circle we drew.
+export const zoneKinds = ['airport-buffer', 'airport-zone', 'restricted', 'flying-site', 'check-first'] as const;
 
 const position = z.tuple([z.number().min(-180).max(180), z.number().min(-90).max(90)]);
 const ring = z.array(position).min(4);
@@ -29,10 +31,17 @@ const zone = z.object({
 			note: z.string().optional(),
 			// The circle is an approximation of the real zone, which has another shape or a larger extent.
 			indicative: z.boolean().optional(),
+			// The part of the sky the zone covers, in metres above the ground, as the authority gives it. Left out when
+			// the authority gives no limit, or gives it above sea level (which cannot be drawn as a height above ground).
+			floorMeters: z.number().min(0).optional(),
+			ceilingMeters: z.number().positive().optional(),
 			validFrom: z.coerce.date().optional(),
 			validUntil: z.coerce.date().optional(),
 		})
-		.refine((p) => p.kind !== 'airport-buffer' || p.radiusMeters !== undefined, 'an airport buffer needs radiusMeters'),
+		.refine((p) => p.kind !== 'airport-buffer' || p.radiusMeters !== undefined, 'an airport buffer needs radiusMeters')
+		.refine((p) => p.floorMeters === undefined || p.ceilingMeters === undefined || p.floorMeters < p.ceilingMeters, 'floorMeters must be below ceilingMeters'),
+}).refine((f) => f.properties.kind !== 'airport-zone' || f.geometry.type !== 'Point', {
+	message: 'an airport zone is an outline, not a point',
 });
 
 export const zoneCollectionSchema = z
@@ -42,7 +51,9 @@ export const zoneCollectionSchema = z
 			.object({
 				// ISO 3166-1 alpha-3, as in the country guides.
 				iso3: z.string().regex(/^[A-Z]{3}$/),
+				// Where a person can read about the data: the authority's page. Bulk files also give `dataUrl`, the file itself.
 				sourceUrl: z.url(),
+				dataUrl: z.url().optional(),
 				// Bulk data: when it was downloaded, and a SHA-256 of what was downloaded, to see that a source changed.
 				fetchedAt: z.coerce.date().optional(),
 				sourceHash: z.string().regex(/^[0-9a-f]{64}$/).optional(),

@@ -8,7 +8,7 @@ export type ZoneFile = z.input<typeof zoneCollectionSchema>;
 
 // The filter on the map groups kinds the way a person thinks about them, not one switch per kind.
 export const ZONE_GROUPS = [
-	{ id: 'airport', label: 'Airport zones', kinds: ['airport-buffer'] },
+	{ id: 'airport', label: 'Airport zones', kinds: ['airport-buffer', 'airport-zone'] },
 	{ id: 'approval', label: 'Approval needed or restricted', kinds: ['check-first', 'restricted'] },
 	{ id: 'site', label: 'Model aircraft fields', kinds: ['flying-site'] },
 ];
@@ -16,6 +16,7 @@ export const ZONE_GROUPS = [
 // Says what a place is, never that you may fly there (DESIGN.md, Voice).
 const KIND_LABELS: Record<string, string> = {
 	'airport-buffer': 'Airport zone',
+	'airport-zone': 'Airport zone (official outline)',
 	'check-first': 'Check first: approval needed',
 	restricted: 'Restricted area',
 	'flying-site': 'Model aircraft field',
@@ -51,6 +52,9 @@ export interface ZoneProps {
 	source: string;
 	asOf: string;
 	indicative: boolean;
+	// Metres above the ground, if the authority gives them (see zone-schema.ts).
+	floorMeters?: number;
+	ceilingMeters?: number;
 	// An outline or circle is drawn as an area; a field is a dot, and so is the middle of an airport circle.
 	shape: 'area' | 'point';
 }
@@ -86,6 +90,8 @@ export function zoneFeatures(files: ZoneFile[]) {
 					source: p.ruleUrl ?? meta.sourceUrl,
 					asOf: String(meta.verifiedOn ?? meta.fetchedAt).slice(0, 10),
 					indicative: p.indicative === true,
+					...(p.floorMeters !== undefined && { floorMeters: p.floorMeters }),
+					...(p.ceilingMeters !== undefined && { ceilingMeters: p.ceilingMeters }),
 				};
 				const feature = (shape: ZoneProps['shape'], geometry: unknown) => ({ type: 'Feature' as const, properties: { ...props, shape }, geometry });
 				// An outline is a few pixels across when zoomed out, so it also gets a dot at its middle.
@@ -105,10 +111,10 @@ export const ZONE_MIN_ZOOM = 6;
 
 // Which kinds each zone layer draws, so switching a group off hides exactly its layers' features.
 const LAYERS: Record<string, { shape: ZoneProps['shape']; kinds: string[] }> = {
-	'zones-fill': { shape: 'area', kinds: ['airport-buffer', 'check-first', 'restricted'] },
-	'zones-airport-line': { shape: 'area', kinds: ['airport-buffer'] },
+	'zones-fill': { shape: 'area', kinds: ['airport-buffer', 'airport-zone', 'check-first', 'restricted'] },
+	'zones-airport-line': { shape: 'area', kinds: ['airport-buffer', 'airport-zone'] },
 	'zones-approval-line': { shape: 'area', kinds: ['check-first', 'restricted'] },
-	'zones-points': { shape: 'point', kinds: ['airport-buffer', 'flying-site', 'check-first', 'restricted'] },
+	'zones-points': { shape: 'point', kinds: ['airport-buffer', 'airport-zone', 'flying-site', 'check-first', 'restricted'] },
 };
 export const ZONE_LAYER_IDS = Object.keys(LAYERS);
 
@@ -130,6 +136,15 @@ const webUrl = (url: string): string | undefined => {
 	}
 };
 
+// "Applies from 0 to 120 m above the ground": the part of the sky the zone covers, as the authority gives it. It says
+// where the zone applies, never how high you may fly (DESIGN.md, Voice).
+export function heightRange(p: Pick<ZoneProps, 'floorMeters' | 'ceilingMeters'>): string | undefined {
+	const { floorMeters: from, ceilingMeters: to } = p;
+	if (from === undefined && to === undefined) return undefined;
+	if (to === undefined) return `Applies from ${from} m above the ground`;
+	return `Applies ${from === undefined || from === 0 ? 'up to' : `from ${from} to`} ${to} m above the ground`;
+}
+
 // The popup for one zone. The hover preview has no links (DESIGN.md); the click or tap popup has the source link.
 export function zonePopupHtml(p: ZoneProps, { link }: { link: boolean }): string {
 	const url = webUrl(p.source);
@@ -142,6 +157,7 @@ export function zonePopupHtml(p: ZoneProps, { link }: { link: boolean }): string
 		`<h2 class="popup-title">${escapeHtml(p.name)}</h2>` +
 		`<p class="zone-kind">${escapeHtml(kind)}${p.indicative ? ' (indicative)' : ''}</p>` +
 		(p.note ? `<p>${escapeHtml(p.note)}</p>` : '') +
+		(heightRange(p) ? `<p>${heightRange(p)}</p>` : '') +
 		`<p class="popup-meta">Source: ${source} · as of ${escapeHtml(p.asOf)}${link ? '' : ' · click or tap for the link'}</p>` +
 		country
 	);

@@ -5,8 +5,9 @@ import { activate, focusOn, highlightedAt, openGlobe, pointAt } from './helpers'
 const COUNTRIES = [
 	{ name: 'Canada', slug: 'canada', iso3: 'CAN', at: [-100, 55], neighbour: [-102, 24], zoom: 3, level: 'Complex restrictions', fact: 'Foreign SFOC-RPAS' },
 	{ name: 'Australia', slug: 'australia', iso3: 'AUS', at: [134, -25], neighbour: [114, -1], zoom: 3, level: 'No restrictions', fact: 'There is no age limit' },
+	// Zoom 5, below where zones show (ZONE_MIN_ZOOM): Switzerland's official zones now cover most of it, and a zone under a tap wins over the country.
 	// Every country around it has a guide, so the "no guide" point is Türkiye, further off.
-	{ name: 'Switzerland', slug: 'switzerland', iso3: 'CHE', at: [8.2, 46.8], neighbour: [35, 39], zoom: 6, level: 'Basic restrictions', fact: 'CHF 10' },
+	{ name: 'Switzerland', slug: 'switzerland', iso3: 'CHE', at: [8.2, 46.8], neighbour: [35, 39], zoom: 5, level: 'Basic restrictions', fact: 'CHF 10' },
 	{ name: 'Japan', slug: 'japan', iso3: 'JPN', at: [138.5, 36.5], neighbour: [128, 36.5], zoom: 5, level: 'Complex restrictions', fact: '900 yen' },
 ] as const;
 

@@ -299,7 +299,7 @@ test.describe('zones data file', () => {
 		expect(response.status()).toBe(200);
 		expect(response.headers()['content-type']).toContain('application/json');
 		const files = (await response.json()) as { meta: { iso3: string; sourceUrl: string }; features: unknown[] }[];
-		expect(files.map((f) => f.meta.iso3).sort()).toEqual(['AUS', 'CAN', 'GBR', 'GBR', 'GBR', 'GBR', 'NPL', 'NPL', 'THA', 'THA']);
+		expect(files.map((f) => f.meta.iso3).sort()).toEqual(['AUS', 'CAN', 'CHE', 'GBR', 'GBR', 'GBR', 'GBR', 'LUX', 'NPL', 'NPL', 'THA', 'THA']);
 		for (const file of files) expect(file.meta.sourceUrl).toMatch(/^https:\/\//);
 		expect(files.reduce((n, f) => n + f.features.length, 0)).toBeGreaterThan(1000);
 	});

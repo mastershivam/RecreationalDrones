@@ -3,6 +3,7 @@
 const EU = 'austria belgium bulgaria croatia cyprus czechia denmark estonia finland france germany greece hungary ireland italy latvia lithuania luxembourg malta netherlands poland portugal romania slovakia slovenia spain sweden'.split(' ');
 const OTHER: Record<string, string> = {
 	'united-kingdom': 'Europe, outside the EU',
+	switzerland: 'Europe, outside the EU',
 	'united-states': 'North America',
 	canada: 'North America',
 	japan: 'Asia',

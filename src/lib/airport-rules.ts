@@ -16,6 +16,9 @@ const EU_NONE = {
 };
 
 export const AIRPORT_RULES: Record<string, AirportRule | { none: string }> = {
+	CHE: {
+		none: "FOCA gives no fixed distance from airports on the pages we read. It lists aerodrome control zones and perimeters on its interactive drone map instead, which we have not copied.",
+	},
 	GBR: {
 		iso2: 'GB',
 		// 2 nautical miles, the CAA's radius for a flight restriction zone (FRZ) with no ATZ, and its smaller ATZ.

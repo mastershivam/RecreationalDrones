@@ -26,7 +26,7 @@ Every commit is preceded by creating all missing unit, end-to-end and regression
 ## Adding a country
 
 1. Write the guide in `src/content/countries/<name>.mdx`, from the authority's own documents (see an existing one).
-2. Add its airport rule to `src/lib/airport-rules.ts`: the radius the authority gives, the document it comes from, and a note saying what the rule is and what it leaves out. If the authority gives no distance, write `{ none: 'why' }`.
+2. Add its airport rule to `src/lib/airport-rules.ts` (find the source first: see [SOURCES.md](SOURCES.md)): the radius the authority gives, the document it comes from, and a note saying what the rule is and what it leaves out. If the authority gives no distance, write `{ none: 'why' }`.
 3. Run `npm run build:zones` to make `data/zones/<iso3>-airports.geojson`, and add a bounding box for the country to `BOX` in `src/lib/zones-data.test.ts`.
 4. Add the country to `OTHER` (or the EU list) in `src/lib/regions.ts`, and run `npm run build:og` to make its social card (`public/og/<slug>.png`).
 5. Run the tests. `src/lib/zones-data.test.ts` fails until steps 2 and 3 are done.

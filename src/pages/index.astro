@@ -1084,7 +1084,29 @@ const bounds = mainlandBounds(JSON.parse(readFileSync('public/data/countries.geo
 			right: var(--space-3);
 		}
 	}
+	@media (min-width: 768px) {
+		/* The top corner is free here (the headline block is narrower than the screen), and the key will be a column below. */
+		.rotate {
+			top: var(--space-3);
+			transform: none;
+		}
+	}
 	@media (min-width: 1024px) {
+		/* On a wide screen the key is a short vertical list down the right side, with its words appearing to its left. */
+		.key-bar {
+			width: auto;
+		}
+		.key-chips {
+			flex-direction: column;
+			align-items: flex-end;
+		}
+		.key-definition {
+			left: auto;
+			right: calc(100% + var(--space-2));
+			bottom: 0;
+			width: 18rem;
+			margin: 0;
+		}
 		.panels {
 			/* Reversed, so the key (first in the page) is on the right and the filter on the left. */
 			flex-direction: row-reverse;

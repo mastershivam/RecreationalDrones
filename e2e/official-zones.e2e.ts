@@ -40,4 +40,13 @@ test.describe('official zone outlines', () => {
 		await page.getByRole('checkbox', { name: 'Airport zones' }).check();
 		await expect.poll(() => kindsShown(page)).toContain('airport-zone');
 	});
+
+	test('Switzerland\'s outlines arrive when the map moves there from another country (regression: zones were one file for all)', async ({ page }) => {
+		await openGlobe(page);
+		await focusOn(page, [85.36, 27.7], 6);
+		await expect(page.locator('#map[data-zones="ready"]')).toBeAttached({ timeout: 30_000 });
+		expect(await kindsShown(page)).not.toContain('airport-zone');
+		await focusOn(page, ZURICH_AIRPORT, 8);
+		await expect.poll(() => kindsShown(page), { timeout: 30_000 }).toContain('airport-zone');
+	});
 });

@@ -1,9 +1,10 @@
 import type { FilterSpecification } from 'maplibre-gl';
+import type { Bounds } from './country-bounds';
 import type { z } from 'astro/zod';
 import { escapeHtml } from './popup';
 import type { zoneCollectionSchema } from './zone-schema';
 
-// What /data/zones.json holds: the zone files as written, so dates are still text.
+// What one file of /data/zones/<iso3>.json holds: the zone files as written, so dates are still text.
 export type ZoneFile = z.input<typeof zoneCollectionSchema>;
 
 // The filter on the map groups kinds the way a person thinks about them, not one switch per kind.
@@ -168,4 +169,21 @@ export function zonePopupHtml(p: ZoneProps, { link }: { link: boolean }): string
 export function zonesPopupHtml(zones: ZoneProps[], options: { link: boolean }): string {
 	const unique = [...new Map(zones.map((z) => [z.id, z])).values()];
 	return unique.map((z) => `<section class="zone">${zonePopupHtml(z, options)}</section>`).join('');
+}
+
+// One country's zones are one file, loaded when the map reaches the country.
+export const zonesUrl = (iso3: string) => `/data/zones/${iso3.toLowerCase()}.json`;
+
+// The countries that have zone files, from their names (`che-official.geojson` is Switzerland's). Zone files are
+// named for their country; zones-data.test.ts holds them to it.
+export const zoneCountriesFromFiles = (names: string[]): string[] => [...new Set(names.map((n) => n.split('-')[0].toUpperCase()))].sort();
+
+// The countries to fetch now: those with zones, not fetched yet, whose box meets the view.
+// shortcut: boxes are each country's mainland and the view may not cross the antimeridian; no zone file is near either yet.
+export function zoneCountriesInView(view: Bounds, bounds: Record<string, Bounds>, withZones: string[], requested: ReadonlySet<string>): string[] {
+	const [w, s, e, n] = view;
+	return withZones.filter((iso3) => {
+		const box = bounds[iso3];
+		return !requested.has(iso3) && !!box && box[0] <= e && box[2] >= w && box[1] <= n && box[3] >= s;
+	});
 }

@@ -10,8 +10,6 @@ import { ZONE_MIN_ZOOM, zoneLayerFilters } from './zones';
 // The basemap is one .pmtiles file, read in small pieces with HTTP byte ranges. In production the Worker serves
 // it from a private R2 bucket (src/worker.ts); the countries file is a plain static asset.
 export const COUNTRIES_URL = '/data/countries.geojson';
-// Zones are loaded by the page after the globe is up, so the source starts empty. See src/pages/data/zones.json.ts.
-export const ZONES_URL = '/data/zones.json';
 
 const ATTRIBUTION =
 	`<a href="https://protomaps.com"${linkAttrsHtml('https://protomaps.com')}>Protomaps</a> © <a href="https://www.openstreetmap.org/copyright"${linkAttrsHtml('https://www.openstreetmap.org/copyright')}>OpenStreetMap</a>`;

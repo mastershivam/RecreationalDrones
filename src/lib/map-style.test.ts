@@ -2,7 +2,7 @@ import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
 import { TILE_PATH } from './tile-server';
-import { COUNTRIES_URL, ZONES_URL, basemapFlavor, basemapLayers, buildStyle } from './map-style';
+import { COUNTRIES_URL, basemapFlavor, basemapLayers, buildStyle } from './map-style';
 import { ZONE_LAYER_IDS, ZONE_MIN_ZOOM } from './zones';
 
 const colors = {
@@ -174,7 +174,6 @@ describe('zone layers', () => {
 
 	it('starts with an empty source, filled by the page once the globe is up', () => {
 		expect(style.sources.zones).toMatchObject({ type: 'geojson', data: { type: 'FeatureCollection', features: [] } });
-		expect(ZONES_URL).toBe('/data/zones.json');
 	});
 
 	it('credits OurAirports, whose airport positions the circles use', () => {

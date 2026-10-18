@@ -1,23 +1,25 @@
 ---
 import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
-import { readFileSync } from 'node:fs';
+import { readFileSync, readdirSync } from 'node:fs';
 import { guideSummaries } from '../lib/guides';
 import { mainlandBounds } from '../lib/country-bounds';
 import { LEVELS } from '../lib/restrictiveness';
-import { ZONE_GROUPS } from '../lib/zones';
+import { ZONE_GROUPS, zoneCountriesFromFiles } from '../lib/zones';
 
 const countries = await getCollection('countries');
 // iso3 -> key facts for the hover preview, read by the map script below.
 const guides = guideSummaries(countries);
 // Where each guided country is, so searching for it can fly the globe there.
 const bounds = mainlandBounds(JSON.parse(readFileSync('public/data/countries.geojson', 'utf8')).features, Object.keys(guides));
+// The countries that have zone files; the map fetches each one's zones when it reaches that country.
+const zoneCountries = zoneCountriesFromFiles(readdirSync('data/zones').filter((f) => f.endsWith('.geojson')));
 ---
 
 <Base title="Recreational Drones: drone rules by country, on a map" description="Search a country or spin the globe to see how strict its drone rules are, how to register, and where to check before you fly." fill>
 	<div class="stage">
 		<div class="space" aria-hidden="true"><div class="stars far"></div><div class="stars mid"></div><div class="stars near"></div></div>
-		<div id="map" data-guides={JSON.stringify(guides)} data-bounds={JSON.stringify(bounds)}></div>
+		<div id="map" data-guides={JSON.stringify(guides)} data-bounds={JSON.stringify(bounds)} data-zone-countries={JSON.stringify(zoneCountries)}></div>
 		<div class="top">
 			<div class="intro">
 				<h1>Where can you fly?</h1>
@@ -116,8 +118,8 @@ const bounds = mainlandBounds(JSON.parse(readFileSync('public/data/countries.geo
 	import { countryAt, locateErrorMessage, locatedMessage } from '../lib/geo';
 	import type { Bounds } from '../lib/country-bounds';
 	import { nightGeoJSON } from '../lib/daynight';
-	import { ZONE_LAYER_IDS, ZONE_MIN_ZOOM, enabledKinds, zoneLayerFilters, zonesPopupHtml, zoneFeatures, type ZoneProps } from '../lib/zones';
-	import { COUNTRIES_URL, ZONES_URL } from '../lib/map-style';
+	import { ZONE_LAYER_IDS, ZONE_MIN_ZOOM, enabledKinds, zoneCountriesInView, zoneLayerFilters, zonesPopupHtml, zoneFeatures, zonesUrl, type ZoneProps } from '../lib/zones';
+	import { COUNTRIES_URL } from '../lib/map-style';
 
 	// MapLibre looks for its worker next to its own module, which breaks once bundled.
 	setWorkerUrl(workerUrl);
@@ -205,23 +207,40 @@ const bounds = mainlandBounds(JSON.parse(readFileSync('public/data/countries.geo
 		{ capture: true },
 	);
 
-	// Zones (1.7 MB and growing) are fetched only once the map is close enough to draw them. If that fails, say so plainly.
+	// Zones are fetched one country at a time, only once the map is close enough to draw them and has reached the
+	// country. If one fails, say so plainly. shortcut: a failed country is not retried until the page is reloaded.
 	const zonesStatus = document.getElementById('zones-status')!;
-	let zonesRequested = false;
+	const zoneCountries: string[] = JSON.parse(el.dataset.zoneCountries!);
+	const requested = new Set<string>();
+	const zonesByCountry: Record<string, unknown[]> = {};
+	let pending = 0;
+	let zonesFailed = false;
+	const reportZones = () => {
+		el.dataset.zones = pending ? 'loading' : zonesFailed ? 'failed' : 'ready';
+	};
 	async function loadZones() {
-		if (zonesRequested || map.getZoom() < ZONE_MIN_ZOOM) return;
-		zonesRequested = true;
-		try {
-			const response = await fetch(ZONES_URL);
-			if (!response.ok) throw new Error(String(response.status));
-			(map.getSource('zones') as GeoJSONSource).setData(zoneFeatures(await response.json()) as never);
-			map.once('idle', () => (el.dataset.zones = 'ready'));
-		} catch {
-			zonesStatus.textContent = 'Zones could not be loaded. The map still works.';
-			el.dataset.zones = 'failed';
+		if (map.getZoom() < ZONE_MIN_ZOOM) return;
+		const view = map.getBounds().toArray().flat() as [number, number, number, number];
+		for (const iso3 of zoneCountriesInView(view, bounds, zoneCountries, requested)) {
+			requested.add(iso3);
+			pending++;
+			reportZones();
+			try {
+				const response = await fetch(zonesUrl(iso3));
+				if (!response.ok) throw new Error(String(response.status));
+				zonesByCountry[iso3] = zoneFeatures(await response.json()).features;
+				(map.getSource('zones') as GeoJSONSource).setData({ type: 'FeatureCollection', features: Object.values(zonesByCountry).flat() } as never);
+			} catch {
+				zonesStatus.textContent = 'Zones could not be loaded. The map still works.';
+				zonesFailed = true;
+			}
+			pending--;
+			// Ready once the map has drawn what arrived.
+			map.once('idle', reportZones);
+			if (pending === 0 && zonesFailed) reportZones();
 		}
 	}
-	map.on('zoom', loadZones);
+	map.on('moveend', loadZones);
 	map.once('load', loadZones);
 
 	// The zone filter is a small closed tab on a phone and open on a desktop.

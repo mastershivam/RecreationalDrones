@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { ZONE_GROUPS, ZONE_LAYER_IDS, circlePolygon, enabledKinds, markerPosition, heightRange, zoneFeatures, zoneLayerFilters, zonePopupHtml, zonesPopupHtml, type ZoneFile, type ZoneProps } from './zones';
+import { ZONE_GROUPS, ZONE_LAYER_IDS, circlePolygon, enabledKinds, markerPosition, heightRange, zoneCountriesFromFiles, zoneCountriesInView, zonesUrl, zoneFeatures, zoneLayerFilters, zonePopupHtml, zonesPopupHtml, type ZoneFile, type ZoneProps } from './zones';
 import { zoneKinds } from './zone-schema';
 
 // Metres between two [lon, lat] positions (haversine), to check circles against.
@@ -255,5 +255,33 @@ describe('zoneFeatures with an official outline', () => {
 		expect(out.map((f) => f.properties.shape)).toEqual(['area', 'point']);
 		expect(out[0].properties).toMatchObject({ kind: 'airport-zone', ceilingMeters: 100 });
 		expect((out[0].geometry as { coordinates: unknown[][] }).coordinates[0]).toHaveLength(4);
+	});
+});
+
+describe('loading zones one country at a time', () => {
+	it('gives each country its own small file', () => {
+		expect(zonesUrl('CHE')).toBe('/data/zones/che.json');
+	});
+
+	it('finds the countries that have zone files, once each', () => {
+		expect(zoneCountriesFromFiles(['gbr-airports.geojson', 'gbr-royal-parks.geojson', 'che-official.geojson'])).toEqual(['CHE', 'GBR']);
+	});
+
+	const bounds: Record<string, [number, number, number, number]> = { CHE: [6, 45.8, 10.5, 47.8], NPL: [80, 26, 88, 30.5], GBR: [-8, 50, 2, 59] };
+	const withZones = ['CHE', 'NPL', 'GBR'];
+
+	it('asks only for the countries the view reaches', () => {
+		expect(zoneCountriesInView([8, 46, 9, 47], bounds, withZones, new Set())).toEqual(['CHE']);
+		expect(zoneCountriesInView([5, 25, 90, 50], bounds, withZones, new Set())).toEqual(['CHE', 'NPL']);
+	});
+
+	it('does not ask twice, and skips a country with no box', () => {
+		expect(zoneCountriesInView([8, 46, 9, 47], bounds, withZones, new Set(['CHE']))).toEqual([]);
+		expect(zoneCountriesInView([8, 46, 9, 47], {}, withZones, new Set())).toEqual([]);
+	});
+
+	it('counts a view that only touches a box, and one that misses it by a little as outside', () => {
+		expect(zoneCountriesInView([10.5, 47, 12, 48], bounds, withZones, new Set())).toEqual(['CHE']);
+		expect(zoneCountriesInView([10.6, 47, 12, 48], bounds, withZones, new Set())).toEqual([]);
 	});
 });

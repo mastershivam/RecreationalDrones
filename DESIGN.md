@@ -70,7 +70,7 @@ Each guide has a `restrictiveness` level from 1 to 4 and a `restrictivenessReaso
 
 ## Zones layer
 
-Places that matter for flying are drawn on the globe from the zone files in `data/zones/` (see the README, Map data). The page loads them after the globe is up, as `/data/zones.json`, which the build makes from every zone file and fails on any file that breaks the schema.
+Places that matter for flying are drawn on the globe from the zone files in `data/zones/` (see the README, Map data). The page loads them one country at a time, as `/data/zones/<iso3>.json`, only once the map is at zoom 6 and its view reaches that country (a country is fetched once). The build makes each file from that country's zone files and fails on any file that breaks the schema.
 
 - **Airport circles for every country.** A country with a guide gets a circle round each airport, sized by its own authority's rule. `src/lib/airport-rules.ts` holds the rules, and a test fails until a new guide has one. Where the real zone is not a circle (the UK's), the circle is the smallest size the authority documents, the zone says it is *indicative*, and its note says what the circle leaves out.
 - **Official outlines.** Where a country's authority publishes its own zones file, we load its outlines as `airport-zone` areas (see SOURCES.md). They are drawn like airport circles (dashed, in `--color-zone-airport`) and sit in the same "Airport zones" box, but they are the authority's shape, never one we drew. A zone may carry the authority's height range, shown as "Applies from X to Y m above the ground", which says where the zone applies and never how high you may fly.

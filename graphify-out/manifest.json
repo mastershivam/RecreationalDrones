@@ -120,9 +120,9 @@
     "semantic_hash": ""
   },
   "src/layouts/Base.astro": {
-    "mtime": 1792275399.957834,
-    "seen": 1792324949.119693,
-    "ast_hash": "c32e71b446e37e1eca17cd0caf183683",
+    "mtime": 1792325220.172093,
+    "seen": 1792327231.369529,
+    "ast_hash": "1a71388cc0dcd255f8247f73a1c0369b",
     "semantic_hash": ""
   },
   "src/lib/contrast.test.ts": {
@@ -210,15 +210,15 @@
     "semantic_hash": ""
   },
   "src/lib/map-style.test.ts": {
-    "mtime": 1792274786.2959156,
-    "seen": 1792324949.1197271,
-    "ast_hash": "402248204b02bfff03d45950275a7790",
+    "mtime": 1792325132.8368292,
+    "seen": 1792327231.3695738,
+    "ast_hash": "03bad4138e2ae3f308e0bb248c3cdab7",
     "semantic_hash": ""
   },
   "src/lib/map-style.ts": {
-    "mtime": 1792322394.3312352,
-    "seen": 1792324949.1197288,
-    "ast_hash": "340bb009b569cf5f351063e7d7c27f8c",
+    "mtime": 1792325132.8364089,
+    "seen": 1792327231.369575,
+    "ast_hash": "c28849c5771a52036f29cb9f73645f2b",
     "semantic_hash": ""
   },
   "src/lib/popup.test.ts": {
@@ -258,9 +258,9 @@
     "semantic_hash": ""
   },
   "src/pages/index.astro": {
-    "mtime": 1792320479.378015,
-    "seen": 1792324949.119793,
-    "ast_hash": "de0dc1a2516c386566bd04003fa7f713",
+    "mtime": 1792325144.5638535,
+    "seen": 1792327231.36965,
+    "ast_hash": "7b1b1c0fa6ef40dd787a385651703e01",
     "semantic_hash": ""
   },
   "src/styles/brand.test.ts": {
@@ -312,15 +312,15 @@
     "semantic_hash": "00f0710c105b640ecd6c80ce24c26df0"
   },
   "DESIGN.md": {
-    "mtime": 1792322439.3714201,
-    "seen": 1792324949.119809,
-    "ast_hash": "51a455c137204e16227cf0ec435226b2",
+    "mtime": 1792325844.7050183,
+    "seen": 1792327231.369668,
+    "ast_hash": "0cb7afc7f0254c754fd57aecac73b07b",
     "semantic_hash": ""
   },
   "README.md": {
-    "mtime": 1792248438.8966222,
-    "seen": 1792249052.160156,
-    "ast_hash": "fb59af4c49a615884c63f8dad1ae0a60",
+    "mtime": 1792325844.705495,
+    "seen": 1792327231.3696692,
+    "ast_hash": "37bd3d3591b0a5a262601287466a4899",
     "semantic_hash": ""
   },
   "TODO.md": {
@@ -372,9 +372,9 @@
     "semantic_hash": ""
   },
   "e2e/chrome.e2e.ts": {
-    "mtime": 1792321124.1416407,
-    "seen": 1792324949.119652,
-    "ast_hash": "db03d8cedf5ce372366e8d74073e2f86",
+    "mtime": 1792325153.709075,
+    "seen": 1792327231.369451,
+    "ast_hash": "372d77133ec64a1a357e9129413395e9",
     "semantic_hash": ""
   },
   "e2e/thailand.e2e.ts": {
@@ -486,9 +486,9 @@
     "semantic_hash": ""
   },
   "e2e/zones.e2e.ts": {
-    "mtime": 1792324463.2240694,
-    "seen": 1792324949.119675,
-    "ast_hash": "97a741c930f4cc0904758775893af8e6",
+    "mtime": 1792325530.4557652,
+    "seen": 1792327231.369504,
+    "ast_hash": "d23e15274ba2104260d2338bd4d7a686",
     "semantic_hash": ""
   },
   "src/lib/airport-rules.ts": {
@@ -510,21 +510,15 @@
     "semantic_hash": ""
   },
   "src/lib/zones.test.ts": {
-    "mtime": 1792322424.8667808,
-    "seen": 1792324949.119786,
-    "ast_hash": "d9b38c58442daad8e3b82d05c8a77401",
+    "mtime": 1792325161.7129292,
+    "seen": 1792327231.369641,
+    "ast_hash": "ab343b54b77b0d047e1c6b058d124fa1",
     "semantic_hash": ""
   },
   "src/lib/zones.ts": {
-    "mtime": 1792322394.3309097,
-    "seen": 1792324949.119787,
-    "ast_hash": "3b51c5fb7f5696015b8238f41dc8f688",
-    "semantic_hash": ""
-  },
-  "src/pages/data/zones.json.ts": {
-    "mtime": 1792243572.3625276,
-    "seen": 1792246278.473013,
-    "ast_hash": "0aadc290f8856b96a9933213b6ed0b28",
+    "mtime": 1792325132.836083,
+    "seen": 1792327231.369642,
+    "ast_hash": "8921475efd1fe48a5c50f2ef8747a926",
     "semantic_hash": ""
   },
   "e2e/eu.e2e.ts": {
@@ -1314,9 +1308,9 @@
     "semantic_hash": ""
   },
   "e2e/official-zones.e2e.ts": {
-    "mtime": 1792322663.2767074,
-    "seen": 1792324949.119667,
-    "ast_hash": "bb33f53f2ccb8df4a7faae2579ba4348",
+    "mtime": 1792325175.746564,
+    "seen": 1792327231.369493,
+    "ast_hash": "b4f41888af9d5ff9ec296d77cb628448",
     "semantic_hash": ""
   },
   "scripts/build-official-zones.ts": {
@@ -1377,6 +1371,18 @@
     "mtime": 1792321126.6845212,
     "seen": 1792324949.119901,
     "ast_hash": "28e68c40658e4bea9873ecc580ae04ba",
+    "semantic_hash": ""
+  },
+  "src/pages/data/zones/[iso3].json.ts": {
+    "mtime": 1792325132.812894,
+    "seen": 1792327231.369649,
+    "ast_hash": "3fc1932e67cd63c4a5c3adb41f14ef14",
+    "semantic_hash": ""
+  },
+  "public/logo-mark.svg": {
+    "mtime": 1792325149.5088048,
+    "seen": 1792327231.3697238,
+    "ast_hash": "139b2c0398a2d1b820ecc9322dceebe6",
     "semantic_hash": ""
   }
 }

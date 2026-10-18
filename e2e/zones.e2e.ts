@@ -269,22 +269,36 @@ test.describe('zone popups', () => {
 });
 
 test.describe('zones are fetched lazily', () => {
-	test('not at all while the globe is zoomed out, and once it is close enough to draw them', async ({ page }) => {
-		// Regression: the 1.7 MB zones file used to download on every visit, even for people who never zoomed in.
+	test('not at all while the globe is zoomed out, and only for the country the map has reached', async ({ page }) => {
+		// Regression: the whole zones file (every country) used to download on every visit, even for people who never zoomed in.
 		const requests: string[] = [];
-		page.on('request', (r) => r.url().includes('/data/zones.json') && requests.push(r.url()));
+		page.on('request', (r) => new URL(r.url()).pathname.startsWith('/data/zones') && requests.push(new URL(r.url()).pathname));
 		await openGlobe(page);
 		await page.waitForTimeout(500);
 		expect(requests).toHaveLength(0);
 		await focusOn(page, KATHMANDU, 6);
 		await expect(page.locator('#map[data-zones="ready"]')).toBeAttached({ timeout: 30_000 });
-		expect(requests).toHaveLength(1);
+		expect(requests).toEqual(['/data/zones/npl.json']);
+	});
+
+	test('fetches a second country when the map moves there, and a country only once', async ({ page }) => {
+		const requests: string[] = [];
+		page.on('request', (r) => new URL(r.url()).pathname.startsWith('/data/zones') && requests.push(new URL(r.url()).pathname));
+		await openZones(page);
+		await focusOn(page, HYDE_PARK, 6);
+		await expect.poll(() => requests).toContain('/data/zones/gbr.json');
+		await expect(page.locator('#map[data-zones="ready"]')).toBeAttached({ timeout: 30_000 });
+		await focusOn(page, KATHMANDU, 6);
+		await focusOn(page, HYDE_PARK, 8);
+		// London at zoom 6 also reaches Luxembourg, so other countries may come with it; what matters is none comes twice.
+		expect(requests).toEqual(expect.arrayContaining(['/data/zones/gbr.json', '/data/zones/npl.json']));
+		expect(new Set(requests).size).toBe(requests.length);
 	});
 });
 
 test.describe('when zones cannot be loaded', () => {
 	test('says so plainly, and the map still works', async ({ page }) => {
-		await page.route('**/data/zones.json', (route) => route.fulfill({ status: 500, body: 'no' }));
+		await page.route('**/data/zones/*.json', (route) => route.fulfill({ status: 500, body: 'no' }));
 		await openGlobe(page);
 		await focusOn(page, KATHMANDU, 6);
 		await expect(page.locator('#zones-status')).toHaveText('Zones could not be loaded. The map still works.');
@@ -293,14 +307,24 @@ test.describe('when zones cannot be loaded', () => {
 	});
 });
 
-test.describe('zones data file', () => {
-	test('is built from every zone file, with the zones and their sources', async ({ request }) => {
-		const response = await request.get('/data/zones.json');
-		expect(response.status()).toBe(200);
-		expect(response.headers()['content-type']).toContain('application/json');
-		const files = (await response.json()) as { meta: { iso3: string; sourceUrl: string }; features: unknown[] }[];
-		expect(files.map((f) => f.meta.iso3).sort()).toEqual(['AUS', 'CAN', 'CHE', 'GBR', 'GBR', 'GBR', 'GBR', 'LUX', 'NPL', 'NPL', 'THA', 'THA']);
-		for (const file of files) expect(file.meta.sourceUrl).toMatch(/^https:\/\//);
-		expect(files.reduce((n, f) => n + f.features.length, 0)).toBeGreaterThan(1000);
+test.describe('zones data files', () => {
+	// One file per country: the zone files of that country and no other.
+	const expected: Record<string, string[]> = { aus: ['AUS'], can: ['CAN'], che: ['CHE'], gbr: ['GBR', 'GBR', 'GBR', 'GBR'], lux: ['LUX'], npl: ['NPL', 'NPL'], tha: ['THA', 'THA'] };
+
+	for (const [slug, isos] of Object.entries(expected)) {
+		test(`${slug}.json is built from that country's zone files, with the zones and their sources`, async ({ request }) => {
+			const response = await request.get(`/data/zones/${slug}.json`);
+			expect(response.status()).toBe(200);
+			expect(response.headers()['content-type']).toContain('application/json');
+			const files = (await response.json()) as { meta: { iso3: string; sourceUrl: string }; features: unknown[] }[];
+			expect(files.map((f) => f.meta.iso3)).toEqual(isos);
+			for (const file of files) expect(file.meta.sourceUrl).toMatch(/^https:\/\//);
+			expect(files.reduce((n, f) => n + f.features.length, 0)).toBeGreaterThan(0);
+		});
+	}
+
+	test('the old single file is gone, and a country with no zones has no file', async ({ request }) => {
+		expect((await request.get('/data/zones.json')).status()).toBe(404);
+		expect((await request.get('/data/zones/xxx.json')).status()).toBe(404);
 	});
 });

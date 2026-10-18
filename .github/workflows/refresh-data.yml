@@ -24,6 +24,8 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run build:zones
+      # Each authority's own zones file (Switzerland, Luxembourg): see src/lib/official-feeds.ts.
+      - run: npm run build:official
       # Fails the job, and so opens no pull request, if a rebuilt file breaks the zone schema or the data tests.
       - run: npm test
       # Pull requests opened with the default token do not start the CI workflow, so run its browser tests here.
@@ -33,13 +35,15 @@ jobs:
       - uses: peter-evans/create-pull-request@v7
         with:
           branch: refresh/airport-zones
-          title: Refresh airport zones from OurAirports
-          commit-message: Refresh airport zones from OurAirports
+          title: Refresh airport zones and official zone files
+          commit-message: Refresh airport zones and official zone files
           body: |
-            Rebuilt with `npm run build:zones`. A zone that has left OurAirports is kept and marked `removed`, so check the diff for those.
+            Rebuilt with `npm run build:zones` and `npm run build:official`. A zone that has left OurAirports is kept and marked `removed`, so check the diff for those.
 
             Created by the scheduled "Refresh data" workflow.
-          add-paths: data/zones/*-airports.geojson
+          add-paths: |
+            data/zones/*-airports.geojson
+            data/zones/*-official.geojson
 
   stale:
     runs-on: ubuntu-latest

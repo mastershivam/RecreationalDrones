@@ -60,9 +60,22 @@ Details worth keeping: Finland's Traficom file has 731 zones and downloads in on
    - **A usable zones file:** plan an ingest of the real polygons (see below).
    - **Neither:** write `{ none: 'why' }`, link the official map, and note it here.
 
+## Pilot: official outlines loaded (2026-10-18)
+
+`npm run build:official` reads each feed listed in `src/lib/official-feeds.ts` and writes `data/zones/<iso3>-official.geojson`. Loaded so far:
+
+| Country | File | Terms | Notes |
+| --- | --- | --- | --- |
+| Switzerland | FOCA ED-269 JSON on data.geo.admin.ch (1,222 zones in the feed) | opendata.swiss "BY": free use, name the source | Includes nature and sensitive-site zones, not only airports. Upper limits above sea level are left out. |
+| Luxembourg | DAC ED-269 JSON from drones.geoportail.lu | CC0 (data.public.lu) | 43 zones in the feed; ended or unrestricted ones are skipped. |
+
+Outlines are rounded and thinned to about 20 m so Switzerland stays near 250 KB compressed. The authority's file stays the reference, and each file's note says so. Czechia is not loaded: its ED-318 file is 409 MB and its terms sit behind a link we have not read.
+
+To add a country, add its feed to `official-feeds.ts` with the terms written down, run the script, and add a bounding box in `zones-data.test.ts`.
+
 ## Recommended next step (not built)
 
-Drawing circles only works where an authority states a radius. For the many EU countries that publish an ED-269 zones file, a better build step would **ingest the file** into `data/zones/` as real polygons, like the existing hand-made zone files, with the file's URL, licence and fetch date in `meta`. Start with the countries whose terms clearly allow it (Czechia, Switzerland, Luxembourg, and Bulgaria and Sweden once their terms are confirmed), then ask the regulators in the "no terms" group for a licence. The zone schema would need a kind for control zones; today `airport-buffer` requires a radius.
+Drawing circles only works where an authority states a radius. For the many EU countries that publish an ED-269 zones file, a better build step would **ingest the file** into `data/zones/` as real polygons, like the existing hand-made zone files, with the file's URL, licence and fetch date in `meta`. Start with the countries whose terms clearly allow it (Czechia, Switzerland, Luxembourg, and Bulgaria and Sweden once their terms are confirmed), then ask the regulators in the "no terms" group for a licence. The zone schema now has an `airport-zone` kind (an outline, no radius) for this.
 
 ## Open questions
 

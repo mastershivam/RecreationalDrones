@@ -6,7 +6,10 @@ const ZONE_LAYERS = ['zones-fill', 'zones-airport-line', 'zones-approval-line', 
 const ZOOM = 8; // close enough that a 5 km circle is about 18 px across, and the highest the map goes
 
 // Where Tribhuvan International Airport is, from the data, so the test does not copy a position.
-const airports = JSON.parse(readFileSync('data/zones/npl-airports.geojson', 'utf8')).features as { geometry: { coordinates: [number, number] }; properties: { id: string } }[];
+const nepalAirports = JSON.parse(readFileSync('data/zones/npl-airports.geojson', 'utf8'));
+const airports = nepalAirports.features as { geometry: { coordinates: [number, number] }; properties: { id: string } }[];
+// The weekly refresh rebuilds this file and changes its date, so the test reads it instead of pinning one.
+const NEPAL_FETCHED = nepalAirports.meta.fetchedAt as string;
 const KATHMANDU = airports.find((f) => f.properties.id === 'ourairports:VNKT')!.geometry.coordinates;
 const PATTAYA_FIELD: [number, number] = [100.93784, 12.90936]; // "Aereomodel strip", in the Thai model-fields file
 const HYDE_PARK: [number, number] = [-0.1657, 51.5073];
@@ -167,7 +170,7 @@ test.describe('zone popups', () => {
 		await expect(preview).toContainText('Tribhuvan International Airport');
 		await expect(preview).toContainText('Airport zone');
 		await expect(preview).toContainText('5 km');
-		await expect(preview).toContainText('as of 2026-10-17');
+		await expect(preview).toContainText(`as of ${NEPAL_FETCHED}`);
 		await expect(preview.locator('a')).toHaveCount(0);
 	});
 

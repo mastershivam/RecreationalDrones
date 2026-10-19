@@ -1,7 +1,9 @@
 name: Refresh data
 
-# Every Monday: rebuild the airport zones from OurAirports and open a pull request if anything changed, and open an
-# issue if a guide or a hand-checked zone file has not been checked against its source for six months.
+# Every Monday: rebuild the airport zones from OurAirports, each authority's official zone files and the country shapes
+# from Natural Earth, and open a pull request if anything changed, and open an issue if a guide or a hand-checked zone
+# file has not been checked against its source for six months.
+# The basemap tiles are not rebuilt here: see TODO.md, "Automate the data refresh".
 # The model aircraft fields are not rebuilt here: `npm run build:fields` needs uv and downloads about 3 GB.
 on:
   schedule:
@@ -27,13 +29,18 @@ jobs:
       - run: npm run build:zones
       # Each authority's own zones file (Switzerland, Luxembourg): see src/lib/official-feeds.ts.
       - run: npm run build:official
+      # Natural Earth's country outlines: the map highlights and links guides by their codes, so a changed code shows up
+      # as a browser test failure before any pull request opens.
+      - run: npm run build:countries
       # Fails the workflow, and so opens no pull request, if a rebuilt file breaks the zone schema or the data tests.
       - run: npm test
       # The browser tests and the pull request need these files, and each runs on its own runner.
       - uses: actions/upload-artifact@v7
         with:
-          name: zones
-          path: data/zones/
+          name: refreshed-data
+          path: |
+            data/zones/
+            public/data/countries.geojson
           retention-days: 1
 
   # Pull requests opened with the default token do not start the CI workflow, so run its browser tests here, split
@@ -53,10 +60,11 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
+      # The artifact keeps the paths it was made from, so unpacking at the repo root puts each file back in place.
       - uses: actions/download-artifact@v8
         with:
-          name: zones
-          path: data/zones/
+          name: refreshed-data
+          path: .
       - run: npx playwright install --with-deps chromium
       - run: npm run test:e2e -- --shard=${{ matrix.shard }}/12
       - uses: actions/upload-artifact@v7
@@ -74,22 +82,24 @@ jobs:
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v7
+      # The artifact keeps the paths it was made from, so unpacking at the repo root puts each file back in place.
       - uses: actions/download-artifact@v8
         with:
-          name: zones
-          path: data/zones/
+          name: refreshed-data
+          path: .
       - uses: peter-evans/create-pull-request@v8
         with:
           branch: refresh/airport-zones
-          title: Refresh airport zones and official zone files
-          commit-message: Refresh airport zones and official zone files
+          title: Refresh airport zones, official zone files and country shapes
+          commit-message: Refresh airport zones, official zone files and country shapes
           body: |
-            Rebuilt with `npm run build:zones` and `npm run build:official`. A zone that has left OurAirports is kept and marked `removed`, so check the diff for those.
+            Rebuilt with `npm run build:zones`, `npm run build:official` and `npm run build:countries`. A zone that has left OurAirports is kept and marked `removed`, so check the diff for those.
 
             Created by the scheduled "Refresh data" workflow.
           add-paths: |
             data/zones/*-airports.geojson
             data/zones/*-official.geojson
+            public/data/countries.geojson
 
   stale:
     runs-on: ubuntu-24.04

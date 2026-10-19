@@ -20,6 +20,8 @@ const guide = (slug: string) => readFileSync(join(root, `src/content/countries/$
 const BOX: Record<string, { lon: [number, number]; lat: [number, number] }> = {
 	NPL: { lon: [79.9, 88.3], lat: [26.3, 30.5] },
 	THA: { lon: [97.3, 105.7], lat: [5.5, 20.5] },
+	// Mainland, Svalbard (to 79 N) and Jan Mayen (to 8.7 W), which OurAirports counts as Norway.
+	NOR: { lon: [-9, 32], lat: [57.5, 81] },
 	GBR: { lon: [-8.7, 1.8], lat: [49.8, 60.9] },
 	CAN: { lon: [-141.1, -52.5], lat: [41.6, 83.2] },
 	AUS: { lon: [96.5, 168], lat: [-54.9, -9.0] },

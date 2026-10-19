@@ -19,6 +19,20 @@ export const AIRPORT_RULES: Record<string, AirportRule | { none: string }> = {
 	CHE: {
 		none: "FOCA gives no fixed distance from airports on the pages we read. It publishes the zones themselves instead, as an open data file, and the map draws those outlines (see data/zones/che-official.geojson).",
 	},
+	NOR: {
+		iso2: 'NO',
+		radiusMeters: 5000,
+		indicative: true,
+		ruleUrl: 'https://www.luftfartstilsynet.no/en/drones/no-drone-zones/',
+		authority: 'Luftfartstilsynet, "No drone zones"',
+		note: 'Luftfartstilsynet says not to fly within 5 km of an airport without permission from the airport tower, and that this will probably change to a ban inside the airport control zone (CTR) without a permit. This circle is drawn at every airport in the open data, so it shows more places than the rule covers. Use dronesoner.no for the real zones.',
+	},
+	ISL: {
+		none: "Samgöngustofa bans flying at airports and in the no-fly zones round scheduled airports without the operator's permission, but the pages we read give no radius. A fixed circle would mislead.",
+	},
+	LIE: {
+		none: "The Landespolizei names no-fly zones (Vaduz government area, parts of Balzers near a heliport and the Bad Ragaz aerodrome) and points to FOCA's drone map, but gives no fixed distance from airports.",
+	},
 	GBR: {
 		iso2: 'GB',
 		// 2 nautical miles, the CAA's radius for a flight restriction zone (FRZ) with no ATZ, and its smaller ATZ.

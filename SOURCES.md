@@ -40,6 +40,9 @@ Details worth keeping: Finland's Traficom file has 731 zones and downloads in on
 | Canada | Transport Canada's "where to fly" page; the National Research Council's Drone Site Selection Tool; NAV Drone for permission | Not confirmed as an open dataset. Check open.canada.ca. |
 | Australia | CASA "Flying near airports" (5.5 km from a controlled airport, over 250 g) | Distance is from the runway centreline, so a circle is an approximation. No open feed found. |
 | Switzerland | See above: the daily ED-269 file | Cleanest source we found. |
+| Norway | Luftfartstilsynet "No drone zones" (5 km from airports without the tower's permission, expected to become the control zone); the map is dronesoner.no | Page undated; read 2026-10-19. We draw a 5 km circle at every OurAirports airport, marked indicative. dronesoner.no's terms were not read. |
+| Iceland | Samgöngustofa's drone map (kort.gis.is/mapview/?app=dronar) and AIP | The pages give no radius, so no circle. Pages are Icelandic only; the map was not opened. |
+| Liechtenstein | FOCA's drone map, which the Landespolizei says applies there; FOCA's feed also holds Liechtenstein's three zones | No distance on the pages read, so no circle. The Liechtenstein authority's own page returned 403. |
 | Japan, Nepal, Thailand | Not researched in this pass | Existing entries use their authority's own pages. |
 
 ## Licences: what we found, not legal advice
@@ -76,6 +79,13 @@ To add a country, add its feed to `official-feeds.ts` with the terms written dow
 ## Recommended next step (not built)
 
 Drawing circles only works where an authority states a radius. For the many EU countries that publish an ED-269 zones file, a better build step would **ingest the file** into `data/zones/` as real polygons, like the existing hand-made zone files, with the file's URL, licence and fetch date in `meta`. Start with the countries whose terms clearly allow it (Czechia, Switzerland, Luxembourg, and Bulgaria and Sweden once their terms are confirmed), then ask the regulators in the "no terms" group for a licence. The zone schema now has an `airport-zone` kind (an outline, no radius) for this.
+
+## Guide sources: Norway, Iceland, Liechtenstein (read 2026-10-19)
+
+Guides follow each authority's own pages. Two things a reader of a search result could get wrong:
+- A search summary said island.is says recreational drones need not be registered. The page it cited, `island.is/en/drone-registration`, returned 404, and Samgöngustofa's own pages (`island.is/dronareglur`, `/opni-flokkurinn`) say every operator registers, with one exemption (a toy under 250 g with no camera). We followed Samgöngustofa's pages.
+- Liechtenstein has no national registration page that we could read. The Landespolizei says Swiss aviation law applies and names the civil aviation division of the Amt für Hochbau und Raumplanung, whose page (llv.li) returned 403 to us. FOCA's statements are what the guide rests on, and its level is marked provisional.
+- Samgöngustofa's open-category page gives two different distances from uninvolved people for A2 (text 30 m or 5 m; table 50 m for drones under 4 kg). The guide says so and picks neither.
 
 ## Open questions
 

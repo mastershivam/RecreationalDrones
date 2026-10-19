@@ -8,6 +8,10 @@ const COUNTRIES = [
 	// Zoom 5, below where zones show (ZONE_MIN_ZOOM): Switzerland's official zones now cover most of it, and a zone under a tap wins over the country.
 	// Every country around it has a guide, so the "no guide" point is Türkiye, further off.
 	{ name: 'Switzerland', slug: 'switzerland', iso3: 'CHE', at: [8.2, 46.8], neighbour: [35, 39], zoom: 5, level: 'Basic restrictions', fact: 'CHF 10' },
+	// Zoom 4, below where zones show (ZONE_MIN_ZOOM), so Norway's airport circles do not sit under the tap. Russia has no guide.
+	{ name: 'Norway', slug: 'norway', iso3: 'NOR', at: [9.5, 61.5], neighbour: [34, 66], zoom: 4, level: 'Complex restrictions', fact: 'NOK 230' },
+	// Greenland, to the north-west, has no guide.
+	{ name: 'Iceland', slug: 'iceland', iso3: 'ISL', at: [-19.5, 64.8], neighbour: [-40, 72], zoom: 5, level: 'Basic restrictions', fact: 'ISK 5,863' },
 	{ name: 'Japan', slug: 'japan', iso3: 'JPN', at: [138.5, 36.5], neighbour: [128, 36.5], zoom: 5, level: 'Complex restrictions', fact: '900 yen' },
 ] as const;
 
@@ -58,6 +62,25 @@ for (const c of COUNTRIES) {
 		});
 	});
 }
+
+// Liechtenstein is about 25 km across, too small to tap on the globe, so it is tested by its page and by search.
+test.describe('Liechtenstein', () => {
+	test('guide page shows its level, the insurance fact and what is not covered, and does not scroll sideways', async ({ page }) => {
+		await page.goto('/countries/liechtenstein/');
+		await expect(page.getByRole('heading', { level: 1 })).toHaveText('Drone rules in Liechtenstein');
+		await expect(page.locator('dd', { hasText: 'Basic restrictions' })).toBeVisible();
+		await expect(page.getByText('CHF 1 million').first()).toBeVisible();
+		await expect(page.getByRole('heading', { name: 'Not covered yet' })).toBeVisible();
+		expect(await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth)).toBeLessThanOrEqual(0);
+	});
+
+	test('can be found by search', async ({ page }) => {
+		await openGlobe(page);
+		await page.getByRole('combobox', { name: 'Search for a country' }).fill('liecht');
+		await page.getByRole('option', { name: 'Liechtenstein' }).click();
+		await expect(page.locator('#country-dialog').getByRole('heading', { level: 1 })).toHaveText('Drone rules in Liechtenstein', { timeout: 15_000 });
+	});
+});
 
 test('Australia is painted in a different color from Canada, because its level differs', async ({ page }) => {
 	await openGlobe(page);

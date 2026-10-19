@@ -4,6 +4,9 @@ const EU = 'austria belgium bulgaria croatia cyprus czechia denmark estonia finl
 const OTHER: Record<string, string> = {
 	'united-kingdom': 'Europe, outside the EU',
 	switzerland: 'Europe, outside the EU',
+	norway: 'Europe, outside the EU',
+	iceland: 'Europe, outside the EU',
+	liechtenstein: 'Europe, outside the EU',
 	'united-states': 'North America',
 	canada: 'North America',
 	japan: 'Asia',

@@ -112,14 +112,14 @@ test.describe('countries page', () => {
 	test('filters by name and level, and sorts', async ({ page }) => {
 		await page.goto('/countries/');
 		const rows = page.locator('.countries li:visible');
-		await expect(rows).toHaveCount(35);
+		await expect(rows).toHaveCount(38);
 		await page.getByRole('searchbox', { name: 'Search the countries' }).fill('nep');
 		await expect(rows).toHaveCount(1);
 		await page.getByRole('searchbox', { name: 'Search the countries' }).fill('');
 		await page.getByLabel('Complex restrictions').check();
 		await expect(rows.first()).toContainText('Complex restrictions');
-		expect(await rows.count()).toBeLessThan(35);
-		await expect(page.locator('#filter-count')).toContainText('of 35');
+		expect(await rows.count()).toBeLessThan(38);
+		await expect(page.locator('#filter-count')).toContainText('of 38');
 	});
 
 	test('shows a level, weight and fee on every row', async ({ page }) => {

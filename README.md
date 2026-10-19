@@ -67,7 +67,9 @@ npx wrangler r2 bucket create recreationaldrones-tiles
 npx wrangler r2 object put recreationaldrones-tiles/basemap.pmtiles --file data/basemap-deep.pmtiles --remote
 ```
 
-Then push. To change the tiles later, extract a new file and run the last command again. Visitors may see the old one for up to a day, because responses are cached for 24 hours.
+Then push. To change the tiles later, run the **Refresh basemap** workflow from the Actions tab (below), or extract a new file and run the last command again. Visitors may see the old one for up to a day, because responses are cached for 24 hours.
+
+**Refreshing the tiles from GitHub.** `.github/workflows/refresh-basemap.yml` (Actions tab, "Refresh basemap", Run workflow) takes the newest Protomaps build of the last 7 days (or the `YYYYMMDD` you type), cuts it to zoom 0-7, checks its size and zoom range, saves the live file as `basemap-previous.pmtiles` in the bucket, uploads the new one, and checks the live site now serves a file of that size. It is manual because it changes what every visitor sees. Tick "Dry run" to do everything except the upload. Before the first real upload, add two repository secrets: `CLOUDFLARE_ACCOUNT_ID` and `CLOUDFLARE_API_TOKEN` (a token with "Workers R2 Storage: Edit" for your account). To roll back, copy `basemap-previous.pmtiles` back over `basemap.pmtiles` with `wrangler r2 object get` and `put` (`--remote`). The committed test basemap is a fixed fixture and is not refreshed, so git history does not grow.
 
 **Plan limits to know about.** A map load makes dozens of tile requests, and each one runs the Worker and reads R2. On the free Workers plan that is capped at 100,000 Worker requests a day, which is roughly a few thousand map loads. The Workers Paid plan ($5 a month) raises it to 10 million a month. R2 reads (10 million a month free) are unlikely to be the limit. If traffic outgrows this, serve the bucket publicly on a custom domain instead and change the URL in `src/lib/map-style.ts`.
 

@@ -1,0 +1,128 @@
+name: Refresh basemap
+
+# Started by hand from the Actions tab. Cuts the latest Protomaps build down to zoom 0-7 and replaces
+# basemap.pmtiles in the private R2 bucket that the Worker serves the live map from (see README, "Deep-zoom tiles on R2").
+# It is manual on purpose: the upload changes what every visitor sees, so a person starts it and reads the result.
+#
+# Needs two repository secrets (Settings, Secrets and variables, Actions):
+#   CLOUDFLARE_ACCOUNT_ID  your Cloudflare account ID
+#   CLOUDFLARE_API_TOKEN   a token with "Workers R2 Storage: Edit" for that account
+# Tick "Dry run" to do everything except the upload; that works without the secrets.
+#
+# To roll back, the job first copies the live file to basemap-previous.pmtiles in the same bucket; copy it back with
+# `npx wrangler r2 object get recreationaldrones-tiles/basemap-previous.pmtiles --file prev.pmtiles --remote`, then `object put`
+# it to basemap.pmtiles. The test basemap in git (data/basemap.pmtiles, zoom 0-5) is a fixed fixture and is not touched.
+on:
+  workflow_dispatch:
+    inputs:
+      build_date:
+        description: 'Protomaps build to use, as YYYYMMDD. Empty means the newest of the last 7 days.'
+        required: false
+        default: ''
+      dry_run:
+        description: 'Dry run: extract and check the tiles, but do not upload'
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: refresh-basemap
+  cancel-in-progress: false
+
+env:
+  PMTILES_VERSION: 1.31.2
+  BUCKET: recreationaldrones-tiles
+  SITE: https://recreationaldrones.shivamlakhani03.workers.dev
+
+jobs:
+  basemap:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+
+      - name: Install the pmtiles tool
+        run: |
+          mkdir -p "$RUNNER_TEMP/bin"
+          curl -fsSL "https://github.com/protomaps/go-pmtiles/releases/download/v${PMTILES_VERSION}/go-pmtiles_${PMTILES_VERSION}_Linux_x86_64.tar.gz" | tar -xz -C "$RUNNER_TEMP/bin" pmtiles
+          echo "$RUNNER_TEMP/bin" >> "$GITHUB_PATH"
+
+      - name: Pick the Protomaps build
+        run: |
+          date="${{ inputs.build_date }}"
+          if [ -z "$date" ]; then
+            for days in 0 1 2 3 4 5 6; do
+              candidate=$(date -u -d "-$days days" +%Y%m%d)
+              if curl -sfI "https://build.protomaps.com/$candidate.pmtiles" > /dev/null; then date=$candidate; break; fi
+            done
+          fi
+          [ -n "$date" ] || { echo "No Protomaps build found in the last 7 days"; exit 1; }
+          echo "BUILD_DATE=$date" >> "$GITHUB_ENV"
+          echo "Using the Protomaps build of $date"
+
+      - name: Cut it down to zoom 0-7
+        run: pmtiles extract "https://build.protomaps.com/${BUILD_DATE}.pmtiles" basemap-deep.pmtiles --maxzoom=7
+
+      - name: Check the result before anything is uploaded
+        run: |
+          size=$(stat -c%s basemap-deep.pmtiles)
+          pmtiles show basemap-deep.pmtiles | tee show.txt
+          echo "size: $size bytes"
+          # The live file is about 189 MB. Far outside this range means the extract went wrong.
+          [ "$size" -ge 100000000 ] && [ "$size" -le 400000000 ] || { echo "Unexpected size"; exit 1; }
+          grep -q '^tile type: mvt' show.txt
+          grep -q '^min zoom: 0$' show.txt
+          grep -q '^max zoom: 7$' show.txt
+          echo "BASEMAP_SIZE=$size" >> "$GITHUB_ENV"
+
+      - name: Check the Cloudflare secrets exist
+        if: ${{ !inputs.dry_run }}
+        env:
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        run: |
+          [ -n "$CLOUDFLARE_ACCOUNT_ID" ] && [ -n "$CLOUDFLARE_API_TOKEN" ] || { echo "Add the CLOUDFLARE_ACCOUNT_ID and CLOUDFLARE_API_TOKEN secrets, or run with Dry run ticked"; exit 1; }
+
+      - name: Keep the live file as basemap-previous.pmtiles
+        if: ${{ !inputs.dry_run }}
+        env:
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        run: |
+          npx wrangler r2 object get "$BUCKET/basemap.pmtiles" --file previous.pmtiles --remote
+          npx wrangler r2 object put "$BUCKET/basemap-previous.pmtiles" --file previous.pmtiles --remote
+
+      - name: Upload the new file
+        if: ${{ !inputs.dry_run }}
+        env:
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        run: npx wrangler r2 object put "$BUCKET/basemap.pmtiles" --file basemap-deep.pmtiles --remote
+
+      - name: Check that the live site serves the new file
+        if: ${{ !inputs.dry_run }}
+        run: |
+          # A different query string each run skips any cached copy; the Worker only looks at the path.
+          curl -s -D headers.txt -o first-bytes.bin -H 'Range: bytes=0-6' "$SITE/tiles/basemap.pmtiles?check=$GITHUB_RUN_ID"
+          cat headers.txt
+          grep -q '^PMTiles' first-bytes.bin
+          total=$(grep -i '^content-range:' headers.txt | sed 's|.*/||' | tr -d '\r\n ')
+          [ "$total" = "$BASEMAP_SIZE" ] || { echo "The live file is $total bytes, expected $BASEMAP_SIZE"; exit 1; }
+
+      - name: Summary
+        if: always()
+        run: |
+          {
+            echo "### Basemap refresh"
+            echo "- Protomaps build: \`${BUILD_DATE:-none found}\`"
+            echo "- Size: ${BASEMAP_SIZE:-unknown} bytes"
+            echo "- Dry run: ${{ inputs.dry_run }}"
+            echo '- Uploaded files keep the old tiles as `basemap-previous.pmtiles` in the bucket, for a rollback.'
+          } >> "$GITHUB_STEP_SUMMARY"

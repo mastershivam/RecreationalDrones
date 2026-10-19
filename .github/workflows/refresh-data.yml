@@ -14,8 +14,9 @@ permissions:
   issues: write
 
 jobs:
-  airports:
+  rebuild:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v7
       - uses: actions/setup-node@v7
@@ -26,13 +27,58 @@ jobs:
       - run: npm run build:zones
       # Each authority's own zones file (Switzerland, Luxembourg): see src/lib/official-feeds.ts.
       - run: npm run build:official
-      # Fails the job, and so opens no pull request, if a rebuilt file breaks the zone schema or the data tests.
+      # Fails the workflow, and so opens no pull request, if a rebuilt file breaks the zone schema or the data tests.
       - run: npm test
-      # Pull requests opened with the default token do not start the CI workflow, so run its browser tests here.
-      - run: npm run build
+      # The browser tests and the pull request need these files, and each runs on its own runner.
+      - uses: actions/upload-artifact@v7
+        with:
+          name: zones
+          path: data/zones/
+          retention-days: 1
+
+  # Pull requests opened with the default token do not start the CI workflow, so run its browser tests here, split
+  # across 12 runners one test at a time, as ci.yml does (see the comment there for why).
+  e2e:
+    needs: rebuild
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - uses: actions/download-artifact@v8
+        with:
+          name: zones
+          path: data/zones/
       - run: npx playwright install --with-deps chromium
-      - run: npm run test:e2e
-      - uses: peter-evans/create-pull-request@v7
+      - run: npm run test:e2e -- --shard=${{ matrix.shard }}/12
+      - uses: actions/upload-artifact@v7
+        if: failure()
+        with:
+          name: playwright-report-${{ matrix.shard }}
+          path: |
+            playwright-report/
+            test-results/
+          retention-days: 7
+
+  pull-request:
+    needs: [rebuild, e2e]
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/download-artifact@v8
+        with:
+          name: zones
+          path: data/zones/
+      - uses: peter-evans/create-pull-request@v8
         with:
           branch: refresh/airport-zones
           title: Refresh airport zones and official zone files
@@ -47,6 +93,7 @@ jobs:
 
   stale:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v7
       - uses: actions/setup-node@v7

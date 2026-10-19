@@ -96,6 +96,13 @@ Places that matter for flying are drawn on the globe from the zone files in `dat
 - **Use my location** is a button inside the search box. It asks the browser for the position, flies the globe there (or jumps, with reduced motion), puts a marker on it, says which country it is in, and opens that country's summary if there is a guide. If there is none, it says so. Refused permission, a timeout and a failure each get a plain message that points back to search.
 - **Privacy.** The position is used only in the page, to find the country from the shapes the map already loads. It is never sent, stored or logged, and the button's tooltip says so. A test fails if any request carries it. Ask for it only when the button is pressed, never on load.
 
+## Weather
+
+- **Opt-in, at a clicked place.** A zone popup and the country summary opened by a map click each carry a "Show weather here" button (`weatherBlockHtml` in `src/lib/weather.ts`). Nothing is requested until it is pressed. "Near me", search and the hover preview offer no weather.
+- **What is sent.** The clicked spot, rounded to 2 decimals (about 1 km), goes from the browser to this site's own Worker (`/weather`, `src/lib/weather-server.ts`), which asks Open-Meteo and returns only the five readings. Open-Meteo never sees the visitor's address or browser, and the notice beside the button says so. The browser must never call Open-Meteo itself (a test fails if it does). The "never sent anywhere" promise is about the location button and still holds; a test checks "Near me" sends nothing to the weather service.
+- **Readings and notes, never a verdict.** Wind, gusts, rain, visibility and temperature, the local time they apply to, and the Open-Meteo credit link (CC BY 4.0). A reading past a typical limit gets a plain note ("Gusts 45 km/h are at or above what many small drones are rated for"). Limits and their sources are in SOURCES.md; they are not rules, and the text sends people to their own drone's manual. Never "safe to fly".
+- **Failure** reads "Couldn't load the weather" and the button works again.
+
 ## Day and night
 
 The globe shades the night side of the Earth, computed from the current time ([daynight.ts](src/lib/daynight.ts)) and refreshed every minute. Daylight countries show at full brightness. Night uses `--color-night` as a translucent overlay with a soft edge.

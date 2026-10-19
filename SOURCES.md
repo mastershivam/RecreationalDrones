@@ -84,4 +84,14 @@ Drawing circles only works where an authority states a radius. For the many EU c
 - What terms apply to the NATS UAS files, and to Canada's NRC layers?
 - Do the EU "no terms" files (Finland, Estonia, Portugal, Cyprus, Ireland) become usable if the regulator is asked? Finland's is the easiest to ask about.
 
+## Weather
+
+Read 2026-10-18. Used by `src/lib/weather.ts`.
+
+- **Data:** [Open-Meteo](https://open-meteo.com/en/terms), called from our Worker (`/weather`) with no key, never from the visitor's browser. Cloudflare caches each rounded point for 10 minutes, since the free limits are shared by everyone calling from Cloudflare's addresses. The free API is for **non-commercial use only** (under 10,000 calls a day, 5,000 an hour), and the data is CC BY 4.0, so every result shows "Weather data by Open-Meteo.com" with a link. If the site ever carries ads or paid features, buy a plan or switch source.
+- **Wind note at 38 km/h:** the DJI Mini 4 Pro's stated maximum wind speed resistance of 10.7 m/s ([DJI specs](https://www.dji.com/mini-4-pro/specs)). Smaller and older drones are rated lower, so the note says "many small drones" and points to the owner's manual.
+- **Temperature note outside -10 to 40 °C:** the Mini 4 Pro's stated operating range, same page.
+- **Visibility note under 5 km:** the minimum flight visibility for manned VFR flight under SERA, used only as a rough guide. Drone rules give no number, only that the drone stays in sight. **Not checked against the regulation text this session.**
+- **Rain note:** any precipitation above 0 mm, because most consumer drones are not waterproof. No source read.
+
 *Status of this file: built from web searches and one fetched survey article on 2026-10-18. The Dronetrake table, the Luxembourg dataset page and the EASA page's country list were not read directly. Re-verify before relying on a row.*

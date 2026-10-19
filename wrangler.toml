@@ -2,14 +2,14 @@ name = "recreationaldrones"
 main = "src/worker.ts"
 compatibility_date = "2026-10-01"
 
-# The built site is static files. The Worker only answers /tiles/*, so ordinary page loads are plain
-# static asset requests and never run the Worker.
+# The built site is static files. The Worker only answers /tiles/* and /weather (which asks Open-Meteo for the
+# weather, so visitors never contact it), so ordinary page loads are plain static asset requests and never run the Worker.
 [assets]
 directory = "./dist"
 binding = "ASSETS"
 # Unknown addresses get dist/404.html with a 404 status, instead of an empty reply.
 not_found_handling = "404-page"
-run_worker_first = ["/tiles/*"]
+run_worker_first = ["/tiles/*", "/weather"]
 
 # Private bucket holding the basemap tiles as one file, basemap.pmtiles. It must exist, with the file in it,
 # before this Worker is deployed (see README: "Deep-zoom tiles on R2").

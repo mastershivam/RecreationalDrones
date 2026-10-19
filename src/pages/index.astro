@@ -120,6 +120,7 @@ const zoneCountries = zoneCountriesFromFiles(readdirSync('data/zones').filter((f
 	import { nightGeoJSON } from '../lib/daynight';
 	import { ZONE_LAYER_IDS, ZONE_MIN_ZOOM, enabledKinds, zoneCountriesInView, zoneLayerFilters, zonesPopupHtml, zoneFeatures, zonesUrl, type ZoneProps } from '../lib/zones';
 	import { COUNTRIES_URL } from '../lib/map-style';
+	import { weatherBlockHtml, weatherErrorMessage, weatherHtml, weatherPath, type Weather } from '../lib/weather';
 
 	// MapLibre looks for its worker next to its own module, which breaks once bundled.
 	setWorkerUrl(workerUrl);
@@ -356,21 +357,39 @@ const zoneCountries = zoneCountriesFromFiles(readdirSync('data/zones').filter((f
 			hidePreview();
 			zoneClick = new Popup({ offset: 14, maxWidth: '20rem', className: 'country-popup' })
 				.setLngLat(e.lngLat)
-				.setHTML(zonesPopupHtml(zones, { link: true }))
+				.setHTML(zonesPopupHtml(zones, { link: true }) + weatherBlockHtml(e.lngLat.lat, e.lngLat.lng))
 				.addTo(map);
 			return;
 		}
 		// The exact point first: with neighbours that all have guides, the padded box can hold the wrong country.
 		const iso3 = covered(e.point) ?? covered(tapBox(e.point));
-		if (iso3) openSummary(iso3);
+		if (iso3) openSummary(iso3, e.lngLat);
 	});
 
 	// A zone popup's "See this country's rules" button opens that country's summary.
 	document.addEventListener('click', (e) => {
 		const iso3 = (e.target as Element).closest<HTMLElement>('.country-popup [data-iso3]')?.dataset.iso3;
 		if (!iso3 || !Object.hasOwn(guides, iso3)) return;
+		const point = zoneClick?.getLngLat();
 		zoneClick?.remove();
-		openSummary(iso3);
+		openSummary(iso3, point);
+	});
+
+	// "Show weather here" in a popup or the summary: the only thing that sends a spot anywhere (to our own Worker, which asks Open-Meteo).
+	document.addEventListener('click', async (e) => {
+		const button = (e.target as Element).closest<HTMLButtonElement>('button[data-weather]');
+		if (!button) return;
+		const result = button.closest('.weather')!.querySelector('.weather-result')!;
+		button.disabled = true;
+		result.textContent = 'Loading the weather…';
+		try {
+			const response = await fetch(weatherPath(Number(button.dataset.lat), Number(button.dataset.lon)));
+			if (!response.ok) throw new Error(String(response.status));
+			result.innerHTML = weatherHtml((await response.json()) as Weather);
+		} catch {
+			result.textContent = weatherErrorMessage();
+		}
+		button.disabled = false;
 	});
 
 	// The countries opened last, kept in this browser only, shown as chips under the search.
@@ -408,7 +427,8 @@ const zoneCountries = zoneCountriesFromFiles(readdirSync('data/zones').filter((f
 	renderChips();
 
 	let current = '';
-	function openSummary(iso3: string) {
+	// `point` is where the visitor clicked, if they did: it lets the summary offer the weather there.
+	function openSummary(iso3: string, point?: { lat: number; lng: number }) {
 		hidePreview();
 		recent = pushRecent(recent, iso3);
 		try {
@@ -422,7 +442,7 @@ const zoneCountries = zoneCountriesFromFiles(readdirSync('data/zones').filter((f
 		// A short pulse on the country that was picked.
 		map.setFeatureState({ source: 'countries', id: iso3 }, { picked: true });
 		setTimeout(() => map.setFeatureState({ source: 'countries', id: iso3 }, { picked: false }), 700);
-		body.innerHTML = summaryHtml(guides[iso3]);
+		body.innerHTML = summaryHtml(guides[iso3]) + (point ? weatherBlockHtml(point.lat, point.lng) : '');
 		const saveButton = body.querySelector<HTMLButtonElement>('.save')!;
 		const showSaved = () => {
 			const on = Object.hasOwn(saved, iso3);
@@ -1323,6 +1343,34 @@ const zoneCountries = zoneCountriesFromFiles(readdirSync('data/zones').filter((f
 	}
 	.dialog-body :global(.save[aria-pressed='true']) {
 		background: var(--color-border);
+	}
+	:global(.weather) {
+		margin-top: var(--space-3);
+	}
+	:global(.weather-button) {
+		min-height: 2.75rem;
+		padding: 0 var(--space-3);
+		border: 0;
+		border-radius: var(--radius-pill);
+		background: var(--color-surface-raised);
+		color: var(--color-text);
+		font: inherit;
+		cursor: pointer;
+	}
+	:global(.weather-button:disabled) {
+		opacity: 0.6;
+		cursor: progress;
+	}
+	:global(.weather-notice) {
+		margin: var(--space-1) 0 0;
+		font-size: var(--text-sm);
+	}
+	:global(.weather-result) {
+		margin-top: var(--space-2);
+	}
+	:global(.weather-notes) {
+		margin: 0 0 var(--space-2);
+		padding-left: var(--space-4);
 	}
 	.dialog-body {
 		overflow-y: auto;

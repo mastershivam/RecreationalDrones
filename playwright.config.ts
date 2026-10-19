@@ -8,7 +8,8 @@ export default defineConfig({
 	testMatch: '**/*.e2e.ts',
 	fullyParallel: true,
 	// Every test on the map page runs a software-rendered globe, so too many at once starve each other of CPU.
-	workers: 2,
+	// A CI runner has 4 CPUs and each shard runs on its own runner, so it can run one more at a time than a laptop.
+	workers: process.env.CI ? 3 : 2,
 	// A retry that passes is reported as "flaky", so it still shows up.
 	retries: 1,
 	expect: { timeout: 10_000 },

@@ -64,10 +64,16 @@ export function conditionNotes(w: Weather): string[] {
 	return notes;
 }
 
-export function weatherHtml(w: Weather): string {
+// 51.49° N, 0.13° W: the point that was asked about, as rounded for the request.
+export function formatPoint(lat: number, lon: number): string {
+	return `${Math.abs(+round(lat)).toFixed(2)}° ${lat < 0 ? 'S' : 'N'}, ${Math.abs(+round(lon)).toFixed(2)}° ${lon < 0 ? 'W' : 'E'}`;
+}
+
+export function weatherHtml(w: Weather, lat: number, lon: number): string {
 	const row = (label: string, value: string) => `<dt>${label}</dt><dd>${value}</dd>`;
 	const notes = conditionNotes(w);
 	return (
+		`<p class="weather-place">Weather at ${formatPoint(lat, lon)}, within about 1 km</p>` +
 		`<dl>${row('Wind', `${w.wind} km/h`)}${row('Gusts', `${w.gusts} km/h`)}${row('Rain', `${w.precipitation} mm`)}${row('Visibility', `${+(w.visibilityM / 1000).toFixed(1)} km`)}${row('Temperature', `${w.temperature} °C`)}</dl>` +
 		(notes.length ? `<ul class="weather-notes">${notes.map((n) => `<li>${escapeHtml(n)}</li>`).join('')}</ul><p class="muted">Check your own drone's manual for its limits.</p>` : '') +
 		`<p class="muted">At ${escapeHtml(w.time.replace('T', ' '))}, local time there. Weather data by <a href="${OPEN_METEO}"${linkAttrsHtml(OPEN_METEO)}>Open-Meteo.com</a>.</p>`

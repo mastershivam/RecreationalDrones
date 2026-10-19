@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { conditionNotes, parseWeather, weatherBlockHtml, weatherErrorMessage, weatherHtml, weatherPath, weatherUrl, type Weather } from './weather';
+import { conditionNotes, parseWeather, weatherBlockHtml, formatPoint, weatherErrorMessage, weatherHtml, weatherPath, weatherUrl, type Weather } from './weather';
 
 const calm: Weather = { time: '2026-10-18T14:15', temperature: 13.8, wind: 17.6, gusts: 20, precipitation: 0, visibilityM: 21560 };
 const response = { current: { time: '2026-10-18T14:15', temperature_2m: 13.8, wind_speed_10m: 17.6, wind_gusts_10m: 38.2, precipitation: 0, visibility: 21560 } };
@@ -64,14 +64,26 @@ describe('conditionNotes', () => {
 
 	it('never gives a verdict', () => {
 		const worst: Weather = { ...calm, wind: 90, gusts: 120, precipitation: 9, visibilityM: 100, temperature: -30 };
-		const text = [...conditionNotes(worst), weatherHtml(worst), weatherBlockHtml(1, 2), weatherErrorMessage()].join(' ');
+		const text = [...conditionNotes(worst), weatherHtml(worst, 1, 2), weatherBlockHtml(1, 2), weatherErrorMessage()].join(' ');
 		expect(text).not.toMatch(/you can fly|allowed to fly|safe to fly|not safe|unsafe|\bsafe\b/i);
+	});
+});
+
+describe('formatPoint', () => {
+	it.each([
+		[51.493491, -0.131729, '51.49° N, 0.13° W'],
+		[-33.8688, 151.2093, '33.87° S, 151.21° E'],
+		[0, 0, '0.00° N, 0.00° E'],
+		[54.05, -2, '54.05° N, 2.00° W'],
+	])('%s, %s reads %s', (lat, lon, text) => {
+		expect(formatPoint(lat, lon)).toBe(text);
 	});
 });
 
 describe('weatherHtml', () => {
 	it('shows each reading, the time there, the notes and the Open-Meteo credit', () => {
-		const html = weatherHtml({ ...calm, gusts: 45 });
+		const html = weatherHtml({ ...calm, gusts: 45 }, 51.493491, -0.131729);
+		expect(html).toContain('Weather at 51.49° N, 0.13° W, within about 1 km');
 		expect(html).toContain('13.8 °C');
 		expect(html).toContain('17.6 km/h');
 		expect(html).toContain('45 km/h');
@@ -84,7 +96,7 @@ describe('weatherHtml', () => {
 	});
 
 	it('escapes the time it was given', () => {
-		expect(weatherHtml({ ...calm, time: '<script>' })).not.toContain('<script>');
+		expect(weatherHtml({ ...calm, time: '<script>' }, 1, 2)).not.toContain('<script>');
 	});
 });
 

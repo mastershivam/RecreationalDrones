@@ -35,6 +35,7 @@ test.describe('weather at a clicked place', () => {
 
 		await button(page).click();
 		const result = dialog(page).locator('.weather-result');
+		await expect(result.locator('.weather-place')).toHaveText(/^Weather at \d+\.\d+° N, \d+\.\d+° [EW], within about 1 km$/);
 		await expect(result).toContainText('17.6 km/h');
 		await expect(result).toContainText('45 km/h');
 		await expect(result).toContainText('21.6 km');

@@ -383,9 +383,11 @@ const zoneCountries = zoneCountriesFromFiles(readdirSync('data/zones').filter((f
 		button.disabled = true;
 		result.textContent = 'Loading the weather…';
 		try {
-			const response = await fetch(weatherPath(Number(button.dataset.lat), Number(button.dataset.lon)));
+			const lat = Number(button.dataset.lat);
+			const lon = Number(button.dataset.lon);
+			const response = await fetch(weatherPath(lat, lon));
 			if (!response.ok) throw new Error(String(response.status));
-			result.innerHTML = weatherHtml((await response.json()) as Weather);
+			result.innerHTML = weatherHtml((await response.json()) as Weather, lat, lon);
 		} catch {
 			result.textContent = weatherErrorMessage();
 		}

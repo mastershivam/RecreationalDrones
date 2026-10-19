@@ -258,9 +258,9 @@
     "semantic_hash": ""
   },
   "src/pages/index.astro": {
-    "mtime": 1792329532.308206,
-    "seen": 1792329878.00621,
-    "ast_hash": "b61861be6a183a5150e988f0fb34a786",
+    "mtime": 1792330762.4372714,
+    "seen": 1792400288.435153,
+    "ast_hash": "15806e925dffcd2e63087f1c0cc8b7dd",
     "semantic_hash": ""
   },
   "src/styles/brand.test.ts": {
@@ -276,10 +276,10 @@
     "semantic_hash": ""
   },
   "src/worker.ts": {
-    "mtime": 1792192956.3191628,
-    "seen": 1792233387.936495,
-    "ast_hash": "a8f4371263fb85aeff7674401b2b3461",
-    "semantic_hash": "a8f4371263fb85aeff7674401b2b3461"
+    "mtime": 1792330762.4359188,
+    "seen": 1792400288.435162,
+    "ast_hash": "09d59390672ee51dbd656dfb6ab4ff94",
+    "semantic_hash": ""
   },
   "tsconfig.json": {
     "mtime": 1791473750.0,
@@ -312,9 +312,9 @@
     "semantic_hash": "00f0710c105b640ecd6c80ce24c26df0"
   },
   "DESIGN.md": {
-    "mtime": 1792329564.1729493,
-    "seen": 1792329878.006227,
-    "ast_hash": "540114bff92f96a46ae1be97fc377c08",
+    "mtime": 1792400284.4938488,
+    "seen": 1792400288.435169,
+    "ast_hash": "f44bdec54cf8fdf9522ea975197fbe2a",
     "semantic_hash": ""
   },
   "README.md": {
@@ -324,9 +324,9 @@
     "semantic_hash": ""
   },
   "TODO.md": {
-    "mtime": 1792329564.1737115,
-    "seen": 1792329878.00623,
-    "ast_hash": "1ec74a6aa98296b7336d60777a34531c",
+    "mtime": 1792400284.4941456,
+    "seen": 1792400288.435172,
+    "ast_hash": "19c9ff79121e3b781de1d805e5c4ce68",
     "semantic_hash": ""
   },
   "src/content/countries/nepal.mdx": {
@@ -1356,9 +1356,9 @@
     "semantic_hash": ""
   },
   "SOURCES.md": {
-    "mtime": 1792329564.173362,
-    "seen": 1792329878.006229,
-    "ast_hash": "8ee9aa25834c497d60917ac4b80b17b5",
+    "mtime": 1792400284.4939938,
+    "seen": 1792400288.4351711,
+    "ast_hash": "e00f8ad265f3ccda2baefbab12754836",
     "semantic_hash": ""
   },
   "src/content/countries/switzerland.mdx": {
@@ -1386,21 +1386,33 @@
     "semantic_hash": ""
   },
   "e2e/weather.e2e.ts": {
-    "mtime": 1792329549.95574,
-    "seen": 1792329878.0060968,
-    "ast_hash": "422cb40efd80084469f32ef3cc8ec1af",
+    "mtime": 1792400099.1447554,
+    "seen": 1792400288.435037,
+    "ast_hash": "fe25b149a2a92b3561f602ae11c88de9",
     "semantic_hash": ""
   },
   "src/lib/weather.test.ts": {
-    "mtime": 1792329515.1821673,
-    "seen": 1792329878.006193,
-    "ast_hash": "b65d393a7ec6287bbbb8e650fcad7581",
+    "mtime": 1792400052.127923,
+    "seen": 1792400288.435136,
+    "ast_hash": "f42b2645216f0aabacdeb0a194d3394a",
     "semantic_hash": ""
   },
   "src/lib/weather.ts": {
-    "mtime": 1792329869.2364404,
-    "seen": 1792329878.0061939,
-    "ast_hash": "faadeb96ccf55ff256a8c4c46bb91fba",
+    "mtime": 1792330762.4364479,
+    "seen": 1792400288.435137,
+    "ast_hash": "7b64c6fc6b524abd70bff923500aa688",
+    "semantic_hash": ""
+  },
+  "src/lib/weather-server.test.ts": {
+    "mtime": 1792400072.280293,
+    "seen": 1792400288.435134,
+    "ast_hash": "773a66ecdbad933fb3ae28f423a91e1a",
+    "semantic_hash": ""
+  },
+  "src/lib/weather-server.ts": {
+    "mtime": 1792400084.6844018,
+    "seen": 1792400288.435135,
+    "ast_hash": "5f1dc7d8f7f4f3a7c5b56daec06fefdd",
     "semantic_hash": ""
   }
 }

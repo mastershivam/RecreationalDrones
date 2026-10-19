@@ -23,14 +23,15 @@ jobs:
 
   # End-to-end tests run the built site in the real Workers runtime (wrangler dev) in a headless browser.
   # Every map page is a software-rendered globe, so one runner doing all of them took over an hour and starved
-  # itself into timeouts. Four runners each take a quarter (Playwright's --shard) and run in parallel.
+  # itself into timeouts, and running more tests at once on one runner made it worse. So each of 12 runners takes a
+  # twelfth (Playwright's --shard) and runs one test at a time, all in parallel.
   e2e:
     runs-on: ubuntu-latest
     timeout-minutes: 30
     strategy:
       fail-fast: false
       matrix:
-        shard: [1, 2, 3, 4]
+        shard: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -39,7 +40,7 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npx playwright install --with-deps chromium
-      - run: npm run test:e2e -- --shard=${{ matrix.shard }}/4
+      - run: npm run test:e2e -- --shard=${{ matrix.shard }}/12
       - uses: actions/upload-artifact@v4
         if: failure()
         with:

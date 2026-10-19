@@ -15,7 +15,7 @@ permissions:
 
 jobs:
   rebuild:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@v7
@@ -40,7 +40,7 @@ jobs:
   # across 12 runners one test at a time, as ci.yml does (see the comment there for why).
   e2e:
     needs: rebuild
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 30
     strategy:
       fail-fast: false
@@ -70,7 +70,7 @@ jobs:
 
   pull-request:
     needs: [rebuild, e2e]
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v7
@@ -92,7 +92,7 @@ jobs:
             data/zones/*-official.geojson
 
   stale:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v7

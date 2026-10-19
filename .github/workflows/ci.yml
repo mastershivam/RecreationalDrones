@@ -5,9 +5,11 @@ on:
     branches: [main]
   pull_request:
 
+# Pinned to Ubuntu 24.04: GitHub is moving ubuntu-latest to 26.04 between 2026-10-19 and 2026-11-19, and the browser
+# tests install Chromium's system packages for the image. Try 26.04 on its own in a change, then move the pins.
 jobs:
   checks:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v7
@@ -26,7 +28,7 @@ jobs:
   # itself into timeouts, and running more tests at once on one runner made it worse. So each of 12 runners takes a
   # twelfth (Playwright's --shard) and runs one test at a time, all in parallel.
   e2e:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 30
     strategy:
       fail-fast: false

@@ -13,10 +13,15 @@ const OTHER: Record<string, string> = {
 	thailand: 'Asia',
 	nepal: 'Asia',
 	'united-arab-emirates': 'Asia',
+	'new-zealand': 'Oceania',
+	india: 'Asia',
+	'south-korea': 'Asia',
+	brazil: 'South America',
+	'south-africa': 'Africa',
 	australia: 'Oceania',
 };
 
-export const REGIONS = ['European Union', 'Europe, outside the EU', 'North America', 'Asia', 'Oceania'];
+export const REGIONS = ['European Union', 'Europe, outside the EU', 'North America', 'South America', 'Africa', 'Asia', 'Oceania'];
 
 // A new guide with no region is a bug, so this throws and the build stops (regions.test.ts also checks every guide).
 export function regionOf(slug: string): string {

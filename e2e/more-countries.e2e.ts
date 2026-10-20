@@ -14,7 +14,18 @@ const COUNTRIES = [
 	{ name: 'Iceland', slug: 'iceland', iso3: 'ISL', at: [-19.5, 64.8], neighbour: [-40, 72], zoom: 5, level: 'Basic restrictions', fact: 'ISK 5,863' },
 	// Saudi Arabia, to the west, has no guide.
 	{ name: 'United Arab Emirates', slug: 'united-arab-emirates', iso3: 'ARE', at: [54.2, 23.9], neighbour: [46, 24], zoom: 5, level: 'Complex restrictions', fact: 'AED 200' },
-	{ name: 'Japan', slug: 'japan', iso3: 'JPN', at: [138.5, 36.5], neighbour: [128, 36.5], zoom: 5, level: 'Complex restrictions', fact: '900 yen' },
+	// Zoom 4, below where zones show (ZONE_MIN_ZOOM). Fiji, to the north, has no guide.
+	{ name: 'New Zealand', slug: 'new-zealand', iso3: 'NZL', at: [172, -43.5], neighbour: [178, -17.8], zoom: 4, level: 'No restrictions', fact: 'Part 101' },
+	// Argentina, to the south-west, has no guide.
+	{ name: 'Brazil', slug: 'brazil', iso3: 'BRA', at: [-53, -10], neighbour: [-64, -34], zoom: 3, level: 'Complex restrictions', fact: 'SARPAS' },
+	// Namibia, to the north-west, has no guide.
+	{ name: 'South Africa', slug: 'south-africa', iso3: 'ZAF', at: [24.5, -29.5], neighbour: [17, -22], zoom: 4, level: 'Complex restrictions', fact: 'rpasInbox' },
+	// Pakistan, to the north-west, has no guide.
+	{ name: 'India', slug: 'india', iso3: 'IND', at: [78, 22], neighbour: [69.5, 29], zoom: 3, level: 'Complex restrictions', fact: 'INR 100' },
+	// North Korea, to the north, has no guide.
+	{ name: 'South Korea', slug: 'south-korea', iso3: 'KOR', at: [127.8, 36.3], neighbour: [127, 40.3], zoom: 5, level: 'Complex restrictions', fact: '9.3 km' },
+	// China, to the west, has no guide (South Korea, closer, now does).
+	{ name: 'Japan', slug: 'japan', iso3: 'JPN', at: [138.5, 36.5], neighbour: [118, 34], zoom: 5, level: 'Complex restrictions', fact: '900 yen' },
 ] as const;
 
 async function show(page: Page, c: (typeof COUNTRIES)[number]) {

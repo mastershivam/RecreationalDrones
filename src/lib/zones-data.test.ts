@@ -25,6 +25,11 @@ const BOX: Record<string, { lon: [number, number]; lat: [number, number] }> = {
 	GBR: { lon: [-8.7, 1.8], lat: [49.8, 60.9] },
 	CAN: { lon: [-141.1, -52.5], lat: [41.6, 83.2] },
 	AUS: { lon: [96.5, 168], lat: [-54.9, -9.0] },
+	// New Zealand crosses the 180th meridian (the Chatham Islands are at about 176 W), so this box is far wider than the country.
+	NZL: { lon: [-178, 179], lat: [-47.5, -29] },
+	ZAF: { lon: [16.3, 33], lat: [-35, -22.2] },
+	// Not Ulleung Airport, which OurAirports places in China (see the exclude list in airport-rules.ts).
+	KOR: { lon: [125.8, 131.5], lat: [32.8, 38.9] },
 	CHE: { lon: [5.9, 10.6], lat: [45.8, 47.9] },
 	LUX: { lon: [5.7, 6.6], lat: [49.4, 50.2] },
 };

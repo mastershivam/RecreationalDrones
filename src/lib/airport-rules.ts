@@ -33,6 +33,38 @@ export const AIRPORT_RULES: Record<string, AirportRule | { none: string }> = {
 	LIE: {
 		none: "The Landespolizei names no-fly zones (Vaduz government area, parts of Balzers near a heliport and the Bad Ragaz aerodrome) and points to FOCA's drone map, but gives no fixed distance from airports.",
 	},
+	NZL: {
+		iso2: 'NZ',
+		radiusMeters: 4000,
+		indicative: true,
+		ruleUrl: 'https://www.aviation.govt.nz/drones/flying-your-drone-safely/',
+		authority: 'CAA New Zealand, "Flying your drone safely" and CATI 101-1',
+		note: 'CATI 101-1 says not to fly on or within 4 km of the boundary of any aerodrome without a pilot qualification, plus air traffic control authorisation at a controlled aerodrome and the operator\'s agreement at an uncontrolled one. This circle is 4 km from the airport\'s centre, not its boundary, and is drawn at every airport in the open data, so it is only a guide. Use the CAA and AirShare maps for the real airspace.',
+	},
+	BRA: {
+		none: "DECEA says every flight needs an authorisation requested in SARPAS and that flights in prohibited controlled-airspace areas (EAC P) are banned, but the pages we read give no general distance from airports. A fixed circle would mislead.",
+	},
+	ZAF: {
+		iso2: 'ZA',
+		radiusMeters: 10000,
+		indicative: true,
+		ruleUrl: 'https://www.caa.co.za/industry-information/uas/',
+		authority: 'SACAA, "Unmanned aircraft systems"',
+		note: 'SACAA says not to fly 10 km or closer to an aerodrome (airport, helipad or airfield) unless it approves. This circle is drawn at every airport in the open data, so it shows more places than the rule covers. SACAA\'s own maps and the AIP show the real airspace.',
+	},
+	IND: {
+		none: "The Drone Rules, 2021 put an 8 to 12 km band round an operational airport in the yellow zone above 200 ft and leave the zones themselves to the Digital Sky airspace map, which we could not open. A fixed circle would mislead.",
+	},
+	KOR: {
+		iso2: 'KR',
+		radiusMeters: 9300,
+		indicative: true,
+		ruleUrl: 'https://drone.onestop.go.kr/introduce/systemintro1',
+		// Ulleung Airport (KR-1113) is at 116.1 E, 42.5 N in OurAirports, in China; the island is at about 130.9 E, 37.5 N.
+		exclude: ['KR-1113'],
+		authority: 'Drone One-Stop portal, "Drone flight approval"',
+		note: 'The portal says flying in the control zone round an airfield (radius 9.3 km) needs prior approval whatever the drone weighs, and that a flight within 3 km of an airfield centre needs coordination. Only airports with a control zone have one, but this circle is drawn at every airport in the open data, so it shows more places than the rule covers. The prohibited zones (P-73 and others) are not drawn.',
+	},
 	ARE: {
 		none: "The UAE Drones portal and manual say flights are approved by the authority and that the app gives airspace updates, but give no distance from airports and no list of no-fly areas. A fixed circle would mislead.",
 	},

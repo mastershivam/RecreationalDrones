@@ -71,9 +71,15 @@ test.describe('countries page', () => {
 	test('filters by region', async ({ page }) => {
 		await page.goto('/countries/');
 		await page.getByLabel('Region').selectOption('Asia');
-		await expect(page.locator('.countries li:visible')).toHaveCount(4);
+		await expect(page.locator('.countries li:visible')).toHaveCount(6);
 		await page.getByLabel('Region').selectOption('European Union');
 		await expect(page.locator('.countries li:visible')).toHaveCount(27);
+		await page.getByLabel('Region').selectOption('Africa');
+		await expect(page.locator('.countries li:visible')).toHaveText(/South Africa/);
+		await page.getByLabel('Region').selectOption('South America');
+		await expect(page.locator('.countries li:visible')).toHaveText(/Brazil/);
+		await page.getByLabel('Region').selectOption('Oceania');
+		await expect(page.locator('.countries li:visible')).toHaveCount(2);
 	});
 });
 

@@ -25,6 +25,11 @@ describe('airportZones', () => {
 		});
 	});
 
+	it('leaves out airports named in the exclude list', () => {
+		const zones = airportZones([row({}), row({ ident: 'VNXX' })], { ...rule, exclude: ['VNXX'] });
+		expect(zones.map((z) => z.properties.id)).toEqual(['ourairports:VNKT']);
+	});
+
 	it('keeps only airports in the country', () => {
 		expect(airportZones([row({}), row({ ident: 'VIDP', iso_country: 'IN' })], rule)).toHaveLength(1);
 	});

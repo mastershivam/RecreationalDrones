@@ -65,7 +65,7 @@ test.describe('EU guide pages', () => {
 		await page.goto('/countries/');
 		for (const name of ['Austria', 'France', 'Sweden', 'Germany']) await expect(page.getByRole('link', { name, exact: true })).toBeVisible();
 		// 27 EU + the UK, Switzerland, Norway, Iceland, Liechtenstein, Nepal, Thailand, the US, Canada, Australia and Japan.
-		await expect(page.locator('.countries li a')).toHaveCount(39);
+		await expect(page.locator('.countries li a')).toHaveCount(44);
 	});
 
 	test('does not scroll sideways, even with the rules table', async ({ page }) => {

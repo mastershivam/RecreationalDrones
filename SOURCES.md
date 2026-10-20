@@ -43,6 +43,7 @@ Details worth keeping: Finland's Traficom file has 731 zones and downloads in on
 | Norway | Luftfartstilsynet "No drone zones" (5 km from airports without the tower's permission, expected to become the control zone); the map is dronesoner.no | Page undated; read 2026-10-19. We draw a 5 km circle at every OurAirports airport, marked indicative. dronesoner.no's terms were not read. |
 | Iceland | Samgöngustofa's drone map (kort.gis.is/mapview/?app=dronar) and AIP | The pages give no radius, so no circle. Pages are Icelandic only; the map was not opened. |
 | Liechtenstein | FOCA's drone map, which the Landespolizei says applies there; FOCA's feed also holds Liechtenstein's three zones | No distance on the pages read, so no circle. The Liechtenstein authority's own page returned 403. |
+| United Arab Emirates | The UAE Drones portal and its UTM Operator Manual v4.0 say flights are approved by the authority and show airspace in the app, with no distance or list | No circle. Read 2026-10-20. |
 | Japan, Nepal, Thailand | Not researched in this pass | Existing entries use their authority's own pages. |
 
 ## Licences: what we found, not legal advice
@@ -86,6 +87,10 @@ Guides follow each authority's own pages. Two things a reader of a search result
 - A search summary said island.is says recreational drones need not be registered. The page it cited, `island.is/en/drone-registration`, returned 404, and Samgöngustofa's own pages (`island.is/dronareglur`, `/opni-flokkurinn`) say every operator registers, with one exemption (a toy under 250 g with no camera). We followed Samgöngustofa's pages.
 - Liechtenstein has no national registration page that we could read. The Landespolizei says Swiss aviation law applies and names the civil aviation division of the Amt für Hochbau und Raumplanung, whose page (llv.li) returned 403 to us. FOCA's statements are what the guide rests on, and its level is marked provisional.
 - Samgöngustofa's open-category page gives two different distances from uninvolved people for A2 (text 30 m or 5 m; table 50 m for drones under 4 kg). The guide says so and picks neither.
+
+## Guide sources: United Arab Emirates (read 2026-10-20)
+
+The usual official pages would not give the rules: u.ae returned 404, gcaa.gov.ae loaded only script placeholders and an empty list of regulations, and the Dubai Civil Aviation Authority's site (dcaa.gov.ae) was a script-only shell. Blog posts and travel sites disagreed on every fee (AED 100, 120, 200 or 250) and on whether small drones are exempt, and one said recreational flying in Dubai is suspended, so none of them is used. What the guide rests on is the **UTM Operator Manual, version 4.0**, linked from the UAE Drones portal (drones.gov.ae/Content/User-Manual.pdf, 27 MB, 141 pages, no date). The fetch tool refuses files over 10 MB, so we downloaded it and read the text with macOS's PDF library. It describes the app and website, so the guide is only as good as that: the fees (AED 100 pilot, AED 200 per drone every 2 years), the 5 kg limit on a recreational drone, the mandatory tracker from e&, and the recreational flight-request limits (500 m radius, 400 ft, same day, daylight, VLOS, no charge) are the manual's. The regulation behind them was not found. The level (3) comes from per-flight approval and is provisional because Dubai could not be read.
 
 ## Open questions
 

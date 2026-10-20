@@ -33,6 +33,9 @@ export const AIRPORT_RULES: Record<string, AirportRule | { none: string }> = {
 	LIE: {
 		none: "The Landespolizei names no-fly zones (Vaduz government area, parts of Balzers near a heliport and the Bad Ragaz aerodrome) and points to FOCA's drone map, but gives no fixed distance from airports.",
 	},
+	ARE: {
+		none: "The UAE Drones portal and manual say flights are approved by the authority and that the app gives airspace updates, but give no distance from airports and no list of no-fly areas. A fixed circle would mislead.",
+	},
 	GBR: {
 		iso2: 'GB',
 		// 2 nautical miles, the CAA's radius for a flight restriction zone (FRZ) with no ATZ, and its smaller ATZ.

@@ -12,6 +12,8 @@ const COUNTRIES = [
 	{ name: 'Norway', slug: 'norway', iso3: 'NOR', at: [9.5, 61.5], neighbour: [34, 66], zoom: 4, level: 'Complex restrictions', fact: 'NOK 230' },
 	// Greenland, to the north-west, has no guide.
 	{ name: 'Iceland', slug: 'iceland', iso3: 'ISL', at: [-19.5, 64.8], neighbour: [-40, 72], zoom: 5, level: 'Basic restrictions', fact: 'ISK 5,863' },
+	// Saudi Arabia, to the west, has no guide.
+	{ name: 'United Arab Emirates', slug: 'united-arab-emirates', iso3: 'ARE', at: [54.2, 23.9], neighbour: [46, 24], zoom: 5, level: 'Complex restrictions', fact: 'AED 200' },
 	{ name: 'Japan', slug: 'japan', iso3: 'JPN', at: [138.5, 36.5], neighbour: [128, 36.5], zoom: 5, level: 'Complex restrictions', fact: '900 yen' },
 ] as const;
 

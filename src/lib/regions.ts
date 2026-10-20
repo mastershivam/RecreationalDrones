@@ -12,6 +12,7 @@ const OTHER: Record<string, string> = {
 	japan: 'Asia',
 	thailand: 'Asia',
 	nepal: 'Asia',
+	'united-arab-emirates': 'Asia',
 	australia: 'Oceania',
 };
 

@@ -13,7 +13,7 @@ test.describe('country search', () => {
 	test('lists matching countries as you type, ignoring case', async ({ page }) => {
 		await openGlobe(page);
 		await search(page).fill('UNI');
-		await expect(page.getByRole('option')).toHaveText(['United Kingdom', 'United States']);
+		await expect(page.getByRole('option')).toHaveText(['United Arab Emirates', 'United Kingdom', 'United States']);
 	});
 
 	test('says so when no guide matches, instead of showing an empty box', async ({ page }) => {
@@ -52,6 +52,7 @@ test.describe('country search', () => {
 		test.skip(test.info().project.name === 'mobile', 'touch screens have no keyboard');
 		await openGlobe(page);
 		await search(page).fill('united');
+		await search(page).press('ArrowDown');
 		await search(page).press('ArrowDown');
 		await search(page).press('ArrowDown');
 		await search(page).press('Enter');

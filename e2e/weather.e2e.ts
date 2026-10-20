@@ -97,16 +97,22 @@ test.describe('the /weather address', () => {
 	});
 });
 
-test.describe('weather when the visitor did not click a place', () => {
-	test.use({ permissions: ['geolocation'], geolocation: { latitude: 35.68, longitude: 139.69 } });
+test.describe('weather from "Near me"', () => {
+	test.use({ permissions: ['geolocation'], geolocation: { latitude: 35.6812, longitude: 139.6944 } });
 
-	test('"Near me" offers no weather and sends nothing to the weather service', async ({ page }) => {
+	test('sends nothing when the position is found, and only the rounded position once the button is pressed', async ({ page }) => {
 		const requests: string[] = [];
 		await mockWeather(page, requests);
 		await openGlobe(page);
 		await page.getByRole('button', { name: 'Near me: use my location' }).click();
 		await expect(dialog(page).getByRole('heading', { level: 1 })).toHaveText('Drone rules in Japan', { timeout: 15_000 });
-		await expect(button(page)).toHaveCount(0);
+		await expect(button(page)).toBeVisible();
 		expect(requests).toEqual([]);
+		await button(page).click();
+		await expect(dialog(page).locator('.weather-place')).toHaveText('Weather at 35.68° N, 139.69° E, within about 1 km');
+		expect(requests).toHaveLength(1);
+		const url = new URL(requests[0]);
+		expect(url.origin).toBe(new URL(page.url()).origin);
+		expect([url.searchParams.get('lat'), url.searchParams.get('lon')]).toEqual(['35.68', '139.69']);
 	});
 });

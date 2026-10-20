@@ -33,7 +33,7 @@ const zoneCountries = zoneCountriesFromFiles(readdirSync('data/zones').filter((f
 				<label class="visually-hidden" for="country-search">Search for a country</label>
 				<input id="country-search" type="search" placeholder="Search for a country" role="combobox" aria-expanded="false" aria-controls="search-results" aria-autocomplete="list" />
 				<kbd class="kbd" aria-hidden="true">/</kbd>
-				<button type="button" id="locate" aria-label="Near me: use my location" title="Use my location. It stays in your browser and is never sent anywhere.">
+				<button type="button" id="locate" aria-label="Near me: use my location" title="Use my location. It stays in your browser. Nothing is sent unless you then press Show weather.">
 					<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="6" /><circle cx="12" cy="12" r="1.5" /><path d="M12 2v4M12 18v4M2 12h4M18 12h4" /></svg>
 					<span class="locate-label" aria-hidden="true">Near me</span>
 				</button>
@@ -490,7 +490,7 @@ const zoneCountries = zoneCountriesFromFiles(readdirSync('data/zones').filter((f
 		else map.flyTo({ ...camera, duration: 3500, essential: true, easing: (t: number) => 1 - (1 - t) ** 3 } as never);
 	}
 
-	// "Use my location": the position is used in this page only, to find the country, and is never sent anywhere.
+	// "Use my location": the position is used in this page only, to find the country. It is sent only if the visitor then presses "Show weather here" (rounded, see the weather block).
 	const locateButton = document.getElementById('locate') as HTMLButtonElement;
 	const locateStatus = document.getElementById('locate-status')!;
 	// "Near me" is spelled out until the button has been used once; after that the icon is enough.
@@ -525,7 +525,7 @@ const zoneCountries = zoneCountriesFromFiles(readdirSync('data/zones').filter((f
 					here?.remove();
 					here = new Marker({ element: Object.assign(document.createElement('div'), { className: 'you-are-here' }) }).setLngLat([lon, lat]).addTo(map);
 					say(locatedMessage(country, guide !== undefined));
-					flyThen({ center: [lon, lat], zoom: 6 }, () => guide && openSummary(guide));
+					flyThen({ center: [lon, lat], zoom: 6 }, () => guide && openSummary(guide, { lat, lng: lon }));
 				} catch {
 					say(locateErrorMessage(2));
 				} finally {

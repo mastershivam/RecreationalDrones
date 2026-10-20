@@ -108,7 +108,7 @@ test.describe('the location button', () => {
 		expect(button.height).toBeGreaterThanOrEqual(44);
 		expect(button.x + button.width).toBeLessThanOrEqual(viewport.width);
 		expect(button.x).toBeGreaterThanOrEqual(input.x);
-		await expect(locate(page)).toHaveAttribute('title', /never sent anywhere/);
+		await expect(locate(page)).toHaveAttribute('title', /Nothing is sent unless you then press Show weather/);
 	});
 
 	test('can be reached by keyboard', async ({ page }) => {

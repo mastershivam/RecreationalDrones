@@ -47,7 +47,7 @@ describe('conditionNotes', () => {
 	});
 
 	it('flags any rain or snow', () => {
-		expect(conditionNotes({ ...calm, precipitation: 0.1 })[0]).toMatch(/waterproof/);
+		expect(conditionNotes({ ...calm, precipitation: 0.1 })[0]).toMatch(/not to fly in/);
 	});
 
 	it('flags visibility under 5 km, not at it', () => {

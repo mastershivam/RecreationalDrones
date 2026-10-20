@@ -12,9 +12,9 @@ export interface Weather {
 }
 
 // Typical limits, not rules. Sources and dates are in SOURCES.md ("Weather").
-const WIND_LIMIT_KMH = 38; // DJI Mini 4 Pro's stated 10.7 m/s wind resistance; smaller or older drones are rated lower
-const VISIBILITY_LIMIT_M = 5000; // the manned-aircraft VFR minimum, as a rough guide; drone rules only say keep it in sight
-const TEMPERATURE_RANGE_C = [-10, 40]; // DJI's stated operating range for the Mini 4 Pro
+const WIND_LIMIT_KMH = 38; // DJI Mini 4 Pro flight manual 2.8: wind over 10.7 m/s prohibited; smaller or older drones are rated lower
+const VISIBILITY_LIMIT_M = 5000; // SERA.5001 flight visibility for crewed VFR below 3050 m, a rough guide; drone rules only say keep it in sight
+const TEMPERATURE_RANGE_C = [-10, 40]; // DJI Mini 4 Pro flight manual 2.8: flyable -10 to 40 °C
 
 const OPEN_METEO = 'https://open-meteo.com/';
 const round = (degrees: number) => degrees.toFixed(2);
@@ -58,8 +58,8 @@ export function conditionNotes(w: Weather): string[] {
 	const notes: string[] = [];
 	if (w.wind >= WIND_LIMIT_KMH) notes.push(`Wind ${Math.round(w.wind)} km/h is at or above what many small drones are rated for (about ${WIND_LIMIT_KMH} km/h).`);
 	if (w.gusts >= WIND_LIMIT_KMH) notes.push(`Gusts ${Math.round(w.gusts)} km/h are at or above what many small drones are rated for (about ${WIND_LIMIT_KMH} km/h).`);
-	if (w.precipitation > 0) notes.push('Rain or snow is falling, and most consumer drones are not waterproof.');
-	if (w.visibilityM < VISIBILITY_LIMIT_M) notes.push('Visibility is low, which makes it harder to keep your drone in sight.');
+	if (w.precipitation > 0) notes.push('Rain or snow is falling. Some makers, such as DJI for the Mini 4 Pro, list rain and snow as conditions not to fly in. Check your drone\'s manual.');
+	if (w.visibilityM < VISIBILITY_LIMIT_M) notes.push('Visibility is under 5 km, the minimum crewed-aircraft pilots flying by sight use, so it may be harder to keep your drone in sight.');
 	if (w.temperature < TEMPERATURE_RANGE_C[0] || w.temperature > TEMPERATURE_RANGE_C[1]) notes.push(`${w.temperature} °C is outside the ${TEMPERATURE_RANGE_C[0]} to ${TEMPERATURE_RANGE_C[1]} °C operating range many drones list.`);
 	return notes;
 }

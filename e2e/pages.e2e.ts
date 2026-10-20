@@ -19,9 +19,19 @@ test.describe('pages', () => {
 	});
 
 	test('says so when a rule has not been checked, instead of leaving it blank', async ({ page }) => {
-		await page.goto('/countries/united-kingdom/');
-		await expect(page.locator('dl .unverified')).toHaveCount(2);
+		await page.goto('/countries/australia/');
+		await expect(page.locator('dl .unverified')).toHaveCount(3);
 		await expect(page.locator('dl .unverified').first()).toHaveText(/Not yet verified/);
+	});
+
+	test('shows the UK Remote ID dates and insurance rule from the CAA, with nothing left unverified', async ({ page }) => {
+		await page.goto('/countries/united-kingdom/');
+		await expect(page.locator('dl .unverified')).toHaveCount(0);
+		await expect(page.locator('main')).toContainText('1 January 2026');
+		await expect(page.locator('main')).toContainText('1 January 2028');
+		await expect(page.locator('main')).toContainText('Optional if you fly only for recreation');
+		await expect(page.locator('a[href*="remote-id-rid"]').first()).toBeVisible();
+		await expect(page.locator('a[href*="insurance-requirements"]').first()).toBeVisible();
 	});
 
 	for (const path of PAGES) {

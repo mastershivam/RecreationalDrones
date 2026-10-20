@@ -1,7 +1,7 @@
 {
   "0": "BRAND.md (brand and design spec)",
   "1": "pages/index.astro",
-  "2": "check-stale.ts",
+  "2": "countries.test.ts",
   "4": "README.md",
   "5": "CountryGuide.astro",
   "6": "openGlobe",
@@ -65,7 +65,7 @@
   "65": "build-official-zones.ts",
   "66": "zones-data.test.ts",
   "67": "helpers.ts",
-  "68": "countries.test.ts",
+  "68": "trip.astro",
   "69": "CLAUDE.md (behavioral guidelines)",
   "70": "vitest",
   "71": "build-official-zones.ts",
@@ -74,7 +74,7 @@
   "74": "zones.e2e.ts",
   "75": "Testing policy",
   "76": "Sources of truth for airport and geo-zone rules",
-  "77": "CountryGuide.astro",
+  "77": "build-icons.mjs",
   "78": "Logo concept: globe, day/night line, amber drone",
   "79": "switzerland.mdx",
   "80": "vitest",
@@ -85,6 +85,7 @@
   "85": "saved.ts",
   "86": "iceland.mdx",
   "87": "norway.mdx",
+  "88": "TestMap",
   "90": "build-og.mjs",
   "91": "weight.ts"
 }

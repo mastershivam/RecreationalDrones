@@ -71,7 +71,7 @@ test.describe('countries page', () => {
 	test('filters by region', async ({ page }) => {
 		await page.goto('/countries/');
 		await page.getByLabel('Region').selectOption('Asia');
-		await expect(page.locator('.countries li:visible')).toHaveCount(3);
+		await expect(page.locator('.countries li:visible')).toHaveCount(4);
 		await page.getByLabel('Region').selectOption('European Union');
 		await expect(page.locator('.countries li:visible')).toHaveCount(27);
 	});

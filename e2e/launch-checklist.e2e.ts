@@ -185,21 +185,17 @@ test.describe('speed on a slow phone connection', () => {
 		const cdp = await context.newCDPSession(page);
 		await cdp.send('Network.enable');
 		await cdp.send('Network.emulateNetworkConditions', { offline: false, latency: 150, downloadThroughput: (1.6 * 1024 * 1024) / 8, uploadThroughput: (750 * 1024) / 8 });
+		return cdp;
 	}
 	const firstPaint = (page: import('@playwright/test').Page) =>
 		page.evaluate(() => performance.getEntriesByName('first-contentful-paint')[0]?.startTime ?? Infinity);
 
 	for (const path of ['/countries/', '/countries/japan/', '/privacy/']) {
 		test(`${path} paints in under 2 seconds and is small`, async ({ page, context }) => {
-			await throttled(page, context);
+			const cdp = await throttled(page, context);
+			// Bytes on the wire (compressed), as a phone on a slow connection downloads them, not the size once unpacked.
 			let bytes = 0;
-			page.on('response', async (r) => {
-				try {
-					bytes += (await r.body()).length;
-				} catch {
-					// A redirect or an aborted request has no body to count.
-				}
-			});
+			cdp.on('Network.loadingFinished', (e) => (bytes += e.encodedDataLength));
 			await page.goto(path, { waitUntil: 'load' });
 			await expect.poll(() => firstPaint(page)).toBeLessThan(2000);
 			expect(bytes / 1024, 'KB downloaded').toBeLessThan(120);

@@ -65,6 +65,14 @@ export const AIRPORT_RULES: Record<string, AirportRule | { none: string }> = {
 		authority: 'Drone One-Stop portal, "Drone flight approval"',
 		note: 'The portal says flying in the control zone round an airfield (radius 9.3 km) needs prior approval whatever the drone weighs, and that a flight within 3 km of an airfield centre needs coordination. Only airports with a control zone have one, but this circle is drawn at every airport in the open data, so it shows more places than the rule covers. The prohibited zones (P-73 and others) are not drawn.',
 	},
+	SGP: {
+		iso2: 'SG',
+		radiusMeters: 5000,
+		indicative: true,
+		ruleUrl: 'https://www.caas.gov.sg/unmanned-aircraft/operator-and-activity-permits/',
+		authority: 'CAAS, "Operator and activity permits"',
+		note: 'CAAS says a Class 2 Activity Permit is needed to fly within 5 km of an airport or military airbase. This circle is 5 km from the centre of every airport in the open data, and military airbases are not shown, so it is only a guide. Use CAAS\'s no-fly zone map for the real areas.',
+	},
 	ARE: {
 		none: "The UAE Drones portal and manual say flights are approved by the authority and that the app gives airspace updates, but give no distance from airports and no list of no-fly areas. A fixed circle would mislead.",
 	},

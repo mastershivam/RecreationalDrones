@@ -1,5 +1,5 @@
 import { expect, test } from '@playwright/test';
-import { activate, focusOn, highlightedAt, openGlobe, pointAt } from './helpers';
+import { activate, focusOn, highlightedAt, openGlobe, pointAt, GUIDE_COUNT } from './helpers';
 
 // Germany is the sample member state; Serbia, to its south-east, is not in the EU and has no guide.
 const GERMANY: [number, number] = [10.5, 51];
@@ -65,7 +65,7 @@ test.describe('EU guide pages', () => {
 		await page.goto('/countries/');
 		for (const name of ['Austria', 'France', 'Sweden', 'Germany']) await expect(page.getByRole('link', { name, exact: true })).toBeVisible();
 		// 27 EU + the UK, Switzerland, Norway, Iceland, Liechtenstein, Nepal, Thailand, the US, Canada, Australia and Japan.
-		await expect(page.locator('.countries li a')).toHaveCount(44);
+		await expect(page.locator('.countries li a')).toHaveCount(GUIDE_COUNT);
 	});
 
 	test('does not scroll sideways, even with the rules table', async ({ page }) => {

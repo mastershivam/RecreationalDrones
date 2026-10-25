@@ -1,5 +1,5 @@
 import { expect, test } from '@playwright/test';
-import { isOutsideRequest } from './helpers';
+import { isOutsideRequest, GUIDE_COUNT } from './helpers';
 
 // A page-by-page check of what makes the site a real one: titles, descriptions, sharing, icons, crawlers, no
 // cookies, alt text, the register button, and speed on a slow phone connection.
@@ -80,7 +80,7 @@ test.describe('crawlers', () => {
 		const paths = await sitemapPaths(request);
 		for (const path of ['/', '/countries/', '/countries/japan/', '/countries/germany/', '/privacy/', '/contact/']) expect(paths).toContain(path);
 		expect(paths).not.toContain('/404.html');
-		expect(paths.filter((p) => p.startsWith('/countries/') && p !== '/countries/')).toHaveLength(44);
+		expect(paths.filter((p) => p.startsWith('/countries/') && p !== '/countries/')).toHaveLength(GUIDE_COUNT);
 	});
 
 	test('every page in the sitemap exists', async ({ request }) => {
@@ -102,7 +102,7 @@ test.describe('trust pages', () => {
 	test('contact gives a real way to reach us, and a report link for every country', async ({ page }) => {
 		await page.goto('/contact/');
 		await expect(page.getByRole('link', { name: 'issue tracker on GitHub' })).toHaveAttribute('href', /github\.com\/.+\/issues$/);
-		await expect(page.locator('.reports li a')).toHaveCount(44);
+		await expect(page.locator('.reports li a')).toHaveCount(GUIDE_COUNT);
 		await expect(page.getByRole('link', { name: 'Japan', exact: true })).toHaveAttribute('href', /issues\/new\?title=Mistake\+in\+the\+Japan\+guide/);
 		await expect(page.getByRole('contentinfo').getByRole('link', { name: 'Contact' })).toHaveAttribute('aria-current', 'page');
 	});

@@ -5,32 +5,38 @@ authority: Guyana Civil Aviation Authority (GCAA)
 authorityUrl: https://www.gcaa-gy.org/drones.html
 registrationUrl: null
 whoMustRegister: >-
-  The GCAA's drone page, as a search summarised it, says operators need written permission
-  first, unless they fly under the recreational rules. Part XVI of the Civil Aviation
-  Regulations bars operating an unmanned aerial system without a certificate of
-  registration, open to Guyanese citizens, CARICOM nationals, permanent residents and
-  bodies incorporated in Guyana or CARICOM.
-restrictiveness: 3
+  Civil Aviation Regulations Part XVI requires a certificate of registration before any unmanned aerial system is flown in Guyana
+  (regulation 4(2)). Only a Guyanese citizen, a CARICOM national, a permanent resident or a body incorporated in Guyana or CARICOM
+  may apply (regulation 5(4)). A micro (100 g or less) or very small (100 g to under 2 kg) recreational drone is exempt only if it
+  flies in a registered club, under a qualified pilot, or over private land with the owner's permission (regulation 25(2)). The GCAA
+  page and its 2020 directive say a recreational drone of 7 kg or less needs no permit. That does not match Part XVI, so we cannot
+  say which rule applies.
+restrictiveness: 2
 restrictivenessReason: >-
-  The GCAA asks for registration, a pilot permit after training or a competence check,
-  and, for permission to fly, a letter to the Director General, an information sheet and a
-  security clearance that takes at least 29 days. This level is provisional: a 2022 draft
-  and a 2020 directive differ and we could not tell which is in force.
-registrationFee: 'G$4,000 to G$10,000 by class in a 2022 draft'
+  Provisional. We lowered this from 3 because the letter, security clearance and pilot permit apply to permits, which a recreational
+  drone of 7 kg or less does not need under the GCAA's 2020 directive. Part XVI asks for registration with a prescribed form and
+  fee, with no in-person step that we found. Two points keep it provisional: Part XVI and the directive disagree, and a visitor who
+  is not a citizen, CARICOM national or resident cannot register.
+registrationFee: null
 registrationWeightGrams: null
 minOperatorAge: null
 remoteId: null
-insurance: null
+insurance: >-
+  Required for commercial operations: the operator must show liability insurance (GCAA drones page, from the 2020 directive). The
+  pages we read do not say whether recreational flying needs it.
 howToRegister:
   needed:
-    - 'A letter to the Director General, a UAV information sheet and an ID or passport page'
-    - 'A security clearance check (at least 29 days)'
+    - 'Proof that you are a Guyanese citizen, a CARICOM national, a permanent resident or a company incorporated in Guyana or CARICOM (Part XVI, regulation 5(4))'
+    - 'The GCAA''s prescribed registration form for the drone''s category and type, and the fee (Part XVI, regulation 5(3)). The fee amount is not in Part XVI'
+    - 'For a flight that needs permission: a letter to the Director General, the UAV information sheet (form GCAA/UAVD/001 R1) and a copy of your national ID or the bio-data page of your passport'
   steps:
-    - 'Send the letter, the UAV information sheet and your ID to the GCAA.'
-    - 'Wait for the security clearance.'
-    - 'Register the drone and apply for the pilot permit, if you are eligible (citizens, CARICOM nationals, permanent residents).'
+    - 'Check whether the drone is exempt: a micro or very small recreational drone is exempt only under the three conditions in regulation 25(2). Otherwise register it.'
+    - 'If you are eligible, apply to the GCAA on the prescribed form with the required documents, and pay the prescribed fee (regulation 5(3)).'
+    - 'For a flight that needs permission (aerial work, surveillance, or a recreational drone over 7 kg by the directive''s measure): email the letter, the information sheet and your ID to dronesunit@gcaa-gy.org.'
+    - 'Wait for the security clearance: the GCAA says it is at least 29 days.'
+    - 'For a pilot permit, send a training certificate from an approved person or organisation, or show the Authority your competence.'
   validFor: null
-  afterwards: 'Ask the GCAA''s drones unit (dronesunit@gcaa-gy.org) what applies to a recreational flight.'
+  afterwards: 'Micro and very small drones may not fly within 2 km of an aerodrome boundary, within 1 km of a helipad, restricted zone, official residence or office, army camp, police station or prison, or above 30 m (regulation 21(1)). Keep the drone in visual line of sight (regulation 18(4)).'
 lastVerified: 2026-10-26
 sources:
   - https://www.gcaa-gy.org/drones.html
@@ -38,10 +44,31 @@ sources:
   - http://www.gcaa-gy.org/pdf/UAV_Directive_Revision_1_Sept_2020.pdf
 ---
 
-This guide rests on excerpts of the GCAA's drone page, Part XVI, a 2020 directive and a 2022 draft that a web search returned on
-26 October 2026. **We did not open them ourselves.** Check the GCAA for any change.
+This guide follows the GCAA's drones page (read 26 October 2026), Civil Aviation Regulations Part XVI (undated in the copy we read)
+and the GCAA directive GCAA/ASR/DIR/2017-01 R1 (revised 25 September 2020, effective 8 September 2020). We read all three ourselves.
+The GCAA's own guidance and its regulation disagree on several points, listed under "Not covered yet". Check the GCAA for any change.
+
+## Where the sources disagree
+
+- **Weight for the recreational exemption:** Part XVI exempts only micro and very small drones (2 kg and under), and only under
+  three conditions. The GCAA page and the 2020 directive exempt a recreational drone of 7 kg or less from the permit. The
+  directive does not mention registration.
+- **Height and distance:** Part XVI caps micro and very small drones at 30 m, and small drones at 120 m. The directive (and the
+  GCAA page that repeats it) allows up to 150 m above the terrain and 500 m from the pilot, and bars flights over congested areas
+  without approval.
+- **Aerodrome distance:** Part XVI bars micro and very small drones within 2 km of an aerodrome boundary, and small drones within
+  5 km. The directive bars flights in an aerodrome traffic zone without the Authority's and air traffic control's permission.
 
 ## Not covered yet
 
-- **Whether a visitor can register or fly, the recreational rules, minimum age, penalties, height and distance limits, Remote ID and insurance.**
-- **Distances from airports and no-fly areas:** none found, so the map draws no circle.
+- **Whether a visitor can register or fly:** Part XVI limits registration to citizens, CARICOM nationals, permanent residents and
+  Guyana or CARICOM companies. Regulation 5(5) lets the Authority allow a drone registered abroad to fly here. We could not say
+  how a visitor should apply.
+- **Fees:** the regulation requires a fee but does not give the amount.
+- **Minimum age:** Part XVI sets 18 for a commercial or experimental operator certificate. It sets no age for recreational flying.
+- **Penalties:** Part XVI regulation 26 allows the Authority to suspend or revoke approvals. The directive refers to prosecution under
+  other Guyanese laws. We did not open those laws.
+- **Insurance for recreational flying, Remote ID and the 2022 draft:** the pages we read do not cover them, and we did not open the
+  2022 draft.
+- **Whether the directive or Part XVI prevails:** we cannot tell from the texts.
+- **Distances from airports and no-fly areas:** Part XVI regulation 21 gives distances. We have not added them to the airport rule file.

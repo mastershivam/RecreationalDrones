@@ -32,11 +32,15 @@ test.describe('how to register, on the guide page', () => {
 		await expect(page.locator('section.how-to ol')).toContainText('cannot register a drone');
 	});
 
-	test('is on every EU guide, with the shared steps and an honest note about national lists', async ({ page }) => {
-		for (const slug of ['germany', 'slovakia', 'malta']) {
+	test('is on every EU guide: the shared steps and an honest note where the national list is unread, national steps where read', async ({ page }) => {
+		// Slovakia's authority site could not be read, so it keeps EASA's four steps and says so.
+		await page.goto('/countries/slovakia/');
+		await expect(page.locator('section.how-to ol li')).toHaveCount(4);
+		await expect(page.locator('section.how-to ul')).toContainText('We have not read the list');
+		for (const slug of ['germany', 'malta']) {
 			await page.goto(`/countries/${slug}/`);
-			await expect(page.locator('section.how-to ol li')).toHaveCount(4);
-			await expect(page.locator('section.how-to ul')).toContainText('We have not read the list');
+			expect(await page.locator('section.how-to ol li').count(), slug).toBeGreaterThanOrEqual(4);
+			await expect(page.locator('section.how-to ul'), slug).not.toContainText('We have not read the list');
 		}
 	});
 

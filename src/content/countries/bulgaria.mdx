@@ -3,59 +3,135 @@ name: Bulgaria
 iso3: BGR
 authority: Civil Aviation Administration of Bulgaria
 authorityUrl: https://www.caa.bg/
-registrationUrl: null
+registrationUrl: https://uas.caa.bg/
 whoMustRegister: >-
-  Register yourself once, not each drone, with your home EU country's authority
-  (visitors: the first EU country you fly in). Needed if a drone weighs 250 g or
-  more or has a camera.
+  You register yourself as the operator, not each drone. Needed if a drone
+  weighs 250 g or more, or is under 250 g with a camera, microphone or other
+  sensor that can capture personal data (an EU toy is exempt). Bulgaria registers
+  people who live there; a visitor from outside the EU registers in Bulgaria
+  only if it is the first EU country they apply in.
 restrictiveness: 2
 restrictivenessReason: >-
-  Register online with your national authority and, for most drones, pass an
-  online training exam (EASA). Steps in your country may add to this; we have
-  not read them.
+  Register online on the authority's portal (a state fee applies, amount not
+  published on the pages we read) and pass the online A1/A3 test. The authority
+  says portal access needs a qualified electronic signature, which it says can
+  be got free and fully online. Flying inside a published geographical zone
+  needs permission. We have not read the Bulgarian rules on privacy.
 registrationFee: null
 registrationWeightGrams: 0
 minOperatorAge: null
 remoteId: >-
-  EASA says open-category drones, with limited exceptions, must have a remote
-  identification system.
+  The CAA says your operator number must be entered in the drone's direct remote
+  identification system and also shown on the drone, usually as a sticker. EASA's
+  exemptions apply.
 insurance: >-
-  EASA requires insurance for a drone over 20 kg, and says most member states
-  also require third-party insurance for lighter drones. Check Bulgaria's rules.
+  The Civil Aviation Act requires third-party liability insurance for every drone
+  except one under 20 kg flown only for sport or fun. So a hobby drone under 20 kg
+  needs none in Bulgaria. Professional flying needs it at any weight. We did not
+  find a minimum sum.
 howToRegister:
   needed:
-    - 'Whatever your national authority asks for. We have not read the list for this country.'
+    - 'A qualified electronic signature (КЕП), which the CAA says is needed to use its drone portal. It says you can get a mobile one free and fully online in 5 to 10 minutes, by scanning an ID card or passport and a selfie.'
+    - 'Your name, address, email and phone number, your national ID number (or personal number and date of birth if you are foreign), and the make and model of your drone'
+    - 'Your insurance policy number, but only if your flying needs insurance (a hobby drone under 20 kg does not)'
+    - 'The state fee. We could not find its amount.'
   steps:
-    - 'Check that you need to register: yes if any drone weighs 250 g or more or has a camera or other sensor that could detect personal data. A toy under 250 g is exempt.'
-    - 'Register yourself, once and not each drone, with the authority of the EU country where you live. A visitor from outside the EU registers in the first EU country where they fly.'
-    - 'Complete the online training and exam if your drone needs it. Most drones of 250 g or more do (C1, C3, C4, and older drones). C2 needs more, and C0 and drones under 250 g need none.'
-    - 'Put your operator registration number on every drone you own as a sticker, and enter it into the drone''s Remote ID if it has one.'
-  validFor: 'Set by the authority you register with. It is valid in every EASA member state.'
-  afterwards: 'Before you fly in any EU country, check that the place is not in a geographical zone that country has published.'
-lastVerified: 2026-10-17
+    - 'Check that you need to register: yes if any drone weighs 250 g or more, or has a camera, microphone or other sensor that can capture personal data. A toy under 250 g is exempt.'
+    - 'Register yourself, once and not each drone, with the authority of the EU country where you live. Bulgaria registers people who live there. A visitor from outside the EU registers in the first EU country where they plan to fly, which is Bulgaria if you apply there first. An operator cannot be registered in two EU states.'
+    - 'Go to the CAA''s UAS portal (uas.caa.bg), fill in the required details, declare they are correct and pay the state fee. The Director General or someone he authorises approves it, and the system issues your registration number.'
+    - 'Take the online A1/A3 training and test if your drone needs it (EASA''s rules above). The certificate is valid for 5 years. You must be 16. If the pilot is under 18, a parent or guardian is registered as the operator.'
+    - 'Put your registration number on every drone you fly, and enter it into the drone''s Remote ID if it has one. Tell the CAA of any change in your details within 10 days.'
+  validFor: 'The CAA pages we read give no end date for the operator registration. The pilot certificate is valid for 5 years. Registration is valid in every EASA member state.'
+  afterwards: 'Before each flight, download the CAA''s geographical zones file (JSON) and load it into your drone''s geo-awareness function, and stop if a zone becomes active during the flight.'
+lastVerified: 2026-10-25
 sources:
   - https://www.easa.europa.eu/en/domains/drones-air-mobility/operating-drone/open-category-low-risk-civil-drones
   - https://www.easa.europa.eu/the-agency/faqs/drones-uas
   - https://www.easa.europa.eu/en/domains/civil-drones/naa
+  - https://uas.caa.bg/
+  - https://www.caa.bg/bg/category/633
+  - https://www.caa.bg/bg/category/899/29602
+  - https://www.caa.bg/bg/category/899/29603
+  - https://www.caa.bg/bg/category/899/29604
+  - https://www.caa.bg/bg/category/899/29605
+  - https://www.caa.bg/bg/category/246/23167
+  - https://www.caa.bg/sites/default/files/upload/documents/2026-01/%D0%9D%D0%A0_2023_664891.2025114.pdf
+  - https://www.caa.bg/bg/category/246/2537
+  - https://www.caa.bg/sites/default/files/upload/documents/2026-04/%D0%97%D0%93%D0%92%D1%8A%D0%B7%D0%B4_1972.2026032.pdf
+  - https://www.caa.bg/bg/category/633/7062
+  - http://web.archive.org/web/20260818113748/https://www.caa.bg/bg/category/633/7062
 ---
 
 import EasaRules from '../../components/EasaRules.mdx';
 
 Bulgaria applies the EU's common drone rules, set by the European Union Aviation Safety Agency (EASA). This
-guide gives those rules, then links to Bulgaria's own authority for what is national.
+guide gives those rules, then Bulgaria's own, from the Civil Aviation Administration's (CAA, GD GVA) drone pages,
+Ordinance No. N-6 of 11 April 2023 (as amended to 24 December 2025) and the Civil Aviation Act, read on 25 October
+2026. Check the CAA for any change.
 
 <EasaRules />
 
 ## In Bulgaria
 
-- **Register:** with Civil Aviation Administration of Bulgaria ([its website](https://www.caa.bg/)).
-- **Where you can fly:** [Bulgaria's map of geographical zones](https://www.caa.bg/bg/category/633/7062).
+- **Register:** [the CAA's UAS registration portal](https://uas.caa.bg/).
+- **Where you can fly:** [the CAA's page of geographical zones](https://www.caa.bg/bg/category/633/7062). It gives a
+  downloadable JSON file, not a web map, and see the note below.
 - **Authority:** [Civil Aviation Administration of Bulgaria](https://www.caa.bg/).
-- **Note:** EASA's list links to `drones.caa.bg` for registration, but that address did not load when we checked. Start from the Civil Aviation Administration's site.
+
+### Registration
+
+- **Who registers:** Ordinance N-6 (Art. 5) lets a person who normally lives in Bulgaria, a company based there, or a
+  person from outside the EU for whom Bulgaria is the first EU state they apply in, register. You cannot be registered
+  in more than one EU state.
+- **How:** online, on the CAA's portal. The CAA says its drone portal needs a **qualified electronic signature (КЕП)**,
+  and that a mobile one can be got for free and fully remotely. It does not say whether a visitor from outside Bulgaria
+  can get one.
+- **Fee:** a state fee ("държавна такса") is charged, but the CAA pages and the ordinance we read give no amount.
+- **Age:** a remote pilot needs to be 16. If the pilot is under 18, a parent or guardian is registered as the operator
+  and carries the responsibility. We left the map's age field unverified.
+- **Changes:** report any change in your details to the CAA within 10 days.
+- **Pilot certificate:** valid for 5 years, and renewed by passing the exam again. A pilot from outside the EU is not
+  exempt: the CAA says qualifications from your own country are not recognised in the EU.
+
+### Insurance
+
+The Civil Aviation Act (Art. 19a) requires third-party liability insurance for flying a drone, except for a drone under
+20 kg flown only for sport or fun. The ordinance repeats this for hobby flying (Art. 29): insurance is needed for a drone
+over 20 kg. The register holds your policy number "if such insurance is required".
+
+### Where you cannot fly
+
+- **Geographical zones:** the CAA says flights go up to 120 m outside the zones, under the open-category rules, and
+  inside a zone only on that zone's published conditions. Before each flight you must download the CAA's JSON file of
+  zones and load it into your drone's geo-awareness function, and during the flight check every 15 minutes whether a zone
+  that affects you has been activated, and end the flight if so. The CAA warns that zones in drone makers' apps do not
+  always cover every restricted area in Bulgaria.
+- **By law (Civil Aviation Act, Art. 62b, and Ordinance Art. 57):** no flying a drone without permission in a
+  restricted or prohibited geographical zone, in airspace structures that are active, in a restricted or danger area in
+  the national aeronautical publication, or within the secured perimeter of a public airport. A drone that breaks this can
+  be forced down, and the operator pays for the damage.
+- **Permission** to fly in such a zone is applied for with a form on the CAA's site. Near an airport, the conditions are
+  agreed with air traffic services and the airport operator. The CAA says information on zones activated for low-flying
+  aircraft is on the BULATSA B-FLIP site, after you register there.
+
+### Penalties
+
+Under the Civil Aviation Act (Art. 143(1)), flying a drone without a required permission, or in breach of the rules, can
+be fined **3,000 to 10,000 leva**, in the Act's own currency (Bulgaria has since adopted the euro, and we did not find the
+euro figure). Flying an unregistered drone is also an offence.
 
 ## Not covered yet
 
-- **Bulgaria's national rules.** We have not read Bulgaria's own drone rules, so what we say here is only what EASA says
-  applies everywhere. Fees, how long registration lasts, the minimum age (a state may lower EASA's 16 to 12),
-  insurance, penalties and any local bans are all unverified. Check the authority above before you fly.
-- **Where flying is banned.** Bulgaria's geographical zones are on the map linked above, and we have not copied them.
+- **Registration fee.** The state fee is not published on the pages we read, and the amount of the fee for the pilot
+  certificate is also unknown.
+- **How long operator registration lasts.** The pages we read give no end date.
+- **Airport distances and the zones themselves.** The CAA gives them only as a JSON file, which we have not copied. Our map
+  circles around airports are not a Bulgarian rule.
+- **The CAA's live zone page** returned "403 Forbidden" when we tried it on 25 October 2026. We read an Internet Archive
+  copy dated 18 August 2026, which listed the zone file of 30 July 2026, so the file may have been updated since.
+- **Privacy rules and model-flying clubs.**
+- **The free electronic signature.** The guide says a mobile qualified signature can be got free. The CAA's registration
+  page (caa.bg/bg/category/899/29602), re-read on 26 October 2026, mentions yearly fees charged by third-party signature
+  providers. We could not read the full sentence, so the "free" claim needs checking before anyone relies on it.
+- **The CAA portal (uas.caa.bg).** The page loads a script shell with no readable text, so we could not re-check the
+  fee, validity or age on it on 26 October 2026.

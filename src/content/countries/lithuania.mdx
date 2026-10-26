@@ -10,9 +10,10 @@ whoMustRegister: >-
   more or has a camera.
 restrictiveness: 2
 restrictivenessReason: >-
-  Register online with your national authority and, for most drones, pass an
-  online training exam (EASA). Steps in your country may add to this; we have
-  not read them.
+  Register online with the Transport Competence Agency's portal and, for most
+  drones, pass an online training exam (EASA). We could not read Lithuania's own
+  rules, because the agency's and the aviation authority's sites refused our
+  requests, so this level rests on EASA's rules and the portal alone.
 registrationFee: null
 registrationWeightGrams: 0
 minOperatorAge: null
@@ -24,39 +25,46 @@ insurance: >-
   also require third-party insurance for lighter drones. Check Lithuania's rules.
 howToRegister:
   needed:
-    - 'Whatever your national authority asks for. We have not read the list for this country.'
+    - 'A personal code or passport number, your date of birth, an email address and a phone number. The registration form asks for these.'
+    - 'A copy of a personal document. The form also asks for proof of residence if it applies.'
+    - 'For a minor, a signed consent from a parent or guardian.'
   steps:
     - 'Check that you need to register: yes if any drone weighs 250 g or more or has a camera or other sensor that could detect personal data. A toy under 250 g is exempt.'
+    - 'Open sertifikatai.tka.lt and choose a login method: the electronic government gateway, or the TKA method. Use "Get ID" to create the account.'
     - 'Register yourself, once and not each drone, with the authority of the EU country where you live. A visitor from outside the EU registers in the first EU country where they fly.'
     - 'Complete the online training and exam if your drone needs it. Most drones of 250 g or more do (C1, C3, C4, and older drones). C2 needs more, and C0 and drones under 250 g need none.'
     - 'Put your operator registration number on every drone you own as a sticker, and enter it into the drone''s Remote ID if it has one.'
-  validFor: 'Set by the authority you register with. It is valid in every EASA member state.'
+  validFor: null
   afterwards: 'Before you fly in any EU country, check that the place is not in a geographical zone that country has published.'
-lastVerified: 2026-10-17
+lastVerified: 2026-10-26
 sources:
   - https://www.easa.europa.eu/en/domains/drones-air-mobility/operating-drone/open-category-low-risk-civil-drones
   - https://www.easa.europa.eu/the-agency/faqs/drones-uas
   - https://www.easa.europa.eu/en/domains/civil-drones/naa
   - https://sertifikatai.tka.lt/en/login-foreign
+  - https://sertifikatai.tka.lt/en/getid
 ---
 
 import EasaRules from '../../components/EasaRules.mdx';
 
 Lithuania applies the EU's common drone rules, set by the European Union Aviation Safety Agency (EASA). This
-guide gives those rules, then links to Lithuania's own authority for what is national.
+guide gives those rules, then links to Lithuania's own authority for what is national. The Transport Competence
+Agency's registration portal (sertifikatai.tka.lt) was read on 26 October 2026. Its pages give the registration
+steps but no fees, terms or rules, so this guide adds only those steps.
 
 <EasaRules />
 
 ## In Lithuania
 
-- **Register:** [Lithuania's registration page](https://sertifikatai.tka.lt/en/login-foreign).
-- **Where you can fly:** [Lithuania's map of geographical zones](https://ltsa.lrv.lt/lt/veiklos-sritys/oro-transportas-1/bepilociai-orlaiviai/neskraidymo-zonu-zemelapis).
+- **Register:** [Lithuania's registration portal](https://sertifikatai.tka.lt/en/login-foreign).
+- **Where you can fly:** [Lithuania's map of geographical zones](https://ltsa.lrv.lt/lt/veiklos-sritys/oro-transportas-1/bepilociai-orlaiviai/neskraidymo-zonu-zemelapis). The map is in Lithuanian.
 - **Authority:** [Transport Competence Agency of Lithuania](https://www.tka.lt/).
 - **Note:** The no-fly map EASA links to is in Lithuanian.
 
 ## Not covered yet
 
-- **Lithuania's national rules.** We have not read Lithuania's own drone rules, so what we say here is only what EASA says
-  applies everywhere. Fees, how long registration lasts, the minimum age (a state may lower EASA's 16 to 12),
-  insurance, penalties and any local bans are all unverified. Check the authority above before you fly.
+- **Lithuania's national rules.** The agency's main site (tka.lt) and the aviation authority's map page refused our requests, so we have not read Lithuania's own drone rules. What we say here is only what EASA says applies everywhere, plus what the registration portal asks for.
+- **Fees and how long registration lasts.** Neither the portal nor the EASA pages give them, so both are unverified.
+- **Minimum age.** EASA's 16 may be lowered to 12 by a state. The portal's registration form asks for a parental consent for a minor, but gives no age.
+- **Insurance, penalties and local bans.** Unverified. Check the authority above before you fly.
 - **Where flying is banned.** Lithuania's geographical zones are on the map linked above, and we have not copied them.

@@ -3,60 +3,133 @@ name: Finland
 iso3: FIN
 authority: Finnish Transport and Communications Agency (Traficom)
 authorityUrl: https://www.traficom.fi/en
-registrationUrl: https://www.traficom.fi/fi/miehittamaton-ilmailu
+registrationUrl: https://traficom.fi/en/unmanned-aviation/registration-and-theoretical-examination
 whoMustRegister: >-
-  Register yourself once, not each drone, with your home EU country's authority
-  (visitors: the first EU country you fly in). Needed if a drone weighs 250 g or
-  more or has a camera.
+  Register yourself once as the operator, not each drone. Needed for a drone of
+  250 g or more, or one with a camera or other sensor that can record personal
+  data. A toy, a drone under 250 g with no camera, and a control-line model
+  aircraft up to 1 kg are exempt.
 restrictiveness: 2
 restrictivenessReason: >-
-  Register online with your national authority and, for most drones, pass an
-  online training exam (EASA). Steps in your country may add to this; we have
-  not read them.
-registrationFee: null
+  Register online with Traficom for EUR 40 to 125 and, for most drones, pass an
+  online exam that is free on a first registration (EASA). Some sites near the
+  eastern border, nuclear and oil plants, and airports need permission, but open
+  ground does not. We could not confirm the fine for breaking the rules.
+registrationFee: 'EUR 40 for 1 year, EUR 95 for 3 years or EUR 125 for 5 years'
 registrationWeightGrams: 0
 minOperatorAge: null
 remoteId: >-
-  EASA says open-category drones, with limited exceptions, must have a remote
-  identification system.
+  Traficom's open-category page lists remote identification as required for
+  class C1, C2 and C3 drones, and not for C0 or C4. It adds no separate Finnish
+  rule on the pages we read.
 insurance: >-
-  EASA requires insurance for a drone over 20 kg, and says most member states
-  also require third-party insurance for lighter drones. Check Finland's rules.
+  Traficom says every drone over 20 kg must be insured under EU rules, and that
+  insurance is not mandatory for most open-category drones but is recommended.
+  It states no minimum cover. Registration records an insurance policy number
+  where Union or national law requires one.
 howToRegister:
   needed:
-    - 'Whatever your national authority asks for. We have not read the list for this country.'
+    - 'Strong online identification: a Finnish identity code and permanent Finnish address fill in your details automatically, otherwise you enter them by hand'
+    - 'EUR 40, 95 or 125 for the registration period you choose'
+    - 'A non-EU visitor uses the Finnish Authenticator app for strong authentication (available from 8 January 2026)'
   steps:
-    - 'Check that you need to register: yes if any drone weighs 250 g or more or has a camera or other sensor that could detect personal data. A toy under 250 g is exempt.'
-    - 'Register yourself, once and not each drone, with the authority of the EU country where you live. A visitor from outside the EU registers in the first EU country where they fly.'
-    - 'Complete the online training and exam if your drone needs it. Most drones of 250 g or more do (C1, C3, C4, and older drones). C2 needs more, and C0 and drones under 250 g need none.'
-    - 'Put your operator registration number on every drone you own as a sticker, and enter it into the drone''s Remote ID if it has one.'
-  validFor: 'Set by the authority you register with. It is valid in every EASA member state.'
-  afterwards: 'Before you fly in any EU country, check that the place is not in a geographical zone that country has published.'
-lastVerified: 2026-10-17
+    - 'Check that you need to register: yes for a drone of 250 g or more, or one with a camera or other sensor that can record personal data. Toys and drones under 250 g with no camera are exempt.'
+    - 'Register in Traficom''s electronic drone services. Organisations must always register electronically; a private person who cannot may use a paper form at a higher price (EUR 50, 100 or 130).'
+    - 'Pay for 1, 3 or 5 years: EUR 40, 95 or 125.'
+    - 'For a drone of 250 g or more, take the online A1/A3 theory exam. It is free for a private person registering for the first time, and EUR 35 for a retake. The certificate lasts five years.'
+    - 'Attach the operator number (the form FIN, 12 digits and a letter) to the side of the drone. It is not the same as your remote pilot number, and you carry the pilot certificate when you fly.'
+    - 'Visiting from the EU? Your registration from your home state is valid in Finland, so you do not register again.'
+  validFor: 'The period you pay for: 1, 3 or 5 years. Traficom reminds you two weeks before it ends, and a renewal is added as full years after the current period. Valid in other EU states.'
+  afterwards: 'Before each flight, check the restricted areas on Traficom''s "Where is flying prohibited?" page and the airport rules from Fintraffic.'
+lastVerified: 2026-10-25
 sources:
   - https://www.easa.europa.eu/en/domains/drones-air-mobility/operating-drone/open-category-low-risk-civil-drones
   - https://www.easa.europa.eu/the-agency/faqs/drones-uas
   - https://www.easa.europa.eu/en/domains/civil-drones/naa
-  - https://www.traficom.fi/fi/miehittamaton-ilmailu
+  - https://traficom.fi/en/unmanned-aviation/registration-and-theoretical-examination
+  - https://traficom.fi/fi/miehittamaton-ilmailu/rekisteroityminen-ja-teoriakoe
+  - https://traficom.fi/en/unmanned-aviation/operations-open-category
+  - https://traficom.fi/en/unmanned-aviation/how-be-safe-case-accident-insurance
+  - https://traficom.fi/en/unmanned-aviation/where-flying-prohibited
+  - https://traficom.fi/en/unmanned-aviation/airspace-restrictions-are-you-aware-rules
+  - https://traficom.fi/en/unmanned-aviation/how-apply-uas-geographical-zones
+  - https://traficom.fi/en/unmanned-aviation/respect-peoples-privacy
+  - https://www.traficom.fi/en/news/drone-season-starting-remember-basic-rules-flying
+  - https://www.fintraffic.fi/en/ans/ans-services/flying-drones-near-airports-and-controlled-airspace
 ---
 
 import EasaRules from '../../components/EasaRules.mdx';
 
-Finland applies the EU's common drone rules, set by the European Union Aviation Safety Agency (EASA). This
-guide gives those rules, then links to Finland's own authority for what is national.
+This guide follows the Finnish Transport and Communications Agency (Traficom) pages on unmanned aviation, and Fintraffic's page on
+flying near airports, read on 25 October 2026. Finland applies the EU's common drone rules, set by the European Union Aviation
+Safety Agency (EASA). Check the authority for any change.
 
 <EasaRules />
 
 ## In Finland
 
-- **Register:** [Finland's registration page](https://www.traficom.fi/fi/miehittamaton-ilmailu).
-- **Where you can fly:** [Finland's map of geographical zones](https://www.traficom.fi/fi/miehittamaton-ilmailu).
+- **Register:** [Finland's registration page](https://traficom.fi/en/unmanned-aviation/registration-and-theoretical-examination).
+- **Where you can fly:** [Where flying is prohibited](https://traficom.fi/en/unmanned-aviation/where-flying-prohibited) lists the
+  restricted areas and links to a map. Traficom publishes the permanent UAS geographical zones in its regulation OPS M1-29 on
+  [Finlex](https://www.finlex.fi/fi/viranomaiset/maarayskokoelmat/traficom-lentoliikenne/2026/5).
 - **Authority:** [Finnish Transport and Communications Agency (Traficom)](https://www.traficom.fi/en).
-- **Note:** The Traficom page EASA links to is in Finnish.
+
+## Registration
+
+Flying without registering as an operator is illegal, and Traficom calls it an aviation violation. One valid number covers all of
+an operator's drones.
+
+- **Fee and term:** EUR 40 for 1 year, EUR 95 for 3 years or EUR 125 for 5 years, online. Traficom reminds you two weeks before it
+  ends. A renewal is added as full years after the current period.
+- **Age:** the operator must be 18 or older, and the remote pilot in Finland must be 12 or older, for the open category. EASA's
+  default for a pilot is 16.
+- **Exam:** the online A1/A3 exam is free for a private person registering for the first time, and EUR 35 otherwise. The
+  certificate lasts five years.
+- **Your number:** the operator number (the form FIN, 12 digits and a letter) goes on the side of the drone. Your remote pilot number
+  is a different one.
+- **Visitors:** the registration page says EU citizens should use the EASA website, and Traficom says a Finnish-registered
+  operator may fly in other EU states. Non-EU citizens use the Finnish Authenticator app for strong authentication, available from
+  8 January 2026. The page does not say whether a visitor from outside the EU must register in Finland.
+
+## Where and how you can fly
+
+Traficom's open-category page gives the usual EASA limits and these points:
+
+- **Operator and pilot:** the operator must be 18 or older; the remote pilot in Finland 12 or older.
+- **Older drones:** from 1 January 2024 a drone of 250 g or more without a class label flies in A3, at least 150 m from
+  residential, business, industrial and recreational areas. Flying one in A1 needs the A1/A3 exam. A2 is only for C2 drones.
+- **Privacy:** respect others' privacy, especially at home. Do not photograph or watch people in private places such as homes. You
+  need no permission to film in a public place, but publishing a picture where one person can be recognised is not always allowed.
+
+## Where you cannot fly without permission
+
+Traficom's "Where is flying prohibited?" page lists:
+
+- **Prohibited areas** (Traficom may grant a permit for special reasons): EFP35 Meilahti, EFP40 Munkkiniemi and EFP50 Kruununhaka in
+  Helsinki, EFP45 Luonnonmaa in Turku, and EFP10 Loviisa, EFP25 Olkiluoto and EFP30 Kilpilahti. Nuclear power plants, oil
+  refineries and state administration areas are named as places with many restrictions.
+- **Restricted areas:** need permission from the Finnish Defence Forces. R area EFR100 follows the eastern border and always needs a
+  special permit. In the air defence identification zone near the eastern border you must file a flight plan at least one hour before.
+- **Airports, airfields and heliports:** UAS geographical zones surround them, and where zones overlap you must meet all of them.
+  Traficom gives no distance for them on that page.
+
+Fintraffic, the air navigation provider, adds that near an airport you need its agreement if you fly closer than 1 km from the edge
+of a runway, 1 to 3 km away more than 15 m above a nearby obstacle, or more than 3 km away inside a control zone or flight
+information zone above 50 m. Near Jyväskylä and Utti airports (RMZ) flying must always be agreed separately. Applications go through
+Fintraffic Sky at least two weekdays before the flight (five for Helsinki Airport), and the fee is currently waived. Flying above
+120 m needs Traficom's permission. Traficom warns that your drone maker's geofencing does not protect you from breaking airspace
+rules.
+
+## Remote ID and insurance
+
+- **Remote ID:** Traficom's open-category page lists it as required for class C1, C2 and C3 drones, and not for C0 or C4.
+- **Insurance:** Traficom says every drone over 20 kg must be insured under EU rules. It is not mandatory for most open-category
+  drones but is recommended, and it covers damage to others but not to your own drone. Traficom says nothing about a minimum sum.
 
 ## Not covered yet
 
-- **Finland's national rules.** We have not read Finland's own drone rules, so what we say here is only what EASA says
-  applies everywhere. Fees, how long registration lasts, the minimum age (a state may lower EASA's 16 to 12),
-  insurance, penalties and any local bans are all unverified. Check the authority above before you fly.
-- **Where flying is banned.** Finland's geographical zones are on the map linked above, and we have not copied them.
+- **Fines.** The pages we read give no amount for breaking the rules, and the Aviation Act was not read.
+- **Visitors from outside the EU.** Traficom's pages do not say whether they register in Finland.
+- **Åland, nature reserves and prison zones**, which Traficom's pages do not list in detail.
+- **The zone map itself.** Traficom's own page links a private map service (Flyk) and the OPS M1-29 zones on Finlex; we have not
+  copied either.

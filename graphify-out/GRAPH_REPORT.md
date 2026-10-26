@@ -1,24 +1,24 @@
-# Graph Report - RecreationalDrones  (2026-10-20)
+# Graph Report - RecreationalDrones  (2026-10-26)
 
 ## Corpus Check
-- 197 files · ~154,847 words
+- 280 files · ~338,557 words
 - Verdict: corpus is large enough that graph structure adds value.
-- Unclassified: 43 file(s) not represented in the graph (top: .pbf 18, .geojson 17, (none) 3)
+- Unclassified: 69 file(s) not represented in the graph (top: .geojson 43, .pbf 18, (none) 3)
 
 ## Summary
-- 1005 nodes · 1688 edges · 102 communities (70 shown, 32 thin omitted)
-- Extraction: 98% EXTRACTED · 2% INFERRED · 0% AMBIGUOUS · INFERRED: 30 edges (avg confidence: 0.8)
+- 1474 nodes · 2086 edges · 184 communities (149 shown, 35 thin omitted)
+- Extraction: 99% EXTRACTED · 1% INFERRED · 0% AMBIGUOUS · INFERRED: 30 edges (avg confidence: 0.8)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `c514b5d8`
+- Built from commit: `fdafb2fa`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
 ## Community Hubs (Navigation)
 - BRAND.md (brand and design spec)
 - pages/index.astro
-- vitest
+- countries.test.ts
 - package.json dependencies
 - README.md
 - Base.astro
@@ -27,13 +27,13 @@
 - zone-schema.ts
 - TODO.md
 - weather.ts
-- map-style.ts
+- zones.ts
 - TypeScript config
 - thailand.mdx
 - united-states.mdx
-- austria.mdx
-- belgium.mdx
-- bulgaria.mdx
+- In Austria
+- In Belgium
+- In Bulgaria
 - croatia.mdx
 - cyprus.mdx
 - czechia.mdx
@@ -42,7 +42,7 @@
 - finland.mdx
 - france.mdx
 - germany.mdx
-- greece.mdx
+- In Greece
 - hungary.mdx
 - ireland.mdx
 - italy.mdx
@@ -55,12 +55,12 @@
 - portugal.mdx
 - romania.mdx
 - slovakia.mdx
-- slovenia.mdx
-- spain.mdx
-- sweden.mdx
-- search.ts
-- zones.ts
-- openSummary
+- In Slovenia
+- In Spain
+- In Sweden
+- weather.ts
+- map-config.ts
+- map-style.ts
 - @playwright/test
 - build-model-fields.ts
 - build-airport-zones.ts
@@ -71,52 +71,134 @@
 - build-logo.mjs
 - canada.mdx
 - geo.ts
-- japan.mdx
+- Where and how you can fly
 - Map data
 - ed269.ts
-- country-bounds.ts
+- vitest
 - Nepal guide (NPL)
 - tokens.test.ts
 - test-changed.mjs
-- external-link.ts
+- zones-data.test.ts
 - Nepal registration rules (all drones, USD 50 + 13% VAT)
-- build-official-zones.ts
-- CountryGuide.astro
+- colombia.mdx
+- external-links.e2e.ts
 - helpers.ts
-- trip.astro
+- argentina.mdx
 - CLAUDE.md (behavioral guidelines)
-- countries/index.astro
-- sitemap.ts
-- check-stale.ts
+- trip.astro
+- singapore.mdx
+- contrast.ts
 - DESIGN.md (design principles)
 - zones.e2e.ts
 - new-zealand.mdx
 - Sources of truth for airport and geo-zone rules
-- build-icons.mjs
+- chile.mdx
 - Logo concept: globe, day/night line, amber drone
 - switzerland.mdx
-- vitest
-- brand.test.ts
-- Unverified.astro
+- build-official-zones.ts
+- israel.mdx
+- malaysia.mdx
 - activate
-- @playwright/test
+- countries/index.astro
 - brazil.mdx
 - iceland.mdx
 - norway.mdx
 - TestMap
 - south-africa.mdx
-- build-og.mjs
-- weight.ts
-- key.e2e.ts
-- site.ts
+- philippines.mdx
+- ref_node_fs
+- turkiye.mdx
+- restrictiveness.ts
 - outline.ts
-- saved.ts
+- albania.mdx
 - United Kingdom guide (GBR)
 - united-arab-emirates.mdx
 - End-to-end tests (Playwright)
 - india.mdx
-- [iso3].json.ts
+- algeria.mdx
 - south-korea.mdx
+- bangladesh.mdx
+- bosnia-and-herzegovina.mdx
+- botswana.mdx
+- ghana.mdx
+- indonesia.mdx
+- jordan.mdx
+- kazakhstan.mdx
+- kenya.mdx
+- maldives.mdx
+- mauritius.mdx
+- monaco.mdx
+- north-macedonia.mdx
+- oman.mdx
+- peru.mdx
+- saudi-arabia.mdx
+- senegal.mdx
+- tanzania.mdx
+- zimbabwe.mdx
+- andorra.mdx
+- antigua-and-barbuda.mdx
+- bahrain.mdx
+- barbados.mdx
+- belarus.mdx
+- belize.mdx
+- bhutan.mdx
+- brunei.mdx
+- cabo-verde.mdx
+- cameroon.mdx
+- china.mdx
+- costa-rica.mdx
+- cote-d-ivoire.mdx
+- cuba.mdx
+- dominican-republic.mdx
+- ecuador.mdx
+- egypt.mdx
+- el-salvador.mdx
+- ethiopia.mdx
+- fiji.mdx
+- georgia.mdx
+- guyana.mdx
+- honduras.mdx
+- iran.mdx
+- jamaica.mdx
+- kosovo.mdx
+- kuwait.mdx
+- kyrgyzstan.mdx
+- madagascar.mdx
+- mexico.mdx
+- moldova.mdx
+- mongolia.mdx
+- montenegro.mdx
+- mozambique.mdx
+- namibia.mdx
+- nigeria.mdx
+- pakistan.mdx
+- panama.mdx
+- papua-new-guinea.mdx
+- paraguay.mdx
+- qatar.mdx
+- russia.mdx
+- rwanda.mdx
+- serbia.mdx
+- seychelles.mdx
+- sierra-leone.mdx
+- solomon-islands.mdx
+- sri-lanka.mdx
+- taiwan.mdx
+- trinidad-and-tobago.mdx
+- uganda.mdx
+- uruguay.mdx
+- uzbekistan.mdx
+- venezuela.mdx
+- vietnam.mdx
+- CountryGuide.astro
+- external-link.ts
+- key.e2e.ts
+- site.ts
+- guides.ts
+- daynight.ts
+- zone-file.ts
+- [iso3].json.ts
+- no-hardcoded-values.test.ts
 
 ## God Nodes (most connected - your core abstractions)
 1. `vitest` - 47 edges
@@ -126,7 +208,7 @@
 5. `DESIGN.md (design principles)` - 18 edges
 6. `highlightedAt()` - 16 edges
 7. `BRAND.md (brand and design spec)` - 16 edges
-8. `Sources of truth for airport and geo-zone rules` - 14 edges
+8. `Sources of truth for airport and geo-zone rules` - 15 edges
 9. `Nepal guide (NPL)` - 14 edges
 10. `scripts` - 13 edges
 
@@ -135,12 +217,12 @@
   DESIGN.md → src/lib/popup.ts
 - `Adoption plan (code changes)` --references--> `public/favicon.svg (current site favicon: Astro default logo)`  [EXTRACTED]
   BRAND.md → public/favicon.svg
-- `Verify unchecked UK rules (Remote ID, insurance)` --references--> `United Kingdom guide (GBR)`  [EXTRACTED]
-  TODO.md → src/content/countries/united-kingdom.mdx
-- `United Kingdom guide (GBR)` --semantically_similar_to--> `Nepal guide (NPL)`  [INFERRED] [semantically similar]
-  src/content/countries/united-kingdom.mdx → src/content/countries/nepal.mdx
+- `guidesIn()` --calls--> `regionOf()`  [EXTRACTED]
+  e2e/helpers.ts → src/lib/regions.ts
 - `Develop commands` --references--> `npm test (Vitest)`  [INFERRED]
   README.md → .github/workflows/ci.yml
+- `Finish Nepal's guide (done)` --references--> `Nepal guide (NPL)`  [EXTRACTED]
+  TODO.md → src/content/countries/nepal.mdx
 
 ## Import Cycles
 - None detected.
@@ -149,7 +231,7 @@
 - **Logo asset family generated by build-logo.mjs** — brand_logo_mark, brand_favicon, brand_logo_lockup, brand_logo_mark_mono, brand_build_logo [EXTRACTED 0.95]
 - **Pre-commit and CI test gate** — github_workflows_ci_npm_test, github_workflows_ci_astro_check, github_workflows_ci_npm_build, github_workflows_ci_npm_test_e2e [INFERRED 0.85]
 
-## Communities (102 total, 32 thin omitted)
+## Communities (184 total, 35 thin omitted)
 
 ### Community 0 - "BRAND.md (brand and design spec)"
 Cohesion: 0.17
@@ -157,15 +239,15 @@ Nodes (13): BRAND.md (brand and design spec), Accessibility, Layout and componen
 
 ### Community 1 - "pages/index.astro"
 Cohesion: 0.07
-Nodes (22): bounds, chips, colors, dialog, guides, layersPanel, linked, locateButton (+14 more)
+Nodes (36): chipCountries(), pushRecent(), changedSince(), markSeen(), parseSaved(), Saved, toggleSaved(), bounds (+28 more)
 
-### Community 2 - "vitest"
-Cohesion: 0.22
-Nodes (9): astro, vitest, yaml, collections, countries, dir, guides, countrySchema (+1 more)
+### Community 2 - "countries.test.ts"
+Cohesion: 0.06
+Nodes (30): dataUri(), header, read(), root, square(), dir, LABELS, root (+22 more)
 
 ### Community 3 - "package.json dependencies"
 Cohesion: 0.05
-Nodes (41): dependencies, astro, @astrojs/markdown-satteri, @astrojs/mdx, @fontsource-variable/inter-tight, maplibre-gl, pmtiles, @protomaps/basemaps (+33 more)
+Nodes (42): dependencies, astro, @astrojs/markdown-satteri, @astrojs/mdx, @fontsource-variable/inter-tight, maplibre-gl, pmtiles, @protomaps/basemaps (+34 more)
 
 ### Community 4 - "README.md"
 Cohesion: 0.22
@@ -177,27 +259,27 @@ Nodes (11): button, current(), links, Props, show(), system, isCurrent(), SITE_N
 
 ### Community 6 - "openGlobe"
 Cohesion: 0.19
-Nodes (18): GERMANY, SERBIA, showGermany(), focusOn(), highlightedAt(), openGlobe(), pointAt(), COUNTRIES (+10 more)
+Nodes (18): GERMANY, showGermany(), UKRAINE, focusOn(), highlightedAt(), openGlobe(), pointAt(), COUNTRIES (+10 more)
 
 ### Community 7 - "The EU rules"
 Cohesion: 0.22
 Nodes (8): Flying away from home, Insurance, Minimum age, Pilot training, Registration, Remote ID, The EU rules, Which category you fly in
 
 ### Community 8 - "zone-schema.ts"
-Cohesion: 0.11
-Nodes (15): guides, root, multiPolygon, point, polygon, position, positions(), ring (+7 more)
+Cohesion: 0.18
+Nodes (7): multiPolygon, point, polygon, position, positions(), ring, zoneKinds
 
 ### Community 9 - "TODO.md"
 Cohesion: 0.15
 Nodes (16): Accounts that track registrations, Airport and restricted-airspace layers, Cloudflare Web Analytics, Check my location button, Custom 404 page, Automate data refresh via scheduled GitHub Action, Deeper map zoom (done, zoom 7 via R2), Step-by-step how-to-register guide per country (+8 more)
 
 ### Community 10 - "weather.ts"
-Cohesion: 0.07
-Nodes (33): Cloudflare R2 bucket recreationaldrones-tiles, Deep-zoom tiles on R2, serveDevTiles(), data, dir, baseHeaders(), handleTileRequest(), parseRange() (+25 more)
+Cohesion: 0.11
+Nodes (18): Cloudflare R2 bucket recreationaldrones-tiles, Deep-zoom tiles on R2, serveDevTiles(), data, dir, baseHeaders(), handleTileRequest(), parseRange() (+10 more)
 
-### Community 11 - "map-style.ts"
-Cohesion: 0.08
-Nodes (36): @protomaps/basemaps, nightGeoJSON(), normalizeLon(), Position, subsolarPoint(), coveredCountriesFilter(), coveredCountryCode(), GLOBE_PROJECTION (+28 more)
+### Community 11 - "zones.ts"
+Cohesion: 0.14
+Nodes (18): circlePolygon(), enabledKinds(), Geometry, heightRange(), KIND_LABELS, LAYERS, markerPosition(), Ring (+10 more)
 
 ### Community 12 - "TypeScript config"
 Cohesion: 0.40
@@ -208,64 +290,148 @@ Cohesion: 0.22
 Nodes (8): Contact, Insurance, Not covered yet, Permits for advanced flights, Pilot certificate, Registration, Showing the registration number, Where and how you can fly
 
 ### Community 14 - "united-states.mdx"
+Cohesion: 0.18
+Nodes (10): Flying for work (Part 107), Insurance, Not covered yet, Penalties, Recreational flyers, Registration, Remote ID, State and local rules (+2 more)
+
+### Community 16 - "In Austria"
 Cohesion: 0.29
-Nodes (6): Flying for work (Part 107), Not covered yet, Recreational flyers, Registration, Remote ID, Visitors from abroad
+Nodes (6): In Austria, Insurance, Not covered yet, Penalties, Registration, Where you cannot fly without permission
 
-### Community 43 - "search.ts"
-Cohesion: 0.38
-Nodes (5): fold(), searchCountries(), SearchHit, guides, showResults()
+### Community 17 - "In Belgium"
+Cohesion: 0.29
+Nodes (6): In Belgium, Insurance, Not covered yet, Penalties, Registration, Where you cannot fly without permission
 
-### Community 44 - "zones.ts"
-Cohesion: 0.14
-Nodes (18): circlePolygon(), enabledKinds(), Geometry, heightRange(), KIND_LABELS, LAYERS, markerPosition(), Ring (+10 more)
+### Community 18 - "In Bulgaria"
+Cohesion: 0.29
+Nodes (6): In Bulgaria, Insurance, Not covered yet, Penalties, Registration, Where you cannot fly
 
-### Community 45 - "openSummary"
-Cohesion: 0.27
-Nodes (9): chipCountries(), pushRecent(), closeResults(), flyThen(), goTo(), hidePreview(), keepSaved(), openSummary() (+1 more)
+### Community 19 - "croatia.mdx"
+Cohesion: 0.33
+Nodes (5): Flight reports and airspace, In Croatia, Insurance and penalties, Not covered yet, Registration
+
+### Community 20 - "cyprus.mdx"
+Cohesion: 0.33
+Nodes (5): In Cyprus, Not covered yet, Penalties, Registration, Where you cannot fly without permission
+
+### Community 21 - "czechia.mdx"
+Cohesion: 0.40
+Nodes (4): In Czechia, Not covered yet, Registration, Where and how you can fly
+
+### Community 22 - "denmark.mdx"
+Cohesion: 0.22
+Nodes (8): Age, In Denmark, Not covered yet, Penalties, Registration, Remote ID and insurance, Where and how you can fly, Where you cannot fly without permission
+
+### Community 23 - "estonia.mdx"
+Cohesion: 0.25
+Nodes (7): In Estonia, Not covered yet, Penalties, Registration, Remote ID and insurance, Where and how you can fly, Where you cannot fly without permission
+
+### Community 24 - "finland.mdx"
+Cohesion: 0.29
+Nodes (6): In Finland, Not covered yet, Registration, Remote ID and insurance, Where and how you can fly, Where you cannot fly without permission
+
+### Community 25 - "france.mdx"
+Cohesion: 0.29
+Nodes (6): In France, Not covered yet, Penalties, Registration and training, Remote ID and insurance, Where and how you can fly
+
+### Community 26 - "germany.mdx"
+Cohesion: 0.29
+Nodes (6): In Germany, Not covered yet, Penalties, Registration and training, Remote ID and insurance, Where and how you can fly
+
+### Community 27 - "In Greece"
+Cohesion: 0.25
+Nodes (7): In Greece, Insurance, Not covered yet, Penalties, Registration, Visitors, Where you cannot fly
+
+### Community 28 - "hungary.mdx"
+Cohesion: 0.29
+Nodes (6): In Hungary, Not covered yet, Penalties, Registration, Remote ID and insurance, Where and how you can fly
+
+### Community 29 - "ireland.mdx"
+Cohesion: 0.29
+Nodes (6): In Ireland, Not covered yet, Penalties, Registration, Remote ID and insurance, Where and how you can fly
+
+### Community 30 - "italy.mdx"
+Cohesion: 0.29
+Nodes (6): In Italy, Not covered yet, Penalties, Registration, Remote ID and insurance, Where and how you can fly
+
+### Community 31 - "latvia.mdx"
+Cohesion: 0.40
+Nodes (4): Fees, terms and age, In Latvia, Insurance, Not covered yet
+
+### Community 35 - "netherlands.mdx"
+Cohesion: 0.50
+Nodes (3): In Netherlands, Netherlands's own rules, Not covered yet
+
+### Community 36 - "poland.mdx"
+Cohesion: 0.50
+Nodes (3): In Poland, Not covered yet, Poland's own services
+
+### Community 40 - "In Slovenia"
+Cohesion: 0.29
+Nodes (6): In Slovenia, Insurance, Not covered yet, Penalties, Registration, Where you cannot fly without permission
+
+### Community 41 - "In Spain"
+Cohesion: 0.29
+Nodes (6): In Spain, Insurance, Not covered yet, Penalties, Registration, Where you cannot fly without permission
+
+### Community 42 - "In Sweden"
+Cohesion: 0.29
+Nodes (6): In Sweden, Insurance, Not covered yet, Penalties, Registration, Where you cannot fly without permission
+
+### Community 43 - "weather.ts"
+Cohesion: 0.13
+Nodes (22): linkAttrsHtml(), escapeHtml(), ESCAPES, popupHtml(), row(), summaryHtml(), guide, conditionNotes() (+14 more)
+
+### Community 44 - "map-config.ts"
+Cohesion: 0.22
+Nodes (12): coveredCountryCode(), GLOBE_PROJECTION, initialZoom(), MAP_COLOR_TOKENS, MapColors, minZoom(), readMapColors(), TAP_RADIUS_PX (+4 more)
+
+### Community 45 - "map-style.ts"
+Cohesion: 0.16
+Nodes (18): coveredCountriesFilter(), basemapFlavor(), basemapLayers(), buildStyle(), COUNTRIES_URL, ICON_PROPERTIES, KEEP_WITHOUT_ICON, overlayLayers() (+10 more)
 
 ### Community 46 - "@playwright/test"
-Cohesion: 0.12
+Cohesion: 0.15
 Nodes (5): ZONE_LAYERS, ZURICH_AIRPORT, PAGES, PORT, @playwright/test
 
 ### Community 47 - "build-model-fields.ts"
-Cohesion: 0.21
+Cohesion: 0.23
 Nodes (7): dir, EXTRACTS, refresh, FieldRow, KNOWN_MISTAGS, modelFieldZones(), Zone
 
 ### Community 48 - "build-airport-zones.ts"
-Cohesion: 0.15
-Nodes (12): RFC-4180, rows, sourceHash, AIRPORT_RULES, AirportRule, EU_NONE, AIRPORT_TYPES, AirportRules (+4 more)
+Cohesion: 0.17
+Nodes (8): RFC-4180, rows, sourceHash, AIRPORT_TYPES, airportZones(), mergeZones(), rule, parseCsv()
 
 ### Community 49 - "countries-geojson.ts"
 Cohesion: 0.17
 Nodes (10): out, trimmed, Feature, FeatureCollection, Geometry, Position, roundTo(), simplifyPolygon() (+2 more)
 
 ### Community 50 - "liechtenstein.mdx"
-Cohesion: 0.29
-Nodes (6): Insurance and cameras, Not covered yet, Registration, Where and how you can fly, Where you cannot fly, Which rules apply
+Cohesion: 0.25
+Nodes (7): Insurance and cameras, Not covered yet, Pilot test and penalties, Registration, Where and how you can fly, Where you cannot fly, Which rules apply
 
 ### Community 51 - "deeplink.test.ts"
 Cohesion: 0.60
 Nodes (3): countryFromSearch(), searchWithCountry(), guides
 
 ### Community 52 - "australia.mdx"
-Cohesion: 0.25
-Nodes (7): Flying for fun, Flying for work, Near airports, Not covered yet, Penalties, The rules for flying for fun, Visiting from abroad
+Cohesion: 0.22
+Nodes (8): Flying for fun, Flying for work, Near airports, Not covered yet, Penalties, States and territories, The rules for flying for fun, Visiting from abroad
 
 ### Community 53 - "build-logo.mjs"
-Cohesion: 0.19
-Nodes (11): C, CENTRE, countries, drone(), FAVICON, globe(), land(), landPath() (+3 more)
+Cohesion: 0.09
+Nodes (16): C, CENTRE, countries, drone(), FAVICON, globe(), land(), landPath() (+8 more)
 
 ### Community 54 - "canada.mdx"
-Cohesion: 0.25
-Nodes (7): Not covered yet, Penalties, Pilot certificate, Registration, Visiting from abroad, Where and how you can fly (basic operations), Which rules apply to your drone
+Cohesion: 0.20
+Nodes (9): Advanced operations, Not covered yet, Penalties, Pilot certificate, Registration, Remote ID, Visiting from abroad, Where and how you can fly (basic operations) (+1 more)
 
 ### Community 55 - "geo.ts"
 Cohesion: 0.27
 Nodes (8): Country, countryAt(), inPolygon(), inRing(), locatedMessage(), locateErrorMessage(), Ring, countries
 
-### Community 56 - "japan.mdx"
-Cohesion: 0.29
-Nodes (6): Contact, Fees, Not covered yet, Registration, Remote ID, Where and how you can fly
+### Community 56 - "Where and how you can fly"
+Cohesion: 0.14
+Nodes (13): Airspace needing permission, Contact, Fees, Insurance, Not covered yet, Other laws, Permission, Pilot certification (+5 more)
 
 ### Community 57 - "Map data"
 Cohesion: 0.29
@@ -275,61 +441,65 @@ Nodes (7): R2 basemap.pmtiles (zoom 0-7), Natural Earth data, Protomaps basemap,
 Cohesion: 0.18
 Nodes (14): aboveGround(), CLASSES, Ed269Geometry, Ed269Options, Ed269Zone, ed269Zones(), expired(), kindOf() (+6 more)
 
-### Community 59 - "country-bounds.ts"
-Cohesion: 0.31
-Nodes (6): area(), Bounds, boundsOf(), Feature, mainlandBounds(), Ring
+### Community 59 - "vitest"
+Cohesion: 0.13
+Nodes (13): vitest, area(), Bounds, boundsOf(), Feature, mainlandBounds(), Ring, fold() (+5 more)
 
 ### Community 60 - "Nepal guide (NPL)"
 Cohesion: 0.24
 Nodes (10): Civil Aviation Authority of Nepal (CAAN), Not covered yet (no-fly list, licence need, <2 kg insurance), Nepal guide (NPL), Flying limits (100 m, 300 m, VLOS, day, 5 km airport), Ministry of Home Affairs Drone Operation Procedure 2019, Permission to fly (CAAN + Home Ministry security clearance), Remote pilot licence (18+), CAAN UAS Requirements (UASR Issue 01, April 2021) (+2 more)
 
 ### Community 61 - "tokens.test.ts"
-Cohesion: 0.20
-Nodes (11): Contrast table (WCAG), channel(), contrastRatio(), luminance(), color(), css, find(), lightColor() (+3 more)
+Cohesion: 0.27
+Nodes (8): Contrast table (WCAG), color(), css, find(), lightColor(), lightCss, lightPairs, pairs
 
 ### Community 62 - "test-changed.mjs"
 Cohesion: 0.22
 Nodes (6): changed, existingSpecs, MAP_SPECS, sources, specs, testFiles
 
-### Community 63 - "external-link.ts"
-Cohesion: 0.29
-Nodes (7): devTiles, @astrojs/markdown-satteri, @astrojs/mdx, externalLinks, isExternal(), linkAttrs(), linkAttrsHtml()
+### Community 63 - "zones-data.test.ts"
+Cohesion: 0.21
+Nodes (9): AIRPORT_RULES, AirportRule, EU_NONE, AirportRules, BOX, dir, files, parsed (+1 more)
 
 ### Community 64 - "Nepal registration rules (all drones, USD 50 + 13% VAT)"
 Cohesion: 0.33
 Nodes (6): Drone categories A-D by weight, Nepali citizens and companies: online registration, Foreign visitors: Temporary Drone Registration, Insurance for >2 kg (C and D), Nepal registration rules (all drones, USD 50 + 13% VAT), Unique Identification Number (UIN)
 
-### Community 65 - "build-official-zones.ts"
-Cohesion: 0.27
-Nodes (5): OFFICIAL_FEEDS, OfficialFeed, meta, zoneFileText(), ZoneCollection
+### Community 65 - "colombia.mdx"
+Cohesion: 0.29
+Nodes (6): Not covered yet, Penalties, Registration, Where and how you can fly, Where you cannot fly, Which rules apply
 
-### Community 66 - "CountryGuide.astro"
-Cohesion: 0.27
-Nodes (5): Props, shape, reportErrorUrl(), ISSUES_URL, countries
+### Community 66 - "external-links.e2e.ts"
+Cohesion: 0.18
+Nodes (3): Link, NEPAL, THAILAND
 
-### Community 68 - "trip.astro"
-Cohesion: 0.23
-Nodes (12): parseTrip(), valid, TRIP_ROWS, TripCountry, tripSearch(), boxes, byId, cell() (+4 more)
+### Community 67 - "helpers.ts"
+Cohesion: 0.16
+Nodes (4): GUIDE_COUNT, guidesIn(), isOutsideRequest(), SLUGS
+
+### Community 68 - "argentina.mdx"
+Cohesion: 0.33
+Nodes (5): Not covered yet, Registration, Where and how you can fly, Where you cannot fly, Which rules apply
 
 ### Community 69 - "CLAUDE.md (behavioral guidelines)"
 Cohesion: 0.20
 Nodes (10): AGENTS.md (agent instructions), Regression tests, Testing policy, Unit tests (Vitest), CLAUDE.md (behavioral guidelines), Goal-Driven Execution, Simplicity First, Surgical Changes (+2 more)
 
-### Community 70 - "countries/index.astro"
-Cohesion: 0.08
-Nodes (33): CountryRow, fold(), SortKey, none, rows, visibleCountries(), GuideEntry, guideSummaries() (+25 more)
+### Community 70 - "trip.astro"
+Cohesion: 0.23
+Nodes (12): parseTrip(), valid, TRIP_ROWS, TripCountry, tripSearch(), boxes, byId, cell() (+4 more)
 
-### Community 71 - "sitemap.ts"
-Cohesion: 0.36
-Nodes (6): escapeXml(), robotsTxt(), SitemapEntry, sitemapXml(), GET(), GET()
+### Community 71 - "singapore.mdx"
+Cohesion: 0.33
+Nodes (5): Not covered yet, Pilot training, Registration, Where you need a permit, Which rules apply
 
-### Community 72 - "check-stale.ts"
-Cohesion: 0.24
-Nodes (7): guides, items, stale, zones, Checked, staleItems(), now
+### Community 72 - "contrast.ts"
+Cohesion: 0.70
+Nodes (3): channel(), contrastRatio(), luminance()
 
 ### Community 73 - "DESIGN.md (design principles)"
-Cohesion: 0.18
-Nodes (13): Restrictiveness colours (undecided), DESIGN.md (design principles), Checklist for new UI, Country popups (hover preview, click modal), Mobile guidelines, Dark and calm, The globe is the product, Light on the wire (+5 more)
+Cohesion: 0.13
+Nodes (18): Night flight palette, Restrictiveness colours (undecided), Follow the Design Principles, DESIGN.md (design principles), Checklist for new UI, Country popups (hover preview, click modal), Mobile guidelines, Dark and calm (+10 more)
 
 ### Community 74 - "zones.e2e.ts"
 Cohesion: 0.20
@@ -340,116 +510,344 @@ Cohesion: 0.33
 Nodes (5): Not covered yet, Registration, Where and how you can fly, Where you cannot fly without permission, Which rules apply
 
 ### Community 76 - "Sources of truth for airport and geo-zone rules"
-Cohesion: 0.14
-Nodes (14): Countries outside the EU, Guide sources: New Zealand, Brazil, South Africa (read 2026-10-20), Guide sources: Norway, Iceland, Liechtenstein (read 2026-10-19), Guide sources: United Arab Emirates (read 2026-10-20), How to add or check a country's airport rule, Licences: what we found, not legal advice, Open questions, Pilot: official outlines loaded (2026-10-18) (+6 more)
+Cohesion: 0.13
+Nodes (15): Added 2026-10-26, Countries outside the EU, Guide sources: New Zealand, Brazil, South Africa (read 2026-10-20), Guide sources: Norway, Iceland, Liechtenstein (read 2026-10-19), Guide sources: United Arab Emirates (read 2026-10-20), How to add or check a country's airport rule, Licences: what we found, not legal advice, Open questions (+7 more)
 
-### Community 77 - "build-icons.mjs"
-Cohesion: 0.38
-Nodes (5): dataUri(), header, read(), root, square()
+### Community 77 - "chile.mdx"
+Cohesion: 0.33
+Nodes (5): Limits (edition 3), Not covered yet, Penalties, Registration and authorisation (edition 3), Which edition applies
 
 ### Community 79 - "switzerland.mdx"
-Cohesion: 0.33
-Nodes (5): Not covered yet, Registration, Remote ID and insurance, Where and how you can fly, Where you cannot fly without permission
-
-### Community 80 - "vitest"
 Cohesion: 0.29
-Nodes (4): slugs, files(), src, styles
+Nodes (6): Not covered yet, Pilot test and penalties, Registration, Remote ID and insurance, Where and how you can fly, Where you cannot fly without permission
 
-### Community 81 - "brand.test.ts"
-Cohesion: 0.17
-Nodes (5): svg(), logos, palette, root, tokens
+### Community 80 - "build-official-zones.ts"
+Cohesion: 0.36
+Nodes (5): OFFICIAL_FEEDS, OfficialFeed, guides, root, zoneCollectionSchema
 
-### Community 82 - "Unverified.astro"
+### Community 81 - "israel.mdx"
+Cohesion: 0.50
+Nodes (3): Licence and registration, Not covered yet, Where and how you can fly
+
+### Community 82 - "malaysia.mdx"
 Cohesion: 0.33
-Nodes (5): Night flight palette, Follow the Design Principles, Trust before flair, Adding a country, src/styles/tokens.css
+Nodes (5): Authorisation, Not covered yet, Penalties, Registration, Which rules apply
 
 ### Community 83 - "activate"
 Cohesion: 0.21
 Nodes (10): activate(), ukPoint(), activate(), dialog(), isMobile(), openUk(), reopenUk(), dialog() (+2 more)
 
-### Community 84 - "@playwright/test"
-Cohesion: 0.15
-Nodes (3): Link, NEPAL, THAILAND
+### Community 84 - "countries/index.astro"
+Cohesion: 0.22
+Nodes (11): CountryRow, fold(), SortKey, none, rows, visibleCountries(), countries, items (+3 more)
 
 ### Community 85 - "brazil.mdx"
 Cohesion: 0.40
 Nodes (4): Not covered yet, Registration, Where and how you can fly, Where you cannot fly
 
 ### Community 86 - "iceland.mdx"
-Cohesion: 0.33
-Nodes (5): Not covered yet, Pilot test and insurance, Registration, Where and how you can fly, Where you cannot fly without permission
+Cohesion: 0.29
+Nodes (6): Not covered yet, Penalties, Pilot test and insurance, Registration, Where and how you can fly, Where you cannot fly without permission
 
 ### Community 87 - "norway.mdx"
-Cohesion: 0.33
-Nodes (5): Not covered yet, Pilot test and insurance, Registration, Where and how you can fly, Where you cannot fly without permission
+Cohesion: 0.29
+Nodes (6): Not covered yet, Penalties, Pilot test and insurance, Registration, Where and how you can fly, Where you cannot fly without permission
 
 ### Community 89 - "south-africa.mdx"
 Cohesion: 0.40
 Nodes (4): Not covered yet, Registration, Where and how you can fly, Which rules apply
 
-### Community 90 - "build-og.mjs"
-Cohesion: 0.29
-Nodes (4): dir, LABELS, root, tokens
+### Community 90 - "philippines.mdx"
+Cohesion: 0.50
+Nodes (3): Not covered yet, Registration and permits, Which rules apply
 
-### Community 92 - "key.e2e.ts"
-Cohesion: 0.25
-Nodes (5): GROUP_LABELS, KATHMANDU, openZones(), zones(), ZONE_GROUPS
+### Community 91 - "ref_node_fs"
+Cohesion: 0.21
+Nodes (7): slugs, EU, OTHER, regionOf(), REGIONS, slugs, rows
 
-### Community 93 - "site.ts"
-Cohesion: 0.46
-Nodes (4): ANALYTICS_HOSTS, ANALYTICS_TOKEN, REPO_URL, SITE_URL
+### Community 92 - "turkiye.mdx"
+Cohesion: 0.33
+Nodes (5): Insurance and penalties, Not covered yet, Pilot age and training, Registration, Where and how you can fly
+
+### Community 93 - "restrictiveness.ts"
+Cohesion: 0.27
+Nodes (6): guideDescription(), guide, levelColorExpression(), LEVELS, levelText(), jsonLd
 
 ### Community 94 - "outline.ts"
 Cohesion: 0.32
 Nodes (4): box(), Feature, outline(), Ring
 
-### Community 95 - "saved.ts"
-Cohesion: 0.48
-Nodes (5): changedSince(), markSeen(), parseSaved(), Saved, toggleSaved()
+### Community 95 - "albania.mdx"
+Cohesion: 0.50
+Nodes (3): Not covered yet, Registration, Where and how you can fly
 
 ### Community 96 - "United Kingdom guide (GBR)"
 Cohesion: 0.33
 Nodes (7): Verify unchecked UK rules (Remote ID, insurance), UK Civil Aviation Authority (CAA), CAA Drone Code, Flyer ID, United Kingdom guide (GBR), Operator ID (GBP 12.34, 1 year, 18+), Remote ID and insurance unverified (null)
 
 ### Community 97 - "united-arab-emirates.mdx"
-Cohesion: 0.50
-Nodes (3): Not covered yet, Registration, Where and how you can fly
+Cohesion: 0.33
+Nodes (5): Dubai, Not covered yet, Registration, Where and how you can fly, Who may fly
 
 ### Community 98 - "End-to-end tests (Playwright)"
 Cohesion: 0.33
 Nodes (6): End-to-end tests (Playwright), E2E test hooks (data-ready, ?e2e, window.__map), Adoption plan (code changes), data/basemap.pmtiles (test, zoom 0-5), public/favicon.svg (current site favicon: Astro default logo), wrangler.toml
 
 ### Community 99 - "india.mdx"
-Cohesion: 0.33
-Nodes (5): Insurance and penalties, Not covered yet, Pilot licence, Registration, Where you can fly
+Cohesion: 0.29
+Nodes (6): Insurance and penalties, Not covered yet, Pilot licence, Registration, Remote ID, Where you can fly
 
-### Community 100 - "[iso3].json.ts"
+### Community 101 - "south-korea.mdx"
+Cohesion: 0.40
+Nodes (4): Not covered yet, Registration fee and business drones, The approval zones, Who must report
+
+### Community 102 - "bangladesh.mdx"
+Cohesion: 0.50
+Nodes (3): Not covered yet, Where the two documents disagree, Which rules apply
+
+### Community 104 - "botswana.mdx"
+Cohesion: 0.40
+Nodes (4): Not covered yet, Penalties, Registration and the two routes, Where and how you can fly
+
+### Community 105 - "ghana.mdx"
+Cohesion: 0.29
+Nodes (6): Not covered yet, Penalties, Safety course, Visitors, Where and how you can fly, Who must register
+
+### Community 107 - "jordan.mdx"
+Cohesion: 0.50
+Nodes (3): Approval for operations, Not covered yet, Which rules apply
+
+### Community 108 - "kazakhstan.mdx"
+Cohesion: 0.33
+Nodes (5): Flying, Not covered yet, Penalties, Registration, Tail number
+
+### Community 109 - "kenya.mdx"
+Cohesion: 0.25
+Nodes (7): Import, Insurance, Not covered yet, Penalties, Registration, Visitors, Where and how you can fly
+
+### Community 110 - "maldives.mdx"
+Cohesion: 0.50
+Nodes (3): Approval, Not covered yet, Where you can fly
+
+### Community 111 - "mauritius.mdx"
+Cohesion: 0.33
+Nodes (5): Aerial work and fees, Not covered yet, Penalties, Recreational flying (FAQ), Which rules apply
+
+### Community 113 - "north-macedonia.mdx"
+Cohesion: 0.50
+Nodes (3): Not covered yet, Registration and certificates, Where and how you can fly
+
+### Community 114 - "oman.mdx"
+Cohesion: 0.40
+Nodes (4): Not covered yet, Penalties, Registration and licence, Where and how you can fly
+
+### Community 115 - "peru.mdx"
+Cohesion: 0.40
+Nodes (4): Not covered yet, Pilot accreditation, Registration, Where and how you can fly
+
+### Community 116 - "saudi-arabia.mdx"
+Cohesion: 0.50
+Nodes (3): Not covered yet, Registration and permits, Where and how you can fly
+
+### Community 117 - "senegal.mdx"
+Cohesion: 0.50
+Nodes (3): Not covered yet, Where and how you can fly, Which rules apply
+
+### Community 118 - "tanzania.mdx"
+Cohesion: 0.40
+Nodes (4): Not covered yet, Penalties, Where and how you can fly, Where you cannot fly without permission
+
+### Community 119 - "zimbabwe.mdx"
+Cohesion: 0.40
+Nodes (4): Not covered yet, Penalties, Where and how you can fly, Where you cannot fly
+
+### Community 120 - "andorra.mdx"
+Cohesion: 0.50
+Nodes (3): Not covered yet, Where and how you can fly, Who must identify and insure
+
+### Community 121 - "antigua-and-barbuda.mdx"
+Cohesion: 0.33
+Nodes (5): Not covered yet, Penalties, Registration, Where and how you can fly, Which rules apply
+
+### Community 122 - "bahrain.mdx"
+Cohesion: 0.50
+Nodes (3): Current position, Not covered yet, Rules we did not read
+
+### Community 123 - "barbados.mdx"
+Cohesion: 0.50
+Nodes (3): Not covered yet, Registration, Where and how you can fly
+
+### Community 125 - "belize.mdx"
+Cohesion: 0.33
+Nodes (5): Fee and permit, Not covered yet, What the draft directive says (not in force, as far as we can tell), Where you cannot fly, Who may fly
+
+### Community 126 - "bhutan.mdx"
+Cohesion: 0.50
+Nodes (3): Not covered yet, Where the sources disagree, Which rules apply
+
+### Community 128 - "cabo-verde.mdx"
+Cohesion: 0.50
+Nodes (3): Authorisation, Not covered yet, Where you can fly
+
+### Community 131 - "costa-rica.mdx"
+Cohesion: 0.40
+Nodes (4): Not covered yet, Optional operator licence, Registration, Where you cannot fly
+
+### Community 133 - "cuba.mdx"
+Cohesion: 0.33
+Nodes (5): Aerial work, Aeromodelling, Not covered yet, Restrictions and penalties, Who may fly
+
+### Community 134 - "dominican-republic.mdx"
+Cohesion: 0.29
+Nodes (6): Insurance, Not covered yet, Penalties and incidents, Registration, Remote pilot licence, Where you may fly
+
+### Community 135 - "ecuador.mdx"
+Cohesion: 0.50
+Nodes (3): Flying in the open category, Near aerodromes, Not covered yet
+
+### Community 142 - "honduras.mdx"
+Cohesion: 0.22
+Nodes (8): Age, Airports and aerodromes, In Honduras, Insurance and Remote ID, Not covered yet, Penalties, Registration, Where and how you can fly (open category)
+
+### Community 144 - "jamaica.mdx"
+Cohesion: 0.25
+Nodes (7): Age and insurance, In Jamaica, Not covered yet, Penalties, Professional flying, Registration, Where and how you can fly
+
+### Community 147 - "kyrgyzstan.mdx"
+Cohesion: 0.33
+Nodes (5): Changes, Marking, Not covered yet, Registration, Weight classes
+
+### Community 148 - "madagascar.mdx"
+Cohesion: 0.50
+Nodes (3): In Madagascar, Not covered yet, Registration
+
+### Community 149 - "mexico.mdx"
+Cohesion: 0.25
+Nodes (7): Age, In Mexico, Not covered yet, Penalties, Registration, Visitors, Where and how you can fly
+
+### Community 151 - "mongolia.mdx"
+Cohesion: 0.50
+Nodes (3): Flying within Part 101, Not covered yet, What Part 102 covers
+
+### Community 152 - "montenegro.mdx"
+Cohesion: 0.29
+Nodes (6): Age, Insurance, Not covered yet, Penalties, Registration, Where and how you can fly
+
+### Community 153 - "mozambique.mdx"
+Cohesion: 0.33
+Nodes (5): Categories, Flying limits for recreational flights, In Mozambique, Not covered yet, Registration and approval
+
+### Community 154 - "namibia.mdx"
+Cohesion: 0.50
+Nodes (3): In Namibia, Not covered yet, Registration and approval
+
+### Community 155 - "nigeria.mdx"
+Cohesion: 0.29
+Nodes (6): Fees, Not covered yet, Penalties, Visitors, Where and how you can fly, Who must register, and the conflict
+
+### Community 157 - "panama.mdx"
+Cohesion: 0.50
+Nodes (3): Flying, Not covered yet, Registration
+
+### Community 159 - "paraguay.mdx"
+Cohesion: 0.40
+Nodes (4): Not covered yet, Registration, The remote pilot, Where and how you can fly
+
+### Community 160 - "qatar.mdx"
+Cohesion: 0.40
+Nodes (4): Insurance, age and the CAA's conditions, Not covered yet, Penalties, Who needs a licence
+
+### Community 162 - "rwanda.mdx"
+Cohesion: 0.40
+Nodes (4): Arriving with a drone, Not covered yet, Registration, Where and how you can fly
+
+### Community 163 - "serbia.mdx"
+Cohesion: 0.40
+Nodes (4): Age and training, Not covered yet, Registration, Where and how you can fly
+
+### Community 164 - "seychelles.mdx"
+Cohesion: 0.40
+Nodes (4): Not covered yet, Other rules, Registration, Where you cannot fly without approval
+
+### Community 165 - "sierra-leone.mdx"
+Cohesion: 0.40
+Nodes (4): Not covered yet, Other operations, Registration, Where and how you can fly
+
+### Community 167 - "sri-lanka.mdx"
+Cohesion: 0.40
+Nodes (4): Incidents, Not covered yet, Registration and approval, Where and how you can fly
+
+### Community 168 - "taiwan.mdx"
+Cohesion: 0.50
+Nodes (3): Not covered yet, Operator certificates, Where and how you can fly
+
+### Community 170 - "uganda.mdx"
+Cohesion: 0.40
+Nodes (4): Not covered yet, Penalties, Where and how you can fly, Where you cannot fly without permission
+
+### Community 171 - "uruguay.mdx"
+Cohesion: 0.33
+Nodes (5): Draft rules under consultation, In Uruguay, Not covered yet, Registration, Where and how you can fly
+
+### Community 174 - "vietnam.mdx"
+Cohesion: 0.33
+Nodes (5): Flying, Not covered yet, Penalties, Registration, Which rules apply
+
+### Community 175 - "CountryGuide.astro"
+Cohesion: 0.27
+Nodes (5): Props, shape, reportErrorUrl(), ISSUES_URL, countries
+
+### Community 176 - "external-link.ts"
+Cohesion: 0.29
+Nodes (6): devTiles, @astrojs/markdown-satteri, @astrojs/mdx, externalLinks, isExternal(), linkAttrs()
+
+### Community 177 - "key.e2e.ts"
+Cohesion: 0.25
+Nodes (5): GROUP_LABELS, KATHMANDU, openZones(), zones(), ZONE_GROUPS
+
+### Community 178 - "site.ts"
+Cohesion: 0.46
+Nodes (4): ANALYTICS_HOSTS, ANALYTICS_TOKEN, REPO_URL, SITE_URL
+
+### Community 179 - "guides.ts"
+Cohesion: 0.36
+Nodes (5): GuideEntry, guideSummaries(), GuideSummary, GuideMeta, Level
+
+### Community 180 - "daynight.ts"
+Cohesion: 0.48
+Nodes (4): nightGeoJSON(), normalizeLon(), Position, subsolarPoint()
+
+### Community 181 - "zone-file.ts"
+Cohesion: 0.40
+Nodes (3): meta, zoneFileText(), ZoneCollection
+
+### Community 182 - "[iso3].json.ts"
 Cohesion: 0.53
 Nodes (5): zoneCountriesFromFiles(), files, GET(), getStaticPaths(), nameOf()
 
-### Community 101 - "south-korea.mdx"
+### Community 183 - "no-hardcoded-values.test.ts"
 Cohesion: 0.50
-Nodes (3): Not covered yet, Registration, What the portal says
+Nodes (3): files(), src, styles
 
 ## Knowledge Gaps
 - **49 isolated node(s):** `@fontsource-variable/inter-tight`, `@astrojs/check`, `@types/node`, `typescript`, `wrangler` (+44 more)
-  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 500 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
-- **32 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 889 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
+- **35 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `vitest` connect `vitest` to `package.json dependencies`, `Base.astro`, `zone-schema.ts`, `weather.ts`, `map-style.ts`, `search.ts`, `zones.ts`, `openSummary`, `build-model-fields.ts`, `build-airport-zones.ts`, `countries-geojson.ts`, `deeplink.test.ts`, `geo.ts`, `ed269.ts`, `country-bounds.ts`, `tokens.test.ts`, `external-link.ts`, `build-official-zones.ts`, `CountryGuide.astro`, `trip.astro`, `countries/index.astro`, `sitemap.ts`, `check-stale.ts`, `vitest`, `brand.test.ts`, `weight.ts`, `site.ts`, `outline.ts`, `saved.ts`?**
-  _High betweenness centrality (0.158) - this node is a cross-community bridge._
+- **Why does `vitest` connect `vitest` to `pages/index.astro`, `countries.test.ts`, `package.json dependencies`, `Base.astro`, `zone-schema.ts`, `weather.ts`, `zones.ts`, `weather.ts`, `map-config.ts`, `map-style.ts`, `build-model-fields.ts`, `build-airport-zones.ts`, `countries-geojson.ts`, `external-link.ts`, `deeplink.test.ts`, `daynight.ts`, `guides.ts`, `CountryGuide.astro`, `geo.ts`, `site.ts`, `zone-file.ts`, `ed269.ts`, `build-logo.mjs`, `no-hardcoded-values.test.ts`, `tokens.test.ts`, `zones-data.test.ts`, `trip.astro`, `contrast.ts`, `build-official-zones.ts`, `countries/index.astro`, `ref_node_fs`, `restrictiveness.ts`, `outline.ts`?**
+  _High betweenness centrality (0.071) - this node is a cross-community bridge._
 - **What connects `@fontsource-variable/inter-tight`, `@astrojs/check`, `@types/node` to the rest of the system?**
   _49 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `pages/index.astro` be split into smaller, more focused modules?**
-  _Cohesion score 0.07389162561576355 - nodes in this community are weakly interconnected._
-- **Why does `@playwright/test` connect `@playwright/test` to `helpers.ts`, `package.json dependencies`, `openGlobe`, `zones.e2e.ts`, `activate`, `@playwright/test`, `key.e2e.ts`, `site.ts`?**
-  _High betweenness centrality (0.070) - this node is a cross-community bridge._
+  _Cohesion score 0.06938020351526364 - nodes in this community are weakly interconnected._
+- **Why does `Nepal guide (NPL)` connect `Nepal guide (NPL)` to `Nepal registration rules (all drones, USD 50 + 13% VAT)`, `United Kingdom guide (GBR)`, `countries.test.ts`, `README.md`, `DESIGN.md (design principles)`, `CountryGuide.astro`?**
+  _High betweenness centrality (0.029) - this node is a cross-community bridge._
+- **Should `countries.test.ts` be split into smaller, more focused modules?**
+  _Cohesion score 0.058279370952821465 - nodes in this community are weakly interconnected._
+- **Why does `DESIGN.md (design principles)` connect `DESIGN.md (design principles)` to `BRAND.md (brand and design spec)`, `README.md`, `CLAUDE.md (behavioral guidelines)`?**
+  _High betweenness centrality (0.025) - this node is a cross-community bridge._
 - **Should `package.json dependencies` be split into smaller, more focused modules?**
-  _Cohesion score 0.047619047619047616 - nodes in this community are weakly interconnected._
-- **Why does `DESIGN.md (design principles)` connect `DESIGN.md (design principles)` to `BRAND.md (brand and design spec)`, `Unverified.astro`, `README.md`, `CLAUDE.md (behavioral guidelines)`?**
-  _High betweenness centrality (0.048) - this node is a cross-community bridge._
-- **Should `zone-schema.ts` be split into smaller, more focused modules?**
-  _Cohesion score 0.1067193675889328 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.046511627906976744 - nodes in this community are weakly interconnected._

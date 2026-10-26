@@ -5,49 +5,68 @@ authority: Bosnia and Herzegovina Directorate of Civil Aviation (BHDCA)
 authorityUrl: https://www.bhdca.gov.ba/index.php/en/drone
 registrationUrl: null
 whoMustRegister: >-
-  The BHDCA's drone page, as a search summarised it, cites its Rulebook on the
-  Requirements for Aerial Drone Operations (Official Gazette 51/20) for drones from 249 g
-  to 25 kg, in open (non-commercial), specific (commercial) and certified (aerial work)
-  tiers. We found no separate drone registration requirement.
+  Nothing to register for a non-commercial flight, according to the BHDCA's drone page,
+  which excerpts the Rulebook on the Requirements for Aerial Drone Operations (Official
+  Gazette of BiH 51/20). The Rulebook covers drones from 249 g to 25 kg. Aerial work needs
+  the BHDCA's special approval, sought by email before you start.
 restrictiveness: 1
 restrictivenessReason: >-
-  The BHDCA's open category, as summarised, asks for no registration or test, but has a
-  low ceiling (30 m on one copy of the page), insurance for drones over 1 kg and border
-  police consent within 300 m of the border. This level is provisional: the copies of the
-  page disagree and we saw only excerpts.
+  For a non-commercial flight the BHDCA page asks for no registration and no test. The
+  limits are flying rules: daylight, in sight, 30 m ceiling, 30 m from people, 500 m from
+  embassies and government buildings, insurance for a drone over 1 kg, and the Border
+  Police's consent within 300 m of the border. We set level 1 because the consent is a
+  flying rule for one zone, not a registration. It is the point that could argue for
+  level 2.
 registrationFee: null
 registrationWeightGrams: null
 minOperatorAge: null
 remoteId: null
 insurance: >-
-  The BHDCA's open-category rules, as summarised, require insurance for a drone over 1 kg.
+  The BHDCA page says a non-commercial drone over 1 kg needs a valid insurance policy that
+  covers third-party damage in Bosnia and Herzegovina. Commercial operations need it at any
+  weight.
 howToRegister:
   needed:
-    - 'Nothing to register on the page we saw, for a non-commercial flight'
-    - 'Insurance, if the drone weighs over 1 kg'
+    - 'Nothing to register for a non-commercial flight'
+    - 'Insurance covering third-party damage in Bosnia and Herzegovina, for a drone over 1 kg, and always for a commercial flight'
+    - 'For aerial work, the BHDCA''s special approval, applied for by email to dron@bhdca.gov.ba'
   steps:
-    - 'Read the BHDCA''s drone page and the 2020 rulebook (Official Gazette 51/20).'
-    - 'Fly only by day, in sight, and keep to the altitude ceiling (the page says 30 m; another copy lists stricter or different figures).'
-    - 'Get the Border Police''s consent first to fly within 300 m of the border.'
+    - 'Read the BHDCA''s drone page and the 2020 Rulebook (Official Gazette 51/20) it excerpts.'
+    - 'For a non-commercial flight, fly only in daylight, in sight, at no more than 30 m above the ground, and never over people.'
+    - 'Get the Border Police''s consent before you fly within 300 m of the border.'
     - 'For aerial work, email dron@bhdca.gov.ba before you begin.'
   validFor: null
-  afterwards: 'A drone over 25 kg needs special approval from the BHDCA. A drone of a foreign army, police or customs body needs approval from the competent Bosnian institution.'
+  afterwards: 'A drone over 25 kg needs special BHDCA approval. A drone of a foreign army, police or customs body needs approval from the competent Bosnian institution.'
 lastVerified: 2026-10-26
 sources:
   - https://www.bhdca.gov.ba/index.php/en/drone
-  - https://www.bhdca.gov.ba/index.php/en/regulations-and-areas/flight-request
 ---
 
-This guide rests on excerpts of the BHDCA's drone pages that a web search returned on 26 October 2026. **We did not open them
-ourselves.** Different copies of the page give different figures (a 500 m setback and a 120 m ceiling in the commercial section, a
-30 m clearance, a 50 m distance from gatherings), and we do not know whether the 2020 rulebook has been amended. Check the BHDCA
-for any change.
+This guide follows the BHDCA's drone page, in English, which excerpts the 2020 Rulebook (Official Gazette 51/20). We read the
+page on 26 October 2026. Its footer is dated 2021. We did not open the Rulebook itself, and we do not know whether it has been
+amended. Check the BHDCA for any change.
+
+The page keeps two sets of rules apart, and the figures differ between them. The 500 m setback and the 50 m distance from
+gatherings are for non-commercial flights. The 100 m setback and the 120 m ceiling are for commercial flights.
 
 ## Where you cannot fly
 
-As summarised: commercial operators may not fly over groups of people or important buildings, and a flight within 1.5 km of an airport area needs the prior consent of air traffic control.
+- **Non-commercial flights:** no flying over people; at least 30 m from people, animals, structures, vehicles, roads, railways,
+  waterways and power lines; at least 50 m from a public gathering; and at least 500 m from industrial zones, embassies,
+  government facilities and institutions, and other public buildings.
+- **Commercial flights:** the same 30 m clearance from people and structures, but 100 m from industrial zones, embassies,
+  government buildings and other public buildings. They may fly up to 120 m above the ground. At night they must not fly over a
+  group of people or important buildings.
+- **Border strip:** no flying within 300 m of the border, in either category, without the Border Police's prior consent.
+- **Airports:** the page gives the 1.5 km rule under commercial flights only. A flight within 1.5 km of an airport or control
+  zone needs the prior consent of air traffic control or the airspace management cell. The page gives no airport distance for
+  non-commercial flights.
 
 ## Not covered yet
 
-- **Fees, minimum age, penalties, Remote ID and visitors.**
-- **The 1.5 km circle on our map** is drawn from the centre of every airport in OurAirports, so it is a guide.
+- **Fees, minimum age, penalties and Remote ID.** The page does not give them.
+- **Visitors.** The page covers foreign army, police and customs drones, which need approval from the competent Bosnian
+  institution. It does not say what a private visitor must do.
+- **Drones under 249 g.** The Rulebook starts at 249 g, and the page does not say what applies below it.
+- **Airport distance for non-commercial flights.** The map's 1.5 km circle for every airport comes from the commercial rule, so
+  it may overstate what applies to a recreational flight. This needs a decision for the lead, in `src/lib/airport-rules.ts`.

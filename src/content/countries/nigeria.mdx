@@ -5,45 +5,99 @@ authority: Nigeria Civil Aviation Authority (NCAA)
 authorityUrl: https://ncaa.gov.ng/documents/regulations/nig-cars-2023/
 registrationUrl: null
 whoMustRegister: >-
-  Part 21 of the Nig.CARs 2023, as a search summarised it, says RPAS in its classification
-  must be registered with the NCAA, with private and recreational operations covered in
-  section 21.1.1.5. A 2020 advisory circular says anyone entitled to possess a drone of
-  250 g or more should register it, while a 2023 circular says a small RPA is exempt from
-  aircraft registration but must carry an identification plate. We could not reconcile
-  them.
+  No one may operate an RPAS unless it is registered and the NCAA has issued a certificate of registration
+  (Nig.CARs Part 21, section 21.3.1.2). The rules we read give no weight floor for registration, but Part 21
+  and the NCAA's advisory circular AC-AWS061 disagree on who must register; see the body. Only Nigerian citizens,
+  permanent residents, Nigerian companies and government may own a registered RPAS (21.3.1.1).
 restrictiveness: 3
 restrictivenessReason: >-
-  The NCAA's rules ask for registration of drones from 250 g, a registration portal and,
-  for government and corporate flights, security clearance from the Office of the National
-  Security Adviser. This level is provisional: we saw search excerpts and the sources
-  disagree.
-registrationFee: null
-registrationWeightGrams: 250
+  Registration needs proof of ownership, a fee and an End User Certificate (21.3.1.2), and an operator applicant
+  may need security clearance (21.13.1.1). Part 21 also says a small RPAS (over 250 g) flies in sight only with the
+  NCAA's prior authorisation (21.2.1.1). Provisional: the recreational rules (21.1.1.5) do not ask for that
+  authorisation, so if the NCAA confirms they do not apply to recreation, the level would be 2.
+registrationFee: 'NGN 5,000 per RPA, and a NGN 20,000 recreational fee (2023 schedule, items 6.56.4 and 6.56.5)'
+registrationWeightGrams: null
 minOperatorAge: null
 remoteId: null
-insurance: null
+insurance: >-
+  Required (21.17.1.1): no RPAS may be operated unless a minimum insurance policy, commensurate with the risk, covers
+  the aircraft and third-party risks, and proof is given to the NCAA. The NCAA may waive it by type of operation.
+  The minimum sum is not set in the text we read.
 howToRegister:
   needed:
-    - 'Your drone''s details, for the NCAA''s RPAS registration portal'
-    - 'An identification plate showing your name and the drone''s serial number (a 2023 circular asks for it on a small RPA)'
+    - 'Proof that you may own the drone: a Nigerian citizen, a permanent resident, a Nigerian company, or government (21.3.1.1)'
+    - 'Proof of ownership, such as a bill of sale (21.3.1.2(2))'
+    - 'Proof of payment of the fee (21.3.1.2(3)). The 2023 schedule lists NGN 5,000 per RPA, and NGN 20,000 as the recreational fee'
+    - 'An End User Certificate (21.3.1.2(4)), and security clearance if it applies (21.13.1.1)'
+    - 'Proof of insurance (21.17.1.1)'
   steps:
-    - 'Check the weight: from 250 g, a 2020 advisory circular says to register.'
-    - 'Register at the NCAA''s RPAS portal (www.rpas.ncaa.gov.ng, named in the 2020 circular), or ask its Unmanned Aircraft Unit.'
-    - 'Ask the NCAA whether a small RPA is exempt, since a 2023 circular says so.'
+    - 'Apply for registration in the form and manner the NCAA specifies (21.3.1.2). The certificate is issued by the NCAA''s RPAS Portal (IS 21.4). We did not confirm the portal''s address.'
+    - 'Pay the fee and attach the proof of ownership and the End User Certificate.'
+    - 'Fix the identification plate to the drone, showing your name and the serial number (21.3.1.5). The 2023 circular asks for this on a small RPA.'
+    - 'Keep the certificate. It cannot be transferred (21.3.1.2).'
   validFor: null
-  afterwards: 'Check Part 21 of the Nig.CARs 2023 for the operating limits before you fly.'
+  afterwards: >-
+    Check the operating rules in Part 21 before each flight (21.1.1.5): below 400 ft AGL, within sight, at least 10 km from any
+    aerodrome, helipad or heliport, not over congested areas, and not in restricted, prohibited, danger or special use areas without
+    authorisation.
 lastVerified: 2026-10-26
 sources:
   - https://ncaa.gov.ng/documents/regulations/nig-cars-2023/
   - https://ncaa.gov.ng/media/l2vjnlce/nig-cars-part-21-remotely-piloted-aircraft-system.pdf
   - https://ncaa.gov.ng/media/unnntab3/ncaa-ac-aws061.pdf
+  - https://ncaa.gov.ng/media/n1xn4tzg/nig-cars-ncaa-schedule-of-fees-and-charges.pdf
 ---
 
-This guide rests on excerpts of the NCAA's Nig.CARs 2023 Part 21 and its advisory circulars that a web search returned on 26
-October 2026. **We did not open them ourselves.** The 2023 text exists in two versions with different effective dates (17 May and
-22 September 2023). Check the NCAA for any change.
+This guide follows the Nigeria Civil Aviation Authority's Nig.CARs Part 21 (Remotely Piloted Aircraft Systems, amendment 4, April
+2023, which the NCAA lists as effective 17 May 2023), its advisory circular AC-AWS061 (10 April 2023) and its schedule of fees and
+charges (effective 17 May 2023). We read all three PDFs ourselves on 26 October 2026. The schedule's figures are printed without a
+currency sign, and the schedule refers to naira. Check the NCAA for any change.
+
+## Who must register, and the conflict
+
+Part 21 says a classified RPAS must be registered, and "open" category drones, which need no prior authorisation, "must be
+registered" (21.1.1 and 21.2.1.1(b)). Section 21.3.1.2 bars anyone from operating an RPAS that is not registered.
+
+AC-AWS061 disagrees on small drones. Section 8.4.2 says a small RPA is "exempt from the requirement for aircraft registration" but
+should carry an identification plate. Its recreational guidance says micro and small RPAs under 7 kg used for recreation "require
+NCAA registration". The circular's definitions also put a small RPA at over 100 g to 7 kg, while Part 21 uses over 250 g to 25 kg.
+We could not reconcile these, so we leave the weight threshold empty. Ask the NCAA which rule applies to a small recreational drone.
+
+## Where and how you can fly
+
+Under 21.1.1.5, private and recreational flights are lawful only if they:
+
+- stay below 400 ft AGL;
+- stay within visual line of sight;
+- stay outside a 10 km radius of any aerodrome, helipad or heliport, or any other radius the NCAA or the Nigeria Airspace Management Agency prescribes;
+- avoid congested areas; and
+- comply with the rest of Part 21.
+
+Recreational flights are forbidden in restricted, prohibited, danger and special use areas published in the Aeronautical Information Publication.
+Private and educational flights need the NCAA's prior authorisation there. AC-AWS061 adds guidance that is not in Part 21: recreational
+drones should carry no camera, should fly only in daylight and good weather, and should stay at least 9 km (5 nautical miles) from
+aerodromes and heliports. That 9 km is advice, not the 10 km rule.
+
+## Visitors
+
+A foreign-registered RPAS may not fly in Nigeria unless it has proof of registration from another state and the NCAA authorises it
+(21.3.1.2). Ownership of a registered drone is limited to Nigerian citizens, permanent residents, Nigerian companies and government
+(21.3.1.1), so a visitor who is not a permanent resident cannot register a drone here. We did not find a visitor route beyond that.
+
+## Fees
+
+The 2023 schedule of fees and charges lists, in naira: recreational or processing fees, NGN 20,000 (item 6.56.4); and registration
+per RPA, NGN 5,000 (item 6.56.5). We could not tell whether both apply to a single recreational registration.
+
+## Penalties
+
+We did not find an offence and penalty list for recreational flyers in the text we read.
 
 ## Not covered yet
 
-- **Fees, minimum age, term, penalties, height and distance limits, Remote ID, insurance and visitors.**
-- **Distances from airports and no-fly areas:** none found, so the map draws no circle.
+- **Which weight class must register.** Part 21 and AC-AWS061 disagree (see above).
+- **Prior authorisation for a small RPA.** 21.2.1.1 requires it for a small RPAS flown in sight; 21.1.1.5 does not require it for recreation. Ask the NCAA.
+- **Whether recreational owners need security clearance** under 21.13.1.1 (the text applies to "any person or organization applying as RPAS operator").
+- **Minimum age, Remote ID, and the minimum insurance sum.**
+- **Registration validity, and the registration portal's address.**
+- **Penalties** for recreational breaches.

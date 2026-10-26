@@ -13,7 +13,8 @@ restrictiveness: 2
 restrictivenessReason: >-
   Register online with FOCA for CHF 10, using an ID scan and an eIAM login. Areas
   such as airports and prisons need the permission of the authority for that
-  area. We have not read FOCA's pilot training rules.
+  area. The usual remote-pilot exam is online (CHF 20); only the optional A2
+  exam is on site.
 registrationFee: 'CHF 10, with no end date'
 registrationWeightGrams: 0
 minOperatorAge: 12
@@ -22,9 +23,10 @@ remoteId: >-
   categories, with your UAS operator number entered. Class C0 drones, legacy
   drones and privately built drones are exempt.
 insurance: >-
-  For a drone over 250 g, FOCA asks for your liability insurance details
-  (policy number and insurer) when you register. Its page does not give a minimum
-  sum; ask your insurer.
+  FOCA's FAQ says operators must take out liability insurance with a guaranteed
+  sum of at least CHF 1 million before flying a drone of 250 g or more, and that
+  uninsured flying can be fined. You give the policy number and insurer when you
+  register. FOCA recommends insuring lighter drones too.
 howToRegister:
   needed:
     - 'A photo or scan of your passport or ID'
@@ -37,19 +39,23 @@ howToRegister:
     - 'Create an eIAM login with AGOV or CH-Login.'
     - 'Log in to FOCA''s dLIS platform, create a private account, and choose Domains, then Drones (UAS), then Personal UAS Operator Number, then Register as UAS Operator.'
     - 'Pay the CHF 10 fee.'
+    - 'Take the remote-pilot exam. The online A1/A3 exam costs CHF 20 and is valid for five years in all EASA states. Only C0 drones, and legacy or home-built drones under 250 g flown in A1, are exempt (FOCA still recommends it).'
     - 'Put your UAS operator number (the form CHExxxxxxxxxxxxxx-xyz) clearly on the drone, and enter it into the drone''s Remote ID if it has one.'
     - 'Visiting? If you are already registered in another EASA state, you do not register again. If you live outside the EASA states and are not registered in one, register in Switzerland.'
   validFor: 'No end date. FOCA says it is valid in all EASA member states.'
   afterwards: 'Before each flight, look at FOCA''s interactive drone map and the Daily Airspace Bulletin for restrictions.'
-lastVerified: 2026-10-18
+lastVerified: 2026-10-25
 sources:
   - https://www.bazl.admin.ch/en/registration-drone-operator
   - https://www.bazl.admin.ch/en/flight-rules-drones
   - https://www.bazl.admin.ch/en/geographical-flight-restrictions
+  - https://www.bazl.admin.ch/de/faq-drohnen
+  - https://www.bazl.admin.ch/de/fernpiloten
 ---
 
 This guide follows the Federal Office of Civil Aviation (FOCA, in German BAZL) pages on registering as a drone operator,
-flight rules and geographical flight restrictions, read on 18 October 2026. FOCA's pages cite EU Regulation 2019/947 and
+flight rules and geographical flight restrictions, read on 18 October 2026 and again on 25 October 2026, with its German FAQ and
+remote-pilot pages (our translations) read on 25 October 2026. FOCA's pages cite EU Regulation 2019/947 and
 the Swiss ordinance VLK (SR 748.941). Check FOCA for any change.
 
 ## Registration
@@ -60,7 +66,9 @@ it is under 250 g but has a camera, so its operator registers. The drones themse
 
 - **Where:** FOCA's [dLIS platform](https://www.dlis.bazl.admin.ch), with an eIAM login (AGOV or CH-Login) and an ID scan.
 - **Fee and term:** CHF 10, valid for an unlimited period in all EASA member states.
-- **Age:** 12 to register. Under 16, you give the name of a legal representative.
+- **Age:** 12 to register. Under 16, you give the name of a legal representative. FOCA's FAQ says a drone may be flown in
+  the open category from age 12 and in the specific category from 14, and that a child under 12 may fly one under the
+  direct supervision of someone aged 16 or over. It adds that the minimum age can differ from one EU country to another.
 - **Your number:** you get a UAS operator number (the form CHExxxxxxxxxxxxxx-xyz). It must be clearly visible on the
   drone, and flying without it can be fined.
 - **Visitors:** register where you live if that is an EASA state, and you may fly in any other. You cannot be registered
@@ -95,11 +103,24 @@ and the [Daily Airspace Bulletin](https://www.skybriefing.com/dabs) before each 
 - **Remote ID** must be on during flights in the open and specific categories, with your operator number entered.
   Class C0 drones, legacy drones and privately built drones are exempt.
 - **Insurance:** for a drone over 250 g you give your liability insurance details when you register. For a lighter drone
-  you write "dronebelow250g" in those fields. We did not find a minimum sum on FOCA's pages.
+  you write "dronebelow250g" in those fields. FOCA's FAQ gives the minimum: "mit einer Garantiesumme von mindestens 1 Million
+  Franken" (our translation: with a guaranteed sum of at least CHF 1 million), for drones of 250 g or more, and recommends
+  insuring lighter ones. The registration page says "more than 250 g" where the FAQ says "250 g or more", so a drone of exactly
+  250 g is unclear.
+
+## Pilot test and penalties
+
+- **Test:** FOCA's FAQ says remote pilots must in principle train and pass an exam. The A1/A3 exam is online, costs CHF 20,
+  is valid for five years in all EASA states and has a minimum age of 12. The A2 certificate needs the A1/A3 certificate,
+  practical self-study and an on-site theory exam in Ittigen (BE), Illnau (ZH) or Lausanne (VD). FOCA's page says pilots of
+  class C0, legacy drones under 250 g or privately built drones under 250 g flying in A1 do not need a certificate, but
+  recommends one.
+- **Penalties:** FOCA says that breaking the rules is punishable ("strafbar"), that a drone without the operator number
+  can be fined, and that flying uninsured can be fined. It gives no amounts on the pages we read, and the penalty text in
+  the aviation act was not readable.
 
 ## Not covered yet
 
-- **Pilot training and exams.** FOCA's remote-pilot page was not read, so what each drone needs is unverified.
 - **Airport distances.** FOCA gives no distance on the pages we read; the map above is the source.
 - **Model aircraft, privacy and cantonal rules**, and the rules for legacy and privately built drones by weight.
-- **Penalties** beyond the fine for a missing operator number.
+- **Penalty amounts.** FOCA names the offences but no figures.

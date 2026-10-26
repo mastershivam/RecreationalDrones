@@ -265,13 +265,18 @@ describe('EU guides', () => {
 
 	it.each(euGuides)('$file cites EASA and links its own authority', ({ data }) => {
 		expect(data.sources.some((url) => new URL(url).hostname === 'www.easa.europa.eu')).toBe(true);
-		expect(data.registrationWeightGrams).toBe(0);
+		// EASA's 0 g (every camera drone), or null where the state's own threshold is unread.
+		expect([0, null]).toContain(data.registrationWeightGrams);
 		// A registration link is optional (a page that did not load is left out), but if given it is a source.
 		if (data.registrationUrl) expect(data.sources).toContain(data.registrationUrl);
 	});
 
-	it.each(euGuides)('$file leaves the minimum age unverified, because a state may lower it', ({ data }) => {
-		expect(data.minOperatorAge).toBeNull();
+	// EASA's 16 may be lowered by a state, so an age is only set once the state's own authority gives it.
+	it.each(euGuides)('$file leaves the minimum age unverified unless its own authority gives one', ({ data }) => {
+		if (data.minOperatorAge === null) return;
+		expect(data.minOperatorAge).toBeGreaterThanOrEqual(12);
+		expect(data.minOperatorAge).toBeLessThanOrEqual(18);
+		expect(data.sources.some((url) => new URL(url).hostname !== 'www.easa.europa.eu')).toBe(true);
 	});
 });
 
@@ -307,8 +312,8 @@ describe('Canada guide', () => {
 		for (const fact of ['**30 m (100 ft)**', '**5.6 km (3 nautical miles)**', '**1.9 km (1 nautical mile)**']) expect(file).toContain(fact);
 	});
 
-	it('leaves the fee unverified, since the page text does not give one', () => {
-		expect(data.registrationFee).toBeNull();
+	it('gives the registration fee from Transport Canada, and still says what is not covered', () => {
+		expect(data.registrationFee).toContain('10.17');
 		expect(file).toContain('## Not covered yet');
 	});
 });
@@ -372,10 +377,12 @@ describe('Japan guide', () => {
 		expect(file).toContain('densely inhabited districts');
 	});
 
-	it('says the airport distance and the PDF leaflets were not read', () => {
+	it('gives the airport surfaces from the JCAB guidelines, and says each airport’s outline and the permission fines were not read', () => {
+		expect(file).toContain('**6 km**');
+		expect(file).toContain('**24 km**');
 		const notCovered = file.slice(file.indexOf('## Not covered yet'));
-		expect(notCovered).toContain('How far the airport areas reach');
-		expect(notCovered).toContain('PDF leaflets');
+		expect(notCovered).toContain('exact outline of each airport area');
+		expect(notCovered).toContain('Fines for flying without permission');
 	});
 });
 
@@ -433,11 +440,13 @@ describe('how to register', () => {
 		expect(of('THA').validFor).toContain('2 years');
 	});
 
-	it('gives all 27 EU states the same EASA steps, and leaves their national requirements unread', () => {
+	it('gives each EU state the EASA steps while its national requirements are unread', () => {
 		const eu = all.filter((g) => ['AUT', 'DEU', 'FRA', 'SWE', 'SVK'].includes(g.data.iso3));
 		for (const { data } of eu) {
-			expect(data.howToRegister!.steps[1]).toContain('once and not each drone');
-			expect(data.howToRegister!.needed[0]).toContain('We have not read the list');
+			// National steps may reuse EASA's wording once read, so only the "unread" side is pinned.
+			if (data.howToRegister!.needed[0].includes('We have not read the list')) {
+				expect(data.howToRegister!.steps[1], data.iso3).toContain('once and not each drone');
+			}
 		}
 	});
 });

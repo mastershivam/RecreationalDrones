@@ -5,57 +5,125 @@ authority: Belgian Civil Aviation Authority (FPS Mobility and Transport)
 authorityUrl: https://mobilit.belgium.be/
 registrationUrl: https://drones.mobilit.fgov.be/login
 whoMustRegister: >-
-  Register yourself once, not each drone, with your home EU country's authority
-  (visitors: the first EU country you fly in). Needed if a drone weighs 250 g or
-  more or has a camera.
+  You register yourself as the operator, not each drone. Belgium requires it of
+  anyone who lives in Belgium or has a head office there, once they own a drone
+  with a camera or other sensor, whatever its weight. For other drones, EASA's
+  rule applies (250 g or more). Individuals register in the EU country where they
+  live. The DGLV pages we read do not say how a visitor from outside the EU
+  registers, so EASA's rule applies there.
 restrictiveness: 2
 restrictivenessReason: >-
-  Register online with your national authority and, for most drones, pass an
-  online training exam (EASA). Steps in your country may add to this; we have
-  not read them.
-registrationFee: null
+  Register online on Belgium's Drone Portal (free) and take the free online A1/A3
+  course if your drone needs it. Some geographical zones need the zone authority's
+  permission, or an operating permit, before you fly. The Drone Portal login is
+  with eID or itsme, and we could not tell what a visitor uses.
+registrationFee: 'Free'
 registrationWeightGrams: 0
-minOperatorAge: null
-remoteId: >-
-  EASA says open-category drones, with limited exceptions, must have a remote
-  identification system.
+minOperatorAge: 14
+remoteId: null
 insurance: >-
-  EASA requires insurance for a drone over 20 kg, and says most member states
-  also require third-party insurance for lighter drones. Check Belgium's rules.
+  The Royal Decree of 8 November 2020 (Art. 12) requires third-party liability
+  insurance for open-category operators, except for drones used only privately and
+  under 900 g. A drone of 20 kg or more must be insured under EU Regulation 785/2004.
+  The DGLV's Drone Portal page says to take out insurance first, because
+  registration asks for the insurance number. No minimum sum is given.
 howToRegister:
   needed:
-    - 'Whatever your national authority asks for. We have not read the list for this country.'
+    - 'A login to the Drone Portal. The DGLV says to log in with eID or itsme. We did not find what a visitor without either uses.'
+    - 'Your insurance policy number, since registration asks for it (see the insurance section for the 900 g exception).'
   steps:
-    - 'Check that you need to register: yes if any drone weighs 250 g or more or has a camera or other sensor that could detect personal data. A toy under 250 g is exempt.'
-    - 'Register yourself, once and not each drone, with the authority of the EU country where you live. A visitor from outside the EU registers in the first EU country where they fly.'
-    - 'Complete the online training and exam if your drone needs it. Most drones of 250 g or more do (C1, C3, C4, and older drones). C2 needs more, and C0 and drones under 250 g need none.'
-    - 'Put your operator registration number on every drone you own as a sticker, and enter it into the drone''s Remote ID if it has one.'
-  validFor: 'Set by the authority you register with. It is valid in every EASA member state.'
-  afterwards: 'Before you fly in any EU country, check that the place is not in a geographical zone that country has published.'
-lastVerified: 2026-10-17
+    - 'Check that you need to register: yes if you live in Belgium or have a head office there and own a drone with a camera or other sensor, whatever its weight. Otherwise follow EASA''s rule (250 g or more, or a sensor).'
+    - 'Register yourself, once and not each drone, as an operator. Individuals register in the EU country where they live. A Belgian operator does not register again in another EU state.'
+    - 'Log in to the Drone Portal (eID or itsme) and register as an operator. The registration is free.'
+    - 'Take the free online A1/A3 course and exam on the Drone Portal if your drone needs it (EASA''s rules above). The certificate is valid for 5 years.'
+    - 'Put your operator number on every drone, as EASA requires, and enter it into the drone''s Remote ID if it has one.'
+  validFor: 'The DGLV pages we read give no end date for the operator registration. The A1/A3 and A2 certificates are valid for 5 years. The registration is valid in every EASA member state.'
+  afterwards: 'Before each flight, check the geographical zone and its conditions on the Droneguide map. Where a zone needs it, get the permission first.'
+lastVerified: 2026-10-26
 sources:
   - https://www.easa.europa.eu/en/domains/drones-air-mobility/operating-drone/open-category-low-risk-civil-drones
   - https://www.easa.europa.eu/the-agency/faqs/drones-uas
   - https://www.easa.europa.eu/en/domains/civil-drones/naa
   - https://drones.mobilit.fgov.be/login
+  - https://mobilit.belgium.be/en/aviation/flying-operating/drones-uas
+  - https://mobilit.belgium.be/en/node/1151
+  - https://mobilit.belgium.be/en/node/2416
+  - https://mobilit.belgium.be/en/node/339
+  - https://mobilit.belgium.be/en/node/444
+  - https://mobilit.belgium.be/en/node/6138
+  - https://mobilit.belgium.be/en/node/6145
+  - https://mobilit.belgium.be/en/node/6150
+  - https://www.ejustice.just.fgov.be/cgi_loi/article.pl?language=nl&lg_txt=n&type=&sort=&numac_search=2020043563&caller=SUM&view_numac=2020043563n
+  - https://map.droneguide.be/
 ---
 
 import EasaRules from '../../components/EasaRules.mdx';
 
-Belgium applies the EU's common drone rules, set by the European Union Aviation Safety Agency (EASA). This
-guide gives those rules, then links to Belgium's own authority for what is national.
+Belgium applies the EU's common drone rules, set by the European Union Aviation Safety Agency (EASA). This guide gives
+those rules, then Belgium's own, from the pages of the FPS Mobility and Transport's Directorate-General for Aviation
+(DGLV) and the Royal Decree of 8 November 2020 (in the version on the Belgian official gazette's database), read on
+26 October 2026. The DGLV's pages were read in Dutch, so the quotes below are our translation. Check the DGLV for any change.
 
 <EasaRules />
 
 ## In Belgium
 
-- **Register:** [Belgium's registration page](https://drones.mobilit.fgov.be/login).
-- **Where you can fly:** [Belgium's map of geographical zones](https://map.droneguide.be/).
+- **Register:** [Belgium's Drone Portal](https://drones.mobilit.fgov.be/login).
+- **Where you can fly:** [Droneguide, the map of geographical zones](https://map.droneguide.be/), which the DGLV's
+  geozone page links to.
 - **Authority:** [Belgian Civil Aviation Authority (FPS Mobility and Transport)](https://mobilit.belgium.be/).
+
+### Registration
+
+- **Who:** the DGLV says anyone who lives in Belgium or has a head office there must register as an operator once they own
+  a drone with a camera or sensor, whatever its weight. The drone itself is not registered.
+- **Fee:** free. The DGLV's registration page says "Registreer u gratis als exploitant" (register as an operator free of
+  charge). The fee list in the Royal Decree names no fee for an open-category operator.
+- **Term:** the pages we read give no end date for the operator registration. The A1/A3 and A2 pilot certificates are
+  valid for 5 years.
+- **Age:** the Royal Decree (Art. 7) sets the minimum age for a remote pilot at **14** for A1 and A3, and **16** for A2.
+  It names no age for the operator registration, so the map's age field shows 14, the lower of the two pilot ages.
+- **Pilot test:** the A1/A3 course and exam are online and free, and need a Drone Portal login with eID or itsme. The
+  A2 certificate is a further step.
+- **Visitors:** the DGLV's FAQ says an individual registers in the Member State where they live. A Belgian operator does not
+  register again in another EU state. A valid EU certificate is valid in all EU states, and questions about it go to the
+  authority that issued it. The pages we read do not say how someone from outside the EU registers.
+- **Number:** shown on every drone, as EASA requires, and entered into its Remote ID if it has one.
+
+### Insurance
+
+The Royal Decree (Art. 12) requires open-category operators to hold third-party liability insurance for injury and damage,
+unless every drone is used only privately and weighs under 900 g. The DGLV's FAQ says the same duty applies to a drone
+under 20 kg for an operator who flies only in the open category. A drone of 20 kg or more must be insured under EU
+Regulation 785/2004. The DGLV's registration page says "Sluit altijd een verzekeringspolis af" (always take out an insurance policy), because
+registration asks for the policy number. The FAQ warns that some policies exclude certain weights or heights. We found no minimum sum.
+
+### Where you cannot fly without permission
+
+The DGLV publishes the geographical zones on Droneguide, and says a zone can prohibit flights, restrict flights to certain
+drones, or make flights subject to prior permission. An operating permit may be needed to fly in some zones. The DGLV's
+geozone page does not give a distance from airports, so the map is the source. Our circles are not a Belgian rule.
+
+### Penalties
+
+The Royal Decree (Art. 11) lets the minister ban a remote pilot from flying for up to 24 months, or suspend or withdraw
+their competence certificate, for intentional or negligent breaches of the open-category rules. It lets the minister ban
+an operator from operating for up to 24 months for breaches of the EU operator rules. We found no fine amounts in the
+pages we read.
 
 ## Not covered yet
 
-- **Belgium's national rules.** We have not read Belgium's own drone rules, so what we say here is only what EASA says
-  applies everywhere. Fees, how long registration lasts, the minimum age (a state may lower EASA's 16 to 12),
-  insurance, penalties and any local bans are all unverified. Check the authority above before you fly.
-- **Where flying is banned.** Belgium's geographical zones are on the map linked above, and we have not copied them.
+- **Fines.** The DGLV pages and the Royal Decree give no amounts. Any criminal penalties under Belgian aviation law are
+  unread.
+- **How a visitor from outside the EU registers.** The Drone Portal login is with eID or itsme, and the pages do not say
+  what a visitor from outside Belgium uses.
+- **How long operator registration lasts.** The pages we read give no period.
+- **Remote ID.** The DGLV's pages we re-read did not give the Remote ID rules, so the EASA rule above is the only guide.
+- **Exam details.** The number of questions, time limit, pass mark and attempts for the A1/A3 exam are not in the pages we
+  read.
+- **The zones themselves.** Droneguide is the source, and the circles on our map are not a Belgian rule.
+- **Model aircraft clubs.** The DGLV says that outside a recognised model-aircraft field, the aircraft needs a C4 class
+  identification label and the pilot needs an A1/A3 certificate. We have not read that section in full.
+- **Privacy (GDPR).** The DGLV's legal page says remote pilots must consider the GDPR when recording. We have not read the
+  privacy rules.
+- **The specific category.**

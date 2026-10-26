@@ -5,58 +5,93 @@ authority: Directorate General of Civil Aeronautics (DGAC)
 authorityUrl: https://www.dgac.gob.cl/como-operar-un-dron-en-chile/
 registrationUrl: null
 whoMustRegister: >-
-  DAN 151 (edition 3, May 2024), as summarised by a search of the DGAC's documents, says
-  the owner must enter a remotely piloted aircraft of up to 9 kg of take-off weight in the
-  DGAC's special register before operating it. A newer edition 4 (April 2026) excepts
-  aircraft of up to 250 g flown at no more than 100 ft, if it is in force.
+  Under DAN 151 edition 3 (May 2024), the owner must enter each remotely piloted aircraft of up to 9 kg take-off weight in
+  the DGAC's special register before operating it, and anyone operating under the rule needs a DGAC authorisation for each
+  operation. Edition 4 (April 2026) exempts recreational flights on private land, with the owner's permission, of aircraft up
+  to 250 g flown no higher than 100 ft (30 m). We could not confirm that edition 4 is in force.
 restrictiveness: 3
 restrictivenessReason: >-
-  DAN 151 asks for a registered aircraft, a remote pilot credential (a notarised declaration
-  and a written exam), the DGAC's authorisation to operate and third-party insurance. This
-  level is provisional: we saw search excerpts of the documents, not the documents, and a
-  2026 edition may change them.
+  DAN 151 edition 3 needs a registered aircraft, a remote-pilot credential (18 or over, training certified by an approved
+  company, and a written exam at 75%), a DGAC authorisation before each operation, and
+  insurance. That is permission before flying, so level 3. Edition 4 would remove most of this for small recreational
+  drones, so the level is provisional until we know which edition applies.
 registrationFee: null
-registrationWeightGrams: null
+registrationWeightGrams: 0
 minOperatorAge: 18
-remoteId: null
+remoteId: >-
+  DAN 151 edition 3 says nothing about Remote ID. Edition 4 requires a remote identification system for BVLOS flights.
 insurance: >-
-  DAN 151 (edition 3) as summarised says the pilot needs third-party liability insurance
-  authorised by the Civil Aeronautical Board.
+  DAN 151 edition 3 requires an insurance policy (for a non-profit operator with a special operating certificate, CEO) or
+  the Civil Aeronautical Board's resolution (for an operator with an air operator certificate, AOC). The operator must carry
+  it when flying and show it in the DGAC authorisation application.
 howToRegister:
   needed:
-    - 'To be at least 18 for the pilot credential'
-    - 'A notarised sworn declaration that you had theory and practical instruction on your drone model'
-    - 'Your drone''s maker, brand, model, serial number and type of motor, in a notarised application'
+    - 'To be at least 18 for the remote-pilot credential'
+    - 'A signed sworn statement, with your fingerprint and a copy of your ID, that you were taught the drone model in theory and practice, plus the training certificate from an AOC or CEO company'
+    - 'A signed application to register the drone, with your fingerprint and a copy of your ID, sent by email or with an advanced electronic signature (FEA)'
+    - 'The drone''s manufacturer and country, brand, model, serial number and factory weight, with the maker''s specifications'
+    - 'For the DGAC authorisation: the registration card, the credential, the insurance, a KML or KMZ file of the flight area, and the owner''s or manager''s permission for the place'
   steps:
-    - 'Register the drone in the DGAC''s special register before operating it; you get a registration card.'
-    - 'Pass the written exam on DAN 151, DAN 91 and meteorology and aerodynamics (pass mark 75%) and pay the aeronautical fee, to get the credential (valid 12 months).'
-    - 'Get the DGAC''s authorisation to operate.'
-    - 'Check DAN 151 edition 4 (2026), which moves the steps to a platform called SIGO.'
-  validFor: 'The credential lasts 12 months and is renewed with a new written exam.'
-  afterwards: 'Carry the registration card, the credential and the authorisation when you fly, and keep the drone in direct sight.'
+    - 'Register the drone in the DGAC special register before operating it. The DGAC issues a registration card (DAN 151, 151.201 and 151.205).'
+    - 'Complete the training with an AOC or CEO company, and pass the written exam on DAN 151, DAN 91, NOTAM, METAR and aerodynamics at 75% (151.303). Edition 4 instead sets 30 hours of theory and 5 of flight.'
+    - 'Apply for the credential on SIPA (https://sipa.dgac.gob.cl/) and pay the aeronautical fee there (151.303).'
+    - 'Apply to the DGAC for authorisation to operate, using the form in Appendix A, with the documents listed above (151.101).'
+  validFor: 'The credential lasts 36 months and is renewed with a new written exam (151.307). The DGAC authorisation lasts up to 6 months (151.101).'
+  afterwards: 'Carry the registration card, the credential, the insurance and the DGAC authorisation when you fly. Keep the drone in direct visual sight, and do not fly at night without a special DGAC authorisation or within 2 km of a runway''s extended centreline or 1 km of its side (151.103).'
 lastVerified: 2026-10-26
 sources:
-  - https://www.dgac.gob.cl/como-operar-un-dron-en-chile/
   - https://www.dgac.gob.cl/wp-content/uploads/2024/05/DAN-151-ED3-27MAY2024.pdf
   - https://www.dgac.gob.cl/wp-content/uploads/2026/04/DAN-151-ED4-24MAR2026-Opinin.pdf
 ---
 
-This guide rests on excerpts of the DGAC's pages and its DAN 151 documents that a web search returned on 26 October 2026. The documents are
-in Spanish and the translations are ours. **We could not open the pages or the PDFs themselves** (the DGAC site returned only its title to our
-fetch tool), so read them before you rely on this. Check the DGAC for any change.
+This guide follows DAN 151 (Spanish for the drone rule), read ourselves on 26 October 2026 in two editions: edition 3 (May 2024) and
+edition 4 (April 2026). The translations are ours. The DGAC's public page on drone operation loaded without its text, so we
+used the DAN documents. Check the DGAC for any change, and for which edition is in force.
 
-## Which rules apply
+## Which edition applies
 
-DAN 151 covers remotely piloted aircraft (RPAS) of up to 9 kg of take-off weight. Operation away from populated areas also falls under DAN 91, and
-secondary sources say it needs no credential or registration there, but still the DGAC's authorisation. We could not confirm that on a DGAC page.
+Edition 3 applies to operations over populated areas, for profit or not (151.003). Its general rules apply to any aircraft
+up to 9 kg take-off weight (151.005).
 
-## Registration, credential and authorisation
+Edition 4 applies to populated and non-populated areas, and its amendment table still has placeholder numbers
+("XX/YYY/2026"), so we cannot say it is in force. Its section 151.103(h) exempts recreational flights from authorisation,
+registration and credential, if they take place on private land with the owner's permission, the aircraft weighs 250 g or
+less, and it stays at or below 100 ft (30 m).
 
-To fly, DAN 151 (edition 3) as summarised asks for the registration card, the pilot's credential and the DGAC's authorisation, direct sight of the
-aircraft at all times, and third-party insurance. The file name of edition 4 suggests a draft for consultation, so we cannot say if it applies yet.
-It renames the credential "Credencial de Operador de RPAS" and excepts aircraft of up to 250 g flown at up to 100 ft.
+## Registration and authorisation (edition 3)
+
+- **Register** each drone with the DGAC special register before operating it (151.201). The application is signed by hand
+  with a fingerprint, or with an advanced electronic signature, and sent with a copy of your ID. The DGAC then issues a
+  registration card (151.203, 151.205). The text gives no fee.
+- **Credential** (151.303): 18 or over; a sworn statement that you were taught the model in theory and practice, with the
+  training certificate from an AOC or CEO company; a written exam at 75% on DAN 151, DAN 91, NOTAM, METAR and aerodynamics.
+  Apply on SIPA and pay the aeronautical fee there (DAR 50). The credential lasts 36 months (151.307). Edition 4 instead
+  sets 30 hours of theory and 5 of practice under a DGAC programme.
+- **Authorisation** (151.101): before operating, apply to the DGAC on its Appendix A form with the registration card, the
+  credential, the insurance, a KML or KMZ file of the area, and the owner's or manager's permission. It lasts up to 6 months.
+  Flying in a restricted zone also needs the DGAC's authorisation (151.103(g)(7)).
+
+## Limits (edition 3)
+
+- Fly with direct visual contact with the drone at all times (151.305), in visual meteorological conditions (151.103(c)).
+- Do not fly in prohibited or danger zones, or in restricted zones unless the DGAC authorises it. Zones are published in the AIP Chile
+  and by NOTAM (151.105(b)).
+- Do not fly over military bases, prisons or strategic installations (151.105(a)).
+- Do not fly at night without a special DGAC authorisation (151.103(g)(10)).
+- Do not fly within 2 km of the extended centreline of a runway, measured from the threshold, or within 1 km of its side (151.103(g)(5)).
+  Edition 4 instead sets a 3 nautical mile radius around an aerodrome's centre, unless the aerodrome authority gives special permission.
+- Do not fly more than 500 m away at a height above 400 ft (120 m) in direct visual contact (151.103(g)(11)).
+
+## Penalties
+
+DAN 151 refers breaches to the DAR 51 infraction procedure, and to the public prosecutor where a crime is involved (151.103(e)).
+It gives no fines.
 
 ## Not covered yet
 
-- **Fees, penalties, height and distance limits, Remote ID and visitors.**
-- **Distances from airports and no-fly areas:** none found, so the map draws no circle.
+- **Fees.** The aeronautical fee is set in DAR 50, which we did not read, so no amount is given.
+- **Penalty amounts.** The DAR 51 procedure is not in the text we read.
+- **Individual flyers.** Edition 3 requires a CEO (for non-profit operators) and insurance under a CEO, which are written for organisations. We could not tell from the text whether a private person flying for fun needs a CEO.
+- **Flying over non-populated areas under edition 3**, and any remote-identification rule in edition 3.
+- **Visitors.** The DAN texts do not say whether a visitor may fly.
+- **Distances from airports and no-fly areas.** Edition 3 gives the runway rule above; edition 4 gives the 3-mile rule. We did not map either.

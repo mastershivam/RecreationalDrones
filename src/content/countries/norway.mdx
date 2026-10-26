@@ -15,11 +15,21 @@ restrictivenessReason: >-
   Register at flydrone.no for NOK 230 a year and pass a free online exam, which
   alone would be level 2. The authority also says to register the use of cameras
   and other sensors with the Norwegian National Security Authority before flying,
-  a second authority, and flying in central Oslo needs permission.
+  a second authority. That authority's own page requires it of foreign aircraft
+  visiting Norway, whatever the sensor, but of others only for sensors other than
+  photo and video. The level holds for a visitor; by NSM's page alone a resident
+  with a plain camera drone would not need it. Flying in central Oslo needs
+  permission.
 registrationFee: 'NOK 230 a year'
 registrationWeightGrams: 0
-minOperatorAge: null
-remoteId: null
+minOperatorAge: 16
+remoteId: >-
+  The authority says drones of class C1, C2 and C3 must be fitted with Remote ID
+  by the manufacturer, and every drone flown in the specific category must have
+  it. In the open category it does not apply to home-built drones, class C0 and C4
+  drones, or old drones without a class mark. If your drone has Remote ID, enter
+  your operator number into it before flying. The page says it may become
+  required in some areas later.
 insurance: >-
   The authority says every drone except a CE-marked toy needs third-party
   liability insurance of at least 750,000 SDR (special drawing rights). You enter
@@ -38,10 +48,10 @@ howToRegister:
     - 'Pay the annual fee of NOK 230.'
     - 'For a drone of 250 g or more, take the free online course and exam for A1 and A3 through the link on flydrone.no. The certificate then appears on "My page".'
     - 'Mark the drone with the operator number from "My page" (the form NOR87astrdge12k-xyz). The number on your pilot certificate does not count.'
-    - 'Before flying with a camera or other sensor, register its use with the Norwegian National Security Authority.'
+    - 'Visiting with a camera or other sensor? The authority says to register its use with the Norwegian National Security Authority before flying. That authority''s own page asks foreign aircraft visiting Norway to notify it of any sensor, photo and video included.'
   validFor: 'The fee is annual. The page gives no end date and does not say how renewal works. A registration from any EASA state is valid in Norway.'
   afterwards: 'Before each flight, check dronesoner.no for restricted areas and stay 5 km from airports unless the airport tower gives permission.'
-lastVerified: 2026-10-19
+lastVerified: 2026-10-25
 sources:
   - https://luftfartstilsynet.no/en/drones/registrering-og-soknader/registration/
   - https://www.luftfartstilsynet.no/en/drones/faq---drones---all/new-eu-regulations/who-needs-to-register/
@@ -49,11 +59,18 @@ sources:
   - https://www.luftfartstilsynet.no/en/drones/veiledning/open-category/
   - https://www.luftfartstilsynet.no/en/drones/no-drone-zones/
   - https://www.luftfartstilsynet.no/en/drones/veiledning/insurance/
+  - https://www.luftfartstilsynet.no/droner/droneregler/droneregler
+  - https://www.luftfartstilsynet.no/om-oss/nyheter/nyheter-2024/brot-droneregler--to-fikk-gebyr/
+  - https://www.luftfartstilsynet.no/droner/dronetilsyn/dronetilsyn/
+  - https://nsm.no/fysisk/luftbarne-sensorsystemer/
+  - https://nsm.no/areas-of-expertise/physical-security/airborne-sensor-systems/
+  - https://dronesoner.no/
 ---
 
 This guide follows the Civil Aviation Authority Norway (Luftfartstilsynet) pages on registration, the open category, no-drone
-zones, insurance and visiting Norway, read on 19 October 2026. Norway applies EASA's drone rules. Check the authority for
-any change.
+zones, insurance and visiting Norway, read on 19 October 2026, with its Norwegian pages on the pilot age limit and Remote ID, an
+enforcement news item and the National Security Authority's (NSM) pages on sensors, read on 25 October 2026. **The Norwegian
+pages are quoted in our own English translation.** Norway applies EASA's drone rules. Check the authority for any change.
 
 ## Registration
 
@@ -65,9 +82,20 @@ Register as a UAS operator at [flydrone.no](https://www.flydrone.no/). The autho
 - **Your number:** you get an operator number on "My page" that goes on the drone.
 - **Visitors:** a registration from any EASA state is valid in Norway. Visitors from outside EASA register in an EASA state,
   preferably the first one where they fly.
-- **Age:** the pages we read give no minimum age.
-- **Cameras and sensors:** the visitor page says that before flying with a camera or other sensors you must register their
-  use with the Norwegian National Security Authority. We have not checked how this applies to a hobby flight.
+- **Age:** you must be at least 16 to fly. This does not apply to a home-built drone under 250 g that flies slower than
+  19 m/s, or to a class C0 drone that is also a toy. Someone under 16 who has the course and exam may fly under the
+  supervision of a person aged 16 or over. The authority says that for a toy drone the age limit, registration, course and
+  insurance rules do not apply.
+- **Cameras and sensors:** the authority's visitor page says that before flying with a camera or other sensors you must
+  register their use with the Norwegian National Security Authority (NSM), for EU and non-EU visitors alike. NSM's own page
+  says: "Utenlandske luftfartøy på besøk i Norge skal varsle NSM dersom de bruker sensorer over norsk territorium" (our
+  translation: foreign aircraft visiting Norway must notify NSM if they use sensors over Norwegian territory), including
+  "foto, video og andre avanserte sensorer". For everyone else NSM says the duty covers "andre sensorer enn
+  foto/video utenfor forbudsområdene" (our translation: sensors other than photo and video outside the prohibition zones).
+  So a resident flying a plain camera drone outside the prohibited zones has no duty to notify on that page. Neither page
+  mentions hobby flights, and neither says whether "foreign aircraft" means a foreign-registered drone or a foreign
+  pilot, so a visitor should notify. Notifying NSM does not replace the airspace rules. NSM keeps a map of the sensor
+  prohibition zones, where photo and video from the air are banned.
 
 ## Where and how you can fly
 
@@ -94,7 +122,10 @@ The authority's no-drone-zones page lists:
   military areas and vessels. National parks and other protected areas may have their own rules, which the Norwegian
   Environment Agency's maps show.
 
-Use [dronesoner.no](https://dronesoner.no/) for the geographical zones before each flight.
+Use [dronesoner.no](https://dronesoner.no/) for the geographical zones before each flight. The authority links to it as the
+map of UAS geographical zones. The site does not name its operator and carries no disclaimer, and it offers its fixed zones
+as downloads (ED-269 and ED-318 JSON, and KML) under the Norwegian licence for open government data, NLOD 2.0. A notice on
+it sends you to ippc.no for current NOTAMs, so it is not the whole picture for temporary bans.
 
 ## Pilot test and insurance
 
@@ -102,10 +133,18 @@ Use [dronesoner.no](https://dronesoner.no/) for the geographical zones before ea
   flydrone.no, in English. A2 needs more: an online course, then the exam at a driver and vehicle licensing office in Norway.
 - **Insurance:** see the facts above. The authority says all drones except CE-marked toys need cover of at least 750,000 SDR.
 
+## Penalties
+
+No page gives a fine table. The authority says it can impose a "tvangsmulkt eller overtredelsesgebyr" (our translation: a
+coercive fine or an infringement fee) to make people comply, and can withdraw an approval or certificate. Its 2024 news
+item reports two fees it imposed: NOK 2,000 on a private person who flew without registration, course and exam, and
+NOK 30,000 on a company that flew outside the open-category rules; the same item says police fines start "fra 12.000
+kroner og oppover" (from NOK 12,000 upwards). These are individual cases, not a tariff.
+
 ## Not covered yet
 
-- **Remote ID.** None of the pages we read mention it.
-- **Penalties** and the **minimum age** are not on the pages we read.
-- **The National Security Authority's sensor registration:** what it asks and whether it applies to hobby flights.
+- **Hobby flights and NSM:** neither the authority nor NSM says whether the sensor notification applies to a hobby flight
+  as such (see above).
+- **Penalties:** only the cases above; no scale and no legal provision.
 - **Nature reserves and national parks:** each has its own rules that we have not read.
 - **Airport distances:** the 5 km on our map is the authority's wording; the real zones are on dronesoner.no.

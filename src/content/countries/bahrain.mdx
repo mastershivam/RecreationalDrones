@@ -5,31 +5,26 @@ authority: Civil Aviation Affairs, Ministry of Transportation and Telecommunicat
 authorityUrl: https://www.mtt.gov.bh/caa-laws-and-regulations
 registrationUrl: null
 whoMustRegister: >-
-  The CAA's regulations page and the Bahrain national portal, as a search summarised them,
-  say all drone activities and related approvals are suspended until further notice,
-  including permit applications, starting 28 March 2026. We found no notice lifting it.
+  The CAA's drone page says all drone activities and related approvals in Bahrain are suspended until
+  further notice, including the processing of applications for permits and approvals. It gives no start date.
 restrictiveness: 4
 restrictivenessReason: >-
-  The CAA's page and the national portal, as summarised, say all drone activity and permit
-  processing is suspended until announced. Under the older rules a permit with no-
-  objection letters from the Bahrain Defence Force and the Ministry of Interior was
-  needed. This level is provisional: the dates on the pages do not agree and we could not
-  open them.
+  The CAA's drone page says all drone activities are suspended until further notice, so flying a drone for fun
+  is banned for now, which is level 4. We read the page through a fetch summary, and the rule document (CAR006)
+  returned a 403 that we did not work around, so the level holds only while the suspension stands.
 registrationFee: null
 registrationWeightGrams: null
 minOperatorAge: null
 remoteId: null
-insurance: >-
-  The older permit rules, as summarised, ask for insurance cover with the application.
+insurance: null
 howToRegister:
   needed:
-    - 'Nothing can be applied for while the suspension lasts, according to the pages as summarised'
+    - 'Nothing can be applied for while the suspension stands, according to the CAA page'
   steps:
-    - 'Check the CAA''s laws and regulations page for the suspension notice before any plan to fly.'
-    - 'If the suspension ends: apply at least seven working days ahead, with the scope of the operation, the operators'' details, insurance and no-objection evidence from the Bahrain Defence Force and the Ministry of Interior.'
-    - 'Send the application form ASSD-OF37-AANR to drone.team@mtt.gov.bh.'
+    - 'Check the CAA''s drone page for a notice lifting the suspension before you plan any flight.'
+    - 'If you need to ask about the suspension, write to drone.team@mtt.gov.bh, the contact on the CAA page.'
   validFor: null
-  afterwards: 'The UAV regulation is listed as CAR006, with Aviation Safety and Security Directive 1/17.'
+  afterwards: 'The page names the UAV regulation as CAR006 and Aviation Safety and Security Directive 1/17. We did not read either.'
 lastVerified: 2026-10-26
 sources:
   - https://www.mtt.gov.bh/caa-laws-and-regulations
@@ -37,11 +32,17 @@ sources:
   - https://www.bahrain.bh/wps/portal/en/BNP/ExploreBahrain/Drones
 ---
 
-This guide rests on excerpts of the CAA's pages and the Bahrain national portal that a web search returned on 26 October 2026.
-**We did not open them ourselves.** One of the two pages carries an age tag that does not fit a March 2026 suspension, and the
-permit rules come from older-looking pages. Check the CAA before you travel with a drone.
+This guide rests on the CAA's drone section on the Ministry of Transportation and Telecommunications site. We read it through a fetch summary, not the raw page, and we did not open the national portal page. The CAR006 regulation PDF returned a 403 from the site, so we did not read it, and we did not work around the block. Check the CAA before you travel with a drone.
+
+## Current position
+
+The CAA's drone section says all drone activities and related approvals in the Kingdom of Bahrain are suspended until further notice. It says this covers the suspension of drone operations and the processing of applications for permits or approvals. The section gives no start date. The only date on the page is a last-updated date of 15 October 2026, which covers the page as a whole.
+
+## Rules we did not read
+
+The earlier search excerpts gave a permit process, no-objection letters, a seven-working-day lead time and a form number. We could not confirm any of those on the authority's pages, so we have left them out.
 
 ## Not covered yet
 
-- **Fees, weight thresholds, minimum age, penalties, height and distance limits, Remote ID and visitors.**
+- **Everything about flying while the suspension is not in force:** fees, weight thresholds, minimum age, penalties, height and distance limits, Remote ID, insurance and visitors.
 - **Distances from airports and no-fly areas:** none found, so the map draws no circle.

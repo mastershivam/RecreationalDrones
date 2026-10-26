@@ -5,31 +5,37 @@ authority: General Civil Aviation Authority (GCAA)
 authorityUrl: https://www.gcaa.gov.ae/
 registrationUrl: https://drones.gov.ae/
 whoMustRegister: >-
-  The portal's manual says recreational pilots register themselves, register at
-  least one drone, and may register only a drone of up to 5 kg. It lists no
-  exemption for small drones, but we have not found the regulation that sets
-  the weight threshold. Every flight also needs an approved flight request.
+  Every recreational pilot and every recreational drone, whatever its weight, says the
+  GCAA's registration page. CAR-UAR and the u.ae page say a recreational drone may not
+  weigh more than 5 kg. The pilot must be a UAE resident aged 18 or over with a
+  training certificate. In Dubai, the DCAA's directive leaves out toys, meaning
+  drones under 250 g that also meet its other conditions.
 restrictiveness: 3
 restrictivenessReason: >-
-  Each recreational flight needs a request approved by the authority first, the
-  drone must be registered with the authority and fitted with a tracker bought
-  from e&, and registration goes through a UAE PASS account. We could not read
-  Dubai's own authority, so this level is provisional.
-registrationFee: 'AED 100 for the pilot and AED 200 for each drone, renewed every 2 years'
-registrationWeightGrams: null
-minOperatorAge: null
+  The GCAA's regulation requires a UAE resident aged 18 or over with a training
+  certificate from an accredited school, a registered pilot and drone, a remote
+  identification system, and (the portal's manual says) a request approved by the
+  authority for each flight. Dubai adds its own regulator with its own rules, and
+  its tourist route could not be read. Level 4 is arguable for a visitor, since
+  the national regulation names residents only, so this level is provisional.
+registrationFee: 'AED 100 for the pilot and AED 200 for each drone, renewed every 2 years (from the portal manual only)'
+registrationWeightGrams: 0
+minOperatorAge: 18
 remoteId: >-
-  The portal's manual says a drone must be retrofitted with a tracker, bought from
-  e&, that gives live position "as per the RemoteID standard". It does not give the
-  tracker's price or the regulation behind it.
+  Required. CAR-UAR (issue 3, 13 June 2025) says a drone "shall be equipped with a remote
+  identification system", and that the pilot must check it works. The portal's manual says
+  the tracker is bought from e&. No page gives the tracker's price.
 insurance: null
 howToRegister:
   needed:
+    - 'To be a UAE resident aged 18 or over (CAR-UAR). The regulation says nothing about visitors using this route.'
+    - 'A training certificate from a training organisation accredited by the GCAA, listed on the UAE Drones platform. CAR-UAR says nobody may fly before getting one.'
     - 'A UAE PASS account, which you can open with your Emirates ID, email address or mobile number'
     - 'For each drone: manufacturer, model, serial number, weight (5 kg or less), a photo of the drone, and a MOIAT letter of conformity for the serial number'
-    - 'AED 100 for the pilot registration and AED 200 for each drone'
+    - 'AED 100 for the pilot registration and AED 200 for each drone (from the portal manual)'
     - 'A tracker for each drone, bought from e&'
   steps:
+    - 'Get the training certificate from an accredited training organisation.'
     - 'Install the UAE Drones app, or go to drones.gov.ae, and choose to sign up as a Recreational pilot.'
     - 'Sign in with UAE PASS, fill in the registration form and accept the terms.'
     - 'Register at least one drone under My Drones. The authority has to approve it, and your profile is approved after that.'
@@ -38,40 +44,67 @@ howToRegister:
     - 'Before each flight, create a flight request in the app and wait for approval (see below).'
   validFor: 'A drone registration lasts 2 years. The manual gives no term for the pilot payment.'
   afterwards: 'Fly only inside the approved request: same day, in daylight, within sight of the drone, and inside the circle or area you drew.'
-lastVerified: 2026-10-20
+lastVerified: 2026-10-26
 sources:
   - https://drones.gov.ae/
   - https://drones.gov.ae/Content/User-Manual.pdf
   - https://www.gcaa.gov.ae/
+  - https://www.gcaa.gov.ae/en/epublication/EPublications/Civil%20Aviation%20Regulations%20(CARs)/EMERGING%20TECHNOLOGIES/UNMANNED%20AIR%20SYSTEMS%20(UAS)/CAR-UAR%20-%20UNMANNED%20AIRCRAFT%20(UA)%20RECREATIONAL%20FLIGHTS%20-%20ISSUE%2003.pdf
+  - https://www.gcaa.gov.ae/en/pages/UASRegistration.aspx/
+  - https://u.ae/en/information-and-services/justice-safety-and-the-law/Safety/aviation-safety
+  - https://betawebapi.dcaa.gov.ae/Uploads/pdfs/DocumentManagement/Shared/EN-DCAA-DCAD-2025-00007.pdf
+  - https://betawebapi.dcaa.gov.ae/Uploads/pdfs/DocumentManagement/Shared/EN-DCAA-DCAR-2025-00007.pdf
 ---
 
-This guide follows the **UAE Drones portal** (drones.gov.ae), where the GCAA runs drone registration and flight approvals, and the
-**UTM Operator Manual, version 4.0**, that it publishes. We read both on 20 October 2026. The manual describes how the app and
-website work, so it gives steps, fees and the limits the app enforces. It is not the regulation itself, and we have not found
-the regulation. The GCAA's own pages loaded but did not list the drone rules, and Dubai's authority, the DCAA, showed us no
-readable page. Check both before you fly.
+This guide follows the GCAA's regulation for recreational drones, **CAR-UAR issue 3** (13 June 2025), its registration page, the
+**UAE Drones portal** (drones.gov.ae) and the **UTM Operator Manual, version 4.0** that the portal publishes, and, for Dubai, the
+DCAA's **Directive DCAA/DCAD/2025/00007** (3 December 2025). We read the regulation, the GCAA and u.ae pages and the two DCAA
+PDFs on 26 October 2026, and the portal and manual again the same day. The regulation sets who may fly and what the drone needs. The manual describes how the app works, so it
+gives the steps, the fees and the limits the app enforces. Check both before you fly.
+
+## Who may fly
+
+CAR-UAR says a recreational pilot must register on the UAE Drones platform through UAE PASS, be **at least 18 years old** and
+**be a UAE resident**, and that nobody may fly in the UAE before getting a **training certificate** from a training organisation
+accredited by the GCAA (listed on the platform). The regulation does not mention visitors, and its residency rule leaves a visitor
+no route that we could find. For Dubai, the DCAA's directive has a separate line for tourists (see below).
 
 ## Registration
+
+The GCAA's registration page says all drones used by individuals for recreation must be registered with the GCAA "regardless of their
+weight". CAR-UAR sets no lower limit either, so we show registration as needed at any weight. It also says the drone must not weigh
+more than 5 kg, and the u.ae page adds that heavier drones, or any with a gas engine, may fly only in GCAA-approved flying clubs.
 
 The portal says "Operators, login with UAE PASS". A recreational pilot signs up in the UAE Drones app or on the website with a
 UAE PASS account, which the manual says you can sign in to with an Emirates ID, an email address or a mobile number. The
 registration form fills itself in from UAE PASS when your identity is verified, including your Emirates ID. If you are not
-verified you do not see an Emirates ID, and the manual says you enter the rest yourself and attach any documents. **It does
-not say whether a visitor with no UAE PASS can register.**
+verified you do not see an Emirates ID, and the manual says you enter the rest yourself and attach any documents.
 
 - **The pilot:** you must register at least one drone before your profile is approved. After approval you get an email asking
   for AED 100, and you cannot create flight requests until it is paid.
 - **Each drone:** you enter the manufacturer, type, model, commission date, serial number and weight, and upload a photo of the
-  drone and a letter of conformity for its serial number from MOIAT, the Ministry of Industry and Advanced Technology. The
-  maximum weight allowed when registering a drone for recreational flying is **5 kg**. When the drone is approved you get a
-  payment request for **AED 200, renewed every 2 years**.
-- **Tracker:** the manual says it is mandatory for a drone to be retrofitted with a tracker, and that the app shows how many to
-  buy from e& (one for each drone). It also names third-party approved retrofitted trackers for live position "as per the
-  RemoteID standard".
+  drone and a letter of conformity for its serial number from MOIAT, the Ministry of Industry and Advanced Technology (CAR-UAR
+  asks for the same "Product Status Statement"). When the drone is approved you get a payment request for **AED 200, renewed every
+  2 years**.
+- **Fees:** the AED 100 and AED 200 are from the manual only. Neither the registration page nor the u.ae page gives a recreational
+  fee (the AED 1,200 on them is for operators), so check the amounts in the app.
+- **Remote identification:** CAR-UAR says the drone shall be fitted with a remote identification system and that you must check it
+  works before flying. The manual says a tracker is mandatory, that the app shows how many to buy from e& (one for each drone),
+  and that it also names third-party approved retrofitted trackers for live position "as per the RemoteID standard".
 
 ## Where and how you can fly
 
-For a recreational pilot, every flight needs an approved **flight request**. The manual says to draw the area on the map in the
+CAR-UAR (the regulation) says the pilot must fly at most 400 ft (120 m) high, within sight and in daylight only, stay clear of airports and
+helicopter landing pads, avoid flying over gatherings, carry no goods, and keep to the designated areas on the app's flight map. It bans
+flying over prohibited or restricted areas shown on the platform. It also bans any modification that changes what MOIAT approved, and
+**installing cameras or any equipment that could be used for filming or recording**.
+
+The airport limit is on the u.ae page and the GCAA registration page, not in the regulation: do not fly **within 5 km of the UAE
+airports' outer fence**, heliports, helicopter landing sites, airfields and controlled zones. The 5 km is measured from the outer
+fence, not the airport's centre. Both pages also say camera use is allowed in the flying zones, which CAR-UAR does not allow, so
+we do not know which applies (see Not covered yet).
+
+The manual adds that for a recreational pilot, every flight needs an approved **flight request**. The manual says to draw the area on the map in the
 app, and that recreational pilots are:
 
 - **Limited in size:** a circle of at most 500 m radius and an altitude of at most 400 ft, or a matching area drawn as a polygon.
@@ -84,14 +117,45 @@ The request goes to the authority for approval, and you wait for it before flyin
 The manual says you cannot cancel a request until it has been approved. The manual says the app can start the flight with a
 tracker, or with a DJI drone through the app.
 
+## Dubai
+
+Dubai has its own authority, the DCAA. Its recreational directive (published 3 December 2025) applies to any private or recreational
+flight in the emirate and says:
+
+- **Registration:** pilots must be registered with the DCAA, and so must the drone. Pilots based in the UAE must be licensed by a
+  DCAA-certified training organisation. Tourists "shall comply with the minimum requirements" in the DCAA's regulation DCAR-UAS,
+  Appendix 3, but that appendix, as published, covers training organisations and says nothing about tourists, so we cannot say what
+  a tourist must do.
+- **Limits:** the drone must weigh under 2.5 kg and be under 1 m across. Fly only within sight and within 500 m of the pilot, below
+  122 m (400 ft), from one fixed spot, at under 19 m/s, and only in DCAA-approved recreational zones. The directive points to a
+  zone map and a list of accepted drones on the DCAA site, which we could not read.
+- **Equipment:** an electric drone with a unique serial number, a DCAA-approved remote identification system and a DCAA-approved
+  geo-awareness system.
+- **Distances:** keep from uninvolved people at least as far as the drone is high (1 to 1), and keep clear of buildings, other
+  drones, airports, heliports and airfields. It gives no distance from an airport. No flying over military, prohibited,
+  restricted or danger areas, or continuously over footpaths, motorways, metro and tram lines.
+- **Toys:** aircraft classed as toys are excluded. A toy must meet a list of conditions, the first being a weight under 250 g. The
+  others include no GPS or follow-me function, no professional sensors such as HD cameras, a toy-grade radio, and speed under 19 m/s.
+  The directive says toys are "typically" under AED 500, as an example, not as a condition.
+- **Accidents:** report any accident or serious incident to the DCAA within 3 hours.
+
+**The DCAA's two documents disagree.** Its commercial regulation DCAR-UAS, issue 3 (5 August 2025), says private recreational
+flights "are not authorized in the Emirates of Dubai". The recreational directive came four months later and allows them in
+approved zones, so we follow the directive. The DCAA's website returned only a script shell to us, including its drone map page, so we read only the two PDFs.
+
 ## Not covered yet
 
-- **Dubai.** We could not read the Dubai Civil Aviation Authority's pages, so we do not know how Dubai's rules relate to the
-  national portal.
-- **The regulation itself:** the weight below which a drone needs no registration, penalties and fines.
-- **Minimum age** and **insurance:** the manual mentions neither.
-- **Visitors:** whether a tourist can register, and what to do with a drone you bring in. The manual asks for a MOIAT letter of
-  conformity.
-- **Airport distances and no-fly areas.** The manual says the app shows airspace, but gives no figure and no list, so the map
-  draws no circle here.
+- **Penalties.** CAR-UAR lists warnings, suspension, revocation, and detention or confiscation of the drone, and says court action
+  can follow under Federal Decree-Law 26 of 2022. Its text was not reachable (uaelegislation.gov.ae returned 403). The GCAA
+  registration page quotes Articles 69 and 70 of a law it does not name: up to one year and AED 50,000 for some offences, and up to
+  three years and AED 100,000 for others. We did not confirm that this text is current, so treat those figures as quoted, not checked.
+- **Insurance:** neither regulation mentions it for recreational flying.
+- **Visitors:** CAR-UAR names residents only, and the DCAA's tourist rule points to an appendix without one. Dubai's commercial
+  rules (DCAR-UAS, Appendix 5, section 14.5.1) say a person who imports a drone for their own use must be a registered recreational
+  pilot and apply online to the DCAA for an import authorisation. Ask the GCAA (drones@gcaa.gov.ae, 8004466 as printed on its
+  page) or the DCAA before you bring a drone, and note that the manual asks for a MOIAT letter of conformity.
+- **Zones and no-fly areas.** The real flying zones are in the My Drone Hub app and on the GCAA map, and Dubai's are on the DCAA
+  site. We could not open any of these. The airport limit above is the only distance we found.
 - **The tracker's price** and which models the authority accepts.
+- **Cameras:** CAR-UAR bans installing cameras or filming equipment. The u.ae and GCAA registration pages allow camera use in the
+  flying zones, and the manual describes flying DJI drones through the app. We do not know how the three fit together in practice.

@@ -5,48 +5,78 @@ authority: National Agency of Civil Aviation and Meteorology (ANACIM)
 authorityUrl: https://www.anacim.sn/IMG/pdf/annexe_5_au_ras_06_-_systemes_d_aeronefs_telepilotes_rpas_.pdf
 registrationUrl: null
 whoMustRegister: >-
-  Annex 5 to ANACIM's RAS 06 (applicable from 20 April 2021), as a search summarised it,
-  bans operating a remotely piloted aircraft in Senegal until the ANACIM has identified it
-  and given it an identification number, and also bans operating one without
-  authorisation.
+  Every drone flown in Senegal must be identified by ANACIM, which enters it on the national register and gives it an SN.UAS
+  mark (Annex 5, sections 2.3 and 2.3.4). Its operator must also hold a leisure authorisation before flying (4.1(b), 5.2(a)).
+  An owner must be 18 or over (2.3.1(c)); a drone owned by a minor is registered in the guardian's name. A foreign operator
+  needs a special authorisation to fly in Senegal if its head office is not in Senegal or its documents were not issued by
+  ANACIM (1.4(c)).
 restrictiveness: 3
 restrictivenessReason: >-
-  The ANACIM asks for the drone to be identified and entered in a national register, an
-  operating authorisation with a certified ID, an operations manual, civil liability
-  insurance, a fee and, for a drone with a camera, the Interior Ministry's authorisation.
-  This level is provisional: the scan was partly unreadable and we saw only excerpts.
+  Every leisure operator must get an ANACIM authorisation before flying (5.2(a)). Recreational and sport flying must take
+  place in clubs registered and approved by ANACIM (5.2(b)). A drone with a camera needs an Interior Ministry authorisation
+  (5.2(f)(14)). That is a second authority and permission before ordinary flights.
 registrationFee: null
-registrationWeightGrams: null
-minOperatorAge: null
+registrationWeightGrams: 0
+minOperatorAge: 15
 remoteId: null
 insurance: >-
-  Annex 5 to RAS 06, as summarised, asks for civil liability insurance with an application
-  for an operating authorisation.
+  A non-commercial operator must hold third-party civil liability insurance covering bodily injury and damage to property
+  (7.7(b)). A copy of the policy goes with the authorisation application (5.2(f)(13)). No amount is stated.
 howToRegister:
   needed:
-    - 'A certified ID, an operations manual and civil liability insurance'
-    - 'The Interior Ministry''s authorisation, if the drone carries a camera'
-    - 'The fee (we found no amount)'
+    - 'A certified copy of your ID card or passport (for a minor, the ID of the minor and of the legal guardian)'
+    - 'A criminal record extract under three months old (for a minor, the guardian''s)'
+    - 'A recent photo, under three months old'
+    - 'ANACIM''s application form for a leisure operating authorisation and its safety impact assessment form'
+    - 'A description of the flights: purpose, area, dates, route and speed'
+    - 'A pilot licence or training certificate, and the drone''s operations and maintenance manuals'
+    - 'A copy of your civil liability insurance contract'
+    - 'For a drone with a camera, the Interior Ministry''s authorisation'
+    - 'The fee (the annex does not say how much)'
   steps:
-    - 'Get the drone identified by the ANACIM, which gives it an identification number and enters it in the national register.'
-    - 'Apply for an operating authorisation with the documents above and the fee.'
-    - 'For a drone of up to 5 kg (the first class), the ANACIM gives an authorisation of limited duration; under 18s need a guardian''s consent and accompaniment.'
-  validFor: null
-  afterwards: 'Night flights are banned unless specially authorised, and an area with special status in the AIP needs the competent authority''s authorisation. The ANACIM publishes a list of authorised drone operators.'
+    - 'Get the drone identified by ANACIM: it is entered on the national register, and the mark SN.UAS followed by letters and numbers must be clearly visible on it (2.3.2, 2.3.4).'
+    - 'Apply for a leisure operating authorisation before the first flight, with the documents above (5.2(a), 5.2(f)). Foreign applicants must justify flying in Senegal (5.2(f)(4)).'
+    - 'Fly leisure or sport only in a club registered and approved by ANACIM, and send the club''s areas and times to ANACIM for approval (5.2(b), 5.2(c)).'
+  validFor: >-
+    The table in section 2.1 says a class 1 leisure authorisation has a limited duration. Section 7.8 refers to annual private and
+    leisure authorisations. The annex does not give a fixed number of months for leisure.
+  afterwards: >-
+    Check ANACIM's website for changes (4.2(n)). Flying rules are in the next section. A change of owner needs a new registration
+    and a new authorisation within two months (4.2(m)).
 lastVerified: 2026-10-26
 sources:
   - https://www.anacim.sn/IMG/pdf/annexe_5_au_ras_06_-_systemes_d_aeronefs_telepilotes_rpas_.pdf
+  - https://web.archive.org/web/2025/https://www.anacim.sn/IMG/pdf/annexe_5_au_ras_06_-_systemes_d_aeronefs_telepilotes_rpas_.pdf
 ---
 
-This guide rests on excerpts of Annex 5 to the ANACIM's RAS 06 that a web search returned on 26 October 2026. The text is in
-French and the translations are ours. **We did not open it ourselves**, and later changes are unknown. Check the ANACIM for any
-change.
+This guide follows Annex 5 to ANACIM's RAS 06 (Remotely Piloted Aircraft Systems), second edition, March 2021, with
+amendment 01 applicable from 20 April 2021. We read the text from an archive.org copy because the authority's own server
+failed certificate checks for us. The text is in French; all translations are ours. Check ANACIM for any change.
 
 ## Which rules apply
 
-The annex sorts drones by mass into three classes: up to 5 kg, 5 to 25 kg, and over 25 kg.
+The annex sorts drones into three classes by mass (2.1): class 1 up to 5 kg, class 2 over 5 kg up to 25 kg, class 3 over 25 kg.
+Leisure drones (category A) can hold only a class 1 authorisation, which has a limited duration. Class 2 and class 3 drones
+are not authorised for leisure flying (table in 2.1, and 4.2(b)).
+
+## Where and how you can fly
+
+- **Height:** at most 100 m (300 ft) above ground for categories A and B (4.4(a)). Higher needs ANACIM permission (4.3(a)(10)).
+- **Night:** banned from 15 minutes after sunset to 15 minutes before sunrise, unless ANACIM authorises it (4.4(f)).
+- **Line of sight:** the pilot must keep constant visual contact (3.3); a visual observer may help, up to two.
+- **People:** no flying less than 50 m above a crowd without permission (4.3(a)(14)), and none over a town, village or built-up area
+  without special authorisation (4.3(a)(18)).
+- **Cameras:** infrared and other non-visible cameras and recorders are banned on categories A and B (4.3(b)).
+- **Aerodromes:** no flying near one without formal authorisation (3.9, 4.3(a)(8)). The restricted zone is a radius around the
+  aerodrome's reference point: 1.5 km if the runway is under 1,200 m, 3 km if it is 1,200 to 2,000 m, and 10 km if it is over
+  2,000 m. Those figures are a candidate for the airport-rules file, since the zone depends on runway length.
+- **Restricted areas:** no flying in a special-status airspace published in Senegal's AIP without the competent authority's
+  permission (3.8(a)), nor over military installations without agreement (3.8(b)).
 
 ## Not covered yet
 
-- **Fees, penalties, height and distance limits, Remote ID and visitors.**
-- **Distances from airports:** none found, so the map draws no circle.
+- **Fees:** the annex refers to the aeronautical fee decree (Decree 2019-1120) but gives no amount, and we did not open the decree.
+- **Penalties:** section 7.11 says breaches bring administrative and financial penalties, but gives no figures.
+- **Remote ID:** we found no rule for remote identification.
+- **Clubs:** the list of approved clubs and the ANACIM guide SN-ALL-DSV-GUID-5, which section 5.2 mentions, were not read.
+- **Insurance amount:** the annex asks for civil liability cover but gives no minimum.

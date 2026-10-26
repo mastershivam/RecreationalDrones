@@ -3,60 +3,145 @@ name: Hungary
 iso3: HUN
 authority: Transport Authority of Hungary
 authorityUrl: https://kozlekedesihatosag.kormany.hu/
-registrationUrl: https://kozlekedesihatosag.kormany.hu/hu/web/legugyi-felugyeleti-hatosagi-foosztaly/pil%c3%b3ta-n%c3%a9lk%c3%bcli-l%c3%a9gij%c3%a1rm%c5%b1-rendszer-%c3%bczembentart%c3%b3-nyilv%c3%a1ntart%c3%a1sba-v%c3%a9tele
+registrationUrl: https://kozlekedesihatosag.kormany.hu/hu/web/legugyi-felugyeleti-hatosagi-foosztaly/pil%C3%B3ta-n%C3%A9lk%C3%BCli-l%C3%A9gij%C3%A1rm%C5%B1-rendszerek-uas-nyilv%C3%A1ntart%C3%A1s%C3%A1val-kapcsolatos-%C3%BCgyint%C3%A9z%C3%A9s
 whoMustRegister: >-
-  Register yourself once, not each drone, with your home EU country's authority
-  (visitors: the first EU country you fly in). Needed if a drone weighs 250 g or
-  more or has a camera.
-restrictiveness: 2
+  Register yourself as the operator, and also each drone. Hungarian law lets a
+  drone use Hungarian airspace only if the aviation authority has registered it,
+  and only a toy drone is exempt (under 120 g, no recording device, cannot go
+  more than 100 m from the pilot). A visitor from outside the EU registers in
+  the first EU country where they fly. The authority's page does not say whether
+  a visiting drone already registered abroad needs a Hungarian entry too.
+restrictiveness: 3
 restrictivenessReason: >-
-  Register online with your national authority and, for most drones, pass an
-  online training exam (EASA). Steps in your country may add to this; we have
-  not read them.
-registrationFee: null
+  The authority takes the operator and each drone by form (e-Paper, post or in
+  person) with a bank-transfer fee and proof of insurance. Flying over places
+  where uninvolved people live needs special airspace designated by the military
+  aviation authority, and some areas need the aerodrome operator's consent
+  first. We have not read the pilot training rules.
+registrationFee: 'HUF 2,000 for the operator plus HUF 2,000 for each drone, with no end date stated'
 registrationWeightGrams: 0
 minOperatorAge: null
 remoteId: >-
-  EASA says open-category drones, with limited exceptions, must have a remote
-  identification system.
+  The authority says the operator number must be shown on the drone and loaded
+  into its direct remote identification system. EASA says open-category drones,
+  with limited exceptions, must have a remote identification system.
 insurance: >-
-  EASA requires insurance for a drone over 20 kg, and says most member states
-  also require third-party insurance for lighter drones. Check Hungary's rules.
+  Required from 250 g (or for any paid work), and it must exist when you
+  register. For a non-commercial drone of 0.25 to 4 kg: at least HUF 3,000,000
+  per event and HUF 6,000,000 per insurance period. For 4 to under 20 kg: HUF
+  5,000,000 and HUF 10,000,000. Under 250 g it is not compulsory.
 howToRegister:
   needed:
-    - 'Whatever your national authority asks for. We have not read the list for this country.'
+    - 'The authority''s form for a natural person (operator, and one for each drone)'
+    - 'Liability insurance for a drone of 250 g or more, in place at registration'
+    - 'HUF 2,000 for the operator and HUF 2,000 for each drone, by bank transfer'
+    - 'Hungarian government login (Ügyfélkapu) if you file through e-Paper; post and in-person filing are also offered'
+    - 'If you are under 18, your legal representative''s consent'
   steps:
-    - 'Check that you need to register: yes if any drone weighs 250 g or more or has a camera or other sensor that could detect personal data. A toy under 250 g is exempt.'
-    - 'Register yourself, once and not each drone, with the authority of the EU country where you live. A visitor from outside the EU registers in the first EU country where they fly.'
-    - 'Complete the online training and exam if your drone needs it. Most drones of 250 g or more do (C1, C3, C4, and older drones). C2 needs more, and C0 and drones under 250 g need none.'
-    - 'Put your operator registration number on every drone you own as a sticker, and enter it into the drone''s Remote ID if it has one.'
-  validFor: 'Set by the authority you register with. It is valid in every EASA member state.'
-  afterwards: 'Before you fly in any EU country, check that the place is not in a geographical zone that country has published.'
-lastVerified: 2026-10-17
+    - 'Check you need to register: every drone except a toy (under 120 g, no recording device, cannot go more than 100 m from the pilot).'
+    - 'Download the form for a natural person from the authority''s page. Fill one for the operator and one for each drone.'
+    - 'Pay by bank transfer to the Ministry of Transport and Investment, quoting your name and the code: UAS-591RU for the operator, UAS-591RE for each drone. Keep the proof of payment.'
+    - 'Send the forms and the proof of payment through e-Paper (epapir.gov.hu), by post to H-1442 Budapest, Pf. 89, or in person at 2220 Vecsés, Lincoln út 1.'
+    - 'Put your operator ID and the drone''s registration number on the drone, and load the operator number into its remote ID if it has one.'
+    - 'Report any change to your details within 15 days (HUF 2,000).'
+  validFor: 'The authority''s page gives no end date. Report changes within 15 days.'
+  afterwards: 'Before each flight, mark the area on the official mydronespace app or website to check the flight is not banned there.'
+lastVerified: 2026-10-25
 sources:
   - https://www.easa.europa.eu/en/domains/drones-air-mobility/operating-drone/open-category-low-risk-civil-drones
   - https://www.easa.europa.eu/the-agency/faqs/drones-uas
   - https://www.easa.europa.eu/en/domains/civil-drones/naa
-  - https://kozlekedesihatosag.kormany.hu/hu/web/legugyi-felugyeleti-hatosagi-foosztaly/pil%c3%b3ta-n%c3%a9lk%c3%bcli-l%c3%a9gij%c3%a1rm%c5%b1-rendszer-%c3%bczembentart%c3%b3-nyilv%c3%a1ntart%c3%a1sba-v%c3%a9tele
+  - https://kozlekedesihatosag.kormany.hu/hu/web/legugyi-felugyeleti-hatosagi-foosztaly/pil%C3%B3ta-n%C3%A9lk%C3%BCli-l%C3%A9gij%C3%A1rm%C5%B1-rendszerek-uas-nyilv%C3%A1ntart%C3%A1s%C3%A1val-kapcsolatos-%C3%BCgyint%C3%A9z%C3%A9s
+  - https://net.jogtar.hu/jogszabaly?docid=99500097.tv
+  - https://net.jogtar.hu/jogszabaly?docid=99800004.kor
+  - https://net.jogtar.hu/jogszabaly?docid=a0100039.kor
+  - https://mydronespace.hu/gyik
+  - https://mydronespace.hu/gyik/legter
 ---
 
 import EasaRules from '../../components/EasaRules.mdx';
 
-Hungary applies the EU's common drone rules, set by the European Union Aviation Safety Agency (EASA). This
-guide gives those rules, then links to Hungary's own authority for what is national.
+Hungary applies the EU's common drone rules, set by the European Union Aviation Safety Agency (EASA), and adds national
+ones. This guide gives the EASA rules, then what Hungary adds. The Hungarian parts follow the Transport Authority's
+page on registering drone systems and operators, the Aviation Act (1995. évi XCVII), Government Decree 4/1998 on the use
+of Hungarian airspace and Decree 39/2001 on insurance, as published on net.jogtar.hu, and the FAQ of mydronespace, the official app run by HungaroControl, all read on 25 October 2026. These are in
+Hungarian. Check the authority for any change.
 
 <EasaRules />
 
 ## In Hungary
 
-- **Register:** [Hungary's registration page](https://kozlekedesihatosag.kormany.hu/hu/web/legugyi-felugyeleti-hatosagi-foosztaly/pil%c3%b3ta-n%c3%a9lk%c3%bcli-l%c3%a9gij%c3%a1rm%c5%b1-rendszer-%c3%bczembentart%c3%b3-nyilv%c3%a1ntart%c3%a1sba-v%c3%a9tele).
-- **Where you can fly:** [Hungary's map of geographical zones](https://mydronespace.hu/tudastar/legter).
+- **Register:** [the Transport Authority's page on registering drone systems and operators](https://kozlekedesihatosag.kormany.hu/hu/web/legugyi-felugyeleti-hatosagi-foosztaly/pil%C3%B3ta-n%C3%A9lk%C3%BCli-l%C3%A9gij%C3%A1rm%C5%B1-rendszerek-uas-nyilv%C3%A1ntart%C3%A1s%C3%A1val-kapcsolatos-%C3%BCgyint%C3%A9z%C3%A9s) (in Hungarian).
+- **Where you can fly:** [the mydronespace airspace pages](https://mydronespace.hu/tudastar/legter) and app.
 - **Authority:** [Transport Authority of Hungary](https://kozlekedesihatosag.kormany.hu/).
-- **Note:** The registration page EASA links to is in Hungarian.
+
+## Registration
+
+Hungary registers **both the operator and each drone**. The Aviation Act says a drone, except a toy drone, may use
+Hungarian airspace only if the aviation authority has registered it. The authority's page adds that the operator must
+register before the first flight, and that a visitor from outside the EU registers in the first EU country where they
+fly. A toy drone, in the Act's words, is a toy under the EU toy directive, under 120 g, with no recording device, and
+unable to go more than 100 m from the pilot.
+
+- **Fees:** HUF 2,000 for the operator and HUF 2,000 for each drone. A change of details is HUF 2,000, removal from the
+  register HUF 1,000, and a certificate of registration HUF 4,090. Pay by bank transfer; a natural person may also pay
+  by card or cash at the authority's office in Vecsés.
+- **How:** paper forms, sent through e-Paper (with a Hungarian government login), by post, or in person at 2220 Vecsés,
+  Lincoln út 1. We found no instant online registration. A minor (under 18) needs the legal representative's consent.
+- **Term:** the page gives no end date. You must report changes within 15 days.
+- **Marking:** show your operator ID and the drone's registration number on the drone, durably and legibly.
+- **Visitors:** the Transport Authority page says a non-EU operator registers in the first EU country they fly in.
+  mydronespace says anyone already registered in an EU state need not register again in another. Neither page says
+  whether a visiting drone needs its own Hungarian entry; Hungarian law has no exemption for it other than the toy rule.
+
+## Where and how you can fly
+
+On top of the EASA limits, Hungarian law sets these:
+
+- **Over homes:** a drone, except a toy, may fly over a populated area only in special airspace that the military
+  aviation authority has designated for it on request. The Act defines a populated area as where an uninvolved person
+  or persons live. mydronespace repeats this.
+- **Check the map before each flight:** the remote pilot must mark the flight area on the official website or app
+  before every take-off and keep checking during the flight that it is not banned. The decree says a fee may be set for
+  the app; we did not find the price.
+- **No Drone Zones:** flights are banned in prohibited airspace, in the No Drone Zones at Budapest (LHBP and the
+  Budapest control zone), Szolnok, Pápa and Kecskemét, in restricted airspace unless its rules are met, and in
+  dangerous and temporary restricted areas while they are active. Inside the Budapest control zone but outside the No
+  Drone Zones, the limit is 40 m above the ground.
+- **Aerodromes:** within the aerodrome traffic zone, only with the aerodrome operator's consent. Within 2 km of an
+  aerodrome that has no such zone, and within 750 m of a rescue helicopter landing site, only with the operator's
+  consent and a notice to the aviation authority at least 2 days before.
+- **Protected sites:** the airspace within 300 m of listed national memorial sites and state-critical sites is
+  banned. So is the airspace within 300 m of designated critical infrastructure, unless its operator flies or allows
+  the flight.
+- **Temporary limits:** the police and other bodies may restrict drones in an area for a time; the limit appears on the
+  same website and app.
+- **Special airspace:** for a flight that cannot follow these rules, you may ask for special airspace. The military
+  aviation authority (the Defence Ministry's state aviation department) decides, according to mydronespace.
+
+## Remote ID and insurance
+
+- **Remote ID:** the authority says to show the operator ID on the drone. mydronespace adds that the registration number
+  must also be loaded into the drone's direct remote identification system. A C1 or C2 drone may be flown only with remote
+  ID and geo-awareness active.
+- **Insurance:** required from 250 g, or for any paid work, and the authority says it must exist at registration. Decree
+  39/2001 sets the minimum cover for a non-commercial drone: 0.25 to 4 kg, HUF 3,000,000 per event and HUF 6,000,000 per
+  period; 4 kg to under 20 kg, HUF 5,000,000 and HUF 10,000,000. The authority says insurance is not compulsory under
+  250 g, although the Aviation Act (section 69) makes liability cover a condition of operating any drone. We have not
+  reconciled the two.
+
+## Penalties
+
+A breach of the drone rules can bring an aviation fine of **up to HUF 100,000,000** under the Aviation Act (section
+66/A), imposed by the aviation authority or by the police. mydronespace adds that where a crime is committed with the
+drone, criminal law applies. The operator is responsible for its drone's breaches; for an unregistered drone, the person flying it is.
 
 ## Not covered yet
 
-- **Hungary's national rules.** We have not read Hungary's own drone rules, so what we say here is only what EASA says
-  applies everywhere. Fees, how long registration lasts, the minimum age (a state may lower EASA's 16 to 12),
-  insurance, penalties and any local bans are all unverified. Check the authority above before you fly.
-- **Where flying is banned.** Hungary's geographical zones are on the map linked above, and we have not copied them.
+- **Pilot training and exams.** We have not read the Hungarian rules on the online course and exam, so what each drone
+  needs is unverified. mydronespace says the certificates last 5 years.
+- **Minimum age.** The authority's page names no minimum age for the operator, only that a minor needs a legal
+  representative. mydronespace says 16 for a remote pilot, with exceptions. Unverified.
+- **Visitors' drones.** Whether a drone registered abroad also needs a Hungarian entry is not stated.
+- **Where flying is banned.** The map and its zones are on the mydronespace app and website, and we have not copied them.
+- **Model aircraft, privacy and nature-protection rules,** and the price of the app.

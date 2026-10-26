@@ -3,48 +3,70 @@ name: Zimbabwe
 iso3: ZWE
 authority: Civil Aviation Authority of Zimbabwe (CAAZ)
 authorityUrl: https://www.caaz.co.zw/drone-registration/
-registrationUrl: https://caaz.co.zw/online-payments/apply/drone
+registrationUrl: https://www.caaz.co.zw/drone-registration/
 whoMustRegister: >-
-  CAAZ's FAQ, as a search summarised it, says all drones must be registered with CAAZ
-  under the Civil Aviation (Remotely Piloted Aircraft) Regulations, Statutory Instrument
-  271 of 2018. Because the rules do not define a toy, CAAZ says every flying drone should
-  be registered.
-restrictiveness: 3
+  Every remotely piloted aircraft (RPA) must be registered with CAAZ before it is operated (SI 271 of 2018,
+  regulation 5(1)). The person flying it must also hold a CAAZ remote pilot licence (regulation 8(1)). CAAZ's
+  FAQ says the licence is needed for recreational flying too. Only Zimbabwean citizens, permanent residents
+  and Zimbabwe-based companies may register a drone (regulation 6(1)), so a visitor cannot register one.
+restrictiveness: 4
 restrictivenessReason: >-
-  CAAZ asks for every drone to be registered (CA Form 520 or its online route), for a
-  clearance on import, and bans flying within 5.5 km of an airport or airfield. Restricted
-  airspace needs an ROC and CAAZ's approval. This level is provisional: we saw search
-  excerpts, not SI 271.
+  No one may operate an RPA without a valid CAAZ remote pilot licence (SI 271 of 2018, regulation 8(1)),
+  and CAAZ's FAQ says that applies to recreational flying. A government licence is level 4 on our scale.
+  The drone also needs a CAAZ letter of approval and a registration certificate first (regulations 4 and 5),
+  and a temporary import needs CAAZ pre-clearance (regulation 7).
 registrationFee: null
-registrationWeightGrams: null
-minOperatorAge: null
+registrationWeightGrams: 0
+minOperatorAge: 18
 remoteId: null
-insurance: null
+insurance: >-
+  Third-party insurance is required for operator-certificate holders (SI 271 of 2018, regulation 28), and
+  CAAZ's FAQ says the same for ROC holders. The regulations we read do not require it for a private flight.
 howToRegister:
   needed:
-    - 'CA Form 520, the RPA drone registration application for individuals, or CAAZ''s online application'
-    - 'For a drone brought into the country, a temporary custody registration letter'
+    - 'A valid CAAZ remote pilot licence for the person flying the drone (SI 271, regulations 8 and 9)'
+    - 'CAAZ letter of approval for the drone (regulation 4)'
+    - 'CA Form 520, the RPA drone registration application for individuals, with ID or passport number, the drone''s details, proof of fee payment and a photo of the dataplate'
+    - 'Proof of ownership for the drone (regulation 5(3))'
+    - 'For a drone brought into the country, CAAZ pre-clearance and a ZIMRA temporary import permit (regulation 7)'
   steps:
-    - 'Apply online at CAAZ''s drone application page, or with CA Form 520.'
-    - 'CAAZ approves or rejects a complete, documented and paid application within 30 days (SI 271, paragraph 5(5)); it says most are reviewed within a working week.'
-    - 'Bringing a drone in? Get the temporary custody registration letter; the sources say ZIMRA or Defence clearance may be given at the port of entry.'
-  validFor: null
-  afterwards: 'Keep the drone more than 5.5 km (3 nautical miles) from any airport or airfield. Ask CAAZ about flight permits, which the application portal mentions.'
+    - 'Get a remote pilot licence. The applicant must be at least 18 and pass the CAAZ tests (SI 271, regulations 8 to 12).'
+    - 'Apply to CAAZ in writing for a letter of approval for the drone, with the fee (regulation 4).'
+    - 'Apply for registration with CA Form 520, through CAAZ''s online form or by email to airworthiness@caaz.co.zw (CAAZ FAQ). CAAZ decides within 30 days (regulation 5(5)).'
+    - 'Bringing a drone in? Apply for CAAZ pre-clearance at least 30 days before the import. The approval lasts three months, and you also need the ZIMRA temporary import permit (regulation 7).'
+  validFor: 'A letter of approval lasts 12 months at first and then three years (regulation 4(5)). We did not find the term of the registration certificate.'
+  afterwards: 'Private flights must be restricted visual line-of-sight or visual line-of-sight (regulation 61). Stay at least 5.5 km (3 nautical miles) from any airport or airfield (CAAZ FAQ).'
 lastVerified: 2026-10-26
 sources:
   - https://www.caaz.co.zw/drone-registration/
   - https://www.caaz.co.zw/drone-safety/
   - https://feedback.caaz.co.zw/faq
+  - https://www.caaz.co.zw/download/remotely-piloted-aircraft-si-271-of-2018/
 ---
 
-This guide rests on excerpts of CAAZ's drone registration and safety pages and FAQ that a web search returned on 26 October 2026.
-**We did not open them ourselves.** The FAQ pages may not be current. Check CAAZ for any change.
+This guide follows CAAZ's drone registration page and its FAQ, and the Civil Aviation (Remotely Piloted Aircraft) Regulations, Statutory Instrument 271 of 2018, which CAAZ publishes. We opened and read them on 26 October 2026. Regulation numbers below are from SI 271. The text of the SI we read is partly garbled in places, so the night-flying rule is taken from the FAQ.
+
+## Where and how you can fly
+
+- **Altitude:** visual line-of-sight means below 400 ft (122 m) above ground level (SI 271, regulation 2). The CAAZ FAQ gives the same limit.
+- **Private flights:** only in restricted visual line-of-sight or visual line-of-sight (regulation 61).
+- **Night:** the FAQ says night flying is allowed only in restricted visual line-of-sight, or by a holder of an ROC approved by CAAZ.
+- **People and property:** the FAQ says to keep 30 m from people, vehicles and private property, unless the owner gives permission. It also says not to fly over crowds or assemblies.
+- **Airspace:** restricted or prohibited airspace needs an ROC and CAAZ's approval (FAQ).
 
 ## Where you cannot fly
 
-As summarised: drones are prohibited within 5.5 km (3 nautical miles) of any airport or airfield. Flying in restricted or prohibited airspace needs an ROC and CAAZ's approval.
+The FAQ says drones are prohibited within 5.5 km (3 nautical miles) of any airport or airfield. SI 271 does not contain that distance, so it rests on the FAQ alone. The map's 5.5 km circle is drawn from every airport in OurAirports, including small airfields, so it is an approximation.
+
+## Penalties
+
+Regulation 5(11) makes flying an unregistered RPA an offence punishable by a fine up to level 14, or up to 15 years in prison, or both. The FAQ says breaking the drone rules can bring fines, imprisonment or both, depending on severity. The fine scale is not converted into a currency amount in the text we read.
 
 ## Not covered yet
 
-- **Fees, minimum age, term, penalties, height limits, Remote ID and insurance.**
-- **The 5.5 km circle on our map** is drawn from the centre of every airport in OurAirports, including small airfields, so it is a guide.
+- **Registration and approval fees.** The Second Schedule fee table did not extract cleanly from the PDF, so no registration fee is given. The schedule lists CAAZ examination fees of USD 25 per subject for a multirotor remote pilot licence, which may be a useful starting point.
+- **Remote ID**, which the SI and FAQ do not mention.
+- **Night operations.** The text of regulation 41 is garbled in our copy, so the night rule rests on the FAQ.
+- **Insurance for private flights.** The FAQ and SI 271 require insurance for operator-certificate holders only.
+- **Registration validity.** The letter of approval's term is given, but the registration certificate's term is not.
+- **The 5.5 km distance** comes from the FAQ, not the SI, and should be checked with CAAZ before use.

@@ -56,12 +56,13 @@ test.describe('United States guide page', () => {
 		}
 	});
 
-	test('links DroneZone and cites only FAA pages', async ({ page }) => {
+	test('links DroneZone and cites only US government pages', async ({ page }) => {
 		await page.goto('/countries/united-states/');
 		await expect(page.getByRole('link', { name: 'Register with Federal Aviation Administration (FAA)' })).toHaveAttribute('href', 'https://faadronezone-access.faa.gov/');
 		const sources = page.locator('h2', { hasText: 'Sources' }).locator('xpath=following-sibling::ul[1]//a');
-		await expect(sources).toHaveCount(6);
-		for (const link of await sources.all()) await expect(link).toHaveAttribute('href', /^https:\/\/www\.faa\.gov\//);
+		expect(await sources.count()).toBeGreaterThanOrEqual(6);
+		// FAA pages, plus the law they rest on (eCFR, GovInfo) and the National Park Service's own drone page.
+		for (const link of await sources.all()) await expect(link).toHaveAttribute('href', /^https:\/\/www\.(faa|ecfr|govinfo|nps)\.gov\//);
 	});
 
 	test('does not scroll sideways', async ({ page }) => {

@@ -5,43 +5,47 @@ authority: Civil Aviation Authority of Bangladesh (CAAB)
 authorityUrl: https://new.caab.gov.bd/corporate/drone.pdf
 registrationUrl: null
 whoMustRegister: >-
-  A CAAB document, as a search summarised it, says drones above 248 g or with a controller
-  range over 100 m must be registered with the CAAB. It is a draft air navigation order
-  and we could not confirm it is in force.
+  The CAAB's draft Air Navigation Order (Parts 947 and 945, issue 1.0, dated 15 November 2021, marked DRAFT) says a drone above 248 g, or with a controller range over 100 m, must be registered with the CAAB. We could not confirm the draft is in force. CAC-5 does not mention registration.
 restrictiveness: 3
 restrictivenessReason: >-
-  CAAB's draft order, as summarised, asks for registration above 248 g and a flight
-  authorisation from the Air Defence Operations Centre outside the Green Zone, and an
-  older circular asks for written permission 60 days ahead. This level is provisional
-  because the status of both is unclear.
+  CAC-5 (Issue 01, January 2019) says RPAS operations need prior permission: the operator asks the CAAB in writing 60 days before the flight and carries the CAAB permission (SFOC). That is permission before flying for ordinary flights. We could not confirm CAC-5 is still current.
 registrationFee: null
-registrationWeightGrams: 248
+registrationWeightGrams: null
 minOperatorAge: null
 remoteId: null
-insurance: null
+insurance: >-
+  CAC-5 says the operator must carry proof of appropriate liability insurance coverage during operations.
 howToRegister:
   needed:
-    - 'Your drone''s details, for CAAB registration'
+    - 'A written permission request to the CAAB chairman, through the Director (Flight Safety and Regulations), sent 60 days before the flight (CAC-5, section 7)'
+    - 'Proof of liability insurance, and a copy of the manufacturer''s operating limitations (CAC-5)'
+    - 'Permission from the owner of any site you take off from or land on (CAC-5)'
   steps:
-    - 'Check the weight: the draft order says drones above 248 g or with a controller range over 100 m register with the CAAB.'
-    - 'Get flight authorisation from the Air Defence Operations Centre for any flight outside the Green Zone.'
-    - 'Ask the CAAB which of its documents is in force: the draft Air Navigation Order or the older Civil Aviation Circular CAC-5.'
+    - 'Send the written request to the Director (Flight Safety and Regulations), CAAB headquarters, Kurmitola, Dhaka, at least 60 days before the operation.'
+    - 'Wait for the CAAB permission (SFOC) and carry a copy, with your insurance proof, whenever you fly.'
+    - 'Ask the CAAB whether the draft order is in force. If it is, it also needs registration above 248 g and flight authorisation outside the Green Zone.'
   validFor: null
-  afterwards: 'The draft order restricts operations above 100 ft; the older circular says 200 ft AGL. Check before you fly.'
+  afterwards: 'CAC-5 limits flights to daylight in visual conditions, at most 200 ft AGL, at least 1,000 ft from people and buildings, and not over open-air assemblies. The draft order says 100 ft. Check before you fly.'
 lastVerified: 2026-10-26
 sources:
   - https://new.caab.gov.bd/corporate/drone.pdf
   - https://new.caab.gov.bd/corporate/rpas.pdf
 ---
 
-This guide rests on excerpts of a CAAB draft Air Navigation Order and its circular CAC-5 that a web search returned on 26 October
-2026. **We did not open them ourselves**, and neither shows a date we could confirm. Check the CAAB for any change.
+This guide is based on two CAAB documents we read ourselves: the circular CAC-5 (Operating Remotely Piloted Aircraft Systems, Issue 01, January 2019) and the draft Air Navigation Order (Parts 947 and 945, 2021). The live CAAB links failed our fetch tool and curl with a certificate error, so we read web.archive.org copies of both PDFs. We did not compare them with the live files. Both are in English. The guide does not cover the 2020 government policy "Drone Registration and Flying Regulation", which we did not open.
 
 ## Which rules apply
 
-As summarised, a government policy, the Drone Registration and Flying Regulation 2020, set open, specific and certified categories. Open-category flights need no prior authorisation; educational, research and professional flights need a specific authorisation. The older circular CAC-5 asks for written permission 60 days ahead, bars flights within 10 nautical miles of an aerodrome and over open-air assemblies, and limits height to 200 ft AGL.
+- **CAC-5** says anyone operating a drone needs CAAB permission before flying (an SFOC), must ask in writing 60 days before the operation, and must carry proof of liability insurance. Operations are limited to daylight in visual conditions, to 200 ft AGL, and to a point at least 10 nautical miles (18.52 km) from an aerodrome. The circular also bars flying within 5 nautical miles of a key installation, sensitive government building or built-up area, over forest fires, in restricted airspace, and over open-air assemblies of people.
+- **The draft Air Navigation Order** is marked DRAFT. It sets categories (open, specific, certified), a minimum age of 18 for the specific category, and a flight authorisation from the Air Defence Operations Centre for any flight outside the Green Zone. Its fee schedule lists flight authorisation fees in BDT. We could not confirm whether any of this has taken effect.
+
+## Where the two documents disagree
+
+- **Height:** CAC-5 says 200 ft AGL. The draft says 100 ft.
+- **Registration weight:** the draft gives 248 g in one place and 249 g in another, so we left the threshold out of the frontmatter.
 
 ## Not covered yet
 
-- **Fees, minimum age for recreational flying, penalties, Remote ID, insurance and visitors.**
-- **Distances from airports:** the only figure is in the older circular, whose status is unclear, so the map draws no circle.
+- **Registration fee, minimum age for recreational flying, penalties, Remote ID and visitor rules.** The draft's Remote ID clause (945.42) is not clear enough to state.
+- **Which document is in force.** CAC-5 is an issued circular, not marked as a draft, but we found nothing that says whether it is current. The draft says it is a draft.
+- **Distances from airports:** CAC-5 gives 10 nautical miles from an aerodrome. The map does not draw that circle yet.

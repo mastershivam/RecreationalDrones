@@ -5,57 +5,127 @@ authority: Swedish Transport Agency (Transportstyrelsen)
 authorityUrl: https://www.transportstyrelsen.se/
 registrationUrl: https://dronarsidan.transportstyrelsen.se/
 whoMustRegister: >-
-  Register yourself once, not each drone, with your home EU country's authority
-  (visitors: the first EU country you fly in). Needed if a drone weighs 250 g or
-  more or has a camera.
+  You register yourself as the operator, not each drone. Needed for a drone that
+  flies outdoors and weighs 250 g or more, can pass more than 80 joules on impact,
+  or has a camera or other sensor; indoor-only flights, tethered model aircraft
+  and toys are exempt. Sweden registers people who live there. If you are already
+  registered in another EU or EEA state, do not register in Sweden; a visitor from
+  outside the EU and EEA with no registration applies by form.
 restrictiveness: 2
 restrictivenessReason: >-
-  Register online with your national authority and, for most drones, pass an
-  online training exam (EASA). Steps in your country may add to this; we have
-  not read them.
-registrationFee: null
+  Register online with a Swedish e-ID for SEK 190 (then SEK 250 a year) and pass
+  the online A1/A3 drone-licence test; no in-person step. Flights within 5 km of
+  any runway need air traffic control permission, as in other level 2 guides. We
+  have not read Sweden's privacy or protected-object rules.
+registrationFee: 'SEK 190 once, then SEK 250 a year'
 registrationWeightGrams: 0
-minOperatorAge: null
+minOperatorAge: 15
 remoteId: >-
-  EASA says open-category drones, with limited exceptions, must have a remote
-  identification system.
+  Transportstyrelsen says the network ID (Remote ID) is required for C1, C2 and C3
+  drones, and "if possible" for C0, C4 and privately built drones. It is the
+  operator ID plus the three characters after the hyphen, and may be required in
+  some airspace.
 insurance: >-
-  EASA requires insurance for a drone over 20 kg, and says most member states
-  also require third-party insurance for lighter drones. Check Sweden's rules.
+  Transportstyrelsen says drone operators using a drone under 20 kg only for
+  leisure, display or recreational flying do not need insurance. Other operations
+  fall under Regulation (EC) 785/2004.
 howToRegister:
   needed:
-    - 'Whatever your national authority asks for. We have not read the list for this country.'
+    - 'If you live in Sweden: a Swedish personal number, a Swedish address, a Swedish e-ID, and to be 18 or over. Pay with a bank card or Swish.'
+    - 'If you live outside the EU and EEA and are not registered in one: form TSL7181 and a PDF copy of your passport.'
+    - 'SEK 190 for the registration.'
   steps:
-    - 'Check that you need to register: yes if any drone weighs 250 g or more or has a camera or other sensor that could detect personal data. A toy under 250 g is exempt.'
-    - 'Register yourself, once and not each drone, with the authority of the EU country where you live. A visitor from outside the EU registers in the first EU country where they fly.'
-    - 'Complete the online training and exam if your drone needs it. Most drones of 250 g or more do (C1, C3, C4, and older drones). C2 needs more, and C0 and drones under 250 g need none.'
-    - 'Put your operator registration number on every drone you own as a sticker, and enter it into the drone''s Remote ID if it has one.'
-  validFor: 'Set by the authority you register with. It is valid in every EASA member state.'
-  afterwards: 'Before you fly in any EU country, check that the place is not in a geographical zone that country has published.'
-lastVerified: 2026-10-17
+    - 'Check that you need to register: yes if any drone flies outdoors and weighs 250 g or more, can pass more than 80 joules on impact, or has a camera or other sensor.'
+    - 'If you live in another EU or EEA country, register there instead. Transportstyrelsen says not to register in Sweden if you are already registered in another EU or EEA state, and a registration from any of them is valid in Sweden.'
+    - 'If you live in Sweden: log in to the Drönarsidan e-service with your e-ID, register as an operator (the service is automatic and takes a few minutes) and pay SEK 190.'
+    - 'If you live outside the EU and EEA and are not registered: fill in form TSL7181, attach a PDF of your passport and email it to operatorsregistrering.dronare@transportstyrelsen.se. Transportstyrelsen says this can take a couple of weeks. You pay SEK 190 by bank transfer on the invoice.'
+    - 'Take the A1/A3 drone-licence test (drönarkort) if any drone weighs 250 g or more.'
+    - 'Show the operator ID where it can be read on the ground, or inside an easy-to-reach battery compartment if the drone is too small, and add it to the drone''s electronic identification if it has one.'
+  validFor: 'No end date. The ID stays until you deregister, but SEK 250 is due for each year you are registered on 1 January. It is valid in every EU and EEA state. The drone licence is valid for 5 years.'
+  afterwards: 'Before each flight, look at LFV''s Dronechart and the NOTAMs in AroWeb. Dronechart can lack information, and AroWeb is the primary source.'
+lastVerified: 2026-10-25
 sources:
   - https://www.easa.europa.eu/en/domains/drones-air-mobility/operating-drone/open-category-low-risk-civil-drones
   - https://www.easa.europa.eu/the-agency/faqs/drones-uas
   - https://www.easa.europa.eu/en/domains/civil-drones/naa
   - https://dronarsidan.transportstyrelsen.se/
+  - https://www.transportstyrelsen.se/en/aviation/aircraft/drones-unmanned-aircraft/
+  - https://www.transportstyrelsen.se/en/aviation/aircraft/drones-unmanned-aircraft/registration-of-uas-operator/
+  - https://www.transportstyrelsen.se/en/aviation/aircraft/drones-unmanned-aircraft/guide-to-uas-operations-in-sweden/
+  - https://www.transportstyrelsen.se/sv/luftfart/luftfartyg-och-luftvardighet/dronare/registrering-av-operator/
+  - https://www.transportstyrelsen.se/sv/om-oss/avgifter/avgifter-inom-luftfart/obemannade-luftfartygssystem---dronare/dronaroperatorer/
+  - https://www.transportstyrelsen.se/dronarflygguiden
+  - https://www.transportstyrelsen.se/dronarkort-och-utbildning/
+  - https://www.transportstyrelsen.se/sv/om-oss/pressrum/nyhetsarkiv/2025/nu-skarps-reglerna-for-dronare/
+  - https://dronechart.lfv.se
 ---
 
 import EasaRules from '../../components/EasaRules.mdx';
 
 Sweden applies the EU's common drone rules, set by the European Union Aviation Safety Agency (EASA). This
-guide gives those rules, then links to Sweden's own authority for what is national.
+guide gives those rules, then Sweden's own rules from the Swedish Transport Agency (Transportstyrelsen) pages on
+drones, operator registration, fees and the drone licence, read on 25 October 2026. The pages show no date, so check
+them for changes.
 
 <EasaRules />
 
 ## In Sweden
 
-- **Register:** [Sweden's registration page](https://dronarsidan.transportstyrelsen.se/).
-- **Where you can fly:** [Sweden's map of geographical zones](https://daim.lfv.se/echarts/dronechart/).
+- **Register:** [Drönarsidan](https://dronarsidan.transportstyrelsen.se/), Transportstyrelsen's e-service.
+- **Where you can fly:** [LFV's Dronechart](https://dronechart.lfv.se), which Transportstyrelsen points to before
+  each flight. It can lack information; Transportstyrelsen says the NOTAMs in AroWeb are the primary source.
 - **Authority:** [Swedish Transport Agency (Transportstyrelsen)](https://www.transportstyrelsen.se/).
+
+### Registration
+
+- **Fee and term:** SEK 190 to register, then SEK 250 a year for as long as you are registered on 1 January. There is
+  no end date; the ID stays until you deregister, and deregistering by 31 December avoids the next year's fee.
+  Transportstyrelsen's fee page was last updated on 1 January 2026.
+- **Who can register:** a private person registering through the e-service must be 18 or over and live in Sweden, with
+  a Swedish e-ID. Do not register in Sweden if you are already registered in another EU or EEA state; that ID and drone
+  licence are valid in Sweden.
+- **Visitors from outside the EU and EEA** with no registration can apply by form TSL7181 and a passport copy, by email.
+  Transportstyrelsen says this can take a couple of weeks.
+- **Your number:** it must be readable on the drone when it is on the ground, without tools beyond glasses. A QR code is
+  allowed.
+- **Drone licence:** any drone of 250 g or more needs one. The A1/A3 test has 40 multiple-choice questions, needs 75 %
+  right, and the licence is valid for 5 years. Transportstyrelsen's English page describes a different route: a test
+  in Swedish only, sent by email, to be returned within 24 hours, with a fee of SEK 600 (2026) and up to 90 days from
+  application to licence. The pages do not say which route applies to whom.
+- **Age:** the age limit to fly as a remote pilot on your own is 15. Under 15 you may fly while supervised by a
+  licensed remote pilot over 16 who holds a valid licence. Registering through the e-service needs 18, so we show 15 as
+  the flying age.
+
+### Insurance
+
+Operators using a drone under 20 kg only for leisure, display or recreational flying do not need insurance.
+Transportstyrelsen says all other operations fall under Regulation (EC) 785/2004.
+
+### Where you cannot fly without permission
+
+Transportstyrelsen's open-category rules include:
+
+- **Height:** at most 120 m above the ground.
+- **Airports:** closer than 5 km to any runway you need air traffic control permission at any height. Inside the
+  control zone (CTR) of most larger airports beyond 5 km, at most 50 m above ground, or 10 m at military airports.
+  Within 1,000 m of a heliport, coordinate with it first.
+- **Crowds:** never over an assembly of people, such as sports events, parks and beaches on a sunny day, or shopping
+  streets in opening hours.
+- **Restricted areas** (for example prisons, nuclear plants and military areas) need permission; Transportstyrelsen has
+  an application page for it. National parks are usually restricted airspace.
+- **Nature reserves:** the county administrative board (Länsstyrelsen) decides, and takeoff and landing may be banned.
+- **Danger areas:** flying is not banned, but it should be avoided unless you can show it is safe.
+- **Sharing photos and video:** a dissemination permit may be needed before you share, publish or sell aerial images of
+  land (Lantmäteriet) or sea (Sjöfartsverket).
+
+### Penalties
+
+Since 1 January 2026, flying a drone of 250 g or more without a drone licence is a crime. Transportstyrelsen's news
+item says it can mean 30 to 150 day-fines (depending on the offence) and, in the most serious cases, up to six months
+in prison. We did not find the amounts for other breaches.
 
 ## Not covered yet
 
-- **Sweden's national rules.** We have not read Sweden's own drone rules, so what we say here is only what EASA says
-  applies everywhere. Fees, how long registration lasts, the minimum age (a state may lower EASA's 16 to 12),
-  insurance, penalties and any local bans are all unverified. Check the authority above before you fly.
-- **Where flying is banned.** Sweden's geographical zones are on the map linked above, and we have not copied them.
+- **Protected objects (skyddsobjekt), privacy and camera-surveillance rules.** The pages we read do not cover them.
+- **Where flying is banned.** Sweden's zones are on the map linked above, and we have not copied them.
+- **The A2 and specific-category rules**, and what Transportstyrelsen's non-EU visitor route needs beyond registration.

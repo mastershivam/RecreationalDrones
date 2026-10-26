@@ -28,8 +28,9 @@ test.describe('EU member states on the globe', () => {
 		const preview = page.locator('.country-popup.preview');
 		await expect(preview).toContainText('Germany');
 		await expect(preview).toContainText('250 g');
-		// The fee is national, so EASA's pages give none.
-		await expect(preview.locator('.unverified')).toHaveCount(1);
+		// The fee is national: Germany's own portal gives it, so it shows with no "not yet verified" marker.
+		await expect(preview).toContainText('EUR 20');
+		await expect(preview.locator('.unverified')).toHaveCount(0);
 	});
 
 	test("opens Germany's guide, with the EASA rules and its own authority", async ({ page }) => {
@@ -38,7 +39,7 @@ test.describe('EU member states on the globe', () => {
 
 		const dialog = page.locator('#country-dialog');
 		await expect(dialog.getByRole('heading', { level: 1 })).toHaveText('Drone rules in Germany');
-		await expect(dialog.getByRole('link', { name: 'Register online' })).toHaveAttribute('href', /uas-operations\.de/);
+		await expect(dialog.getByRole('link', { name: 'Register online' })).toHaveAttribute('href', /lba-openuav\.de/);
 		await expect(dialog.getByRole('link', { name: 'Read the full guide' })).toHaveAttribute('href', '/countries/germany/');
 		await expect(dialog).not.toContainText('Flyer ID');
 	});

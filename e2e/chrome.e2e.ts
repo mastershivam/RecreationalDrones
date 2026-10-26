@@ -88,7 +88,7 @@ test.describe('countries list', () => {
 		await page.goto('/countries/');
 		const nepal = page.locator('.countries li', { hasText: 'Nepal' });
 		await expect(nepal).toContainText('Civil Aviation Authority of Nepal (CAAN)');
-		await expect(nepal).toContainText('last verified 2026-10-17');
+		await expect(nepal).toContainText('last verified 2026-10-26');
 		await expect(page.locator('.countries li')).toHaveCount(GUIDE_COUNT);
 	});
 });

@@ -17,7 +17,8 @@ test.describe('every page has its own title, description and sharing tags', () =
 		const descriptions = new Set<string>();
 		for (const path of paths) {
 			const html = await (await request.get(path)).text();
-			const get = (re: RegExp) => html.match(re)?.[1] ?? '';
+			// Attribute values are HTML-escaped (Côte d&#39;Ivoire); <title> text is not, so decode before comparing.
+			const get = (re: RegExp) => (html.match(re)?.[1] ?? '').replace(/&#39;/g, "'").replace(/&quot;/g, '"').replace(/&amp;/g, '&');
 			const title = get(/<title>([^<]+)<\/title>/);
 			const description = get(/<meta name="description" content="([^"]*)"/);
 			expect(title.length, `${path} title`).toBeGreaterThan(5);

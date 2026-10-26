@@ -3,42 +3,63 @@ name: Barbados
 iso3: BRB
 authority: Barbados Civil Aviation Authority (BCAA), with the Prime Minister's Office
 authorityUrl: https://www.bcaa.gov.bb/remotely-piloted-aircraft-systems/
-registrationUrl: null
+registrationUrl: https://barbados.seamlessdocs.com/sc/uasapplication
 whoMustRegister: >-
-  The BCAA's drone page, as a search summarised it, says operators must apply through the
-  Prime Minister's Office before operating a drone in Barbados airspace. A GIS Barbados
-  notice calls prior authorisation and the online application mandatory before any flight.
+  The BCAA's drone page says you must apply through the Prime Minister's Office before operating a drone in Barbados
+  airspace, and that "no permission means no drone flying". The page links the online application form. It does not
+  say whether toys or lighter drones are exempt.
 restrictiveness: 3
 restrictivenessReason: >-
-  Every drone flight needs the Prime Minister's Office's prior authorisation, with a
-  training certificate and a spectrum licence from the telecommunications unit. This level
-  is provisional: the pages are about two to three years old, and older notices describe a
-  temporary import ban that may have lapsed.
+  Every drone flight needs the Prime Minister's Office's prior authorisation, not only flights in particular zones. The
+  BCAA page also asks for a training certificate for the device and a spectrum licence. This level is provisional:
+  the BCAA page was read directly, but the GIS Barbados notice we could read is a 2022 archive copy.
 registrationFee: null
 registrationWeightGrams: null
 minOperatorAge: null
 remoteId: null
-insurance: null
+insurance: >-
+  Public liability insurance of at least $250,000, according to the BCAA page (the page does not state the currency).
 howToRegister:
   needed:
-    - 'The Prime Minister''s Office online application'
-    - 'The training certificate for the device you will fly, and a spectrum licence from the telecommunications unit'
+    - 'The Prime Minister''s Office online application form, which the BCAA page links'
+    - 'Public liability insurance of at least $250,000, and a licensed and insured drone'
+    - 'A training certificate for the device you will fly (the BCAA page does not say who issues it)'
+    - 'A spectrum licence (the BCAA page points to the Ministry of Innovation, Science and Smart Technology for it, and gives no link)'
   steps:
-    - 'Apply online to the Prime Minister''s Office for authorisation before any flight (questions: dronesinfo@pmo.gov.bb or 535-5318).'
-    - 'Get the training certificate and the spectrum licence.'
-    - 'Declare a visitor''s drone to Customs at the port of entry; its licensing goes through the Telecommunications Unit.'
+    - 'Apply online to the Prime Minister''s Office for authorisation before any flight. Questions: dronesinfo@pmo.gov.bb or 246-535-5318.'
+    - 'Get the training certificate for the device you will fly.'
+    - 'Get your spectrum licence.'
+    - 'Check the BCAA page''s list of spots where, with approval and a licensed and insured drone, you may fly for fun without special permission.'
   validFor: null
-  afterwards: 'Keep the drone below 400 ft. Check whether the import ban in older notices still applies.'
+  afterwards: 'Keep the drone under 400 ft, and fly aerial shots only at locations you have permission for.'
 lastVerified: 2026-10-26
 sources:
   - https://www.bcaa.gov.bb/remotely-piloted-aircraft-systems/
   - https://gisbarbados.gov.bb/blog/new-link-to-apply-online-to-operate-a-drone/
 ---
 
-This guide rests on excerpts of the BCAA's drone page and GIS Barbados notices that a web search returned on 26 October 2026. **We
-did not open them ourselves.** The email address in the notices has changed once already. Check the BCAA for any change.
+This guide follows the BCAA's drone page, read on 26 October 2026. The application form is the one the page links; we could not read its
+content, only its title. The GIS Barbados notice on the online application returned HTTP 403 when we tried it, so we read an
+archived copy of it, dated 11 February 2022. That notice gave the older contact details: 535-5318 and droneapplication@barbados.gov.bb.
+The BCAA page now gives dronesinfo@pmo.gov.bb and 246-535-5318. Check the BCAA for any change.
+
+## Registration
+
+- **Who:** anyone who operates a drone in Barbados airspace, according to the BCAA page.
+- **How:** the Prime Minister's Office's online application, before any flight.
+- **Other requirements:** a training certificate for the device, a spectrum licence, and public liability insurance of at least
+  $250,000.
+
+## Where and how you can fly
+
+- **Height:** keep the drone under 400 ft.
+- **Locations:** aerial shots only at locations you have permission for. The page lists spots where a licensed and insured drone may
+  fly freely for fun without special permission; we did not open that list.
 
 ## Not covered yet
 
-- **Fees, weight thresholds, minimum age, penalties, Remote ID and insurance.**
+- **Fees, weight thresholds, minimum age, Remote ID, validity and penalties:** the BCAA page does not state them.
+- **Import and visitors:** the BCAA page says nothing about bringing a drone in. The 2022 notice does not mention an import ban or a
+  customs declaration either, so we have left both out.
+- **The free-to-fly list and the form's content:** not read.
 - **Distances from airports and no-fly areas:** none found, so the map draws no circle.

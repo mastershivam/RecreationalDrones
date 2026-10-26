@@ -3,59 +3,94 @@ name: Luxembourg
 iso3: LUX
 authority: Directorate of Civil Aviation of Luxembourg
 authorityUrl: https://dac.gouvernement.lu/en.html
-registrationUrl: https://dac.gouvernement.lu/en/drones/where-when-register.html
+registrationUrl: https://guichet.public.lu/en/entreprises/sectoriel/aviation/systeme-aeronef-sans-pilote/enregistrement-exploitant-uas.html
 whoMustRegister: >-
-  Register yourself once, not each drone, with your home EU country's authority
-  (visitors: the first EU country you fly in). Needed if a drone weighs 250 g or
-  more or has a camera.
+  Register yourself once, not each drone, in your country of residence. In Luxembourg
+  that means the DAC, through Guichet.lu. Needed if a drone weighs 250 g or more, or
+  weighs less and has a camera or other sensor that can detect personal data. A toy
+  under 250 g does not need it. A visitor from outside the EU registers in the first
+  EU country where they fly.
 restrictiveness: 2
 restrictivenessReason: >-
-  Register online with your national authority and, for most drones, pass an
-  online training exam (EASA). Steps in your country may add to this; we have
-  not read them.
-registrationFee: null
+  Register online on MyGuichet.lu with a civil liability insurance number for a €10
+  fee, and take the online A1/A3 exam, which is free. The on-site A2 exam (€45) is
+  needed only for C2 drones, and some zones need authorisation. No permission is
+  needed before a general flight, so it stays at 2, as Switzerland does.
+registrationFee: '€10, valid one year and renewed each year'
 registrationWeightGrams: 0
-minOperatorAge: null
+minOperatorAge: 14
 remoteId: >-
-  EASA says open-category drones, with limited exceptions, must have a remote
-  identification system.
+  The DAC says the identification string on your registration certificate goes into the
+  drone's UAS system if that system supports remote identification. EASA says open-category
+  drones, with limited exceptions, must have a remote identification system.
 insurance: >-
-  EASA requires insurance for a drone over 20 kg, and says most member states
-  also require third-party insurance for lighter drones. Check Luxembourg's rules.
+  Registering needs a civil liability insurance policy number on Guichet.lu, and the DAC's
+  FAQ says insurance is compulsory for under-16s who fly. The pages we read give no amount.
+  EASA says insurance is required for a drone over 20 kg, and that most member states also
+  require third-party insurance for lighter drones.
 howToRegister:
   needed:
-    - 'Whatever your national authority asks for. We have not read the list for this country.'
+    - 'A MyGuichet.lu login with LuxTrust, an electronic ID card (eID), or an eIDAS-compliant device. Natural persons must register themselves.'
+    - 'Your civil liability insurance policy number.'
+    - 'A way to pay the €10 fee, online or by bank transfer.'
+    - 'If you are 14 or 15: a parent or guardian to complete the registration.'
   steps:
-    - 'Check that you need to register: yes if any drone weighs 250 g or more or has a camera or other sensor that could detect personal data. A toy under 250 g is exempt.'
-    - 'Register yourself, once and not each drone, with the authority of the EU country where you live. A visitor from outside the EU registers in the first EU country where they fly.'
-    - 'Complete the online training and exam if your drone needs it. Most drones of 250 g or more do (C1, C3, C4, and older drones). C2 needs more, and C0 and drones under 250 g need none.'
-    - 'Put your operator registration number on every drone you own as a sticker, and enter it into the drone''s Remote ID if it has one.'
-  validFor: 'Set by the authority you register with. It is valid in every EASA member state.'
-  afterwards: 'Before you fly in any EU country, check that the place is not in a geographical zone that country has published.'
-lastVerified: 2026-10-17
+    - 'Check that you need to register: yes if any drone weighs 250 g or more, or weighs less and has a camera or other sensor that could detect personal data. A toy under 250 g is exempt.'
+    - 'Register on MyGuichet.lu (or send the hard-copy form to uas@av.etat.lu) and pay the €10 fee. Online applications get a reply within 3 hours.'
+    - 'Take the online A1/A3 exam if your drone needs it. The DAC says it is mandatory for drones without a class mark that weigh 250 g to 25 kg, and highly recommended for lighter ones. It is free, on the Eurocontrol LearningZone, and valid in all EASA states.'
+    - 'Put your operator number (LUX followed by 13 characters) on every drone you own, and enter the identification string into the drone''s Remote ID if it has one.'
+    - 'Non-EU residents: email uas@av.etat.lu for how to register in Luxembourg.'
+  validFor: 'One year. Renew in the 90 days before it expires, keeping the same anniversary, for another €10. The operator number stays the same.'
+  afterwards: 'Before each flight, check the legally applicable zone map at g-o.lu/uas. For drones with a C1 to C3 class mark, the DAC says to upload the zone file before each flight.'
+lastVerified: 2026-10-26
 sources:
   - https://www.easa.europa.eu/en/domains/drones-air-mobility/operating-drone/open-category-low-risk-civil-drones
   - https://www.easa.europa.eu/the-agency/faqs/drones-uas
   - https://www.easa.europa.eu/en/domains/civil-drones/naa
   - https://dac.gouvernement.lu/en/drones/where-when-register.html
+  - https://guichet.public.lu/en/entreprises/sectoriel/aviation/systeme-aeronef-sans-pilote/enregistrement-exploitant-uas.html
+  - https://dac.gouvernement.lu/en/drones/drones-faq.html
+  - https://dac.gouvernement.lu/en/drones/geozones.html
+  - https://dac.gouvernement.lu/en/drones/train-where-how.html
 ---
 
 import EasaRules from '../../components/EasaRules.mdx';
 
 Luxembourg applies the EU's common drone rules, set by the European Union Aviation Safety Agency (EASA). This
-guide gives those rules, then links to Luxembourg's own authority for what is national.
+guide gives those rules, then sets out what the Directorate of Civil Aviation (DAC) and Guichet.lu say for Luxembourg.
+Those pages are in English and were read on 26 October 2026.
 
 <EasaRules />
 
 ## In Luxembourg
 
-- **Register:** [Luxembourg's registration page](https://dac.gouvernement.lu/en/drones/where-when-register.html).
-- **Where you can fly:** [Luxembourg's map of geographical zones](https://dac.gouvernement.lu/en/drones/geozones.html).
+- **Register:** on [Guichet.lu](https://guichet.public.lu/en/entreprises/sectoriel/aviation/systeme-aeronef-sans-pilote/enregistrement-exploitant-uas.html),
+  with a [MyGuichet.lu](https://guichet.public.lu/en/entreprises/sectoriel/aviation/systeme-aeronef-sans-pilote/enregistrement-exploitant-uas.html)
+  login. The fee is €10 for each registration or renewal. The certificate is valid for one year, and the number is
+  permanent and does not change on renewal.
+- **Who can register:** people who live in Luxembourg, and companies whose main place of business is there. The DAC's
+  list of who can register starts at 14, and 14 and 15 year olds need a parent or guardian to complete it. A UAS
+  operator cannot be registered in two EASA states at once.
+- **Under 16:** the DAC's FAQ says a child under 16 may fly if they have done the A1/A3 training, fly a drone whose
+  registered operator has given explicit consent, are supervised by a remote pilot aged 16 or over with the required
+  qualification, and have insurance. We found no separate minimum flying age.
+- **Training:** the A1/A3 exam is online and free. The A2 exam (needed for C2 drones) is on site at DAC premises, costs
+  €45, and needs the A1/A3 exam and practical training first. The STS exam is also on site.
+- **Insurance:** a civil liability insurance policy number is needed to complete any registration.
+- **Where you can fly:** the DAC's [UAS geographical zones page](https://dac.gouvernement.lu/en/drones/geozones.html) says
+  the legally applicable map is [g-o.lu/uas](https://g-o.lu/uas). Zones are prohibited, need an authorisation, or need
+  prior notification. Examples the DAC gives are football stadiums and the Useldange and Noertrange airfields (prohibited),
+  prisons, Findel Airport and the Grand Ducal Palace (authorisation), and helistations (notification). Zones the drone
+  maker puts in its remote controller do not necessarily cover Luxembourg.
+- **Flying limits:** the DAC's FAQ gives the EASA limits: stay in sight of the drone, below 120 m, and 150 m from
+  residential, commercial, industrial or leisure sites in A3. FPV flying in the open category needs a person beside you
+  who keeps the drone in view and can warn you.
 - **Authority:** [Directorate of Civil Aviation of Luxembourg](https://dac.gouvernement.lu/en.html).
 
 ## Not covered yet
 
-- **Luxembourg's national rules.** We have not read Luxembourg's own drone rules, so what we say here is only what EASA says
-  applies everywhere. Fees, how long registration lasts, the minimum age (a state may lower EASA's 16 to 12),
-  insurance, penalties and any local bans are all unverified. Check the authority above before you fly.
-- **Where flying is banned.** Luxembourg's geographical zones are on the map linked above, and we have not copied them.
+- **Penalties.** The DAC and Guichet.lu pages we read do not say what a breach costs, or name a fine.
+- **Insurance amount.** No minimum cover is given on the pages we read.
+- **Remote ID dates.** We found no Luxembourg-specific date for remote identification.
+- **Temporary bans.** The DAC posts temporary bans (for example for a national event) in its news. We have not copied them: check the news and the map before you fly.
+- **Where flying is banned.** The zones are on the map at g-o.lu/uas, and we have not copied them.

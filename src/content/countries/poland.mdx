@@ -14,7 +14,7 @@ restrictivenessReason: >-
   online training exam (EASA). Steps in your country may add to this; we have
   not read them.
 registrationFee: null
-registrationWeightGrams: 0
+registrationWeightGrams: null
 minOperatorAge: null
 remoteId: >-
   EASA says open-category drones, with limited exceptions, must have a remote
@@ -32,30 +32,49 @@ howToRegister:
     - 'Put your operator registration number on every drone you own as a sticker, and enter it into the drone''s Remote ID if it has one.'
   validFor: 'Set by the authority you register with. It is valid in every EASA member state.'
   afterwards: 'Before you fly in any EU country, check that the place is not in a geographical zone that country has published.'
-lastVerified: 2026-10-17
+lastVerified: 2026-10-26
 sources:
   - https://www.easa.europa.eu/en/domains/drones-air-mobility/operating-drone/open-category-low-risk-civil-drones
   - https://www.easa.europa.eu/the-agency/faqs/drones-uas
   - https://www.easa.europa.eu/en/domains/civil-drones/naa
   - https://drony.gov.pl/
+  - https://drony.gov.pl/e-registration
+  - https://drony.gov.pl/e-learning
+  - https://www.pansa.pl/sprawdz-waznosc-profilu-operatora/
 ---
 
 import EasaRules from '../../components/EasaRules.mdx';
 
 Poland applies the EU's common drone rules, set by the European Union Aviation Safety Agency (EASA). This
-guide gives those rules, then links to Poland's own authority for what is national.
+guide gives those rules, then sets out what Poland's own services say, read on 26 October 2026. Quotations from
+Polish pages are our translation.
 
 <EasaRules />
 
+## Poland's own services
+
+Poland runs its drone services through drony.gov.pl, a portal for the Civil Aviation Authority (ULC) with services
+run by PANSA, the air navigation service provider.
+
+- **Registration.** Operators and pilots register in PANSA's e-Rejestracja service, reached from drony.gov.pl.
+- **Online training and exam.** The e-Learning service covers the A1/A3 open-category training and exam online. Its
+  page says the training is open to anyone aged 14 or over who has registered (our translation). That is the age for
+  the course, not a minimum age for flying, so we have not put it in the minimum-age field.
+- **Where you can fly.** PANSA's [DroneMap](https://dronemap.pansa.pl/) is linked from PANSA's own page on operator
+  profiles as its map. We could not open the map: our check of it failed with a TLS certificate error.
+
 ## In Poland
 
-- **Register:** [Poland's registration page](https://drony.gov.pl/).
-- **Where you can fly:** [Poland's map of geographical zones](https://dronemap.pansa.pl/).
+- **Register:** [drony.gov.pl](https://drony.gov.pl/), with registration through PANSA's e-Rejestracja.
+- **Where you can fly:** [PANSA's DroneMap](https://dronemap.pansa.pl/).
 - **Authority:** [Civil Aviation Authority of Poland (ULC)](https://drony.gov.pl/).
 
 ## Not covered yet
 
-- **Poland's national rules.** We have not read Poland's own drone rules, so what we say here is only what EASA says
-  applies everywhere. Fees, how long registration lasts, the minimum age (a state may lower EASA's 16 to 12),
-  insurance, penalties and any local bans are all unverified. Check the authority above before you fly.
-- **Where flying is banned.** Poland's geographical zones are on the map linked above, and we have not copied them.
+- **Fees, validity and minimum age for flying.** The ULC's own pages (ulc.gov.pl) blocked every request we made, so
+  we have not read the fee, how long registration lasts, or the minimum age to fly. Check the authority above.
+- **Insurance.** ULC has an FAQ on whether insurance is required, but we could not read it. We have not stated any
+  Polish insurance rule.
+- **Penalties and local bans.** We have not read Poland's drone penalties or its restricted areas, and the map above
+  was not readable to us.
+- **Remote ID and visitors.** We have not read Poland's own remote ID or visitor rules.

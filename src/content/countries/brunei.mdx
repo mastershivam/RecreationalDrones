@@ -3,18 +3,12 @@ name: Brunei
 iso3: BRN
 authority: Department of Civil Aviation (DCA)
 authorityUrl: https://www.dca.gov.bn/Site%20Pages/Unmanned%20Aircraft%20Registration%20Guide.aspx
-registrationUrl: https://www.dca.gov.bn/Site%20Pages/Unmanned%20Aircraft%20Registration%20Guide.aspx
+registrationUrl: null
 whoMustRegister: >-
-  The DCA's registration guide, as a search summarised it, says every drone in Brunei,
-  personal or commercial, must be registered with the DCA. Toy drones are exempt, and a
-  visitor bringing a drone in transit or for a short stay need not register unless they
-  plan to fly it.
-restrictiveness: 3
+  The DCA's Unmanned Aircraft Registration Guide says every drone in Brunei, for personal or commercial use, must be registered with the DCA. Toy drones are exempt, and foreigners bringing a drone in transit or for a short stay do not need to register it.
+restrictiveness: 2
 restrictivenessReason: >-
-  Registration is by form UAS001 emailed to the DCA with an ID, photos and the drone's
-  serial number, taking up to a week, and a drone import needs a permit from AITI. This
-  level is provisional: we saw search excerpts, and the registration is not a drone
-  licence.
+  Registration is an email to the DCA's unmanned aircraft unit with an ID, photos and a signed form, and the DCA says it takes up to a week. That is no in-person step and no permission before flying for ordinary flights. The DCA's rules ask for authorisation only for flights over public events. The guide also mentions a "drone flying permit" without explaining it, and the import permit from AITI is for importing, not flying, so we have kept this at level 2 with that open question.
 registrationFee: null
 registrationWeightGrams: null
 minOperatorAge: null
@@ -22,25 +16,38 @@ remoteId: null
 insurance: null
 howToRegister:
   needed:
-    - 'Form UAS001, an ID copy, a passport-size photo, and photos of the drone and its serial number'
-    - 'A company support letter, for commercial use'
-    - 'An import permit from AITI, if you import the drone'
+    - 'A coloured copy of your ID or passport, and a 4x4 passport-size photo of the applicant'
+    - 'Photos of the whole drone, of its serial number (on the drone, not the box), and of the remote control if it has one'
+    - 'For commercial use: an official letter from your organisation or company'
+    - 'Form UAS001, filled in digitally and signed digitally (a photo of a paper form is not accepted)'
   steps:
-    - 'Email form UAS001 and the documents to the DCA''s unmanned aircraft unit (unmanned.aircraft@dca.gov.bn); it takes up to a week.'
-    - 'Apply to AITI for an import permit if you bring in a drone to keep.'
-    - 'Keep the drone in sight, no higher than 200 ft above mean sea level, and 5 km from airports, heliports, military bases and restricted areas.'
+    - 'Fill in and sign form UAS001 on your computer, then combine the form and documents into one PDF.'
+    - 'Email the PDF to the DCA unmanned aircraft unit at unmanned.aircraft@dca.gov.bn. Approval can take up to a week, and you get the registration letter and number by email.'
+    - 'If you import a drone to keep, apply to AITI for an import permit first. The DCA does not issue import permits.'
+    - 'Fly only in daylight and visual line of sight, no higher than 200 ft above mean sea level, and at least 5 km from airports, heliports, military bases and restricted areas.'
   validFor: null
-  afterwards: 'Offences fall under the Civil Aviation Order 2006, with fines up to B$50,000, up to 5 years in prison, or both.'
+  afterwards: 'The form is a registration, not a drone licence. Do not fly over public events without DCA authorisation. Offences fall under the Civil Aviation Order 2006, Part X, para 51(1): a fine of up to $50,000 (the guide does not state the currency), up to 5 years in prison, or both.'
 lastVerified: 2026-10-26
 sources:
   - https://www.dca.gov.bn/Site%20Pages/Unmanned%20Aircraft%20Registration%20Guide.aspx
   - https://www.dca.gov.bn/wp-content/uploads/2026/07/Form-UAS001-Unmanned-Aircraft-Registration-V01-August-2023.pdf
 ---
 
-This guide rests on excerpts of the DCA's registration guide and form UAS001 that a web search returned on 26 October 2026. **We
-did not open them ourselves.** Check the DCA for any change.
+This guide is based on the DCA's Unmanned Aircraft Registration Guide and form UAS001 (version 01, 1 August 2023), which we read ourselves. The live guide page returned a "page could not be found" message to our fetch, so we read a web.archive.org copy of it. We did not check the live page again after that. The form PDF is the live file.
+
+## Which rules apply
+
+- **Registration:** all drones must be registered, personal or commercial. The form says it is "ONLY a drone registration, and it is NOT a drone license."
+- **Exemptions:** toy drones, and visitors bringing a drone in transit or for a short stay, do not need to register. The guide adds that a visitor who does not plan to fly the drone need not register it, and that a visitor who flies is responsible for any damage or injury.
+- **Flying rules:** daylight only, visual line of sight only, no operation in strong wind or rain, no flights near roads or emergency response, no flights over public events without DCA authorisation, and no dropping or spraying anything from the drone. Height is 200 ft above mean sea level (the guide gives about 60 m).
+- **Distance:** avoid flying within 5 km of airports, heliports, military bases and restricted areas.
+- **Import:** the DCA does not issue import permits. Apply to AITI.
 
 ## Not covered yet
 
-- **Fees, minimum age, insurance, Remote ID and the full operating rules.**
-- **The 5 km circle on our map** is drawn from the centre of every airport in OurAirports and does not show heliports, military bases or restricted areas, so it is a guide.
+- **Registration fee.** The guide and form say nothing about a fee.
+- **Minimum age.** The form asks for a parent or guardian's details for applicants under 18, but gives no age limit.
+- **Insurance and Remote ID.** Neither is mentioned.
+- **The "drone flying permit"** the guide mentions in passing, which we could not find described anywhere. We have not treated it as a permit before flying.
+- **Validity of the registration.** The guide does not say how long it lasts.
+- **The 5 km circle on our map** is drawn from every airport in OurAirports. It does not show heliports, military bases or restricted areas, so treat it as a rough guide.

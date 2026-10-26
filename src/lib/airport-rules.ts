@@ -84,6 +84,23 @@ export const AIRPORT_RULES: Record<string, AirportRule | { none: string }> = {
 	COL: {
 		none: "Aerocivil points to its UAS geographic viewer for restricted airspace and gives no distance from airports on the pages we read (RAC 100, which may, would not load). A fixed circle would mislead.",
 	},
+	MYS: {
+		none: "CAAM asks for an Authorisation to Fly before any flight and gives no distance from airports on the pages we saw. A fixed circle would mislead.",
+	},
+	TUR: {
+		none: "SHGM's registration pages and instruction, as far as we could read them, give no fixed distance from airports. A fixed circle would mislead.",
+	},
+	ISR: {
+		none: "The CAAI's study material, as far as we could read it, gives no fixed distance from airports (gov.il refused our requests). A fixed circle would mislead.",
+	},
+	PHL: {
+		iso2: 'PH',
+		radiusMeters: 10000,
+		indicative: true,
+		ruleUrl: 'https://www.caap.gov.ph/types-of-operations/',
+		authority: 'CAAP, "Types of operations"',
+		note: 'CAAP says a special flight permit is needed to operate within 10 km of an aerodrome (its table says "ARP"). This circle is 10 km from the centre of every airport in the open data, so it is only a guide. Ask CAAP for the real airspace.',
+	},
 	ARE: {
 		none: "The UAE Drones portal and manual say flights are approved by the authority and that the app gives airspace updates, but give no distance from airports and no list of no-fly areas. A fixed circle would mislead.",
 	},

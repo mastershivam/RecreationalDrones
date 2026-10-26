@@ -156,6 +156,18 @@ export const AIRPORT_RULES: Record<string, AirportRule | { none: string }> = {
 	BGD: {
 		none: "The CAAB's documents, as far as we could read them (search excerpts), give no fixed distance from airports. A fixed circle would mislead.",
 	},
+	NAM: {
+		none: "The NCAA's documents, as far as we could read them (search excerpts), give no fixed distance from airports. A fixed circle would mislead.",
+	},
+	BWA: {
+		none: "The CAAB's documents, as far as we could read them (search excerpts), give no fixed distance from airports. A fixed circle would mislead.",
+	},
+	MUS: {
+		none: "The DCA's documents, as far as we could read them (search excerpts), give no fixed distance from airports. A fixed circle would mislead.",
+	},
+	KAZ: {
+		none: "The Aviation Administration's documents, as far as we could read them (search excerpts), give no fixed distance from airports. A fixed circle would mislead.",
+	},
 	ARE: {
 		none: "The UAE Drones portal and manual say flights are approved by the authority and that the app gives airspace updates, but give no distance from airports and no list of no-fly areas. A fixed circle would mislead.",
 	},

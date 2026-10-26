@@ -18,8 +18,8 @@ const COUNTRIES = [
 	{ name: 'New Zealand', slug: 'new-zealand', iso3: 'NZL', at: [172, -43.5], neighbour: [178, -17.8], zoom: 4, level: 'No restrictions', fact: 'Part 101' },
 	// Bolivia, to the west, has no guide (Argentina, to the south-west, now does).
 	{ name: 'Brazil', slug: 'brazil', iso3: 'BRA', at: [-53, -10], neighbour: [-64.5, -17], zoom: 3, level: 'Complex restrictions', fact: 'SARPAS' },
-	// Namibia, to the north-west, has no guide.
-	{ name: 'South Africa', slug: 'south-africa', iso3: 'ZAF', at: [24.5, -29.5], neighbour: [17, -22], zoom: 4, level: 'Complex restrictions', fact: 'rpasInbox' },
+	// Mozambique, to the north-east, has no guide (Namibia, to the north-west, now does).
+	{ name: 'South Africa', slug: 'south-africa', iso3: 'ZAF', at: [24.5, -29.5], neighbour: [35, -17.5], zoom: 4, level: 'Complex restrictions', fact: 'rpasInbox' },
 	// Pakistan, to the north-west, has no guide.
 	{ name: 'India', slug: 'india', iso3: 'IND', at: [78, 22], neighbour: [69.5, 29], zoom: 3, level: 'Complex restrictions', fact: 'INR 100' },
 	// North Korea, to the north, has no guide.

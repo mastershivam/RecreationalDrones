@@ -168,6 +168,26 @@ export const AIRPORT_RULES: Record<string, AirportRule | { none: string }> = {
 	KAZ: {
 		none: "The Aviation Administration's documents, as far as we could read them (search excerpts), give no fixed distance from airports. A fixed circle would mislead.",
 	},
+	GEO: {
+		none: "The GCAA's documents, as far as we could read them (search excerpts), give no fixed distance from airports. A fixed circle would mislead.",
+	},
+	MNE: {
+		none: "The CAA's documents, as far as we could read them (search excerpts), give no fixed distance from airports. A fixed circle would mislead.",
+	},
+	ALB: {
+		none: "The AAC's documents, as far as we could read them (search excerpts), give no fixed distance from airports. A fixed circle would mislead.",
+	},
+	MKD: {
+		iso2: 'MK',
+		radiusMeters: 8000,
+		indicative: true,
+		ruleUrl: 'https://www.caa.gov.mk/en/20706-2/',
+		authority: 'CAA North Macedonia, guidance on aircraft without crew',
+		note: 'An older, undated CAA guidance page says drones should stay at least 8 km (5 miles) from commercial airports. We did not confirm it against the 2025 Regulation on unmanned aircraft. This circle is 8 km from the centre of every airport in the open data, so it is only a guide. Check the CAA for the real zones.',
+	},
+	MNG: {
+		none: "The MCAA's documents, as far as we could read them (search excerpts), give no fixed distance from airports. A fixed circle would mislead.",
+	},
 	ARE: {
 		none: "The UAE Drones portal and manual say flights are approved by the authority and that the app gives airspace updates, but give no distance from airports and no list of no-fly areas. A fixed circle would mislead.",
 	},

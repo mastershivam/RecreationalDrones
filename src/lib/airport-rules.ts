@@ -279,6 +279,29 @@ export const AIRPORT_RULES: Record<string, AirportRule | { none: string }> = {
 	CIV: {
 		none: "The ANAC's documents, as far as we could read them (search excerpts), give no fixed distance from airports. A fixed circle would mislead.",
 	},
+	CHN: {
+		none: "The CAAC's documents, as far as we could read them (search excerpts), give no fixed distance from airports. A fixed circle would mislead.",
+	},
+	TWN: {
+		none: "The CAA's documents, as far as we could read them (search excerpts), give no fixed distance from airports. A fixed circle would mislead.",
+	},
+	BRN: {
+		iso2: 'BN',
+		radiusMeters: 5000,
+		indicative: true,
+		ruleUrl: 'https://www.dca.gov.bn/Site%20Pages/Unmanned%20Aircraft%20Registration%20Guide.aspx',
+		authority: 'DCA Brunei, unmanned aircraft registration guide',
+		note: 'The DCA\'s guide, as summarised by a search, says to keep drones away from airports, heliports, military bases and other restricted areas, specifically within 5 km. This circle is 5 km from the centre of every airport in the open data; heliports and military bases are not shown, so it is only a guide. Ask the DCA for the real areas.',
+	},
+	MEX: {
+		none: "The AFAC's documents, as far as we could read them (search excerpts), give no fixed distance from airports. A fixed circle would mislead.",
+	},
+	RUS: {
+		none: "Rosaviatsia's documents, as far as we could read them (search excerpts), give no fixed distance from airports. A fixed circle would mislead.",
+	},
+	ECU: {
+		none: "The DGAC's documents, as far as we could read them (search excerpts), give no fixed distance from airports. A fixed circle would mislead.",
+	},
 	ARE: {
 		none: "The UAE Drones portal and manual say flights are approved by the authority and that the app gives airspace updates, but give no distance from airports and no list of no-fly areas. A fixed circle would mislead.",
 	},

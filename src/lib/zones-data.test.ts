@@ -33,6 +33,7 @@ const BOX: Record<string, { lon: [number, number]; lat: [number, number] }> = {
 	GHA: { lon: [-3.3, 1.3], lat: [4.5, 11.3] },
 	OMN: { lon: [51.8, 60], lat: [16.5, 26.5] },
 	MKD: { lon: [20.4, 23], lat: [40.8, 42.4] },
+	ZWE: { lon: [25.2, 33.1], lat: [-22.5, -15.5] },
 	PHL: { lon: [114, 127], lat: [4.5, 21.5] },
 	ARG: { lon: [-73.6, -53.5], lat: [-55.2, -21.7] },
 	SGP: { lon: [103.5, 104.2], lat: [1.1, 1.5] },

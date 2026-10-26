@@ -197,6 +197,20 @@ export const AIRPORT_RULES: Record<string, AirportRule | { none: string }> = {
 	URY: {
 		none: "The DINACIA's documents, as far as we could read them (search excerpts), give no fixed distance from airports. A fixed circle would mislead.",
 	},
+	ZWE: {
+		iso2: 'ZW',
+		radiusMeters: 5500,
+		indicative: true,
+		ruleUrl: 'https://www.caaz.co.zw/drone-safety/',
+		authority: 'CAAZ, drone safety',
+		note: 'CAAZ\'s pages, as summarised by a search, say drones are prohibited within 5.5 km (3 nautical miles) of any airport or airfield. This circle is 5.5 km from the centre of every airport in the open data, so it is only a guide. Ask CAAZ for the real airspace.',
+	},
+	MDV: {
+		none: "The CAA's documents, as far as we could read them (search excerpts), give no fixed distance from airports. A fixed circle would mislead.",
+	},
+	KWT: {
+		none: "The DGCA's documents, as far as we could read them (search excerpts), give no fixed distance from airports. A fixed circle would mislead.",
+	},
 	ARE: {
 		none: "The UAE Drones portal and manual say flights are approved by the authority and that the app gives airspace updates, but give no distance from airports and no list of no-fly areas. A fixed circle would mislead.",
 	},

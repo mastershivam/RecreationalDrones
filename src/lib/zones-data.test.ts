@@ -38,6 +38,7 @@ const BOX: Record<string, { lon: [number, number]; lat: [number, number] }> = {
 	FJI: { lon: [-180, 180], lat: [-21, -12] },
 	PNG: { lon: [140.5, 156.5], lat: [-12, -1] },
 	JAM: { lon: [-78.8, -76], lat: [17.6, 18.8] },
+	BIH: { lon: [15.7, 19.7], lat: [42.5, 45.3] },
 	PHL: { lon: [114, 127], lat: [4.5, 21.5] },
 	ARG: { lon: [-73.6, -53.5], lat: [-55.2, -21.7] },
 	SGP: { lon: [103.5, 104.2], lat: [1.1, 1.5] },

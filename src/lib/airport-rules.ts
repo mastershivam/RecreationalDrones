@@ -247,6 +247,23 @@ export const AIRPORT_RULES: Record<string, AirportRule | { none: string }> = {
 	PRY: {
 		none: "The DINAC's documents, as far as we could read them (search excerpts), give no fixed distance from airports. A fixed circle would mislead.",
 	},
+	BIH: {
+		iso2: 'BA',
+		radiusMeters: 1500,
+		indicative: true,
+		ruleUrl: 'https://www.bhdca.gov.ba/index.php/en/drone',
+		authority: 'BHDCA, drone page',
+		note: 'The BHDCA\'s drone page, as summarised by a search, says a drone may fly within an airport area at a distance of less than 1.5 km only with the prior consent of air traffic control. This circle is 1.5 km from the centre of every airport in the open data, so it is only a guide. Ask the BHDCA for the real airspace.',
+	},
+	MOZ: {
+		none: "The IACM's documents, as far as we could read them (search excerpts), give no fixed distance from airports. A fixed circle would mislead.",
+	},
+	SEN: {
+		none: "The ANACIM's documents, as far as we could read them (search excerpts), give no fixed distance from airports. A fixed circle would mislead.",
+	},
+	UZB: {
+		none: "The Civil Aviation Agency's documents, as far as we could read them (search excerpts), give no fixed distance from airports. A fixed circle would mislead.",
+	},
 	ARE: {
 		none: "The UAE Drones portal and manual say flights are approved by the authority and that the app gives airspace updates, but give no distance from airports and no list of no-fly areas. A fixed circle would mislead.",
 	},

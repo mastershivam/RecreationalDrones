@@ -3,7 +3,7 @@ import { activate, focusOn, highlightedAt, openGlobe, pointAt } from './helpers'
 
 // Kansas, in the middle of the lower 48. Zoomed in, so the country is large enough to hover or tap.
 const USA: [number, number] = [-98, 39];
-const CUBA: [number, number] = [-79, 22]; // no guide yet
+const GREENLAND: [number, number] = [-42, 72]; // no guide yet
 const ZOOM = 3;
 
 async function showUsa(page: import('@playwright/test').Page) {
@@ -16,7 +16,7 @@ test.describe('United States on the globe', () => {
 	test('is highlighted, and its neighbour with no guide is not', async ({ page }) => {
 		await showUsa(page);
 		expect(await highlightedAt(page, USA)).toEqual(['USA']);
-		expect(await highlightedAt(page, CUBA)).toEqual([]);
+		expect(await highlightedAt(page, GREENLAND)).toEqual([]);
 	});
 
 	test('shows a hover preview with the key facts', async ({ page }) => {

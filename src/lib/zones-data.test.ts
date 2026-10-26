@@ -34,6 +34,10 @@ const BOX: Record<string, { lon: [number, number]; lat: [number, number] }> = {
 	OMN: { lon: [51.8, 60], lat: [16.5, 26.5] },
 	MKD: { lon: [20.4, 23], lat: [40.8, 42.4] },
 	ZWE: { lon: [25.2, 33.1], lat: [-22.5, -15.5] },
+	// Fiji crosses the 180th meridian, so this box spans all longitudes.
+	FJI: { lon: [-180, 180], lat: [-21, -12] },
+	PNG: { lon: [140.5, 156.5], lat: [-12, -1] },
+	JAM: { lon: [-78.8, -76], lat: [17.6, 18.8] },
 	PHL: { lon: [114, 127], lat: [4.5, 21.5] },
 	ARG: { lon: [-73.6, -53.5], lat: [-55.2, -21.7] },
 	SGP: { lon: [103.5, 104.2], lat: [1.1, 1.5] },

@@ -211,6 +211,33 @@ export const AIRPORT_RULES: Record<string, AirportRule | { none: string }> = {
 	KWT: {
 		none: "The DGCA's documents, as far as we could read them (search excerpts), give no fixed distance from airports. A fixed circle would mislead.",
 	},
+	FJI: {
+		iso2: 'FJ',
+		radiusMeters: 5000,
+		indicative: true,
+		ruleUrl: 'https://www.caaf.org.fj/rpas-frequently-asked-questions/',
+		authority: 'CAAF, RPAS FAQ',
+		note: 'CAAF\'s FAQ, as summarised by a search, says flights need permission within 5 km of an international aerodrome and within 3 km of a domestic one. This circle is 5 km from the centre of every airport in the open data, so it shows more than the rule covers at domestic airports. Ask CAAF for the real airspace.',
+	},
+	PNG: {
+		iso2: 'PG',
+		radiusMeters: 5556,
+		indicative: true,
+		ruleUrl: 'https://casapng.gov.pg/admin/images/372675fd91d5577dac18323252c4b2d4.pdf',
+		authority: 'CASA PNG, Part 101 and Part 102',
+		note: 'CASA PNG\'s rules, as summarised by a search, ask for an additional qualification to fly a remotely piloted aircraft within 3 nautical miles (5.56 km) of an aerodrome reference point. This circle is drawn at every airport in the open data, so it is only a guide. Ask CASA PNG for the real airspace.',
+	},
+	DOM: {
+		none: "IDAC's guide, as far as we could read it (search excerpts), gives no fixed distance from airports. A fixed circle would mislead.",
+	},
+	JAM: {
+		iso2: 'JM',
+		radiusMeters: 5000,
+		indicative: true,
+		ruleUrl: 'https://www.jcaa.gov.jm/recreational-ua-operators-or-hobbyists/',
+		authority: 'JCAA, recreational UA operators',
+		note: 'The JCAA\'s guidelines for recreational operators, as summarised by a search, say not to fly within 5 km (16,500 ft) of any aerodrome or rotorcraft landing zone. This circle is 5 km from the centre of every airport in the open data, so it is only a guide. Ask the JCAA for the real airspace.',
+	},
 	ARE: {
 		none: "The UAE Drones portal and manual say flights are approved by the authority and that the app gives airspace updates, but give no distance from airports and no list of no-fly areas. A fixed circle would mislead.",
 	},

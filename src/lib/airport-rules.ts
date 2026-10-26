@@ -128,6 +128,34 @@ export const AIRPORT_RULES: Record<string, AirportRule | { none: string }> = {
 	QAT: {
 		none: "The CAA's pages, as far as we could read them (search excerpts), give no fixed distance from airports. A fixed circle would mislead.",
 	},
+	NGA: {
+		none: "The NCAA's documents, as far as we could read them (search excerpts), give no fixed distance from airports. A fixed circle would mislead.",
+	},
+	GHA: {
+		iso2: 'GH',
+		radiusMeters: 10000,
+		indicative: true,
+		ruleUrl: 'https://www.gcaa.com.gh/web/wp-content/uploads/2023/RPAS/RPAS%20FAQs.pdf',
+		authority: 'GCAA RPAS FAQs',
+		note: 'The GCAA\'s FAQ sets a 10 km restriction round airports or helipads with published instrument procedures, and 5 km where none are published, and says the GCAA can allow a flight inside it. This circle is 10 km from the centre of every airport in the open data, so it shows more places than the rule covers. Ask the GCAA for the real airspace.',
+	},
+	UGA: {
+		none: "The UCAA's documents, as far as we could read them (search excerpts), give no fixed distance from airports. A fixed circle would mislead.",
+	},
+	OMN: {
+		iso2: 'OM',
+		radiusMeters: 5500,
+		indicative: true,
+		ruleUrl: 'https://www.caa.gov.om/files/publications/regulation-governing-unmanned-aircraft-systems-drones.pdf',
+		authority: 'CAA Oman, drone regulation and CAR-102',
+		note: 'The CAA\'s documents, as summarised by a search, say flights within 5.5 km (3 nautical miles) of an air-traffic-controlled aerodrome need prior CAA approval. This circle is drawn at every airport in the open data, controlled or not, so it shows more places than the rule covers. Ask the CAA for the real airspace.',
+	},
+	JOR: {
+		none: "The CARC's documents, as far as we could read them (search excerpts), give no fixed distance from airports. A fixed circle would mislead.",
+	},
+	BGD: {
+		none: "The CAAB's documents, as far as we could read them (search excerpts), give no fixed distance from airports. A fixed circle would mislead.",
+	},
 	ARE: {
 		none: "The UAE Drones portal and manual say flights are approved by the authority and that the app gives airspace updates, but give no distance from airports and no list of no-fly areas. A fixed circle would mislead.",
 	},

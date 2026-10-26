@@ -16,8 +16,8 @@ const COUNTRIES = [
 	{ name: 'United Arab Emirates', slug: 'united-arab-emirates', iso3: 'ARE', at: [54.2, 23.9], neighbour: [46, 24], zoom: 5, level: 'Complex restrictions', fact: 'AED 200' },
 	// Zoom 4, below where zones show (ZONE_MIN_ZOOM). Fiji, to the north, has no guide.
 	{ name: 'New Zealand', slug: 'new-zealand', iso3: 'NZL', at: [172, -43.5], neighbour: [178, -17.8], zoom: 4, level: 'No restrictions', fact: 'Part 101' },
-	// Argentina, to the south-west, has no guide.
-	{ name: 'Brazil', slug: 'brazil', iso3: 'BRA', at: [-53, -10], neighbour: [-64, -34], zoom: 3, level: 'Complex restrictions', fact: 'SARPAS' },
+	// Bolivia, to the west, has no guide (Argentina, to the south-west, now does).
+	{ name: 'Brazil', slug: 'brazil', iso3: 'BRA', at: [-53, -10], neighbour: [-64.5, -17], zoom: 3, level: 'Complex restrictions', fact: 'SARPAS' },
 	// Namibia, to the north-west, has no guide.
 	{ name: 'South Africa', slug: 'south-africa', iso3: 'ZAF', at: [24.5, -29.5], neighbour: [17, -22], zoom: 4, level: 'Complex restrictions', fact: 'rpasInbox' },
 	// Pakistan, to the north-west, has no guide.

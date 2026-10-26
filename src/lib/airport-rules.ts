@@ -101,6 +101,21 @@ export const AIRPORT_RULES: Record<string, AirportRule | { none: string }> = {
 		authority: 'CAAP, "Types of operations"',
 		note: 'CAAP says a special flight permit is needed to operate within 10 km of an aerodrome (its table says "ARP"). This circle is 10 km from the centre of every airport in the open data, so it is only a guide. Ask CAAP for the real airspace.',
 	},
+	CHL: {
+		none: "The DGAC documents, as far as we could read them (search excerpts), give no fixed distance from airports. A fixed circle would mislead.",
+	},
+	PER: {
+		none: "The MTC pages, as far as we could read them (search excerpts), give no fixed distance from airports. A fixed circle would mislead.",
+	},
+	SAU: {
+		none: "GACA's portal and regulations, as far as we could read them (search excerpts), give no fixed distance from airports. A fixed circle would mislead.",
+	},
+	KEN: {
+		none: "The KCAA's regulations, as far as we could read them (search excerpts), give no fixed distance from airports. A fixed circle would mislead.",
+	},
+	IDN: {
+		none: "The Ministry's pages, as far as we could read them (search excerpts), give no fixed distance from airports. A fixed circle would mislead.",
+	},
 	ARE: {
 		none: "The UAE Drones portal and manual say flights are approved by the authority and that the app gives airspace updates, but give no distance from airports and no list of no-fly areas. A fixed circle would mislead.",
 	},

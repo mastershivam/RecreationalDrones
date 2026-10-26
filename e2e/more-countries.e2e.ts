@@ -4,7 +4,7 @@ import { activate, focusOn, highlightedAt, openGlobe, pointAt } from './helpers'
 // Each country: a point inside it, a neighbour with no guide, how far in to zoom, and what its guide says.
 const COUNTRIES = [
 	{ name: 'Canada', slug: 'canada', iso3: 'CAN', at: [-100, 55], neighbour: [-102, 24], zoom: 3, level: 'Complex restrictions', fact: 'Foreign SFOC-RPAS' },
-	{ name: 'Australia', slug: 'australia', iso3: 'AUS', at: [134, -25], neighbour: [114, -1], zoom: 3, level: 'No restrictions', fact: 'There is no age limit' },
+	{ name: 'Australia', slug: 'australia', iso3: 'AUS', at: [134, -25], neighbour: [144, -6], zoom: 3, level: 'No restrictions', fact: 'There is no age limit' },
 	// Zoom 5, below where zones show (ZONE_MIN_ZOOM): Switzerland's official zones now cover most of it, and a zone under a tap wins over the country.
 	// Every country around it has a guide, so the "no guide" point is Serbia, further off.
 	{ name: 'Switzerland', slug: 'switzerland', iso3: 'CHE', at: [8.2, 46.8], neighbour: [20.8, 44], zoom: 5, level: 'Basic restrictions', fact: 'CHF 10' },
@@ -12,8 +12,8 @@ const COUNTRIES = [
 	{ name: 'Norway', slug: 'norway', iso3: 'NOR', at: [9.5, 61.5], neighbour: [34, 66], zoom: 4, level: 'Complex restrictions', fact: 'NOK 230' },
 	// Greenland, to the north-west, has no guide.
 	{ name: 'Iceland', slug: 'iceland', iso3: 'ISL', at: [-19.5, 64.8], neighbour: [-40, 72], zoom: 5, level: 'Basic restrictions', fact: 'ISK 5,863' },
-	// Saudi Arabia, to the west, has no guide.
-	{ name: 'United Arab Emirates', slug: 'united-arab-emirates', iso3: 'ARE', at: [54.2, 23.9], neighbour: [46, 24], zoom: 5, level: 'Complex restrictions', fact: 'AED 200' },
+	// Oman, to the south-east, has no guide (Saudi Arabia, to the west, now does).
+	{ name: 'United Arab Emirates', slug: 'united-arab-emirates', iso3: 'ARE', at: [54.2, 23.9], neighbour: [56.5, 20.5], zoom: 5, level: 'Complex restrictions', fact: 'AED 200' },
 	// Zoom 4, below where zones show (ZONE_MIN_ZOOM). Fiji, to the north, has no guide.
 	{ name: 'New Zealand', slug: 'new-zealand', iso3: 'NZL', at: [172, -43.5], neighbour: [178, -17.8], zoom: 4, level: 'No restrictions', fact: 'Part 101' },
 	// Bolivia, to the west, has no guide (Argentina, to the south-west, now does).

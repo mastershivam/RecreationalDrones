@@ -24,6 +24,11 @@ const OTHER: Record<string, string> = {
 	brazil: 'South America',
 	argentina: 'South America',
 	colombia: 'South America',
+	chile: 'South America',
+	peru: 'South America',
+	'saudi-arabia': 'Asia',
+	indonesia: 'Asia',
+	kenya: 'Africa',
 	'south-africa': 'Africa',
 	australia: 'Oceania',
 };

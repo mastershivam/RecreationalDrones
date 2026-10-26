@@ -4,7 +4,7 @@ import { activate, focusOn, highlightedAt, openGlobe, pointAt } from './helpers'
 // Each country: a point inside it, a neighbour with no guide, how far in to zoom, and what its guide says.
 const COUNTRIES = [
 	{ name: 'Canada', slug: 'canada', iso3: 'CAN', at: [-100, 55], neighbour: [-42, 72], zoom: 3, level: 'Complex restrictions', fact: 'Foreign SFOC-RPAS' },
-	{ name: 'Australia', slug: 'australia', iso3: 'AUS', at: [134, -25], neighbour: [160, -9], zoom: 3, level: 'No restrictions', fact: 'There is no age limit' },
+	{ name: 'Australia', slug: 'australia', iso3: 'AUS', at: [134, -25], neighbour: [167.5, -16], zoom: 3, level: 'No restrictions', fact: 'There is no age limit' },
 	// Zoom 5, below where zones show (ZONE_MIN_ZOOM): Switzerland's official zones now cover most of it, and a zone under a tap wins over the country.
 	// Every country around it has a guide, so the "no guide" point is Ukraine, further off.
 	{ name: 'Switzerland', slug: 'switzerland', iso3: 'CHE', at: [8.2, 46.8], neighbour: [31, 49], zoom: 5, level: 'Basic restrictions', fact: 'CHF 10' },

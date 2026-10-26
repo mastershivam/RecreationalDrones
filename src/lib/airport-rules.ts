@@ -364,6 +364,9 @@ export const AIRPORT_RULES: Record<string, AirportRule | { none: string }> = {
 		authority: 'AAC Cabo Verde, drones',
 		note: 'The AAC\'s drone page, as summarised by a search, says drones may not be flown within 2,000 m of an aerodrome or landing site, or along aircraft flight routes. This circle is 2 km from the centre of every airport in the open data, so it is only a guide. Ask the AAC for the real areas.',
 	},
+	IRN: {
+		none: "The CAO's pages, as far as we could read them (search excerpts), give no fixed distance from airports. A fixed circle would mislead.",
+	},
 	ARE: {
 		none: "The UAE Drones portal and manual say flights are approved by the authority and that the app gives airspace updates, but give no distance from airports and no list of no-fly areas. A fixed circle would mislead.",
 	},

@@ -12,8 +12,8 @@ const COUNTRIES = [
 	{ name: 'Norway', slug: 'norway', iso3: 'NOR', at: [9.5, 61.5], neighbour: [31, 49], zoom: 4, level: 'Complex restrictions', fact: 'NOK 230' },
 	// Greenland, to the north-west, has no guide.
 	{ name: 'Iceland', slug: 'iceland', iso3: 'ISL', at: [-19.5, 64.8], neighbour: [-40, 72], zoom: 5, level: 'Basic restrictions', fact: 'ISK 5,863' },
-	// Iran, to the north across the Gulf, has no guide (Saudi Arabia and Oman now do).
-	{ name: 'United Arab Emirates', slug: 'united-arab-emirates', iso3: 'ARE', at: [54.2, 23.9], neighbour: [54, 29.5], zoom: 5, level: 'Complex restrictions', fact: 'AED 200' },
+	// Yemen, to the south-west, has no guide (Saudi Arabia, Oman and Iran now do).
+	{ name: 'United Arab Emirates', slug: 'united-arab-emirates', iso3: 'ARE', at: [54.2, 23.9], neighbour: [48, 15.5], zoom: 5, level: 'Complex restrictions', fact: 'AED 200' },
 	// Zoom 4, below where zones show (ZONE_MIN_ZOOM). Vanuatu, to the north, has no guide (Fiji, further east, now does).
 	{ name: 'New Zealand', slug: 'new-zealand', iso3: 'NZL', at: [172, -43.5], neighbour: [167.5, -16], zoom: 4, level: 'No restrictions', fact: 'Part 101' },
 	// Bolivia, to the west, has no guide (Argentina, to the south-west, now does).

@@ -30,6 +30,7 @@ const OTHER: Record<string, string> = {
 	indonesia: 'Asia',
 	kenya: 'Africa',
 	tanzania: 'Africa',
+	iran: 'Asia',
 	'bhutan': 'Asia',
 	'sierra-leone': 'Africa',
 	'cabo-verde': 'Africa',

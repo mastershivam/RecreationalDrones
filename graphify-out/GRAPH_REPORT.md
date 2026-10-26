@@ -18,7 +18,7 @@
 ## Community Hubs (Navigation)
 - BRAND.md (brand and design spec)
 - pages/index.astro
-- vitest
+- countries.test.ts
 - package.json dependencies
 - README.md
 - Base.astro
@@ -247,7 +247,7 @@ Nodes (30): dataUri(), header, read(), root, square(), dir, LABELS, root (+22 mo
 
 ### Community 3 - "package.json dependencies"
 Cohesion: 0.05
-Nodes (41): dependencies, astro, @astrojs/markdown-satteri, @astrojs/mdx, @fontsource-variable/inter-tight, maplibre-gl, pmtiles, @protomaps/basemaps (+33 more)
+Nodes (42): dependencies, astro, @astrojs/markdown-satteri, @astrojs/mdx, @fontsource-variable/inter-tight, maplibre-gl, pmtiles, @protomaps/basemaps (+34 more)
 
 ### Community 4 - "README.md"
 Cohesion: 0.22
@@ -266,8 +266,8 @@ Cohesion: 0.22
 Nodes (8): Flying away from home, Insurance, Minimum age, Pilot training, Registration, Remote ID, The EU rules, Which category you fly in
 
 ### Community 8 - "zone-schema.ts"
-Cohesion: 0.11
-Nodes (15): guides, root, multiPolygon, point, polygon, position, positions(), ring (+7 more)
+Cohesion: 0.18
+Nodes (7): multiPolygon, point, polygon, position, positions(), ring, zoneKinds
 
 ### Community 9 - "TODO.md"
 Cohesion: 0.15
@@ -394,12 +394,12 @@ Cohesion: 0.15
 Nodes (5): ZONE_LAYERS, ZURICH_AIRPORT, PAGES, PORT, @playwright/test
 
 ### Community 47 - "build-model-fields.ts"
-Cohesion: 0.21
+Cohesion: 0.23
 Nodes (7): dir, EXTRACTS, refresh, FieldRow, KNOWN_MISTAGS, modelFieldZones(), Zone
 
 ### Community 48 - "build-airport-zones.ts"
-Cohesion: 0.15
-Nodes (12): RFC-4180, rows, sourceHash, AIRPORT_RULES, AirportRule, EU_NONE, AIRPORT_TYPES, AirportRules (+4 more)
+Cohesion: 0.17
+Nodes (8): RFC-4180, rows, sourceHash, AIRPORT_TYPES, airportZones(), mergeZones(), rule, parseCsv()
 
 ### Community 49 - "countries-geojson.ts"
 Cohesion: 0.17

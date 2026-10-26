@@ -281,7 +281,9 @@ test.describe('zones are fetched lazily', () => {
 		expect(requests).toHaveLength(0);
 		await focusOn(page, KATHMANDU, 6);
 		await expect(page.locator('#map[data-zones="ready"]')).toBeAttached({ timeout: 30_000 });
-		expect(requests).toEqual(['/data/zones/npl.json']);
+		// Nepal, plus the neighbours inside the same view (Bangladesh and Bhutan have airport zones too); never a far-off country.
+		expect(requests).toContain('/data/zones/npl.json');
+		for (const path of requests) expect(['/data/zones/npl.json', '/data/zones/bgd.json', '/data/zones/btn.json']).toContain(path);
 	});
 
 	test('fetches a second country when the map moves there, and a country only once', async ({ page }) => {

@@ -10,52 +10,100 @@ whoMustRegister: >-
   more or has a camera.
 restrictiveness: 2
 restrictivenessReason: >-
-  Register online with your national authority and, for most drones, pass an
-  online training exam (EASA). Steps in your country may add to this; we have
-  not read them.
-registrationFee: null
+  Register online with the Civil Aviation Authority, free of charge, and for most
+  drones pass its online exam, also free. The pages we read name no in-person
+  step and no permission before an ordinary flight. A flight that conflicts with
+  a geographical zone's conditions needs the Authority's permission (OKL),
+  which has no fee.
+registrationFee: 'Free'
 registrationWeightGrams: 0
-minOperatorAge: null
+minOperatorAge: 16
 remoteId: >-
   EASA says open-category drones, with limited exceptions, must have a remote
-  identification system.
+  identification system. The Authority says that if your drone has one, you
+  upload your full operator registration number to it.
 insurance: >-
-  EASA requires insurance for a drone over 20 kg, and says most member states
-  also require third-party insurance for lighter drones. Check Czechia's rules.
+  The Authority says liability insurance is required in Czechia, except for
+  individual recreational or sport flying of a drone up to 20 kg (not at a
+  public air show). Minimum sums are set for heavier drones and air shows.
 howToRegister:
   needed:
-    - 'Whatever your national authority asks for. We have not read the list for this country.'
+    - 'An email address. The Authority sends your registration document and test results by email.'
+    - 'If you are under 18, a legal representative to act for you in the Authority''s procedures'
   steps:
     - 'Check that you need to register: yes if any drone weighs 250 g or more or has a camera or other sensor that could detect personal data. A toy under 250 g is exempt.'
-    - 'Register yourself, once and not each drone, with the authority of the EU country where you live. A visitor from outside the EU registers in the first EU country where they fly.'
-    - 'Complete the online training and exam if your drone needs it. Most drones of 250 g or more do (C1, C3, C4, and older drones). C2 needs more, and C0 and drones under 250 g need none.'
-    - 'Put your operator registration number on every drone you own as a sticker, and enter it into the drone''s Remote ID if it has one.'
-  validFor: 'Set by the authority you register with. It is valid in every EASA member state.'
-  afterwards: 'Before you fly in any EU country, check that the place is not in a geographical zone that country has published.'
-lastVerified: 2026-10-17
+    - 'Register as an operator, once and not each drone, on the Authority''s drone site (dron.caa.gov.cz). It is free.'
+    - 'Take the online training and exam for remote pilots (A1/A3). It is free, and the certificate lasts 5 years. The minimum age to fly is 16, but none applies to a C0 drone in A1.'
+    - 'Put your operator registration number on every drone, and upload the full number to the drone''s Remote ID if it has one.'
+    - 'Visiting? The Authority says someone from outside the EU registers in the first EU country where they plan to fly, and cannot be registered in more than one.'
+  validFor: 'The period printed on your registration document, after which you renew it. It is valid in all EASA states.'
+  afterwards: 'Before each flight, check the Authority''s DroneMap and the ANS CR DronView app for geographical zones and airspace.'
+lastVerified: 2026-10-25
 sources:
   - https://www.easa.europa.eu/en/domains/drones-air-mobility/operating-drone/open-category-low-risk-civil-drones
   - https://www.easa.europa.eu/the-agency/faqs/drones-uas
   - https://www.easa.europa.eu/en/domains/civil-drones/naa
   - https://dron.caa.cz/
+  - https://www.caa.gov.cz/provoz/bezpilotni-letadla/faq-casto-kladene-dotazy/
+  - https://www.caa.gov.cz/provoz/bezpilotni-letadla/zakladni-informace-k-miniwebu-ucl-pro-bezpilotni-systemy/
+  - https://www.caa.gov.cz/provoz/bezpilotni-letadla/provozovatel-bezpilotniho-systemu/
+  - https://www.caa.gov.cz/ufaqs/musim-registrovat-svuj-dron/
+  - https://www.caa.gov.cz/provoz/bezpilotni-letadla/zemepisne-zony/obecne-informace/
+  - https://www.caa.gov.cz/provoz/bezpilotni-letadla/digitalni-mapa/
 ---
 
 import EasaRules from '../../components/EasaRules.mdx';
 
 Czechia applies the EU's common drone rules, set by the European Union Aviation Safety Agency (EASA). This
-guide gives those rules, then links to Czechia's own authority for what is national.
+guide gives those rules, then what the Civil Aviation Authority of the Czech Republic (CAA, in Czech ÚCL) adds. The
+national part follows the CAA's pages on registration, its FAQ and its geographical zones, read on 25 October 2026. Its
+FAQ was published on 20 December 2023, so check it for any change.
 
 <EasaRules />
 
 ## In Czechia
 
-- **Register:** [Czechia's registration page](https://dron.caa.cz/).
-- **Where you can fly:** [Czechia's map of geographical zones](https://dronemap.gov.cz/).
+- **Register:** [the CAA's drone registration site](https://dron.caa.cz/).
+- **Where you can fly:** [DroneMap](https://dronemap.gov.cz/), the map the CAA names for planning flights.
 - **Authority:** [Civil Aviation Authority of the Czech Republic](https://dron.caa.cz/).
+
+## Registration
+
+The CAA says an operator registers once, however many drones they fly. Registration is not needed if every drone weighs
+under 250 g and has no camera or other sensor that can detect personal data, or is a toy under the EU toy directive.
+
+- **Fee:** none. The CAA says the online training, the pilot exam, registering pilots and operators, the registration
+  number and the training document carry no administrative or other fee, and are free.
+- **Term:** valid for the period on your registration document, then you renew it. It is valid in all EASA states.
+- **Age:** 16 is the minimum age for a remote pilot in Czechia. The CAA's FAQ says the option to lower it to 12 "does not
+  apply to the Czech Republic", and there is no minimum for a C0 drone in A1. For an operator under 18, a legal
+  representative acts in the CAA's procedures.
+- **Pilot certificate:** valid for 5 years.
+- **Visitors:** someone from outside the EU registers with the national authority of the first EU country where they
+  plan to fly, and training from their own country is not recognised.
+- **Your number:** put it on every drone. If the drone has Remote ID, upload the full number to it.
+
+## Where and how you can fly
+
+- **Height:** at most 120 m above the ground, unless the CAA has set a zone with a lower floor.
+- **Zones:** the CAA sets geographical zones under Article 15 of Regulation 2019/947, for safety, protection against
+  unlawful acts, privacy and the environment. They apply to all categories. Zones that affect crewed traffic are in the
+  AIP (ENR 5.1); the others are in ENR 5.3.1 and in the DronView app run by the air navigation provider. National parks,
+  city centres and areas near airports are the CAA's own examples.
+- **Permission:** a flight that conflicts with a zone's conditions needs an OKL (a flight permit) from the CAA. It has no
+  fee, and the CAA expects a decision within 30 days, usually much sooner.
+- **Rescue work:** you may not fly near or inside an area where rescue work is going on.
+- **Insurance:** liability insurance is required, except for individual recreational or sport flying of a drone up to
+  20 kg. Flying in a public air show is not covered by the exception.
+- **Privacy:** the Office for Personal Data Protection (ÚOOÚ) handles complaints about drone cameras.
 
 ## Not covered yet
 
-- **Czechia's national rules.** We have not read Czechia's own drone rules, so what we say here is only what EASA says
-  applies everywhere. Fees, how long registration lasts, the minimum age (a state may lower EASA's 16 to 12),
-  insurance, penalties and any local bans are all unverified. Check the authority above before you fly.
-- **Where flying is banned.** Czechia's geographical zones are on the map linked above, and we have not copied them.
+- **Penalties.** The FAQ gives no amounts. It says the CAA has limited supervisory powers and the police usually deal
+  with incidents on the ground.
+- **Landowner consent.** The FAQ says a national decree (108/1997, section 14) asks an operator for the landowner's written
+  consent to take off and land, and that it is not clear how far this stays under the EU framework. We have not read the
+  decree, so we do not know whether it applies to a visitor's hobby flight.
+- **Airport distances and the zones themselves.** They are in DroneMap and DronView, and we have not copied them.
+- **Registration site details.** The CAA's registration site needs a browser to display, so we read the CAA's
+  explanations of it, not the forms.

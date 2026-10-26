@@ -3,59 +3,119 @@ name: Netherlands
 iso3: NLD
 authority: RDW (registration) and the Human Environment and Transport Inspectorate
 authorityUrl: https://www.rdw.nl/drone
-registrationUrl: https://www.rdw.nl/drone
+registrationUrl: https://www.rdw.nl/drone/exploitantnummer-aanvragen
 whoMustRegister: >-
-  Register yourself once, not each drone, with your home EU country's authority
-  (visitors: the first EU country you fly in). Needed if a drone weighs 250 g or
-  more or has a camera.
+  You register yourself as the operator, not each drone. Needed if a drone weighs
+  250 g or more or has a camera; RDW also says a toy drone of 250 g or more must
+  register even without a camera. RDW issues operator numbers only to people who live
+  outside the EU or EASA; EU and EASA residents register in their own country.
 restrictiveness: 2
 restrictivenessReason: >-
-  Register online with your national authority and, for most drones, pass an
-  online training exam (EASA). Steps in your country may add to this; we have
-  not read them.
-registrationFee: null
-registrationWeightGrams: 0
-minOperatorAge: null
+  Register online with RDW for EUR 23 and log in with DigiD or eHerkenning. A flight
+  certificate for drones of 250 g or more is an online exam passed at a Dutch approved
+  flight school, paid for online (EUR 10). In the open category no permit is needed
+  before flying.
+registrationFee: 'EUR 23, valid 1 year'
+registrationWeightGrams: null
+minOperatorAge: 16
 remoteId: >-
-  EASA says open-category drones, with limited exceptions, must have a remote
-  identification system.
+  RDW and the Rijksoverheid say remote ID applies to drones with a C1, C2 or C3 label,
+  and in the specific category. Drones with a C0 or C4 label do not need the operator
+  number and serial number in the software.
 insurance: >-
-  EASA requires insurance for a drone over 20 kg, and says most member states
-  also require third-party insurance for lighter drones. Check Netherlands's rules.
+  RDW says insurance is required for private users flying a drone of 20 kg or more, on
+  the basis of EU rules, and strongly recommends liability cover for injury or damage to
+  third parties. Its pages say nothing about insurance for lighter drones.
 howToRegister:
   needed:
-    - 'Whatever your national authority asks for. We have not read the list for this country.'
+    - 'DigiD or eHerkenning (for a drone registered to a company), and a place in the Basisregistratie Personen (for a company, a KVK registration)'
+    - 'EUR 23 to pay by iDEAL or Wero (RDW says iDEAL is replaced by Wero by the end of 2027)'
+    - 'For a drone of 250 g or more, or a flight certificate, the insurance or certificate number if one is required'
   steps:
-    - 'Check that you need to register: yes if any drone weighs 250 g or more or has a camera or other sensor that could detect personal data. A toy under 250 g is exempt.'
-    - 'Register yourself, once and not each drone, with the authority of the EU country where you live. A visitor from outside the EU registers in the first EU country where they fly.'
-    - 'Complete the online training and exam if your drone needs it. Most drones of 250 g or more do (C1, C3, C4, and older drones). C2 needs more, and C0 and drones under 250 g need none.'
-    - 'Put your operator registration number on every drone you own as a sticker, and enter it into the drone''s Remote ID if it has one.'
-  validFor: 'Set by the authority you register with. It is valid in every EASA member state.'
-  afterwards: 'Before you fly in any EU country, check that the place is not in a geographical zone that country has published.'
-lastVerified: 2026-10-17
+    - 'Check that you need to register: yes if any drone weighs 250 g or more or has a camera. A toy drone of 250 g or more must register too. Drones under 250 g with no camera need none, and a toy under 250 g with a camera needs none.'
+    - 'Apply for an operator number on RDW''s exploitantnummer page, log in with DigiD or eHerkenning, and pay EUR 23.'
+    - 'RDW says the number arrives by e-mail, up to 10 working days after payment.'
+    - 'Put the part of the number before the dash clearly on the outside of every drone you own, for example as a sticker. RDW says to leave off the last three characters. Enter the number into the drone''s Remote ID if it has one.'
+    - 'Complete the online training and exam if your drone needs it. Most drones of 250 g or more do (C1, C3, C4, and older drones). C2 needs more, and C0 and drones under 250 g need none. RDW''s flight certificate is valid for 5 years from the exam date.'
+    - 'If a drone needs insurance or a flight certificate, add its number to your operator details at RDW.'
+  validFor: 'One year, then extend it with RDW. The one number is valid for all your drones.'
+  afterwards: 'Before you fly, check the place on an official map (GoDrone or the Aeret Kaartviewer) for no-fly zones and restrictions.'
+lastVerified: 2026-10-26
 sources:
   - https://www.easa.europa.eu/en/domains/drones-air-mobility/operating-drone/open-category-low-risk-civil-drones
   - https://www.easa.europa.eu/the-agency/faqs/drones-uas
   - https://www.easa.europa.eu/en/domains/civil-drones/naa
   - https://www.rdw.nl/drone
+  - https://www.rdw.nl/drone/exploitantnummer-aanvragen
+  - https://www.rdw.nl/drone/vliegbewijs-aanvragen
+  - https://www.rdw.nl/drone/verzekeringen-en-vluchtvergunningen
+  - https://www.rijksoverheid.nl/themas/verkeer-en-vervoer/drone/regels-voor-vliegen-met-drones
+  - https://www.rijksoverheid.nl/themas/verkeer-en-vervoer/drone/vraag-en-antwoord/drone/registreren-eigenaar-drone
+  - https://www.rijksoverheid.nl/themas/verkeer-en-vervoer/drone/vraag-en-antwoord/drone/vliegen-drone-lichter-250-gram
+  - https://www.rijksoverheid.nl/themas/verkeer-en-vervoer/drone/vraag-en-antwoord/drone/vliegbewijs-drone
+  - https://www.rijksoverheid.nl/themas/verkeer-en-vervoer/drone/vraag-en-antwoord/drone/uitbreiding-inperking-no-fly-zone-drones-aanvragen
+  - https://www.veiligdronevliegen.nl/voordat-je-gaat-vliegen
+  - https://www.veiligdronevliegen.nl/voordat-je-gaat-vliegen/waar-kan-ik-vliegen
 ---
 
 import EasaRules from '../../components/EasaRules.mdx';
 
 Netherlands applies the EU's common drone rules, set by the European Union Aviation Safety Agency (EASA). This
-guide gives those rules, then links to Netherlands's own authority for what is national.
+guide gives those rules, then sets out what Netherlands's own authorities add, read on 26 October 2026. Quotations
+from Dutch pages are our translation.
 
 <EasaRules />
 
+## Netherlands's own rules
+
+**Registration.** The owner registers as an operator by applying to RDW for an operator number (exploitantnummer).
+A drone of 250 g or more, or any drone with a camera, needs one. The weight threshold is not a simple 0 g rule, so
+the weight field is left empty. RDW says a toy drone of 250 g or more needs one
+even without a camera. RDW's fee is EUR 23, paid by iDEAL or Wero, and the number arrives by e-mail within 10 working
+days. Only people living outside the EU or EASA can apply to RDW for a number; EU and EASA residents apply in their
+own country. A visitor from outside the EU or EASA who flies in Netherlands applies to RDW, if Netherlands is the first
+European country they fly in.
+
+**Validity.** The operator number is valid for one year, after which it must be extended with RDW (RDW's pages and the
+Rijksoverheid's question and answer page agree). We did not find the extension fee.
+
+**Minimum age.** Under 16, a person may fly only with supervision by someone over 16 who holds a flight certificate
+(RDW's certificate page and the Rijksoverheid's question on drones lighter than 250 g). For a drone under 250 g with a
+C0 label there is no minimum age, and such a drone with a camera still needs registering.
+
+**Flight certificate.** A flight certificate is needed for a drone of 250 g or more. It is an online exam passed at a
+Dutch approved flight school, with a EUR 10 application fee, and it is valid for 5 years from the exam date.
+
+**Remote ID.** RDW and the Rijksoverheid say remote ID applies to drones with a C1, C2 or C3 label and to drones in the
+specific category. Drones with a C0 or C4 label do not need the operator number and serial number in the software.
+
+**Insurance.** RDW says insurance is required for private users flying a drone of 20 kg or more, on the basis of EU
+rules. It strongly recommends liability cover for injury or property damage to third parties, and says that if an
+insurance or flight certificate is required, its number must be added to the operator details.
+
+**Where you can fly.** In the open category, drones may not fly over government buildings, military and training grounds,
+events or other temporarily closed areas, roads with a speed limit of 80 km/h or more, railways, areas around airports,
+some Natura 2000 areas, and other places that the province or land manager sets, along with helicopter platforms at
+hospitals, high-voltage lines, drinking-water areas, large sea ports, companies with dangerous substances, secured sites
+and areas where emergency services are active (summary of the Veilig drone vliegen page, our translation). Official maps
+are [GoDrone](https://map.godrone.nl/) and the [Aeret Kaartviewer](https://aeret.kaartviewer.nl/?@dpf_basic), which
+show the no-fly zones and restrictions for the open category.
+
 ## In Netherlands
 
-- **Register:** [Netherlands's registration page](https://www.rdw.nl/drone).
-- **Where you can fly:** [Netherlands's map of geographical zones](https://map.godrone.nl/).
+- **Register:** [RDW's operator number page](https://www.rdw.nl/drone/exploitantnummer-aanvragen).
+- **Certificate:** [RDW's flight certificate page](https://www.rdw.nl/drone/vliegbewijs-aanvragen).
+- **Where you can fly:** [GoDrone](https://map.godrone.nl/) and the [Aeret Kaartviewer](https://aeret.kaartviewer.nl/?@dpf_basic),
+  both linked from [Veilig drone vliegen](https://www.veiligdronevliegen.nl/voordat-je-gaat-vliegen/waar-kan-ik-vliegen).
 - **Authority:** [RDW (registration) and the Human Environment and Transport Inspectorate](https://www.rdw.nl/drone).
 
 ## Not covered yet
 
-- **Netherlands's national rules.** We have not read Netherlands's own drone rules, so what we say here is only what EASA says
-  applies everywhere. Fees, how long registration lasts, the minimum age (a state may lower EASA's 16 to 12),
-  insurance, penalties and any local bans are all unverified. Check the authority above before you fly.
-- **Where flying is banned.** Netherlands's geographical zones are on the map linked above, and we have not copied them.
+- **Penalties.** The pages we read do not give fines or penalty amounts for drone rules.
+- **Extension fee.** We did not find the fee for extending the operator number after one year.
+- **Local bans beyond the open-category list.** The Veilig drone vliegen and Rijksoverheid pages list the categories of
+  place; we have not checked the map layers for each place.
+- **Specific-category rules and the certified category.** The Rijksoverheid says specific-category flights need a flight
+  permit from the ILT, and the certified category is still being developed. We have not read those rules.
+- **Exam location.** The RDW page says the online exam is passed at an approved Dutch flight school; we did not confirm
+  whether that step is in person.

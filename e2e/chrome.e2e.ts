@@ -1,4 +1,5 @@
 import { expect, test } from '@playwright/test';
+import { GUIDE_COUNT } from './helpers';
 
 // The header, skip link, sharing tags and 404 page that every page shares. These pages are light, so none of
 // these tests start the globe.
@@ -87,8 +88,8 @@ test.describe('countries list', () => {
 		await page.goto('/countries/');
 		const nepal = page.locator('.countries li', { hasText: 'Nepal' });
 		await expect(nepal).toContainText('Civil Aviation Authority of Nepal (CAAN)');
-		await expect(nepal).toContainText('last verified 2026-10-17');
-		await expect(page.locator('.countries li')).toHaveCount(39);
+		await expect(nepal).toContainText('last verified 2026-10-26');
+		await expect(page.locator('.countries li')).toHaveCount(GUIDE_COUNT);
 	});
 });
 

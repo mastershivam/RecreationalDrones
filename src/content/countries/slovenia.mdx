@@ -5,57 +5,125 @@ authority: Civil Aviation Agency of Slovenia
 authorityUrl: https://www.caa.si/
 registrationUrl: https://www.caa.si/en/operator-registration-and-traning-with-exam-a1a3.html
 whoMustRegister: >-
-  Register yourself once, not each drone, with your home EU country's authority
-  (visitors: the first EU country you fly in). Needed if a drone weighs 250 g or
-  more or has a camera.
+  You register yourself as the operator, not each drone. Needed in the open
+  category for a drone of 250 g or more, one that can pass more than 80 joules to
+  a person on impact, or one with a sensor that captures personal data, even
+  under 250 g. A family can register one member as operator, but everyone else
+  still has to pass the A1/A3 training and exam. EU residents register in their
+  own state; an operator from outside the EU registers in the first EU state where
+  they fly.
 restrictiveness: 2
 restrictivenessReason: >-
-  Register online with your national authority and, for most drones, pass an
-  online training exam (EASA). Steps in your country may add to this; we have
-  not read them.
-registrationFee: null
+  Registration and the A1/A3 exam are online and free, and an EU resident needs a
+  qualified digital certificate to log in. No permission is needed before an
+  ordinary open-category flight. Two kinds of flight have extra conditions: over
+  buildings and structures where people are present, including roads, which is
+  banned unless the drone is 1,200 g or less, flies at 50 m or lower in daylight,
+  you have the owner's consent and you email a flight announcement 12 hours ahead,
+  and inside a control zone within 5 km of an airport, which is banned. We read the
+  level from the agency's pages and the 2024 regulation; it is provisional.
+registrationFee: 'Free (the UAS portal says its use is free)'
 registrationWeightGrams: 0
 minOperatorAge: null
 remoteId: >-
-  EASA says open-category drones, with limited exceptions, must have a remote
+  The agency's pages and the 2024 national regulation we read do not mention Remote
+  ID. EASA says open-category drones, with limited exceptions, must have a remote
   identification system.
 insurance: >-
-  EASA requires insurance for a drone over 20 kg, and says most member states
-  also require third-party insurance for lighter drones. Check Slovenia's rules.
+  The 2024 Slovenian regulation (article 5) says the operator of a drone system
+  must take out compulsory insurance for it under the law on compulsory traffic
+  insurance. It sets no weight threshold, exemption for model aircraft or sum, and
+  we found no amount on the agency's pages.
 howToRegister:
   needed:
-    - 'Whatever your national authority asks for. We have not read the list for this country.'
+    - 'A qualified digital certificate, if you are an EU resident. The agency says to check whether you can get one in your EU country of residence, and that it is free.'
+    - 'If you are a resident of a non-EU country: an email address and scanned personal documents with a clear photograph and the document number.'
+    - 'If you are under 18: your parent or legal representative, who acts for you in the registration.'
   steps:
-    - 'Check that you need to register: yes if any drone weighs 250 g or more or has a camera or other sensor that could detect personal data. A toy under 250 g is exempt.'
-    - 'Register yourself, once and not each drone, with the authority of the EU country where you live. A visitor from outside the EU registers in the first EU country where they fly.'
-    - 'Complete the online training and exam if your drone needs it. Most drones of 250 g or more do (C1, C3, C4, and older drones). C2 needs more, and C0 and drones under 250 g need none.'
-    - 'Put your operator registration number on every drone you own as a sticker, and enter it into the drone''s Remote ID if it has one.'
-  validFor: 'Set by the authority you register with. It is valid in every EASA member state.'
-  afterwards: 'Before you fly in any EU country, check that the place is not in a geographical zone that country has published.'
-lastVerified: 2026-10-17
+    - 'Check that you need to register: yes if any drone weighs 250 g or more, can pass more than 80 joules to a person on impact, or has a sensor that captures personal data.'
+    - 'Register in the EU country where you live, or where your business is based. A non-EU operator registers in the first EU country where they plan to operate. You cannot be registered in two.'
+    - 'Open the agency''s online UAS Repository (uas.caa.si). EU residents log in with SI-PASS and a digital certificate; non-EU residents use the login for non-EU residents.'
+    - 'Complete the online A1/A3 training and exam if any drone weighs 250 g or more. A toy and a C0 drone need none, but you must know its instructions. For a drone under 250 g with a camera the agency recommends the training but does not require it.'
+    - 'Put your operator registration number on every drone, and enter it into the drone''s Remote ID if it has one.'
+  validFor: null
+  afterwards: 'Before each flight, check the agency''s 2D map of geographical zones. For a flight over buildings where people are, email the announcement to uav@caa.si 12 hours ahead.'
+lastVerified: 2026-10-25
 sources:
   - https://www.easa.europa.eu/en/domains/drones-air-mobility/operating-drone/open-category-low-risk-civil-drones
   - https://www.easa.europa.eu/the-agency/faqs/drones-uas
   - https://www.easa.europa.eu/en/domains/civil-drones/naa
   - https://www.caa.si/en/operator-registration-and-traning-with-exam-a1a3.html
+  - https://uas.caa.si
+  - https://www.caa.si/en/unmanned-aircraft-system.html
+  - https://www.caa.si/en/geographical-restrictions-for-uas.html
+  - https://www.caa.si/en/cross-border-operations.html
+  - https://www.caa.si/nova-uredba-o-izvajanju-izvedbene-uredbe-komisije-eu-o-pravilih-in-postopkih-za-upravljanje-brezpilotnih-zrakoplovov.html
+  - https://www.uradni-list.si/glasilo-uradni-list-rs/vsebina/2024-01-1354
 ---
 
 import EasaRules from '../../components/EasaRules.mdx';
 
 Slovenia applies the EU's common drone rules, set by the European Union Aviation Safety Agency (EASA). This
-guide gives those rules, then links to Slovenia's own authority for what is national.
+guide gives those rules, then Slovenia's own rules from the Civil Aviation Agency of Slovenia (CAA) pages and the
+national regulation of 2024 (Uradni list RS 39/2024, in force from 25 May 2024), read on 25 October 2026. The agency's
+pages show no date, so check them for changes.
 
 <EasaRules />
 
 ## In Slovenia
 
-- **Register:** [Slovenia's registration page](https://www.caa.si/en/operator-registration-and-traning-with-exam-a1a3.html).
-- **Where you can fly:** [Slovenia's map of geographical zones](https://uas-geo.caa.si/).
+- **Register:** [Slovenia's registration page](https://www.caa.si/en/operator-registration-and-traning-with-exam-a1a3.html),
+  which leads to the [UAS portal](https://uas.caa.si).
+- **Where you can fly:** [the agency's page on geographical restrictions](https://www.caa.si/en/geographical-restrictions-for-uas.html),
+  which links a 2D web map.
 - **Authority:** [Civil Aviation Agency of Slovenia](https://www.caa.si/).
+
+### Registration
+
+- **Fee and term:** the UAS portal says using the web application is free. The pages we read do not say how long a
+  registration lasts.
+- **Age:** the agency's page gives no minimum age. A minor under 18 registers with a parent or legal representative, who
+  acts for them under the 2024 regulation. We left the age unverified.
+- **Visitors:** a non-EU operator's authority is that of the first EU country where it operates, and a registration is
+  valid across the EU. A non-EU resident logs in with an email address and scanned documents.
+- **Cross-border operations** in the specific category are a separate application to the agency, not covered here.
+
+### Insurance
+
+The 2024 regulation (article 5) makes insurance compulsory for the operator of a drone system, under the law on
+compulsory traffic insurance. It names no weight limit, no exemption for hobby use and no sum. The regulation sets no fine
+for missing insurance, but the agency's insurance page covers other aircraft owners, not drones. Ask the agency or your
+insurer what cover you need.
+
+### Where you cannot fly without permission
+
+- **Airports:** in the open category, flying in a control zone (CTR) within a 5 km radius of an airport reference point is
+  banned (article 13). The regulation also bans zones around heliports, aerodromes without a tower and landing sites. A
+  specific-category operator needs the air traffic service provider's approval.
+- **Buildings and structures where people are:** in the open category, banned over buildings and above-ground structures
+  where people are present, such as roads and other transport infrastructure (article 14). The exception applies only if
+  all of these are met: 1,200 g or less, 50 m or lower above the ground, daylight only, the owner's or user's consent,
+  and a flight announcement sent by email to uav@caa.si 12 hours ahead. The agency says its map's "BUILT" layer is for
+  information only.
+- **Other zones** (nuclear, defence, police, nature protection, municipalities and temporary police zones) need the zone
+  manager's prior approval. The agency's map shows them; we have not copied them.
+- **Assemblies of people:** flying over one, or not keeping a safe distance from people, is an offence.
+
+### Penalties
+
+The 2024 regulation sets these fines for an individual:
+
+- Not registered: EUR 400.
+- Flying with no remote-pilot training or certificate: EUR 400. Not carrying proof of it: EUR 200.
+- Flying in a flight-safety zone without permission: EUR 1,000.
+- Flying in another geographical zone without permission: EUR 700.
+- Breaking the open-category rules, including flying over an assembly of people: EUR 400.
+
+The agency's notice of 20 May 2024 says fines for some offences were reduced; read the regulation for the current amounts.
 
 ## Not covered yet
 
-- **Slovenia's national rules.** We have not read Slovenia's own drone rules, so what we say here is only what EASA says
-  applies everywhere. Fees, how long registration lasts, the minimum age (a state may lower EASA's 16 to 12),
-  insurance, penalties and any local bans are all unverified. Check the authority above before you fly.
-- **Where flying is banned.** Slovenia's geographical zones are on the map linked above, and we have not copied them.
+- **How long registration lasts, and the insurance sum.** The pages we read do not say.
+- **Nature areas, privacy rules and the A2 and specific-category rules.**
+- **Where flying is banned.** Slovenia's zones are on the agency's map linked above, and we have not copied them. The
+  map address we used before, uas-geo.caa.si, failed its security certificate check when we tried it on 25 October 2026.

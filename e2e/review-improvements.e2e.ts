@@ -1,5 +1,5 @@
 import { expect, test } from '@playwright/test';
-import { openGlobe } from './helpers';
+import { openGlobe, GUIDE_COUNT } from './helpers';
 
 // The design review's fixes: the headline and search on the first screen, shareable links, the country sheet's
 // badge and verdict, the "not covered" key entry and the filterable countries page.
@@ -112,14 +112,14 @@ test.describe('countries page', () => {
 	test('filters by name and level, and sorts', async ({ page }) => {
 		await page.goto('/countries/');
 		const rows = page.locator('.countries li:visible');
-		await expect(rows).toHaveCount(39);
+		await expect(rows).toHaveCount(GUIDE_COUNT);
 		await page.getByRole('searchbox', { name: 'Search the countries' }).fill('nep');
 		await expect(rows).toHaveCount(1);
 		await page.getByRole('searchbox', { name: 'Search the countries' }).fill('');
 		await page.getByLabel('Complex restrictions').check();
 		await expect(rows.first()).toContainText('Complex restrictions');
-		expect(await rows.count()).toBeLessThan(39);
-		await expect(page.locator('#filter-count')).toContainText('of 39');
+		expect(await rows.count()).toBeLessThan(GUIDE_COUNT);
+		await expect(page.locator('#filter-count')).toContainText(`of ${GUIDE_COUNT}`);
 	});
 
 	test('shows a level, weight and fee on every row', async ({ page }) => {

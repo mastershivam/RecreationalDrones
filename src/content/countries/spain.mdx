@@ -5,57 +5,131 @@ authority: State Aviation Safety Agency (AESA)
 authorityUrl: https://www.seguridadaerea.gob.es/
 registrationUrl: https://www.seguridadaerea.gob.es/es/ambitos/drones/registro-de-operador-de-drones-uas
 whoMustRegister: >-
-  Register yourself once, not each drone, with your home EU country's authority
-  (visitors: the first EU country you fly in). Needed if a drone weighs 250 g or
-  more or has a camera.
+  You register yourself as the operator, not each drone. Needed in the open
+  category for a drone that weighs 250 g or more, can pass more than 80 joules on
+  impact, or carries a sensor that can capture personal data (unless it meets the
+  EU toy directive); model-aircraft flyers register too. You register in the
+  country where you live, and cannot be registered in two. A visitor from outside
+  the EASA states registers in the first one where they plan to fly.
 restrictiveness: 2
 restrictivenessReason: >-
-  Register online with your national authority and, for most drones, pass an
-  online training exam (EASA). Steps in your country may add to this; we have
-  not read them.
-registrationFee: null
+  Registration is online and free. Royal Decree 517/2024 (art. 40) tells registered
+  operators who plan to fly in urban environments or over crowds to notify the
+  Ministry of the Interior at least five days ahead, and flights in controlled
+  airspace need coordination with the air navigation provider unless they stay in
+  sight under 60 m. Those steps apply to particular flights, not to ordinary
+  open-category flying. We read this from the legal text, not from an AESA page, so
+  the level is provisional.
+registrationFee: 'Free, valid 3 years'
 registrationWeightGrams: 0
-minOperatorAge: null
+minOperatorAge: 16
 remoteId: >-
-  EASA says open-category drones, with limited exceptions, must have a remote
-  identification system.
+  The AESA pages we read give no national Remote ID rule, only an exemption from
+  the direct remote identification system and night light for UAS swarm
+  operations. EASA says open-category drones, with limited exceptions, must have a
+  remote identification system.
 insurance: >-
-  EASA requires insurance for a drone over 20 kg, and says most member states
-  also require third-party insurance for lighter drones. Check Spain's rules.
+  AESA says third-party liability insurance is required in open subcategory A2,
+  in A3 with a drone of 20 kg or more, and in the specific and certified
+  categories. Royal Decree 517/2024 (art. 8) exempts other operations under 20
+  kg, such as open A1 and A3 under 20 kg, from the insurance duty. Under 20 kg
+  the minimum is 220,000 SDR (special drawing rights); from 20 kg it is 750,000
+  SDR.
 howToRegister:
   needed:
-    - 'Whatever your national authority asks for. We have not read the list for this country.'
+    - 'A digital certificate, if you are registering with one. With it the sign-up is automatic and immediate.'
+    - 'If you are a foreign individual without a Spanish digital certificate: an e4F account (eSignature for Foreigners) and your passport number.'
   steps:
-    - 'Check that you need to register: yes if any drone weighs 250 g or more or has a camera or other sensor that could detect personal data. A toy under 250 g is exempt.'
-    - 'Register yourself, once and not each drone, with the authority of the EU country where you live. A visitor from outside the EU registers in the first EU country where they fly.'
-    - 'Complete the online training and exam if your drone needs it. Most drones of 250 g or more do (C1, C3, C4, and older drones). C2 needs more, and C0 and drones under 250 g need none.'
-    - 'Put your operator registration number on every drone you own as a sticker, and enter it into the drone''s Remote ID if it has one.'
-  validFor: 'Set by the authority you register with. It is valid in every EASA member state.'
-  afterwards: 'Before you fly in any EU country, check that the place is not in a geographical zone that country has published.'
-lastVerified: 2026-10-17
+    - 'Check that you need to register: yes if any drone weighs 250 g or more, can pass more than 80 joules on impact, or carries a sensor that can capture personal data (unless it meets the toy directive).'
+    - 'Register in the EASA state where you live. If you live outside the EASA states, register in the first one where you plan to fly, which may be Spain.'
+    - 'Open the electronic office of AESA and create your user in the UAS application. With a digital certificate the sign-up is automatic.'
+    - 'Foreign individual (EU or not) without a certificate: register with e4F, create your account in the UAS application with option 1.b "SIN CERTIFICADO", and later log in with option 2 using e4F. AESA''s guide for this is UAS-OPR-P01-GU12.'
+    - 'Finish the operator registration within 90 days of creating your user, or the system deletes the user. An approved user sign-up is not a registration.'
+    - 'Put your operator registration number on every drone you own, and enter it into the drone''s Remote ID if it has one.'
+  validFor: '3 years from issue. Certificates issued before 25 June 2024 expire on 25 June 2027. Renew by filing a modification of the operator registration, which extends it another 3 years. It is valid in every EASA state.'
+  afterwards: 'Before each flight, look at the zone guide on AESA''s geographical-zones page and the ENAIRE drones app. Some flights need coordination or notification first.'
+lastVerified: 2026-10-25
 sources:
   - https://www.easa.europa.eu/en/domains/drones-air-mobility/operating-drone/open-category-low-risk-civil-drones
   - https://www.easa.europa.eu/the-agency/faqs/drones-uas
   - https://www.easa.europa.eu/en/domains/civil-drones/naa
   - https://www.seguridadaerea.gob.es/es/ambitos/drones/registro-de-operador-de-drones-uas
+  - https://www.seguridadaerea.gob.es/es/ambitos/drones/how-to-fly-a-uas-in-spain
+  - https://www.seguridadaerea.gob.es/es/ambitos/drones/zonas-geograficas-de-uas
+  - https://www.boe.es/buscar/act.php?id=BOE-A-2024-11377
 ---
 
 import EasaRules from '../../components/EasaRules.mdx';
 
 Spain applies the EU's common drone rules, set by the European Union Aviation Safety Agency (EASA). This
-guide gives those rules, then links to Spain's own authority for what is national.
+guide gives those rules, then Spain's own rules from AESA's registration, "how to fly a UAS in Spain" and
+geographical-zones pages, and from Royal Decree 517/2024 as published in the BOE, read on 25 October 2026. The
+registration page was last changed on 23 January 2026, and the "how to fly" page on 1 October 2026.
 
 <EasaRules />
 
 ## In Spain
 
 - **Register:** [Spain's registration page](https://www.seguridadaerea.gob.es/es/ambitos/drones/registro-de-operador-de-drones-uas).
-- **Where you can fly:** [Spain's map of geographical zones](https://www.seguridadaerea.gob.es/es/ambitos/drones/how-to-fly-a-uas-in-spain).
+- **Where you can fly:** [AESA's geographical-zones page](https://www.seguridadaerea.gob.es/es/ambitos/drones/zonas-geograficas-de-uas),
+  which links the ENAIRE drones app and AESA's zone guide.
 - **Authority:** [State Aviation Safety Agency (AESA)](https://www.seguridadaerea.gob.es/).
+
+### Registration
+
+- **Fee and term:** AESA says registering is free ("es gratuito"). A registration lasts 3 years from issue; ones issued
+  before 25 June 2024 end on 25 June 2027. You renew by filing a modification of the registration, and each one adds 3 years.
+- **Age:** 16 to be an operator. Open-category remote pilots are 16 in general, 14 for some A1, A2 and A3 cases
+  (for example A1 with a C1 drone, or A3 with a C3 or C4), and 12 for A1 with a C0 drone that is not a toy, or a legacy
+  drone under 250 g.
+- **Visitors:** operators from another EASA state use their own registration. From outside the EASA states, you register
+  in the first state where you plan to fly. A foreign individual registering in Spain without a Spanish digital
+  certificate goes through e4F (see the steps above). Remote-pilot certificates from any EASA state are valid in Spain.
+  AESA's own courses and exams are in Spanish only.
+- **Number:** it must be on all your drones.
+
+### Insurance
+
+AESA says third-party liability insurance is required in open subcategory A2, in A3 with a drone of 20 kg or more, and in
+the specific and certified categories. Royal Decree 517/2024 (article 8) says other operations under 20 kg are exempt
+from that duty. AESA's registration page separately tells you to hold a policy covering third-party liability, and its
+cross-border text lists a policy for open-category operations without splitting by subcategory, so check with AESA if you
+fly in A1 or A3 with a lighter drone. The minimum is 220,000 SDR under 20 kg (Royal Decree 37/2001) and 750,000 SDR from
+20 kg (Regulation (EC) 785/2004).
+
+### Where you cannot fly without permission
+
+Royal Decree 517/2024 sets general zones. Its main rules for a hobby flyer:
+
+- **Aerodromes and heliports:** flying is prohibited inside a zone around each public-use and military aerodrome. Up to
+  45 m it runs 6 km along the runway axis and 5 km each side; above 45 m and up to 900 m it runs 10 km along the axis and
+  7.5 km each side (article 41). Public-use heliports and restricted aerodromes have smaller zones. Coordination with the
+  aerodrome can allow flights.
+- **Controlled airspace and flight information zones:** prohibited unless you fly in sight at 60 m or lower outside
+  those aerodrome zones, or have coordinated with the air navigation provider (article 42). Coordination needs written
+  approval, and the authorities have a month to answer, with no answer counting as a refusal (article 43).
+- **Urban environments** (built-up areas, parks and beaches, up to 300 m above the highest obstacle within 600 m): registered
+  operators who plan to fly in them or over crowds must notify the Ministry of the Interior at least five calendar days
+  ahead, and local security authorities may limit or ban risky flights. In the open category you may not overfly
+  buildings or homes. Keep at least 5 m horizontally from buildings with a C1 drone, or 30 m with a C2 drone under 4 kg
+  (5 m in low-speed mode). The owner can waive this in advance (article 40).
+- **Infrastructure** (energy, ports, rail, water, telecoms, hospitals, police bases): keep 25 m from the edges of linear
+  facilities or 10 m from the covered area of others, and 50 m above the highest point. Flying inside needs the owner's
+  prior permission (article 39). Defence and state-security sites need the owner's or manager's prior permission
+  (article 38).
+- **Nature areas and photography-restricted zones** are set by other rules (Royal Decree 1180/2018) that we have not read.
+
+### Penalties
+
+AESA says breaches can be sanctioned under Law 21/2003 on Aviation Safety, with AESA enforcing. Minor infringements
+cost EUR 4,500 to 70,000, serious ones EUR 70,001 to 250,000, and very serious ones EUR 250,001 to 4,500,000
+(articles 45 ter and 55).
 
 ## Not covered yet
 
-- **Spain's national rules.** We have not read Spain's own drone rules, so what we say here is only what EASA says
-  applies everywhere. Fees, how long registration lasts, the minimum age (a state may lower EASA's 16 to 12),
-  insurance, penalties and any local bans are all unverified. Check the authority above before you fly.
-- **Where flying is banned.** Spain's geographical zones are on the map linked above, and we have not copied them.
+- **Nature areas, photography-restricted zones, local and temporary bans.** We have not read Royal Decree 1180/2018,
+  AESA's zone guide (a PDF we could not open) or the last part of Royal Decree 517/2024. Use the ENAIRE drones app.
+- **How the five-day notice to the Interior Ministry works for a recreational flyer,** and any exemptions in the part
+  of the decree we did not read.
+- **Aeromodelling zones, privacy rules and the A2 and specific-category rules.**
+- **Where flying is banned.** Spain's zones are in the app and guide linked above, and we have not copied them.

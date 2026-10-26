@@ -5,15 +5,18 @@ authority: Civil aviation division, Office of Construction and Spatial Planning 
 authorityUrl: https://www.llv.li/de/landesverwaltung/amt-fuer-hochbau-und-raumplanung/zivilluftfahrt
 registrationUrl: null
 whoMustRegister: >-
-  The Liechtenstein pages we could read do not say. The Swiss Federal Office of
-  Civil Aviation (FOCA) says you register in the EASA state where you live,
+  Liechtenstein's own pages say nothing on it. The Swiss Federal Office of Civil
+  Aviation (FOCA), which Liechtenstein's aviation law names as the competent
+  aviation authority, says you register in the EASA state where you live,
   Liechtenstein being one, that a registration is valid in every EASA state, and
-  that you cannot hold two.
+  that you cannot hold two. Where a Liechtenstein resident does it is not stated.
 restrictiveness: 2
 restrictivenessReason: >-
-  Liechtenstein applies Swiss aviation law, and FOCA's registration is online and
-  inexpensive. We could not read Liechtenstein's own authority page or confirm
-  where residents register, so this level is a provisional reading.
+  Liechtenstein's aviation law applies Swiss aviation law, names FOCA as the
+  competent aviation authority and leaves its own office as a coordinator, and
+  FOCA's registration is online and inexpensive. The one local permission found is
+  for the Vaduz government area. We could not confirm where residents register, so
+  this level is a provisional reading.
 registrationFee: null
 registrationWeightGrams: null
 minOperatorAge: null
@@ -27,16 +30,16 @@ insurance: >-
   carried while flying.
 howToRegister:
   needed:
-    - 'Whatever the registering authority asks for. We have not found Liechtenstein''s own list.'
+    - 'Whatever the registering authority asks for. We have not found a list for Liechtenstein residents. FOCA asks for an ID scan and, for a drone over 250 g, insurance details.'
     - 'For a drone over 250 g, your liability insurance certificate (CHF 1 million minimum), in the pilot''s name'
   steps:
     - 'Check that you need to register. FOCA, whose rules apply in Liechtenstein, asks for it unless every drone you fly weighs under 250 g and has no camera or other sensor that records personal data.'
-    - 'Register in the EASA state where you live (Liechtenstein is one). We could not confirm where a Liechtenstein resident registers, so ask the civil aviation division of the Amt für Hochbau und Raumplanung (info.ahr@llv.li).'
+    - 'Register in the EASA state where you live (Liechtenstein is one). Neither FOCA nor Liechtenstein says where a Liechtenstein resident registers. The Liechtenstein authority says FOCA deals with applicants directly, so ask FOCA (rpas@bazl.admin.ch, the address on its remote-pilot page) before registering.'
     - 'Visiting? If you are already registered in another EASA state, or in Switzerland, FOCA says that registration also lets you fly in Liechtenstein, as long as no permit is needed.'
     - 'Put your operator number on the drone, and enter it into the drone''s Remote ID if it has one.'
   validFor: null
   afterwards: 'Before each flight, check FOCA''s drone map for no-fly zones. The Vaduz government area and parts of Balzers are closed.'
-lastVerified: 2026-10-19
+lastVerified: 2026-10-25
 sources:
   - https://www.landespolizei.li/informationen/drohnen
   - https://www.bazl.admin.ch/de/registrierung-drohnenbetreiber
@@ -44,25 +47,39 @@ sources:
   - https://www.bazl.admin.ch/de/geografische-flugeinschraenkungen
   - https://www.bazl.admin.ch/de/faq-drohnen
   - https://www.datenschutzstelle.li/datenschutz/themen-z/drohnen
+  - https://web.archive.org/web/20251123073457/https://www.llv.li/de/landesverwaltung/amt-fuer-hochbau-und-raumplanung/zivilluftfahrt
+  - https://www.gesetze.li/konso/pdf/2024224000?version=1
+  - https://www.gesetze.li/konso/pdf/2024228000?version=1
+  - https://www.bazl.admin.ch/de/fernpiloten
 ---
 
 This guide follows the Liechtenstein National Police page on drones, the Swiss Federal Office of Civil Aviation (FOCA, in
 German BAZL) pages it relies on, and the Data Protection Office's page on drones, read on 19 October 2026. The pages are in
-German and the translations are ours. The Liechtenstein authority's own page (linked above) refused our request, so it is
-unread. Check it before you fly.
+German and the translations are ours. The Liechtenstein authority's own page (linked above) still refuses our requests (HTTP 403), so on 25 October 2026 we read
+an Internet Archive copy of it from 23 November 2025 (the page itself says it was last updated on 14 October 2024), and
+Liechtenstein's Aviation Act (LFG, LGBl. 2024 Nr. 224) and its fee ordinance (LFG-GebV, LGBl. 2024 Nr. 228). Check the page
+before you fly.
 
 ## Which rules apply
 
 The Landespolizei says drone use in Liechtenstein follows **Swiss aviation law** and Liechtenstein's data protection law. FOCA
 says the same rules apply as in the other EASA states, including Liechtenstein. For general questions and permits, the
-Landespolizei names the civil aviation division of the Amt für Hochbau und Raumplanung.
+Landespolizei names the civil aviation division of the Amt für Hochbau und Raumplanung (AHR).
+
+The Aviation Act (LFG) of 11 April 2024 says in Article 2 that the Swiss aviation law applies, through the exchange of notes
+of 27 January 2003. The authority's page says the same, and adds that FOCA is the competent aviation authority for
+Liechtenstein, that FOCA normally deals directly with applicants, and that the AHR answers general questions and acts as a
+coordination point (our translation). Article 5 of the Act gives FOCA the task of examining the conditions for permits for
+unmanned aircraft. The AHR itself handles applications for an exemption from the drone ban in the Vaduz no-fly zone.
 
 ## Registration
 
 FOCA says registration is in the EASA state where you live, that a registration in one EASA state is valid in all of them,
 and that you cannot be registered in two. Anyone registered in Switzerland may also fly in Liechtenstein, as long as no
 permit is needed. In Switzerland the fee is CHF 10, with no end date and a minimum age of 12. **We could not find a
-Liechtenstein registration page, fee or portal**, so we show them as not yet verified.
+Liechtenstein registration page, fee or portal**, and FOCA's pages do not say whether a Liechtenstein resident uses its
+dLIS platform, so we show them as not yet verified. FOCA's pages say a certificate from any EASA state is valid in the
+others.
 
 ## Where and how you can fly
 
@@ -79,7 +96,9 @@ FOCA's open-category limits are:
 
 ## Where you cannot fly
 
-- **Vaduz:** the area of the government buildings, the Landtag and Vaduz Castle is a permanent no-fly zone.
+- **Vaduz:** the area of the government buildings, the Landtag and Vaduz Castle is a permanent no-fly zone. The AHR grants
+  exemptions from the ban. Its fee ordinance sets CHF 80 for an exemption concerning geographical areas (Art. 8), which we
+  take to be this one, since the ordinance does not say.
 - **Balzers:** parts of the municipality, from the Rhine over the quarry to parts of the Fläscher Riet, lie in a no-fly zone
   because of a heliport and the Bad Ragaz aerodrome.
 - **FOCA's drone map** also applies in Liechtenstein. The permit for a no-fly zone comes from the body responsible for that
@@ -89,14 +108,26 @@ Neither the Landespolizei nor FOCA gives a distance from airports on the pages w
 
 ## Insurance and cameras
 
-- **Insurance:** see the facts above. FOCA's FAQ says a fine can follow for flying uninsured.
+- **Insurance:** see the facts above. FOCA's FAQ says a fine can follow for flying uninsured, and gives the same sum: a
+  guarantee of at least CHF 1 million, before flying a drone of 250 g or more.
 - **Cameras:** the Data Protection Office says data protection law applies when a drone's camera is on and personal data is
   processed. Recording for purely personal or family use is exempt, but publishing or passing on recordings is not. It also
   says recordings of publicly accessible places are subject to notification to the office, and that unlawful camera
   flights can be fined.
 
+## Pilot test and penalties
+
+- **Test:** FOCA says remote pilots must in principle train and pass an exam; a pilot flying only a drone under 250 g is
+  exempt, though FOCA recommends it. The A1/A3 exam is online, costs CHF 20, is valid for five years in all EASA states and
+  has a minimum age of 12; the A2 exam is on site in Switzerland. Whether Liechtenstein residents take it through FOCA is not stated.
+- **Penalties:** FOCA says breaking its rules is punishable, a drone without the operator number can be fined, and flying
+  uninsured can be fined; it gives no amounts. Liechtenstein's Aviation Act (Art. 19) lets the Landgericht fine up to
+  CHF 50,000 (half that for negligence) anyone who does an activity needing a permit without it or against its conditions,
+  or ignores an AHR order. It does not name drones. The Data Protection Office says unlawful camera flights fall under the
+  GDPR fine regime and gives no amounts.
+
 ## Not covered yet
 
 - **Registration:** where Liechtenstein residents register, and the fee, are unverified.
-- **Pilot training and exams** for Liechtenstein, and the **fine amounts**.
+- **Fines under Swiss law** for the drone rules themselves, which neither page quantifies.
 - **Airport distances.** No figure is given, so the map draws no circle here.

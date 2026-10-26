@@ -1,5 +1,5 @@
 import { expect, test } from '@playwright/test';
-import { isOutsideRequest } from './helpers';
+import { isOutsideRequest, GUIDE_COUNT } from './helpers';
 
 // A page-by-page check of what makes the site a real one: titles, descriptions, sharing, icons, crawlers, no
 // cookies, alt text, the register button, and speed on a slow phone connection.
@@ -17,7 +17,8 @@ test.describe('every page has its own title, description and sharing tags', () =
 		const descriptions = new Set<string>();
 		for (const path of paths) {
 			const html = await (await request.get(path)).text();
-			const get = (re: RegExp) => html.match(re)?.[1] ?? '';
+			// Attribute values are HTML-escaped (Côte d&#39;Ivoire); <title> text is not, so decode before comparing.
+			const get = (re: RegExp) => (html.match(re)?.[1] ?? '').replace(/&#39;/g, "'").replace(/&quot;/g, '"').replace(/&amp;/g, '&');
 			const title = get(/<title>([^<]+)<\/title>/);
 			const description = get(/<meta name="description" content="([^"]*)"/);
 			expect(title.length, `${path} title`).toBeGreaterThan(5);
@@ -80,7 +81,7 @@ test.describe('crawlers', () => {
 		const paths = await sitemapPaths(request);
 		for (const path of ['/', '/countries/', '/countries/japan/', '/countries/germany/', '/privacy/', '/contact/']) expect(paths).toContain(path);
 		expect(paths).not.toContain('/404.html');
-		expect(paths.filter((p) => p.startsWith('/countries/') && p !== '/countries/')).toHaveLength(39);
+		expect(paths.filter((p) => p.startsWith('/countries/') && p !== '/countries/')).toHaveLength(GUIDE_COUNT);
 	});
 
 	test('every page in the sitemap exists', async ({ request }) => {
@@ -102,7 +103,7 @@ test.describe('trust pages', () => {
 	test('contact gives a real way to reach us, and a report link for every country', async ({ page }) => {
 		await page.goto('/contact/');
 		await expect(page.getByRole('link', { name: 'issue tracker on GitHub' })).toHaveAttribute('href', /github\.com\/.+\/issues$/);
-		await expect(page.locator('.reports li a')).toHaveCount(39);
+		await expect(page.locator('.reports li a')).toHaveCount(GUIDE_COUNT);
 		await expect(page.getByRole('link', { name: 'Japan', exact: true })).toHaveAttribute('href', /issues\/new\?title=Mistake\+in\+the\+Japan\+guide/);
 		await expect(page.getByRole('contentinfo').getByRole('link', { name: 'Contact' })).toHaveAttribute('aria-current', 'page');
 	});
@@ -185,21 +186,17 @@ test.describe('speed on a slow phone connection', () => {
 		const cdp = await context.newCDPSession(page);
 		await cdp.send('Network.enable');
 		await cdp.send('Network.emulateNetworkConditions', { offline: false, latency: 150, downloadThroughput: (1.6 * 1024 * 1024) / 8, uploadThroughput: (750 * 1024) / 8 });
+		return cdp;
 	}
 	const firstPaint = (page: import('@playwright/test').Page) =>
 		page.evaluate(() => performance.getEntriesByName('first-contentful-paint')[0]?.startTime ?? Infinity);
 
 	for (const path of ['/countries/', '/countries/japan/', '/privacy/']) {
 		test(`${path} paints in under 2 seconds and is small`, async ({ page, context }) => {
-			await throttled(page, context);
+			const cdp = await throttled(page, context);
+			// Bytes on the wire (compressed), as a phone on a slow connection downloads them, not the size once unpacked.
 			let bytes = 0;
-			page.on('response', async (r) => {
-				try {
-					bytes += (await r.body()).length;
-				} catch {
-					// A redirect or an aborted request has no body to count.
-				}
-			});
+			cdp.on('Network.loadingFinished', (e) => (bytes += e.encodedDataLength));
 			await page.goto(path, { waitUntil: 'load' });
 			await expect.poll(() => firstPaint(page)).toBeLessThan(2000);
 			expect(bytes / 1024, 'KB downloaded').toBeLessThan(120);

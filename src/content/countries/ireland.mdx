@@ -3,59 +3,125 @@ name: Ireland
 iso3: IRL
 authority: Irish Aviation Authority (IAA)
 authorityUrl: https://www.iaa.ie/
-registrationUrl: https://iaa.mysrs.ie/
+registrationUrl: https://www.iaa.ie/general-aviation/drones/drone-register
 whoMustRegister: >-
-  Register yourself once, not each drone, with your home EU country's authority
-  (visitors: the first EU country you fly in). Needed if a drone weighs 250 g or
-  more or has a camera.
+  Register yourself as the operator, once and not each drone. Needed if a drone
+  weighs 250 g or more or has a camera or other sensor that can detect personal
+  data. Toy drones are exempt. A visitor registered in another EU country does
+  not register again; anyone else, including visitors from the UK or elsewhere
+  outside the EU, registers with the IAA if Ireland is the first EU country they
+  fly in.
 restrictiveness: 2
 restrictivenessReason: >-
-  Register online with your national authority and, for most drones, pass an
-  online training exam (EASA). Steps in your country may add to this; we have
-  not read them.
-registrationFee: null
+  Register online with the IAA on its MySRS platform for EUR 41, with an identity
+  check and a short online training course and test. The IAA says no permission
+  is needed to fly inside the open-category limits. Controlled airspace and the
+  geographical zones have their own conditions.
+registrationFee: 'EUR 41, valid 2 years'
 registrationWeightGrams: 0
 minOperatorAge: null
 remoteId: >-
-  EASA says open-category drones, with limited exceptions, must have a remote
-  identification system.
+  The IAA says that, except for toys, you must register, show your registration
+  number on the drone and load it into the drone's direct remote ID (DRI), which
+  broadcasts that number, the serial number, position, height, route, speed and
+  the pilot's or take-off position.
 insurance: >-
-  EASA requires insurance for a drone over 20 kg, and says most member states
-  also require third-party insurance for lighter drones. Check Ireland's rules.
+  The IAA says insurance is always required for a drone, except one flown for
+  recreation and under 20 kg. It recommends third-party insurance even for a
+  lighter drone, and for everyone who flies one.
 howToRegister:
   needed:
-    - 'Whatever your national authority asks for. We have not read the list for this country.'
+    - 'An email address, to create a MySRS account'
+    - 'Proof of your identity, name and age, which MySRS checks'
+    - 'EUR 41 for the registration, and EUR 51 for the online-training certificate if your drone needs it (IAA schedule of charges, 2026)'
   steps:
-    - 'Check that you need to register: yes if any drone weighs 250 g or more or has a camera or other sensor that could detect personal data. A toy under 250 g is exempt.'
-    - 'Register yourself, once and not each drone, with the authority of the EU country where you live. A visitor from outside the EU registers in the first EU country where they fly.'
-    - 'Complete the online training and exam if your drone needs it. Most drones of 250 g or more do (C1, C3, C4, and older drones). C2 needs more, and C0 and drones under 250 g need none.'
-    - 'Put your operator registration number on every drone you own as a sticker, and enter it into the drone''s Remote ID if it has one.'
-  validFor: 'Set by the authority you register with. It is valid in every EASA member state.'
-  afterwards: 'Before you fly in any EU country, check that the place is not in a geographical zone that country has published.'
-lastVerified: 2026-10-17
+    - 'Check that you need to register: yes if any drone weighs 250 g or more or has a camera or other sensor that could detect personal data. A toy is exempt.'
+    - 'Create an account on MySRS (iaa.mysrs.ie) with your email address, and verify your identity.'
+    - 'Take the IAA online training (about 15 minutes: a short video and 40 questions) if your drone is over 250 g. You get a Proof of Online Training certificate.'
+    - 'Register as a drone operator on MySRS and pay the fee.'
+    - 'Put your operator ID on every drone you fly. It must be visible from outside, or inside a compartment you can open without a tool.'
+    - 'Load your operator ID into the drone''s Remote ID if it has one.'
+    - 'Need more than the open category, or an A2 certificate? Apply on MySRS; the A2 training is done with an IAA-designated training organisation.'
+  validFor: 'Operator registration lasts 2 years (IAA schedule of charges, 2026). The online-training certificate lasts 5 years. Registration is valid across the EU.'
+  afterwards: 'Before each flight, check the IAA''s UAS geographical zones data and the airspace notices (TRAs, NOTAMs).'
+lastVerified: 2026-10-25
 sources:
   - https://www.easa.europa.eu/en/domains/drones-air-mobility/operating-drone/open-category-low-risk-civil-drones
   - https://www.easa.europa.eu/the-agency/faqs/drones-uas
   - https://www.easa.europa.eu/en/domains/civil-drones/naa
-  - https://iaa.mysrs.ie/
+  - https://www.iaa.ie/general-aviation/drones/drone-register
+  - https://www.iaa.ie/general-aviation/drones/faqs/registration
+  - https://www.iaa.ie/general-aviation/drones/faqs/safety-regulations
+  - https://www.iaa.ie/general-aviation/drones/faqs/geographical-zones
+  - https://www.iaa.ie/general-aviation/drones/uas-geographic-zones
+  - https://www.iaa.ie/general-aviation/aircraft-categories/remotely-piloted-aircraft-systems-(rpas)/drone-remote-identification
+  - https://www.iaa.ie/docs/default-source/publications/corporate-publications/schedule-of-charges/iaa-schedule-of-charges---schedule-6---uas-operations---final.pdf
 ---
 
 import EasaRules from '../../components/EasaRules.mdx';
 
-Ireland applies the EU's common drone rules, set by the European Union Aviation Safety Agency (EASA). This
-guide gives those rules, then links to Ireland's own authority for what is national.
+Ireland applies the EU's common drone rules, set by the European Union Aviation Safety Agency (EASA). This guide gives
+those rules, then what the Irish Aviation Authority (IAA) says on its drone pages, FAQs and 2026 schedule of charges,
+read on 25 October 2026. Check the IAA for any change.
 
 <EasaRules />
 
 ## In Ireland
 
-- **Register:** [Ireland's registration page](https://iaa.mysrs.ie/).
-- **Where you can fly:** [Ireland's map of geographical zones](https://www.iaa.ie/general-aviation/drones/uas-geographic-zones).
+- **Register:** [the IAA's drone operator registration page](https://www.iaa.ie/general-aviation/drones/drone-register), which leads to the [MySRS platform](https://iaa.mysrs.ie/).
+- **Where you can fly:** [Ireland's UAS geographical zones](https://www.iaa.ie/general-aviation/drones/uas-geographic-zones).
 - **Authority:** [Irish Aviation Authority (IAA)](https://www.iaa.ie/).
+
+## Registration
+
+The IAA says that if you own a drone over 250 g, or one with a camera, you must register as an operator. You register
+yourself once, not each drone, and one account can operate many drones. Model aircraft are treated the same as drones,
+and a toy drone is exempt (the box or manual must say it meets the toy-safety rules and is for children under 14).
+
+- **Where:** MySRS, the IAA's digital platform, with your email address and an identity check (name and age).
+- **Fee and term:** EUR 41 for operator registration, valid 2 years. A renewal is charged under the same schedule.
+- **Training:** the online course is about 15 minutes, a short video and 40 questions. The IAA's schedule of charges lists
+  EUR 51 for the Proof of Online Training (open A1/A3), valid 5 years, and EUR 128 for the A2 certificate. The A2 training
+  is attended at an IAA-designated training organisation.
+- **Age:** 16 to register. For a pilot under 16, a parent or guardian registers as the operator, and must train and
+  supervise the pilot.
+- **Your number:** put it on every drone, visible from outside or inside a compartment that opens without a tool.
+- **Visitors:** a visitor already registered with the authority of their home EU country does not register again. A
+  visitor from outside the EU, including the UK, registers with the IAA if Ireland is the first EU country where they
+  fly, and is then valid across Europe. Their own country's pilot training is not accepted; they take the required
+  training before flying. Flying in the specific category needs a further application to the IAA.
+
+## Where and how you can fly
+
+The IAA says no permission is needed to fly a drone if you stay within the open-category limits and the EASA guidance.
+For the open category it gives these limits: keep the drone in sight, stay below 120 m (400 ft), and keep clear of
+people as the drone's class requires. You may fly at night if the drone shows a green flashing light.
+
+- **Geographical zones:** the IAA publishes them as a data file (GeoJSON), and warns that it is for reference only, not
+  navigation. Zones may overlap, so click through every box on its map.
+- **Airspace:** check controlled and restricted airspace in the Aeronautical Information Publication and NOTAMs. The
+  IAA FAQ gives no airport distance; the aerodrome is for you to assess.
+- **Other limits:** the IAA's page points to data-protection rules (the Data Protection Commission's drone guidance)
+  and environmental restrictions (an ArcGIS map linked from the zones page). Planning law is
+  outside the IAA's scope, and trespass or privacy laws may apply on private property.
+
+## Remote ID and insurance
+
+- **Remote ID:** except for toys, you load your registration number into the drone's direct remote ID, which broadcasts
+  it, the serial number, the drone's position and height, route, speed and the pilot's position (or take-off point), and an
+  emergency flag. Anyone in range can scan it.
+- **Insurance:** the IAA's FAQ says insurance is always required unless the flight is for recreation and the drone is
+  under 20 kg. It recommends third-party insurance for everyone, including with a lighter drone.
+
+## Penalties
+
+For a drone that does not meet the legal and safety rules, the IAA says it can act up to detaining the drone, or take
+summary proceedings in the District Court, or start an indictment through the Director of Public Prosecutions. It says
+it has brought several successful prosecutions. The pages we read give no fine amounts.
 
 ## Not covered yet
 
-- **Ireland's national rules.** We have not read Ireland's own drone rules, so what we say here is only what EASA says
-  applies everywhere. Fees, how long registration lasts, the minimum age (a state may lower EASA's 16 to 12),
-  insurance, penalties and any local bans are all unverified. Check the authority above before you fly.
-- **Where flying is banned.** Ireland's geographical zones are on the map linked above, and we have not copied them.
+- **Fine amounts.** The IAA pages give none.
+- **Airport distances and nature-protection areas.** The IAA gives no distances on the pages we read; its geographical
+  zones data file and the airspace notices are the source, and we have not copied them.
+- **Model aircraft clubs, privacy rules and the specific category** beyond the fees above.

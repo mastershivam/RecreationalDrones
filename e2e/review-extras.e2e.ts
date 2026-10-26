@@ -1,4 +1,5 @@
 import { expect, test } from '@playwright/test';
+import { guidesIn } from './helpers';
 
 // The second half of the design review: trip planner, weight check, saved countries, region filter, outline,
 // social cards, the draggable phone sheet and the light theme.
@@ -71,9 +72,15 @@ test.describe('countries page', () => {
 	test('filters by region', async ({ page }) => {
 		await page.goto('/countries/');
 		await page.getByLabel('Region').selectOption('Asia');
-		await expect(page.locator('.countries li:visible')).toHaveCount(4);
+		await expect(page.locator('.countries li:visible')).toHaveCount(guidesIn('Asia'));
 		await page.getByLabel('Region').selectOption('European Union');
-		await expect(page.locator('.countries li:visible')).toHaveCount(27);
+		await expect(page.locator('.countries li:visible')).toHaveCount(guidesIn('European Union'));
+		await page.getByLabel('Region').selectOption('Africa');
+		await expect(page.locator('.countries li:visible').filter({ hasText: /South Africa/ })).toHaveCount(1);
+		await page.getByLabel('Region').selectOption('South America');
+		await expect(page.locator('.countries li:visible').filter({ hasText: /Brazil/ })).toHaveCount(1);
+		await page.getByLabel('Region').selectOption('Oceania');
+		await expect(page.locator('.countries li:visible')).toHaveCount(guidesIn('Oceania'));
 	});
 });
 

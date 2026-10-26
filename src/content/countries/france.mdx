@@ -5,57 +5,144 @@ authority: Directorate General for Civil Aviation (DGAC)
 authorityUrl: https://alphatango.aviation-civile.gouv.fr/
 registrationUrl: https://alphatango.aviation-civile.gouv.fr/login.jsp
 whoMustRegister: >-
-  Register yourself once, not each drone, with your home EU country's authority
-  (visitors: the first EU country you fly in). Needed if a drone weighs 250 g or
-  more or has a camera.
+  Register yourself once as the operator, not each drone, on DGAC's AlphaTango
+  portal. Needed for a drone of 250 g or more, or one with a camera or other
+  sensor that can record personal data (a toy is exempt). A visitor registered
+  in another EU state does not register again; one from outside the EU
+  registers in the first EU state where they fly. Separately, the owner of any
+  drone of 800 g or more registers that drone on AlphaTango.
 restrictiveness: 2
 restrictivenessReason: >-
-  Register online with your national authority and, for most drones, pass an
-  online training exam (EASA). Steps in your country may add to this; we have
-  not read them.
+  Register online on DGAC's AlphaTango portal and, for a drone over 250 g or
+  with a camera, take DGAC's free online course and exam. No in-person step and
+  no permission before flying in the open category, outside restricted zones. Two things make France stricter than the EASA minimum:
+  open-category flying is banned in public places in built-up areas, and a drone
+  over 800 g must also be registered and carry a French electronic signalling
+  device. We kept level 2 because neither is a second authority, an in-person
+  step or a permission, the tests this site uses for level 3.
 registrationFee: null
 registrationWeightGrams: 0
-minOperatorAge: null
+minOperatorAge: 14
 remoteId: >-
-  EASA says open-category drones, with limited exceptions, must have a remote
-  identification system.
+  Two separate signals. France requires a national electronic signalling device
+  on every drone and model aircraft over 800 g (DGAC's FAQ). The EU's direct
+  Remote ID is required by DGAC's FAQ for drones that carry a class label, and
+  the maker fits it. The pages we read do not say what applies to an older drone
+  without a class label.
 insurance: >-
-  EASA requires insurance for a drone over 20 kg, and says most member states
-  also require third-party insurance for lighter drones. Check France's rules.
+  DGAC says insurance is not an obligation in the open category, but you should
+  check that your home liability policy covers damage from a drone accident. The
+  AlphaTango operator form has an insurance field, filled in when EU or national
+  law requires it.
 howToRegister:
   needed:
-    - 'Whatever your national authority asks for. We have not read the list for this country.'
+    - 'An email address and a personal AlphaTango account (the online course is open to people aged 14 and over)'
+    - 'Your postal address, entered under "My account" before you can register'
+    - 'If you are a minor, the identity of a legal representative when you create the account'
+    - 'Your insurance policy number only if EU or national law requires it for you'
   steps:
-    - 'Check that you need to register: yes if any drone weighs 250 g or more or has a camera or other sensor that could detect personal data. A toy under 250 g is exempt.'
-    - 'Register yourself, once and not each drone, with the authority of the EU country where you live. A visitor from outside the EU registers in the first EU country where they fly.'
-    - 'Complete the online training and exam if your drone needs it. Most drones of 250 g or more do (C1, C3, C4, and older drones). C2 needs more, and C0 and drones under 250 g need none.'
-    - 'Put your operator registration number on every drone you own as a sticker, and enter it into the drone''s Remote ID if it has one.'
-  validFor: 'Set by the authority you register with. It is valid in every EASA member state.'
-  afterwards: 'Before you fly in any EU country, check that the place is not in a geographical zone that country has published.'
-lastVerified: 2026-10-17
+    - 'Check that you need to register: yes if any drone weighs 250 g or more, or has a camera or other sensor that can record personal data. A drone under 250 g without one, or a toy, is exempt.'
+    - 'Register yourself, once and not each drone, on AlphaTango, DGAC''s portal. Create an account and fill in your address under "My account", then under "My operator activity" choose "Register" as a UAS operator.'
+    - 'Choose France as your country of registration and tick the box saying you are not registered as an operator in another European country. You get a number of the form FRA plus 13 characters.'
+    - 'For a drone over 250 g or with a camera, follow DGAC''s free online open-category A1/A3 course and pass its exam, then download the certificate from AlphaTango.'
+    - 'Put your operator number on every drone that needs registration, and enter it into the drone''s Remote ID if it has one.'
+    - 'If you own a drone of 800 g or more, also register that drone on AlphaTango and fit a French electronic signalling device. The drone gets a number of the form UAS-FR-xxx that must stay visible on it.'
+  validFor: 'The pages we read give no end date for the operator registration. The A1/A3 exam certificate is valid for 5 years (DGAC help sheet, February 2022).'
+  afterwards: 'Before each flight, check the Géoportail map of restrictions. In a built-up area you may not fly in public space under the open category.'
+lastVerified: 2026-10-26
 sources:
   - https://www.easa.europa.eu/en/domains/drones-air-mobility/operating-drone/open-category-low-risk-civil-drones
   - https://www.easa.europa.eu/the-agency/faqs/drones-uas
   - https://www.easa.europa.eu/en/domains/civil-drones/naa
   - https://alphatango.aviation-civile.gouv.fr/login.jsp
+  - https://www.ecologie.gouv.fr/politiques-publiques/alphatango
+  - https://www.ecologie.gouv.fr/politiques-publiques/exploitation-drones-categorie-ouverte
+  - https://www.ecologie.gouv.fr/sites/default/files/documents/enregistrement_exploitant_uas.pdf
+  - https://www.ecologie.gouv.fr/sites/default/files/documents/Formation_dgac_categorie_ouverte_A1A3.pdf
+  - https://www.ecologie.gouv.fr/sites/default/files/documents/FAQ_Transition_europeenne_UAS.pdf
 ---
 
 import EasaRules from '../../components/EasaRules.mdx';
 
-France applies the EU's common drone rules, set by the European Union Aviation Safety Agency (EASA). This
-guide gives those rules, then links to France's own authority for what is national.
+France applies the EU's common drone rules, set by the European Union Aviation Safety Agency (EASA), with national
+additions. This guide gives the EASA rules first, then what the Directorate General for Civil Aviation (DGAC) says
+for France. The France sections follow DGAC's pages on AlphaTango and on the open category (updated by DGAC on 13 July
+and 3 September 2026), its operator-registration and online-course help sheets (2022) and its FAQ (July 2026), read on
+25 and 26 October 2026 (the help sheets and FAQ as PDF text). DGAC's pages are in French and quoted here in our own English translation. Check DGAC for any change.
 
 <EasaRules />
 
 ## In France
 
-- **Register:** [France's registration page](https://alphatango.aviation-civile.gouv.fr/login.jsp).
+- **Register:** [DGAC's AlphaTango portal](https://alphatango.aviation-civile.gouv.fr/login.jsp). Registration is online only.
 - **Where you can fly:** [France's map of geographical zones](https://cartes.gouv.fr/explorer-les-cartes/?l=TRANSPORTS.DRONES.RESTRICTIONS%24GEOPORTAIL:OGC:WMTS(2;0.9;1;0)&permalink=yes&z=7).
 - **Authority:** [Directorate General for Civil Aviation (DGAC)](https://alphatango.aviation-civile.gouv.fr/).
 
+## Registration and training
+
+- **Who:** DGAC says an operator must register before any activity if the drone weighs more than 250 g, or has a sensor
+  such as a camera or microphone that can collect personal data (a toy is exempt). A drone under 250 g, with an impact
+  energy under 80 joules and no such sensor, is exempt.
+- **Fee and term:** DGAC's pages state no fee for operator registration, and its help sheet for registering shows no
+  payment step. DGAC says the online course and exam are free. We found no end date for the registration.
+- **Age:** the minimum age to fly in the open category is **14** in France, below EASA's default of 16. DGAC adds that
+  other states may set a higher age, so check before flying elsewhere. The online course is open to people aged 14 and over.
+- **Exam:** for an A1/A3 drone over 250 g or with a camera, the pilot follows DGAC's online course and passes its online
+  exam. DGAC's help sheet says the certificate is valid for 5 years (February 2022), and its FAQ says it is recognised in
+  every EU member state, Iceland, Liechtenstein, Norway and Switzerland. The pass mark and number of questions were not
+  on the pages we read.
+  DGAC's open-category page still says the course and exam are "being finalised", although its help sheets and the
+  AlphaTango page describe the online course as available.
+- **A second registration for 800 g or more:** a drone of 800 g or more must also be registered by its owner on
+  AlphaTango, and its pilot needs the training certificate. Registration is required for a lighter drone only if it has an
+  electronic signalling device.
+- **Visitors:** an operator registered in another EU state registers nowhere else; an operator registers in only one
+  European country at a time. DGAC says one from outside the EU registers in the first EU country where they fly, and the
+  same rules then apply as to any EU operator, with no recognition of non-EU pilot qualifications. DGAC says the French
+  electronic signalling device is required on every drone over 800 g, but the pages we read do not say whether a visitor
+  must also register that drone on AlphaTango.
+
+## Where and how you can fly
+
+DGAC gives these open-category limits:
+
+- **Height:** at most 120 m.
+- **Night:** night flights are banned in the open category. The prefect can grant exceptions; DGAC's form must be sent at
+  least 30 days before.
+- **Built-up areas:** the open category does not allow flying in public space in a built-up area (an "agglomération":
+  a group of houses with an entry and an exit road sign). Flying in a private space there can be allowed. A flight in
+  public space in a town falls under the specific category.
+- **Zones:** DGAC and IGN's Géoportail map shows where flying is banned or needs the zone manager's permission, between
+  0 and 120 m. DGAC says it is a complement to knowing the rules and has gaps: private helistations and temporary bans
+  during bird nesting are not shown. The zones are also published as an EU-format data file by the aeronautical
+  information service (SIA).
+- **Aerial photos:** an order of 2 January 2023 lists zones where capturing aerial data is prohibited.
+- **Privacy:** people present must at least be told if the drone has a camera. To publish images in which people can be
+  recognised you need their agreement, or the owner's for a private space.
+
+## Remote ID and insurance
+
+- **Remote ID:** France requires a national electronic signalling device on every drone and model aircraft over 800 g.
+  This is separate from EU direct Remote ID, which DGAC says is fitted by the maker on class-labelled drones. DGAC says
+  the security authorities are working to spare drones with EU Remote ID from also carrying the national device.
+- **Insurance:** not an obligation in the open category, according to DGAC's FAQ, which advises checking that your home
+  liability policy covers a drone accident. EASA's wording that most states require third-party insurance does not match
+  what DGAC says for France.
+
+## Penalties
+
+DGAC's page lists two kinds. Using a drone in breach of the safety rules, carelessly flying over an area where overflight is
+banned, or deliberately invading someone's privacy carries imprisonment and a heavy fine. A fine (a "contravention") applies to a
+pilot of a drone of 800 g or more with no training certificate or who cannot show it, and to an owner of a drone of 800 g
+or more who lets it be used without registering it, with false details, without the number on the drone or without the
+electronic signalling device. The pages we read give no amounts.
+
 ## Not covered yet
 
-- **France's national rules.** We have not read France's own drone rules, so what we say here is only what EASA says
-  applies everywhere. Fees, how long registration lasts, the minimum age (a state may lower EASA's 16 to 12),
-  insurance, penalties and any local bans are all unverified. Check the authority above before you fly.
-- **Where flying is banned.** France's geographical zones are on the map linked above, and we have not copied them.
+- **Fine amounts.** DGAC names the decree (no. 2019-1253 of 28 November 2019) but not the sums. Légifrance refused
+  access (HTTP 403) to our fetch tools.
+- **Registration fee and term.** DGAC's pages do not say whether the operator registration costs anything or when it
+  ends, only what is stated above.
+- **Remote ID for drones without a class label.**
+- **Specific and certified categories, model-aircraft clubs, and local rules** such as national-park and nesting-season
+  bans that are not on DGAC's map.

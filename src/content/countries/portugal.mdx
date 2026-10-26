@@ -6,56 +6,87 @@ authorityUrl: https://www.anac.pt/
 registrationUrl: https://uas.anac.pt/anac-registry/
 whoMustRegister: >-
   Register yourself once, not each drone, with your home EU country's authority
-  (visitors: the first EU country you fly in). Needed if a drone weighs 250 g or
-  more or has a camera.
+  (visitors: see the steps). Needed if a drone weighs 250 g or more, has a camera,
+  microphone or other sensor that can capture personal data, or could deliver
+  more than 80 joules on impact (ANAC's test).
 restrictiveness: 2
 restrictivenessReason: >-
-  Register online with your national authority and, for most drones, pass an
-  online training exam (EASA). Steps in your country may add to this; we have
-  not read them.
-registrationFee: null
+  Register online with ANAC, free of charge, with a digital mobile key (CMD). The
+  A1/A3 exam is online. The A2 exam is taken in person at ANAC, which is the one
+  in-person step we found for an ordinary flyer.
+registrationFee: 'Free of charge'
 registrationWeightGrams: 0
 minOperatorAge: null
 remoteId: >-
-  EASA says open-category drones, with limited exceptions, must have a remote
-  identification system.
+  ANAC says your operator number goes into the drone's Remote ID device, or onto
+  one attached to it. Its operator page says Remote ID is required for
+  specific-category drones flown below 120 m. Open-category rules follow EASA's
+  general text.
 insurance: >-
+  ANAC's registration asks for your insurance policy details, under Portaria
+  n.º 2/2021. We have not read that law, so the minimum cover is not given here.
   EASA requires insurance for a drone over 20 kg, and says most member states
-  also require third-party insurance for lighter drones. Check Portugal's rules.
+  also require third-party insurance for lighter drones.
 howToRegister:
   needed:
-    - 'Whatever your national authority asks for. We have not read the list for this country.'
+    - 'A digital mobile key (Chave Móvel Digital, CMD), which you need to log in and register.'
+    - 'Your identity document, phone number and email address.'
+    - 'Your insurance policy details, as the registration form asks for them.'
+    - 'For a company, a Portuguese tax number (NIF) and a Portuguese address. A foreign company needs both.'
+    - 'For a visitor from outside the EU, a digital mobile key obtained in person at a consulate or a Citizen''s Shop (ANAC FAQ).'
   steps:
-    - 'Check that you need to register: yes if any drone weighs 250 g or more or has a camera or other sensor that could detect personal data. A toy under 250 g is exempt.'
-    - 'Register yourself, once and not each drone, with the authority of the EU country where you live. A visitor from outside the EU registers in the first EU country where they fly.'
-    - 'Complete the online training and exam if your drone needs it. Most drones of 250 g or more do (C1, C3, C4, and older drones). C2 needs more, and C0 and drones under 250 g need none.'
-    - 'Put your operator registration number on every drone you own as a sticker, and enter it into the drone''s Remote ID if it has one.'
-  validFor: 'Set by the authority you register with. It is valid in every EASA member state.'
-  afterwards: 'Before you fly in any EU country, check that the place is not in a geographical zone that country has published.'
-lastVerified: 2026-10-17
+    - 'Check that you need to register: yes if any drone weighs 250 g or more, has a camera, microphone or other sensor that can capture personal data, or could deliver more than 80 joules on impact.'
+    - 'Register yourself, once and not each drone, with the authority of the EU country where you live. A visitor from outside the EU registers in the first EU country where they fly. If that is Portugal, register with ANAC as an individual. If it is Spain, register with Spain''s authority (ANAC FAQ).'
+    - 'Register on ANAC''s platform at uas.anac.pt. Registration is free of charge (ANAC FAQ).'
+    - 'Pass the training and exam if your drone needs them. The A1/A3 exam is online, straight after the course, on ANAC''s platform (rp.anac.pt). The A2 exam is taken in person at ANAC. ANAC says there is no certified training body in Portugal.'
+    - 'Put your operator registration number on every drone you own, and enter it into the drone''s Remote ID device or one attached to it.'
+  validFor: 'Keep your details up to date and revalidate every three years. If you do not, the number is revoked and you must register again (ANAC operator page).'
+  afterwards: 'Before you fly, check ANAC''s geographical zones map at dnt.anac.pt.'
+lastVerified: 2026-10-26
 sources:
   - https://www.easa.europa.eu/en/domains/drones-air-mobility/operating-drone/open-category-low-risk-civil-drones
   - https://www.easa.europa.eu/the-agency/faqs/drones-uas
   - https://www.easa.europa.eu/en/domains/civil-drones/naa
   - https://uas.anac.pt/anac-registry/
+  - https://uas.anac.pt/anac-registry/info_pages.php?page=support&lang=en
+  - https://www.anac.pt/vPT/Generico/drones/registo_uas/Paginas/OperadoresdeUAS.aspx
+  - https://www.anac.pt/vPT/Generico/drones/pilotos_remotos/Paginas/CompetenciasdosPilotosRemotos.aspx
+  - https://www.anac.pt/vPT/Generico/drones/Paginas/AeronavesCivisPilotadasRemotamente.aspx
 ---
 
 import EasaRules from '../../components/EasaRules.mdx';
 
 Portugal applies the EU's common drone rules, set by the European Union Aviation Safety Agency (EASA). This
-guide gives those rules, then links to Portugal's own authority for what is national.
+guide gives those rules, then sets out what ANAC, Portugal's authority, requires on its own pages, read on 26 October 2026.
+Quotations from Portuguese pages are our translation.
 
 <EasaRules />
 
 ## In Portugal
 
-- **Register:** [Portugal's registration page](https://uas.anac.pt/anac-registry/).
-- **Where you can fly:** [Portugal's map of geographical zones](https://www.anac.pt/vPT/Generico/drones/operacoes_transfronteiricas/Paginas/Crossborder.aspx).
+- **Register:** [ANAC's registration platform](https://uas.anac.pt/anac-registry/), with a digital mobile key. ANAC's
+  support page says registration is free of charge.
+- **Fee and term:** free of charge. The registration must be revalidated every three years (ANAC's operator page).
+  Its page also contains a sentence saying five years, which conflicts with the three-year rule; we follow the three-year
+  rule, which its FAQ and the rest of the page repeat.
+- **Who registers:** a drone with a camera, microphone or other data-capturing sensor needs an operator, whatever its
+  weight. Without a sensor, you register if the drone weighs more than 249 g, or could deliver more than 80 joules on impact
+  (ANAC's FAQ, with its formula).
+- **Visitors:** an EU resident registers in their own country. A visitor from outside the EU registers in Portugal as an
+  individual if Portugal is their first EU country (ANAC FAQ). A foreign company must have a Portuguese address, a tax
+  number (NIF) and an active CMD (ANAC's operator page, our translation).
+- **Penalties:** flying without registration is an administrative offence (contraordenação) under Decree-Law 87/2021 (ANAC's
+  FAQ). We did not find the fine amounts.
+- **Where you can fly:** [ANAC's geographical zones map](https://dnt.anac.pt/mapa.html), linked from ANAC's platform.
 - **Authority:** [National Civil Aviation Authority of Portugal (ANAC)](https://www.anac.pt/).
 
 ## Not covered yet
 
-- **Portugal's national rules.** We have not read Portugal's own drone rules, so what we say here is only what EASA says
-  applies everywhere. Fees, how long registration lasts, the minimum age (a state may lower EASA's 16 to 12),
-  insurance, penalties and any local bans are all unverified. Check the authority above before you fly.
-- **Where flying is banned.** Portugal's geographical zones are on the map linked above, and we have not copied them.
+- **Minimum age.** ANAC's FAQ says a person registering on their own must be an adult with a digital mobile key and a main
+  residence in Portugal. We have not found a minimum age for the operator, so the age field stays empty. EASA's 16 may be
+  lowered by a state to 12, and we have not checked whether Portugal does.
+- **Fines.** The amounts under Decree-Law 87/2021 were not found on the pages we read.
+- **Insurance cover.** Portaria n.º 2/2021 requires a policy, but we have not read its minimum cover.
+- **Where flying is banned.** ANAC's zones are on the map linked above, and we have not copied them. We did not read its
+  restricted-zone pages.
+- **Remote ID for open-category drones.** ANAC's pages we read set the Remote ID rule only for specific-category drones.

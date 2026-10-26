@@ -6,13 +6,17 @@ authorityUrl: http://www.ccaa.hr/
 registrationUrl: http://www.ccaa.hr/letenje-dronom-98073
 whoMustRegister: >-
   Register yourself once, not each drone, with your home EU country's authority
-  (visitors: the first EU country you fly in). Needed if a drone weighs 250 g or
-  more or has a camera.
-restrictiveness: 2
+  (visitors from outside the EU: the first EU country you fly in; if that is
+  Croatia, with the CCAA). Needed if a drone weighs 250 g or more, could deliver
+  more than 80 joules on impact, or has a camera, microphone or other sensor that
+  could record personal data (a toy under the EU toy directive is exempt).
+restrictiveness: 3
 restrictivenessReason: >-
-  Register online with your national authority and, for most drones, pass an
-  online training exam (EASA). Steps in your country may add to this; we have
-  not read them.
+  Register online with the CCAA and, for most drones, pass an online exam, as
+  elsewhere in the EU. On top of that the CCAA says every drone flight, whatever
+  its weight, must be reported through the AMC Portal run by Croatia Control,
+  and flights in some airspace need a reservation first. That is a second
+  authority and a step before flying.
 registrationFee: null
 registrationWeightGrams: 0
 minOperatorAge: null
@@ -20,42 +24,105 @@ remoteId: >-
   EASA says open-category drones, with limited exceptions, must have a remote
   identification system.
 insurance: >-
-  EASA requires insurance for a drone over 20 kg, and says most member states
-  also require third-party insurance for lighter drones. Check Croatia's rules.
+  The CCAA says third-party liability insurance is not needed for a drone up to
+  20 kg flown only for sport or recreation. It is required if you do aerial work,
+  and the CCAA counts taking photos or video, even for private use, as aerial
+  work. Where it is needed, the minimum is 750,000 SDR (CCAA's wording for
+  visitors).
 howToRegister:
   needed:
-    - 'Whatever your national authority asks for. We have not read the list for this country.'
+    - 'An account on the CCAA''s FAUST platform for drone operators (drone.ccaa.hr). The CCAA''s pages do not list the documents it asks for.'
+    - 'If you are not an EU resident and Croatia is the first EU country you fly in, you register here. An EU resident registers once in their home state, and that is valid in Croatia.'
+    - 'Where you need liability insurance (see Insurance), a policy that covers third parties'
   steps:
-    - 'Check that you need to register: yes if any drone weighs 250 g or more or has a camera or other sensor that could detect personal data. A toy under 250 g is exempt.'
-    - 'Register yourself, once and not each drone, with the authority of the EU country where you live. A visitor from outside the EU registers in the first EU country where they fly.'
-    - 'Complete the online training and exam if your drone needs it. Most drones of 250 g or more do (C1, C3, C4, and older drones). C2 needs more, and C0 and drones under 250 g need none.'
-    - 'Put your operator registration number on every drone you own as a sticker, and enter it into the drone''s Remote ID if it has one.'
-  validFor: 'Set by the authority you register with. It is valid in every EASA member state.'
-  afterwards: 'Before you fly in any EU country, check that the place is not in a geographical zone that country has published.'
-lastVerified: 2026-10-17
+    - 'Check that you need to register: yes if any drone weighs 250 g or more, could deliver more than 80 joules on impact, or has a camera, microphone or other sensor that could record personal data. A toy under the EU toy directive is exempt.'
+    - 'Register yourself, once and not each drone, in the CCAA''s FAUST platform. You get a confirmation with an operator registration number.'
+    - 'Pass the CCAA''s online exam for A1/A3 if your drone needs it. Drones under 250 g with no C class label, flown only in the open category, need no exam.'
+    - 'Put your operator registration number on every drone. The CCAA''s page says to leave off the characters after the dash (its example is HRV123abc456defg-abc).'
+    - 'Create an account on Croatia Control''s AMC Portal (amc.crocontrol.hr) so you can report your flights, which the CCAA says is required for all drones.'
+  validFor: null
+  afterwards: 'Report each flight through the AMC Portal Mobile app before take-off, check the airspace map, and ask the managers of any protected nature area for permission before flying there.'
+lastVerified: 2026-10-25
 sources:
   - https://www.easa.europa.eu/en/domains/drones-air-mobility/operating-drone/open-category-low-risk-civil-drones
   - https://www.easa.europa.eu/the-agency/faqs/drones-uas
   - https://www.easa.europa.eu/en/domains/civil-drones/naa
   - http://www.ccaa.hr/letenje-dronom-98073
+  - https://www.ccaa.hr/en/uas-operator-registration-52143
+  - https://www.ccaa.hr/en/i-wish-to-fly-drone-in-croatia-i-am-not-croatian-citizen-i-am-here-temporarily--what-do-i-need-to-do-67803
+  - https://www.ccaa.hr/faq-25020
+  - https://www.ccaa.hr/otvorena-kategorija-43022
+  - https://drone.ccaa.hr/user2/category.php?eng=1
+  - https://www.ccaa.hr/en/flight-operations-with-unmanned-aerial-systems-uas-89201
+  - https://amc-en.crocontrol.hr/Information
+  - https://www.crocontrol.hr/en/media/news/notice-to-drone-users/
 ---
 
 import EasaRules from '../../components/EasaRules.mdx';
 
 Croatia applies the EU's common drone rules, set by the European Union Aviation Safety Agency (EASA). This
-guide gives those rules, then links to Croatia's own authority for what is national.
+guide gives those rules, then what the Croatian Civil Aviation Agency (CCAA, in Croatian HACZ) and Croatia Control add.
+The national part follows the CCAA's registration, visitor, open-category and FAQ pages, and Croatia Control's AMC Portal
+pages, read on 25 October 2026. Check them for any change.
 
 <EasaRules />
 
 ## In Croatia
 
-- **Register:** [Croatia's registration page](http://www.ccaa.hr/letenje-dronom-98073).
-- **Where you can fly:** [Croatia's map of geographical zones](https://amc.crocontrol.hr/Current-situation-anonymous-users).
+- **Register:** [CCAA's registration page](http://www.ccaa.hr/letenje-dronom-98073), which sends you to the CCAA's FAUST platform
+  at drone.ccaa.hr.
+- **Where you can fly:** [the AMC Portal's current-situation map](https://amc.crocontrol.hr/Current-situation-anonymous-users),
+  run by Croatia Control, and its [mobile app](https://amc-en.crocontrol.hr/Information).
 - **Authority:** [Croatian Civil Aviation Agency (CCAA)](http://www.ccaa.hr/).
+
+## Registration
+
+The CCAA says you must register as an operator if your drone weighs 250 g or more, could deliver more than 80 joules
+on impact, or has a sensor that collects personal data, such as a camera or microphone. Its FAQ says an FPV drone's
+flight camera counts. A toy under the EU toy directive is exempt.
+
+- **Where:** the CCAA's FAUST platform. You get a registration number, which goes on the drone without the characters
+  after the dash.
+- **Visitors:** an EU resident who is registered at home does not register again. Someone from outside the EU registers
+  in the first EU country where they fly; if that is Croatia, with the CCAA. The CCAA adds that a visitor also needs the
+  training and exam.
+- **Pilots** are not registered. They complete the training and exam. The exam for A1/A3 is on the CCAA's website, and an A2
+  exam from any EU state is valid in Croatia.
+
+## Flight reports and airspace
+
+The CCAA's notice says all drone flights in Croatia are to be reported to air traffic control before take-off, through
+the AMC Portal Mobile app. Its FAQ answers that this is required for all drones, whatever their weight. Croatia Control
+runs the portal, and you register on it first.
+
+- **Reservations:** depending on the area, all remote pilots and operators must obtain an airspace reservation whatever
+  the drone's weight: on paper at least 7 days ahead, or by the app's automated procedure.
+- **Automated approval:** Croatia Control describes real-time approval in the app for UAG zones, inside a control zone
+  up to 50 m above ground (outside the published URG zone), and outside one up to 120 m, if nothing of higher priority is
+  active. Recreational flights rank 19th on its priority list and can be displaced.
+- **Near airports:** Croatia Control's 2019 notice says flying within 5 km of an airport reference point is prohibited
+  without the permit of the air traffic control, and that outside that circle, registered users may fly up to 50 m
+  through the app. Its AMC Portal page gives 3 km from the runway edges, up to 1,000 ft, for uncontrolled aerodromes,
+  with the aerodrome operator's approval. We have not reconciled these, so use the app.
+- **Protected nature areas:** the CCAA's FAQ says yes, you need the approval of the public body that manages a national
+  park or other protected area.
+- **Aerial photos and videos:** the CCAA's visitor page says you may need permission from the state geodetic authority.
+
+## Insurance and penalties
+
+- **Insurance:** the CCAA says a policy is not needed for a drone up to 20 kg flown for sport or recreation with no
+  aerial work. It also says taking photos or video, even for private use, counts as aerial work, and then insurance is
+  mandatory. So a visitor who films with a drone should expect to need it.
+- **Penalties:** the CCAA's FAQ says the air traffic act sets them: from a warning, to fines "from 700 euros upward",
+  to withdrawal of licences or operator registrations. It gives a fine of 2,652 to 26,520 euros for declaring
+  recreational flying at registration and then doing aerial work without the insurance.
 
 ## Not covered yet
 
-- **Croatia's national rules.** We have not read Croatia's own drone rules, so what we say here is only what EASA says
-  applies everywhere. Fees, how long registration lasts, the minimum age (a state may lower EASA's 16 to 12),
-  insurance, penalties and any local bans are all unverified. Check the authority above before you fly.
-- **Where flying is banned.** Croatia's geographical zones are on the map linked above, and we have not copied them.
+- **Registration fee and how long it lasts.** None of the CCAA pages we read gives either.
+- **Minimum age.** The pages we read do not say whether Croatia keeps EASA's 16 or has lowered it to 12.
+- **Remote ID.** The CCAA's pages do not add anything to EASA's rule.
+- **Where flying is banned.** The AMC Portal's zones load in its map and app, and we have not copied them. The CCAA's
+  visitor page names the AMC Portal Mobile app as the way to check.
+- **The law itself.** We read the CCAA's explanations, not the Croatian air traffic act or the drone ordinance, so the
+  penalties above are the CCAA's summary.

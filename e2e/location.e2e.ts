@@ -62,12 +62,12 @@ test.describe('use my location, with reduced motion', () => {
 });
 
 test.describe('use my location, in a country with no guide', () => {
-	test.use({ permissions: ['geolocation'], geolocation: { latitude: -15.8, longitude: -47.9 } }); // Brasília
+	test.use({ permissions: ['geolocation'], geolocation: { latitude: -80, longitude: 0 } }); // Antarctica, which no guide will cover
 
 	test('says where you are and that there is no guide yet, without opening a popup', async ({ page }) => {
 		await openGlobe(page);
 		await locate(page).click();
-		await expect(status(page)).toHaveText('You are in Brazil. We have no guide for it yet.');
+		await expect(status(page)).toHaveText('You are in Antarctica. We have no guide for it yet.');
 		await expect.poll(() => page.evaluate(() => (window as any).__map.isMoving()), { timeout: 15_000 }).toBe(false);
 		await expect(dialog(page)).toBeHidden();
 	});

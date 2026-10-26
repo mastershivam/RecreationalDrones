@@ -36,15 +36,15 @@
     "semantic_hash": "3223831f615ecbf2469eb6d8f2d37cac"
   },
   "e2e/globe.e2e.ts": {
-    "mtime": 1792265844.2423565,
-    "seen": 1792268503.006846,
-    "ast_hash": "1a7469a529fd7f4ff548006e68a28271",
+    "mtime": 1793007309.7262561,
+    "seen": 1793008986.739682,
+    "ast_hash": "75429ff9c1f05bc7c7a39ae4fe5cb6ff",
     "semantic_hash": ""
   },
   "e2e/helpers.ts": {
-    "mtime": 1792265734.0385468,
-    "seen": 1792268503.006847,
-    "ast_hash": "e4bbfb1de7514aafeace4911c389061e",
+    "mtime": 1792984420.2038546,
+    "seen": 1793004309.0644639,
+    "ast_hash": "8560a7356bba55b0733ec5893336f8dd",
     "semantic_hash": ""
   },
   "e2e/modal-content.e2e.ts": {
@@ -54,9 +54,9 @@
     "semantic_hash": ""
   },
   "e2e/nepal.e2e.ts": {
-    "mtime": 1792269825.493655,
-    "seen": 1792274159.063976,
-    "ast_hash": "4aad15d53dd07d5dde784c71338d61be",
+    "mtime": 1792989882.4492037,
+    "seen": 1793004309.064474,
+    "ast_hash": "196a54eec848e4e1e5f569ad7d5972aa",
     "semantic_hash": ""
   },
   "e2e/pages.e2e.ts": {
@@ -114,9 +114,9 @@
     "semantic_hash": "79bb63a72e963b25d68867772a56ea20"
   },
   "src/content/countries.test.ts": {
-    "mtime": 1792253730.304371,
-    "seen": 1792254244.685128,
-    "ast_hash": "7262065c6c6c7be31e8ea96b395e6e7f",
+    "mtime": 1793003367.6260076,
+    "seen": 1793004309.064502,
+    "ast_hash": "4370e231ada8804f9dd7cf8186e20a32",
     "semantic_hash": ""
   },
   "src/layouts/Base.astro": {
@@ -324,21 +324,21 @@
     "semantic_hash": ""
   },
   "TODO.md": {
-    "mtime": 1792517422.1996303,
-    "seen": 1792518590.5441768,
-    "ast_hash": "72f757f09b7389c0533781d5df0d33fb",
+    "mtime": 1793008973.3542295,
+    "seen": 1793008986.739841,
+    "ast_hash": "ffceea7ba329bea0e58fe302912da9ba",
     "semantic_hash": ""
   },
   "src/content/countries/nepal.mdx": {
-    "mtime": 1792253701.1426015,
-    "seen": 1792254244.685227,
-    "ast_hash": "3293ec9284735b9f4f539f382007422d",
+    "mtime": 1793003437.6708744,
+    "seen": 1793004309.064704,
+    "ast_hash": "109851d1c42e4bea41c733bd5b45d485",
     "semantic_hash": ""
   },
   "src/content/countries/united-kingdom.mdx": {
-    "mtime": 1792508145.0181847,
-    "seen": 1792508155.039607,
-    "ast_hash": "4ed130d6a51d347592a72e32c6953bf6",
+    "mtime": 1792967352.820736,
+    "seen": 1793004309.064744,
+    "ast_hash": "9e04cdb0132cf69c3624d38a0f82da39",
     "semantic_hash": ""
   },
   "brand/favicon.svg": {
@@ -372,9 +372,9 @@
     "semantic_hash": ""
   },
   "e2e/chrome.e2e.ts": {
-    "mtime": 1792517378.1792977,
-    "seen": 1792518590.5440168,
-    "ast_hash": "5a94e0785c8afaa5f805d32cb9a38fc5",
+    "mtime": 1793007309.7251084,
+    "seen": 1793008986.739678,
+    "ast_hash": "2876e422793d808b1632a90bffaa3210",
     "semantic_hash": ""
   },
   "e2e/thailand.e2e.ts": {
@@ -456,9 +456,9 @@
     "semantic_hash": ""
   },
   "src/lib/zones-data.test.ts": {
-    "mtime": 1792517422.1989365,
-    "seen": 1792518590.544147,
-    "ast_hash": "cc114f838cf13a7cf3d94a82cc60215e",
+    "mtime": 1793008952.696757,
+    "seen": 1793008986.7398121,
+    "ast_hash": "524c28561bfcdf905e4e03c4f47dc5c5",
     "semantic_hash": ""
   },
   "scripts/build-model-fields.ts": {
@@ -492,9 +492,9 @@
     "semantic_hash": ""
   },
   "src/lib/airport-rules.ts": {
-    "mtime": 1792517400.4752982,
-    "seen": 1792518590.544061,
-    "ast_hash": "19e7e985da22065cc97819c4c06eb5d6",
+    "mtime": 1793008952.6962707,
+    "seen": 1793008986.739725,
+    "ast_hash": "0b2d3323bab6731b250a6107281cb295",
     "semantic_hash": ""
   },
   "src/lib/zone-file.test.ts": {
@@ -522,15 +522,15 @@
     "semantic_hash": ""
   },
   "e2e/eu.e2e.ts": {
-    "mtime": 1792517378.1807985,
-    "seen": 1792518590.544018,
-    "ast_hash": "6b38450aee82d610ccbbd30762163e22",
+    "mtime": 1793007309.7256095,
+    "seen": 1793008986.7396789,
+    "ast_hash": "6b892d2d0a8f12cbde6e5118b299a292",
     "semantic_hash": ""
   },
   "e2e/united-states.e2e.ts": {
-    "mtime": 1792247466.4680512,
-    "seen": 1792247585.736774,
-    "ast_hash": "cd1e95d7aebb7f5cc70dd4639ae971be",
+    "mtime": 1793007309.7259805,
+    "seen": 1793008986.739702,
+    "ast_hash": "be22e56a2b7014fc644854d48c1fbe67",
     "semantic_hash": ""
   },
   "src/components/EasaRules.mdx": {
@@ -540,141 +540,141 @@
     "semantic_hash": ""
   },
   "src/content/countries/austria.mdx": {
-    "mtime": 1792253701.1460655,
-    "seen": 1792254244.6852071,
-    "ast_hash": "dc5d5c18e91e104de4a32030a1670345",
+    "mtime": 1793003259.9361386,
+    "seen": 1793004309.064636,
+    "ast_hash": "423cd4fa4ba92db2f6511b6eb0a147c0",
     "semantic_hash": ""
   },
   "src/content/countries/belgium.mdx": {
-    "mtime": 1792253701.1423569,
-    "seen": 1792254244.685208,
-    "ast_hash": "f89f67039bf7e6384c80b8a1b59067a8",
+    "mtime": 1793003280.8008058,
+    "seen": 1793004309.06464,
+    "ast_hash": "57a8171132ee01f1cd49807d1ab7dca8",
     "semantic_hash": ""
   },
   "src/content/countries/bulgaria.mdx": {
-    "mtime": 1792253701.1464343,
-    "seen": 1792254244.685209,
-    "ast_hash": "362d2781bfe819d7dbcfad6106336259",
+    "mtime": 1793003258.2650921,
+    "seen": 1793004309.064647,
+    "ast_hash": "b74f4515ed83f86aea2b37cd664ce5c2",
     "semantic_hash": ""
   },
   "src/content/countries/croatia.mdx": {
-    "mtime": 1792253701.1448553,
-    "seen": 1792254244.685211,
-    "ast_hash": "cafe5dc16729a563b177b2ee9c21b1c6",
+    "mtime": 1792967328.214603,
+    "seen": 1793004309.064655,
+    "ast_hash": "f5f83bf6dde0269eaeb6ccb48c2f05c8",
     "semantic_hash": ""
   },
   "src/content/countries/cyprus.mdx": {
-    "mtime": 1792253701.1413822,
-    "seen": 1792254244.685212,
-    "ast_hash": "8cd67363d2d155ff42c20a1bc1710b1c",
+    "mtime": 1792967368.543679,
+    "seen": 1793004309.064657,
+    "ast_hash": "ace33c81aed99e7f4fdfd76548ce27a3",
     "semantic_hash": ""
   },
   "src/content/countries/czechia.mdx": {
-    "mtime": 1792253701.1424918,
-    "seen": 1792254244.6852129,
-    "ast_hash": "bb0ea7a6089d90c7707016b4d19c2b5b",
+    "mtime": 1792967403.2640839,
+    "seen": 1793004309.064658,
+    "ast_hash": "09ff1a71d05a29bbd37a35e28532abce",
     "semantic_hash": ""
   },
   "src/content/countries/denmark.mdx": {
-    "mtime": 1792253701.145117,
-    "seen": 1792254244.685214,
-    "ast_hash": "3e44f086010001285dbe200cc9c95f7a",
+    "mtime": 1792967378.8732753,
+    "seen": 1793004309.0646589,
+    "ast_hash": "483c2e7fffcbe7385ec89f7bbb769de5",
     "semantic_hash": ""
   },
   "src/content/countries/estonia.mdx": {
-    "mtime": 1792253701.143172,
-    "seen": 1792254244.685215,
-    "ast_hash": "61f45e55cc5591fcf36bf522db1a072d",
+    "mtime": 1792967378.876625,
+    "seen": 1793004309.0646641,
+    "ast_hash": "aaee4a6fa4109942c305bc8f798a7c5b",
     "semantic_hash": ""
   },
   "src/content/countries/finland.mdx": {
-    "mtime": 1792253701.144728,
-    "seen": 1792254244.685216,
-    "ast_hash": "4cb62e72dc315e2b5441fc25ab82e622",
+    "mtime": 1792967378.8798685,
+    "seen": 1793004309.064667,
+    "ast_hash": "d3a3fd884c2719e2c77cbbcd016605eb",
     "semantic_hash": ""
   },
   "src/content/countries/france.mdx": {
-    "mtime": 1792253701.1453702,
-    "seen": 1792254244.6852171,
-    "ast_hash": "922fb6e32757c19cc6d8036da9f13d51",
+    "mtime": 1793003317.1296222,
+    "seen": 1793004309.064668,
+    "ast_hash": "2a54da803d20f73bcb24514444aebdae",
     "semantic_hash": ""
   },
   "src/content/countries/germany.mdx": {
-    "mtime": 1792253701.1463103,
-    "seen": 1792254244.685218,
-    "ast_hash": "e9a2e9b0ebdf595dad78e027f65a038c",
+    "mtime": 1793003301.2476249,
+    "seen": 1793004309.0646698,
+    "ast_hash": "cbd7d656b807e165dbbb94418ab920d3",
     "semantic_hash": ""
   },
   "src/content/countries/greece.mdx": {
-    "mtime": 1792253701.1416497,
-    "seen": 1792254244.685219,
-    "ast_hash": "ffea4278beadd3765b67365ee6f35d2d",
+    "mtime": 1793003274.0435786,
+    "seen": 1793004309.064671,
+    "ast_hash": "c70bc712b2a34fa9180570ec065ebfca",
     "semantic_hash": ""
   },
   "src/content/countries/hungary.mdx": {
-    "mtime": 1792253701.1433043,
-    "seen": 1792254244.68522,
-    "ast_hash": "be232a6272cf0243a39f4504748fe733",
+    "mtime": 1792967376.0566292,
+    "seen": 1793004309.0646741,
+    "ast_hash": "4ed000be3d9d4fdaf3762fc2656f13fd",
     "semantic_hash": ""
   },
   "src/content/countries/ireland.mdx": {
-    "mtime": 1792253701.144604,
-    "seen": 1792254244.6852212,
-    "ast_hash": "77e1c9c3a1b8e2114d33d2abf9076c60",
+    "mtime": 1792967409.7296798,
+    "seen": 1793004309.064679,
+    "ast_hash": "402a8a45314975d27345e055015a2ca0",
     "semantic_hash": ""
   },
   "src/content/countries/italy.mdx": {
-    "mtime": 1792253701.1452434,
-    "seen": 1792254244.6852212,
-    "ast_hash": "da92d8a8d7092cd7e4199bd301652cd4",
+    "mtime": 1792967452.757209,
+    "seen": 1793004309.064681,
+    "ast_hash": "23eeb46dc0660f2ac548fe37c9fe2588",
     "semantic_hash": ""
   },
   "src/content/countries/latvia.mdx": {
-    "mtime": 1792253701.1461897,
-    "seen": 1792254244.6852229,
-    "ast_hash": "0afc19f7c5880f881e1ee966dd8c520d",
+    "mtime": 1793003543.3223577,
+    "seen": 1793004309.064689,
+    "ast_hash": "62d3b3b386643eb68f2d1b1afd7cc733",
     "semantic_hash": ""
   },
   "src/content/countries/lithuania.mdx": {
-    "mtime": 1792253701.1436834,
-    "seen": 1792254244.6852238,
-    "ast_hash": "5232130808879317fd9b4c53f3e1aee6",
+    "mtime": 1793003518.9958317,
+    "seen": 1793004309.0646908,
+    "ast_hash": "625a9d173ac09baa32f00d077217a5d1",
     "semantic_hash": ""
   },
   "src/content/countries/luxembourg.mdx": {
-    "mtime": 1792253701.1459432,
-    "seen": 1792254244.685225,
-    "ast_hash": "916cd1a2cf259961513d577727bfc96d",
+    "mtime": 1793003286.8002617,
+    "seen": 1793004309.064692,
+    "ast_hash": "d8188caa707de0ec9236eb2baf2446dc",
     "semantic_hash": ""
   },
   "src/content/countries/malta.mdx": {
-    "mtime": 1792253701.144478,
-    "seen": 1792254244.685226,
-    "ast_hash": "2170fec311da7233a218288bc282026f",
+    "mtime": 1793003302.9217863,
+    "seen": 1793004309.064696,
+    "ast_hash": "040a4d290ae2347bea0e4c920881e607",
     "semantic_hash": ""
   },
   "src/content/countries/netherlands.mdx": {
-    "mtime": 1792253701.1449869,
-    "seen": 1792254244.685228,
-    "ast_hash": "208dfaca050b7cbd17466dcc54568137",
+    "mtime": 1793003417.7370832,
+    "seen": 1793004309.0647051,
+    "ast_hash": "d1a0a5bc0eec1a13b85079ee3dd6f451",
     "semantic_hash": ""
   },
   "src/content/countries/poland.mdx": {
-    "mtime": 1792253701.1434314,
-    "seen": 1792254244.685229,
-    "ast_hash": "651a0e66dbd551aab375645d1b043045",
+    "mtime": 1793003403.089555,
+    "seen": 1793004309.064717,
+    "ast_hash": "de5aae6f874483ff38a9e02858e21f56",
     "semantic_hash": ""
   },
   "src/content/countries/portugal.mdx": {
-    "mtime": 1792253701.145697,
-    "seen": 1792254244.68523,
-    "ast_hash": "cdf375674ec8598ca92efd2dc576f8e5",
+    "mtime": 1793003340.824178,
+    "seen": 1793004309.064718,
+    "ast_hash": "8b9f1d629e732f83050db5633cd02922",
     "semantic_hash": ""
   },
   "src/content/countries/romania.mdx": {
-    "mtime": 1792253701.1435566,
-    "seen": 1792254244.6852312,
-    "ast_hash": "5b2ad15837b6ac68bccfb17b3ce38b4f",
+    "mtime": 1793003389.9287162,
+    "seen": 1793004309.06472,
+    "ast_hash": "acad02193bb8e658108d22a6e7b37646",
     "semantic_hash": ""
   },
   "src/content/countries/slovakia.mdx": {
@@ -684,27 +684,27 @@
     "semantic_hash": ""
   },
   "src/content/countries/slovenia.mdx": {
-    "mtime": 1792253701.1439326,
-    "seen": 1792254244.6852329,
-    "ast_hash": "6337200906bc909e00c720d9f0d5d212",
+    "mtime": 1793003353.3878055,
+    "seen": 1793004309.064729,
+    "ast_hash": "d4379db0e88675c84d2348a47cfffb16",
     "semantic_hash": ""
   },
   "src/content/countries/spain.mdx": {
-    "mtime": 1792253701.1458185,
-    "seen": 1792254244.6852338,
-    "ast_hash": "05bc0dfb20d56f1da0c7a7facf5ecc19",
+    "mtime": 1793003353.388191,
+    "seen": 1793004309.064733,
+    "ast_hash": "e04e644e47b6fd7bed92ca213f93ab6c",
     "semantic_hash": ""
   },
   "src/content/countries/sweden.mdx": {
-    "mtime": 1792253701.1421957,
-    "seen": 1792254244.685235,
-    "ast_hash": "26ff350714900d10867c7112aefa58bd",
+    "mtime": 1792967371.1636767,
+    "seen": 1793004309.064735,
+    "ast_hash": "5fb595b513d6b1a54cab95481f9437dd",
     "semantic_hash": ""
   },
   "src/content/countries/united-states.mdx": {
-    "mtime": 1792253701.1441495,
-    "seen": 1792254244.6852381,
-    "ast_hash": "e005237d76832289cee43f253dfe0c56",
+    "mtime": 1792967382.4196475,
+    "seen": 1793004309.064745,
+    "ast_hash": "a170980c44ba6a200a1a0220ffa4cb8b",
     "semantic_hash": ""
   },
   "e2e/search.e2e.ts": {
@@ -756,27 +756,27 @@
     "semantic_hash": ""
   },
   "e2e/more-countries.e2e.ts": {
-    "mtime": 1792518518.3075008,
-    "seen": 1792518590.544029,
-    "ast_hash": "b840e941ceff9b886d8e274e12f74947",
+    "mtime": 1793007309.726121,
+    "seen": 1793008986.73969,
+    "ast_hash": "5810aa2fe738f9743cc42c1973e79d44",
     "semantic_hash": ""
   },
   "src/content/countries/australia.mdx": {
-    "mtime": 1792253701.1430347,
-    "seen": 1792254244.685206,
-    "ast_hash": "30d734c9791bc17b0462ceb912f66262",
+    "mtime": 1793003332.8012378,
+    "seen": 1793004309.0646348,
+    "ast_hash": "24bf340b75f14798b3968ab822675c0e",
     "semantic_hash": ""
   },
   "src/content/countries/canada.mdx": {
-    "mtime": 1792253701.1466491,
-    "seen": 1792254244.6852102,
-    "ast_hash": "cd7cccd23db77dec83cc656795453bb7",
+    "mtime": 1793003332.8207667,
+    "seen": 1793004309.06465,
+    "ast_hash": "7557190ce4a6ce4eb2f21c30be9f9257",
     "semantic_hash": ""
   },
   "src/content/countries/japan.mdx": {
-    "mtime": 1792253701.1443489,
-    "seen": 1792254244.685222,
-    "ast_hash": "cf60e45f771e9acf34e0ffdb387a832f",
+    "mtime": 1793003302.4724314,
+    "seen": 1793004309.064683,
+    "ast_hash": "9562d5e5f6dbea79ac598063754b952e",
     "semantic_hash": ""
   },
   "scripts/check-stale.ts": {
@@ -804,9 +804,9 @@
     "semantic_hash": ""
   },
   "e2e/location.e2e.ts": {
-    "mtime": 1792508193.1974392,
-    "seen": 1792508524.687268,
-    "ast_hash": "3ff63cfca746fed2542a518e14a89d50",
+    "mtime": 1792984420.308662,
+    "seen": 1793004309.06447,
+    "ast_hash": "a4343841a915c32e2a043e1519703483",
     "semantic_hash": ""
   },
   "src/lib/geo.test.ts": {
@@ -822,9 +822,9 @@
     "semantic_hash": ""
   },
   "e2e/how-to-register.e2e.ts": {
-    "mtime": 1792253730.3104193,
-    "seen": 1792254244.6850991,
-    "ast_hash": "9de1428f79d60a33093399eee85c2f2c",
+    "mtime": 1793007309.7257273,
+    "seen": 1793008986.739684,
+    "ast_hash": "a0bbc63a39fca81ae8c368df5e793d46",
     "semantic_hash": ""
   },
   "brand/build-icons.mjs": {
@@ -834,9 +834,9 @@
     "semantic_hash": ""
   },
   "e2e/launch-checklist.e2e.ts": {
-    "mtime": 1792517378.1803098,
-    "seen": 1792518590.5440252,
-    "ast_hash": "3c00cadf4e7258dce2674e1315a3769a",
+    "mtime": 1793007309.7263873,
+    "seen": 1793008986.7396858,
+    "ast_hash": "384982d035251ebcdefe32c480716b99",
     "semantic_hash": ""
   },
   "src/lib/meta.test.ts": {
@@ -984,15 +984,15 @@
     "semantic_hash": ""
   },
   "e2e/review-extras.e2e.ts": {
-    "mtime": 1792517378.1737382,
-    "seen": 1792518590.544035,
-    "ast_hash": "e09d8a260015146526444fbe97ee0793",
+    "mtime": 1792984420.2055004,
+    "seen": 1793004309.0644789,
+    "ast_hash": "ca5081dc98c1acb55d9d7f274f924998",
     "semantic_hash": ""
   },
   "e2e/review-improvements.e2e.ts": {
-    "mtime": 1792517378.1813507,
-    "seen": 1792518590.5440361,
-    "ast_hash": "0b4ff3c93cdc45e194e9f4bcbd77bc62",
+    "mtime": 1792984420.2060065,
+    "seen": 1793004309.06448,
+    "ast_hash": "eacac4fcdf509233858530b58624358a",
     "semantic_hash": ""
   },
   "src/content/og-cards.test.ts": {
@@ -1056,9 +1056,9 @@
     "semantic_hash": ""
   },
   "src/lib/regions.ts": {
-    "mtime": 1792517378.1734357,
-    "seen": 1792518590.544113,
-    "ast_hash": "92c88de7e753eeb623bde874841581d7",
+    "mtime": 1792990080.6895132,
+    "seen": 1793004309.0645602,
+    "ast_hash": "ab0f6061eaf8ba24a0c1445617dc2e48",
     "semantic_hash": ""
   },
   "src/lib/saved.test.ts": {
@@ -1104,206 +1104,206 @@
     "semantic_hash": ""
   },
   "public/og/australia.png": {
-    "mtime": 1792517423.1365461,
-    "seen": 1792518590.5442402,
+    "mtime": 1792990088.4632928,
+    "seen": 1793004309.06477,
     "ast_hash": "aa3a881e7d8f2b5a796cc2cd7c82a286",
     "semantic_hash": ""
   },
   "public/og/austria.png": {
-    "mtime": 1792517423.1806407,
-    "seen": 1792518590.544241,
+    "mtime": 1792990088.512271,
+    "seen": 1793004309.0647712,
     "ast_hash": "ff9db9c1a684acd35c4c8bbcb0ff33f7",
     "semantic_hash": ""
   },
   "public/og/belgium.png": {
-    "mtime": 1792517423.2136135,
-    "seen": 1792518590.544242,
+    "mtime": 1792990088.7127407,
+    "seen": 1793004309.064776,
     "ast_hash": "48b6dfa5d22a7c9faa5b9d83f806c8cf",
     "semantic_hash": ""
   },
   "public/og/bulgaria.png": {
-    "mtime": 1792517423.278396,
-    "seen": 1792518590.544244,
+    "mtime": 1792990089.0297153,
+    "seen": 1793004309.064783,
     "ast_hash": "e2759aebe59cf9bb569ddd3787509d2f",
     "semantic_hash": ""
   },
   "public/og/canada.png": {
-    "mtime": 1792517423.31263,
-    "seen": 1792518590.544245,
+    "mtime": 1792990089.1808593,
+    "seen": 1793004309.064786,
     "ast_hash": "ffd38354bf0db6eaff97377e84d16b2b",
     "semantic_hash": ""
   },
   "public/og/croatia.png": {
-    "mtime": 1792517423.346041,
-    "seen": 1792518590.544246,
+    "mtime": 1792990093.275632,
+    "seen": 1793004309.064791,
     "ast_hash": "cde44961c0d16d2f3e1ca24e7fa461b8",
     "semantic_hash": ""
   },
   "public/og/cyprus.png": {
-    "mtime": 1792517423.3806741,
-    "seen": 1792518590.5442472,
+    "mtime": 1792990089.529669,
+    "seen": 1793004309.064793,
     "ast_hash": "bd86f7f487b907e4ef1927483d8a4811",
     "semantic_hash": ""
   },
   "public/og/czechia.png": {
-    "mtime": 1792517423.4152648,
-    "seen": 1792518590.544248,
+    "mtime": 1792990089.5626721,
+    "seen": 1793004309.064794,
     "ast_hash": "f47e77df8e7b1708b1eb0ba24835f5d0",
     "semantic_hash": ""
   },
   "public/og/denmark.png": {
-    "mtime": 1792517423.4480839,
-    "seen": 1792518590.544248,
+    "mtime": 1792990089.5959382,
+    "seen": 1793004309.0647948,
     "ast_hash": "68930c7a1b2a95b88113af7054a98164",
     "semantic_hash": ""
   },
   "public/og/estonia.png": {
-    "mtime": 1792517423.4804096,
-    "seen": 1792518590.544249,
+    "mtime": 1792990089.7793446,
+    "seen": 1793004309.0648,
     "ast_hash": "19ac72673b39ccebdbebd8c56dbc49c7",
     "semantic_hash": ""
   },
   "public/og/finland.png": {
-    "mtime": 1792517423.5134816,
-    "seen": 1792518590.54425,
+    "mtime": 1792990089.8957298,
+    "seen": 1793004309.064802,
     "ast_hash": "80252ea35bf32b09bd4bdc40313a0cf0",
     "semantic_hash": ""
   },
   "public/og/france.png": {
-    "mtime": 1792517423.547659,
-    "seen": 1792518590.544251,
+    "mtime": 1792990089.9289994,
+    "seen": 1793004309.0648031,
     "ast_hash": "c849d91338847ad68be179020447dd09",
     "semantic_hash": ""
   },
   "public/og/germany.png": {
-    "mtime": 1792517423.5803103,
-    "seen": 1792518590.544252,
+    "mtime": 1792990089.996471,
+    "seen": 1793004309.064806,
     "ast_hash": "5ddd075d917f79f5450b3fed855958a1",
     "semantic_hash": ""
   },
   "public/og/greece.png": {
-    "mtime": 1792517423.6151142,
-    "seen": 1792518590.5442529,
+    "mtime": 1792990090.0967147,
+    "seen": 1793004309.064808,
     "ast_hash": "cbda8fad0f05d2847303c75d434c4371",
     "semantic_hash": ""
   },
   "public/og/hungary.png": {
-    "mtime": 1792517423.648634,
-    "seen": 1792518590.544254,
+    "mtime": 1792990093.2761517,
+    "seen": 1793004309.06481,
     "ast_hash": "13a92f485c38ebca7012c54cbfb5a424",
     "semantic_hash": ""
   },
   "public/og/ireland.png": {
-    "mtime": 1792517423.7487016,
-    "seen": 1792518590.544257,
+    "mtime": 1792990090.3770278,
+    "seen": 1793004309.064815,
     "ast_hash": "401e260732f5be501b02acade6c2af43",
     "semantic_hash": ""
   },
   "public/og/italy.png": {
-    "mtime": 1792517423.7852764,
-    "seen": 1792518590.544258,
+    "mtime": 1792990090.444554,
+    "seen": 1793004309.064817,
     "ast_hash": "e6784eeb38c16f5aa6418d4dd5274c43",
     "semantic_hash": ""
   },
   "public/og/japan.png": {
-    "mtime": 1792517423.8321176,
-    "seen": 1792518590.544259,
+    "mtime": 1792990090.5127385,
+    "seen": 1793004309.0648189,
     "ast_hash": "2a8d5a9c02a573d0546802522f6686e0",
     "semantic_hash": ""
   },
   "public/og/latvia.png": {
-    "mtime": 1792517423.8654575,
-    "seen": 1792518590.54426,
+    "mtime": 1792990090.7958941,
+    "seen": 1793004309.064826,
     "ast_hash": "19425d5aa9ee33156aa80fa6371b9708",
     "semantic_hash": ""
   },
   "public/og/lithuania.png": {
-    "mtime": 1792517423.9318445,
-    "seen": 1792518590.544262,
+    "mtime": 1792990090.8953545,
+    "seen": 1793004309.064828,
     "ast_hash": "34f321a1f1b1f707ef43578146391d9f",
     "semantic_hash": ""
   },
   "public/og/luxembourg.png": {
-    "mtime": 1792517423.9656527,
-    "seen": 1792518590.544263,
+    "mtime": 1792990090.9292436,
+    "seen": 1793004309.0648289,
     "ast_hash": "f4e24a51ea06ab752a9b96e88d798ae3",
     "semantic_hash": ""
   },
   "public/og/malta.png": {
-    "mtime": 1792517423.995895,
-    "seen": 1792518590.544263,
+    "mtime": 1792990091.0623906,
+    "seen": 1793004309.064833,
     "ast_hash": "359285df58812bb8b36484355aa4404c",
     "semantic_hash": ""
   },
   "public/og/nepal.png": {
-    "mtime": 1792517424.0316901,
-    "seen": 1792518590.5442638,
+    "mtime": 1792990091.3610814,
+    "seen": 1793004309.064841,
     "ast_hash": "a56436e5a215d7e7fa76409a4f3c654c",
     "semantic_hash": ""
   },
   "public/og/netherlands.png": {
-    "mtime": 1792517424.0652823,
-    "seen": 1792518590.544265,
+    "mtime": 1792990091.3962135,
+    "seen": 1793004309.064843,
     "ast_hash": "0cdb01c6ada81c13d7f33e867c4e6609",
     "semantic_hash": ""
   },
   "public/og/poland.png": {
-    "mtime": 1792517424.1631646,
-    "seen": 1792518590.5442681,
+    "mtime": 1792990091.8457243,
+    "seen": 1793004309.064854,
     "ast_hash": "3d1651d985b7f4eacfc9c1663aadfdb6",
     "semantic_hash": ""
   },
   "public/og/portugal.png": {
-    "mtime": 1792517424.1964672,
-    "seen": 1792518590.544269,
+    "mtime": 1792990091.8957772,
+    "seen": 1793004309.064855,
     "ast_hash": "6c1a21fb3ca4b6f5c1ad417a2a08b9c7",
     "semantic_hash": ""
   },
   "public/og/romania.png": {
-    "mtime": 1792517424.2310028,
-    "seen": 1792518590.54427,
+    "mtime": 1792990091.962537,
+    "seen": 1793004309.064857,
     "ast_hash": "f7f6d001e70ecc10d9d2e48913daa23b",
     "semantic_hash": ""
   },
   "public/og/slovakia.png": {
-    "mtime": 1792517424.265198,
-    "seen": 1792518590.544271,
+    "mtime": 1792990092.2603545,
+    "seen": 1793004309.064865,
     "ast_hash": "38df2f5891c92f510428b36a70b78065",
     "semantic_hash": ""
   },
   "public/og/slovenia.png": {
-    "mtime": 1792517424.298657,
-    "seen": 1792518590.544272,
+    "mtime": 1792990093.276631,
+    "seen": 1793004309.064866,
     "ast_hash": "ed663cd6ad811f2ce94329026204761e",
     "semantic_hash": ""
   },
   "public/og/spain.png": {
-    "mtime": 1792517424.398387,
-    "seen": 1792518590.544275,
+    "mtime": 1792990093.2773132,
+    "seen": 1793004309.0648699,
     "ast_hash": "9d102b76994973a7906a79067fe713c1",
     "semantic_hash": ""
   },
   "public/og/sweden.png": {
-    "mtime": 1792517424.432125,
-    "seen": 1792518590.544276,
+    "mtime": 1792990092.4960058,
+    "seen": 1793004309.064872,
     "ast_hash": "24f38e4f57690c385998645dbb25bf28",
     "semantic_hash": ""
   },
   "public/og/thailand.png": {
-    "mtime": 1792517424.4984803,
-    "seen": 1792518590.544278,
+    "mtime": 1792990092.628691,
+    "seen": 1793004309.064876,
     "ast_hash": "4c3a9fbe5dc14c1d275ebb1bc9ab17da",
     "semantic_hash": ""
   },
   "public/og/united-kingdom.png": {
-    "mtime": 1792517424.5825822,
-    "seen": 1792518590.54428,
+    "mtime": 1792990092.8123019,
+    "seen": 1793004309.0648808,
     "ast_hash": "7b31f1daf0882ad38604157d61d38300",
     "semantic_hash": ""
   },
   "public/og/united-states.png": {
-    "mtime": 1792517424.6330936,
-    "seen": 1792518590.544281,
+    "mtime": 1792990092.845852,
+    "seen": 1793004309.0648818,
     "ast_hash": "66fd74bb3374b9bd3489e75da39d5301",
     "semantic_hash": ""
   },
@@ -1356,20 +1356,20 @@
     "semantic_hash": ""
   },
   "SOURCES.md": {
-    "mtime": 1792517422.1993883,
-    "seen": 1792518590.544176,
-    "ast_hash": "83cd64078ee9f66f153ed83368b66d32",
+    "mtime": 1793008973.3540413,
+    "seen": 1793008986.739841,
+    "ast_hash": "4f9af997872110c40edee1344f712123",
     "semantic_hash": ""
   },
   "src/content/countries/switzerland.mdx": {
-    "mtime": 1792321124.0842843,
-    "seen": 1792324949.119852,
-    "ast_hash": "f23397e49336dcc350efd73324dbe829",
+    "mtime": 1792967464.7307267,
+    "seen": 1793004309.064736,
+    "ast_hash": "e2069c59c4c9886ea10a672ee8b50339",
     "semantic_hash": ""
   },
   "public/og/switzerland.png": {
-    "mtime": 1792517424.465153,
-    "seen": 1792518590.544277,
+    "mtime": 1792990092.52923,
+    "seen": 1793004309.064873,
     "ast_hash": "28e68c40658e4bea9873ecc580ae04ba",
     "semantic_hash": ""
   },
@@ -1416,38 +1416,38 @@
     "semantic_hash": ""
   },
   "src/content/countries/iceland.mdx": {
-    "mtime": 1792414802.9771273,
-    "seen": 1792420890.496647,
-    "ast_hash": "c59be2a96136c3e4557f47afab751c51",
+    "mtime": 1792967417.409279,
+    "seen": 1793004309.064675,
+    "ast_hash": "e9f27277f394a63f793f493298cdc829",
     "semantic_hash": ""
   },
   "src/content/countries/liechtenstein.mdx": {
-    "mtime": 1792414824.0929885,
-    "seen": 1792420890.496653,
-    "ast_hash": "d6eae506ec24b101cc325b5c9253b33f",
+    "mtime": 1792967446.7545543,
+    "seen": 1793004309.0646899,
+    "ast_hash": "949b843dc78212e1a1ad07a3ec69b847",
     "semantic_hash": ""
   },
   "src/content/countries/norway.mdx": {
-    "mtime": 1792414802.9474428,
-    "seen": 1792420890.49666,
-    "ast_hash": "a90eb854d6b1e789b90752bc16239765",
+    "mtime": 1792967389.7173562,
+    "seen": 1793004309.0647092,
+    "ast_hash": "9182d996a8122c8c55a81e09b08587b1",
     "semantic_hash": ""
   },
   "public/og/iceland.png": {
-    "mtime": 1792517423.6799092,
-    "seen": 1792518590.544255,
+    "mtime": 1792990090.2450557,
+    "seen": 1793004309.064811,
     "ast_hash": "af0c6f460b14bc1a932d2a682b66c2e1",
     "semantic_hash": ""
   },
   "public/og/liechtenstein.png": {
-    "mtime": 1792517423.8971314,
-    "seen": 1792518590.5442612,
+    "mtime": 1792990090.8467627,
+    "seen": 1793004309.064827,
     "ast_hash": "45d325aa269cb50a5b9f8d301bad6d60",
     "semantic_hash": ""
   },
   "public/og/norway.png": {
-    "mtime": 1792517424.1302755,
-    "seen": 1792518590.544267,
+    "mtime": 1792990091.5779543,
+    "seen": 1793004309.064846,
     "ast_hash": "e3f417372c934e1846f9ed8adfdbc035",
     "semantic_hash": ""
   },
@@ -1458,75 +1458,1083 @@
     "semantic_hash": ""
   },
   "src/content/countries/united-arab-emirates.mdx": {
-    "mtime": 1792509332.6339676,
-    "seen": 1792510363.257091,
-    "ast_hash": "eca3746263481c387b367bf5e30455a9",
+    "mtime": 1793003365.3350654,
+    "seen": 1793004309.0647428,
+    "ast_hash": "c3b59a8c05a71d8efaef688ea078d40e",
     "semantic_hash": ""
   },
   "public/og/united-arab-emirates.png": {
-    "mtime": 1792517424.5331728,
-    "seen": 1792518590.544278,
+    "mtime": 1792990092.7795815,
+    "seen": 1793004309.0648801,
     "ast_hash": "6c1a1fdc89ff41c444c01f91d8d5efef",
     "semantic_hash": ""
   },
   "src/content/countries/brazil.mdx": {
-    "mtime": 1792516599.5998576,
-    "seen": 1792516818.555003,
-    "ast_hash": "c355356592a4b6159021384a3b5ca783",
+    "mtime": 1793003267.1683807,
+    "seen": 1793004309.064645,
+    "ast_hash": "1ec0c3bcdff84ecc2c949630fa756120",
     "semantic_hash": ""
   },
   "src/content/countries/new-zealand.mdx": {
-    "mtime": 1792516580.7148793,
-    "seen": 1792516818.555029,
-    "ast_hash": "2cc289db498b96d91ddb5a6c5ff16d8e",
+    "mtime": 1793003278.1997614,
+    "seen": 1793004309.064706,
+    "ast_hash": "174807280060aafd87e7267f2b59018e",
     "semantic_hash": ""
   },
   "src/content/countries/south-africa.mdx": {
-    "mtime": 1792516599.604485,
-    "seen": 1792516818.555037,
-    "ast_hash": "7ed0d805f902c7c1184f31a0dd1f9780",
+    "mtime": 1793003252.4942245,
+    "seen": 1793004309.064731,
+    "ast_hash": "e5f7c885c966f7a9122af987a6d7551c",
     "semantic_hash": ""
   },
   "public/og/brazil.png": {
-    "mtime": 1792517423.2463691,
-    "seen": 1792518590.5442429,
+    "mtime": 1792990088.9451,
+    "seen": 1793004309.064781,
     "ast_hash": "b3c44ef33e1ab14d5b0d90bfe0ab6857",
     "semantic_hash": ""
   },
   "public/og/new-zealand.png": {
-    "mtime": 1792517424.0986457,
-    "seen": 1792518590.544266,
+    "mtime": 1792990091.4455664,
+    "seen": 1793004309.064843,
     "ast_hash": "2aa9ae39fe90187876309fd5cafe255a",
     "semantic_hash": ""
   },
   "public/og/south-africa.png": {
-    "mtime": 1792517424.3305373,
-    "seen": 1792518590.544273,
+    "mtime": 1792990093.276971,
+    "seen": 1793004309.0648682,
     "ast_hash": "d187ad46fd626b7ed8542efb94fffb8f",
     "semantic_hash": ""
   },
   "src/content/countries/india.mdx": {
-    "mtime": 1792517378.1521242,
-    "seen": 1792518590.5441978,
-    "ast_hash": "c50f83f7dcbe59b3a029ad7d744bd462",
+    "mtime": 1793003605.1452827,
+    "seen": 1793004309.064676,
+    "ast_hash": "60e210fa439a66a93b0a61680583af92",
     "semantic_hash": ""
   },
   "src/content/countries/south-korea.mdx": {
-    "mtime": 1792517441.1412475,
-    "seen": 1792518590.5442188,
-    "ast_hash": "2d0eb2eafe637309da307dc66c6cb826",
+    "mtime": 1793003544.629247,
+    "seen": 1793004309.0647318,
+    "ast_hash": "3a66a304d258037aa6201aa106632dbb",
     "semantic_hash": ""
   },
   "public/og/india.png": {
-    "mtime": 1792517423.7138731,
-    "seen": 1792518590.544256,
+    "mtime": 1792990090.2782562,
+    "seen": 1793004309.064812,
     "ast_hash": "d7d10338baa235bae5ed2555b75c6650",
     "semantic_hash": ""
   },
   "public/og/south-korea.png": {
-    "mtime": 1792517424.365404,
-    "seen": 1792518590.5442739,
+    "mtime": 1792990092.3960705,
+    "seen": 1793004309.0648692,
     "ast_hash": "0a15395c0457a2f0826a7aae708a1d4f",
+    "semantic_hash": ""
+  },
+  "src/content/countries/albania.mdx": {
+    "mtime": 1793007328.383026,
+    "seen": 1793008986.739846,
+    "ast_hash": "28af884661537f0e47df34eb341cc6d1",
+    "semantic_hash": ""
+  },
+  "src/content/countries/algeria.mdx": {
+    "mtime": 1793008743.7147584,
+    "seen": 1793008986.739847,
+    "ast_hash": "a25d8563674817073c33b8c8b263c29e",
+    "semantic_hash": ""
+  },
+  "src/content/countries/andorra.mdx": {
+    "mtime": 1793007336.550507,
+    "seen": 1793008986.739848,
+    "ast_hash": "90e7b7e54295ade014d92f654adb2e93",
+    "semantic_hash": ""
+  },
+  "src/content/countries/antigua-and-barbuda.mdx": {
+    "mtime": 1793008685.297438,
+    "seen": 1793008986.7398489,
+    "ast_hash": "a41e7db0a346f1090f05753e2a44fddf",
+    "semantic_hash": ""
+  },
+  "src/content/countries/argentina.mdx": {
+    "mtime": 1793008694.790408,
+    "seen": 1793008986.73985,
+    "ast_hash": "b5ed1a5dfe1460f03c30e215510d9d65",
+    "semantic_hash": ""
+  },
+  "src/content/countries/bahrain.mdx": {
+    "mtime": 1793007966.386677,
+    "seen": 1793008986.7398531,
+    "ast_hash": "e43ac3512dcebd32816bbb736f56c23e",
+    "semantic_hash": ""
+  },
+  "src/content/countries/bangladesh.mdx": {
+    "mtime": 1793008030.3539705,
+    "seen": 1793008986.739854,
+    "ast_hash": "93e6543bfdce5f11d52f7870ddd72720",
+    "semantic_hash": ""
+  },
+  "src/content/countries/barbados.mdx": {
+    "mtime": 1793008706.6090755,
+    "seen": 1793008986.739855,
+    "ast_hash": "c641eca9dcc01beaff62d527a5d22174",
+    "semantic_hash": ""
+  },
+  "src/content/countries/belarus.mdx": {
+    "mtime": 1793007516.8044856,
+    "seen": 1793008986.7398558,
+    "ast_hash": "822f68ce01ec545869c4af6ccd5a4749",
+    "semantic_hash": ""
+  },
+  "src/content/countries/belize.mdx": {
+    "mtime": 1793008762.7586136,
+    "seen": 1793008986.739858,
+    "ast_hash": "a102f764e9aae87480eef33ffd4dae11",
+    "semantic_hash": ""
+  },
+  "src/content/countries/bhutan.mdx": {
+    "mtime": 1793008049.8680623,
+    "seen": 1793008986.739858,
+    "ast_hash": "780ea5e634ffc19e32f2416748a71bbe",
+    "semantic_hash": ""
+  },
+  "src/content/countries/bosnia-and-herzegovina.mdx": {
+    "mtime": 1793007349.0259905,
+    "seen": 1793008986.7398589,
+    "ast_hash": "00dad7e86bafbe64cdf7ab3efd522411",
+    "semantic_hash": ""
+  },
+  "src/content/countries/botswana.mdx": {
+    "mtime": 1793008460.473654,
+    "seen": 1793008986.73986,
+    "ast_hash": "d810e16e314cf07c44c7119703a67d77",
+    "semantic_hash": ""
+  },
+  "src/content/countries/brunei.mdx": {
+    "mtime": 1793008057.759587,
+    "seen": 1793008986.739865,
+    "ast_hash": "68f889b756283b2a6ca6fcc45ca50c34",
+    "semantic_hash": ""
+  },
+  "src/content/countries/cabo-verde.mdx": {
+    "mtime": 1793008473.9012115,
+    "seen": 1793008986.739867,
+    "ast_hash": "261a7832335c540168bb859c6b2d381c",
+    "semantic_hash": ""
+  },
+  "src/content/countries/cameroon.mdx": {
+    "mtime": 1793008467.2859063,
+    "seen": 1793008986.739868,
+    "ast_hash": "bf10f94dac1f3b2ff57c6c11aacbf58a",
+    "semantic_hash": ""
+  },
+  "src/content/countries/chile.mdx": {
+    "mtime": 1793008803.31836,
+    "seen": 1793008986.7398698,
+    "ast_hash": "10cc138ad7ddd13be409acd681ca16e1",
+    "semantic_hash": ""
+  },
+  "src/content/countries/china.mdx": {
+    "mtime": 1793008382.0915525,
+    "seen": 1793008986.739871,
+    "ast_hash": "55a428845927644ae4b9884cec3cb5b7",
+    "semantic_hash": ""
+  },
+  "src/content/countries/colombia.mdx": {
+    "mtime": 1793008824.793535,
+    "seen": 1793008986.739871,
+    "ast_hash": "33200288c500546a0324701de21a80dd",
+    "semantic_hash": ""
+  },
+  "src/content/countries/costa-rica.mdx": {
+    "mtime": 1793008611.0327485,
+    "seen": 1793008986.739872,
+    "ast_hash": "b42ee08e9215f119fd1b009024a3b4ad",
+    "semantic_hash": ""
+  },
+  "src/content/countries/cote-d-ivoire.mdx": {
+    "mtime": 1793008457.500403,
+    "seen": 1793008986.739873,
+    "ast_hash": "2e89f7d7939012e980716056ca7bd4a9",
+    "semantic_hash": ""
+  },
+  "src/content/countries/cuba.mdx": {
+    "mtime": 1793008623.6732912,
+    "seen": 1793008986.739875,
+    "ast_hash": "ccfc15e1ec9d04a3d2381ac15028dbc7",
+    "semantic_hash": ""
+  },
+  "src/content/countries/dominican-republic.mdx": {
+    "mtime": 1793008645.7430787,
+    "seen": 1793008986.739879,
+    "ast_hash": "04fc66be5e1af1d26bcf3060344579ab",
+    "semantic_hash": ""
+  },
+  "src/content/countries/ecuador.mdx": {
+    "mtime": 1793008797.92944,
+    "seen": 1793008986.7398798,
+    "ast_hash": "941e873e13b1662b31cc6dbc38eb5fe4",
+    "semantic_hash": ""
+  },
+  "src/content/countries/egypt.mdx": {
+    "mtime": 1793008735.3657682,
+    "seen": 1793008986.739881,
+    "ast_hash": "2b5db44fad0ef7b81a32e7c421b78ffc",
+    "semantic_hash": ""
+  },
+  "src/content/countries/el-salvador.mdx": {
+    "mtime": 1793008819.1815586,
+    "seen": 1793008986.7398841,
+    "ast_hash": "ac803f834f0ab003c1a2611517b2d473",
+    "semantic_hash": ""
+  },
+  "src/content/countries/ethiopia.mdx": {
+    "mtime": 1793008735.3912067,
+    "seen": 1793008986.739886,
+    "ast_hash": "a74a105628fcf1d209826fc821a22753",
+    "semantic_hash": ""
+  },
+  "src/content/countries/fiji.mdx": {
+    "mtime": 1793008186.789013,
+    "seen": 1793008986.739887,
+    "ast_hash": "bebb5ce303091fab84dc0aef92db08cf",
+    "semantic_hash": ""
+  },
+  "src/content/countries/georgia.mdx": {
+    "mtime": 1793007516.7821043,
+    "seen": 1793008986.7398899,
+    "ast_hash": "3268258e57609471de472c68508e8e90",
+    "semantic_hash": ""
+  },
+  "src/content/countries/ghana.mdx": {
+    "mtime": 1793008566.0307064,
+    "seen": 1793008986.739892,
+    "ast_hash": "c0ca96ff637ccb16ac97315bb39ef800",
+    "semantic_hash": ""
+  },
+  "src/content/countries/guyana.mdx": {
+    "mtime": 1793008838.5870354,
+    "seen": 1793008986.739894,
+    "ast_hash": "2b9786a019a162999063c03b1e7ca313",
+    "semantic_hash": ""
+  },
+  "src/content/countries/honduras.mdx": {
+    "mtime": 1793008798.0826814,
+    "seen": 1793008986.739895,
+    "ast_hash": "f59fc0173c1f07ad22704579cfd9d751",
+    "semantic_hash": ""
+  },
+  "src/content/countries/indonesia.mdx": {
+    "mtime": 1793008008.4007463,
+    "seen": 1793008986.739899,
+    "ast_hash": "88c66c51f1a7ebfdfd7ce70172b4f1f9",
+    "semantic_hash": ""
+  },
+  "src/content/countries/iran.mdx": {
+    "mtime": 1792989977.8986897,
+    "seen": 1793004309.064678,
+    "ast_hash": "be48ba9e1994c22cb7413e60b1aad478",
+    "semantic_hash": ""
+  },
+  "src/content/countries/israel.mdx": {
+    "mtime": 1792984535.5337276,
+    "seen": 1793004309.0646799,
+    "ast_hash": "20df5d852d75abee282d8c1c631d56ed",
+    "semantic_hash": ""
+  },
+  "src/content/countries/jamaica.mdx": {
+    "mtime": 1793008808.1461399,
+    "seen": 1793008986.739904,
+    "ast_hash": "9695ba95f5ce1b5bd632f484cdce868c",
+    "semantic_hash": ""
+  },
+  "src/content/countries/jordan.mdx": {
+    "mtime": 1793007463.9439716,
+    "seen": 1793008986.739906,
+    "ast_hash": "8b57eff304d18085fc0623962b4b6499",
+    "semantic_hash": ""
+  },
+  "src/content/countries/kazakhstan.mdx": {
+    "mtime": 1793007394.6465697,
+    "seen": 1793008986.739907,
+    "ast_hash": "416fa073c3bdfd780fd7eb913691363e",
+    "semantic_hash": ""
+  },
+  "src/content/countries/kenya.mdx": {
+    "mtime": 1793008601.392251,
+    "seen": 1793008986.739908,
+    "ast_hash": "871ea866d4c9bd9861ed5c0f86625e31",
+    "semantic_hash": ""
+  },
+  "src/content/countries/kosovo.mdx": {
+    "mtime": 1793007701.709703,
+    "seen": 1793008986.7399092,
+    "ast_hash": "bb8e8c78512f5fc33049e8bb0ee39047",
+    "semantic_hash": ""
+  },
+  "src/content/countries/kuwait.mdx": {
+    "mtime": 1792987169.106836,
+    "seen": 1793004309.0646882,
+    "ast_hash": "ea73c0edb9dd1ba880116034bcdadaa7",
+    "semantic_hash": ""
+  },
+  "src/content/countries/kyrgyzstan.mdx": {
+    "mtime": 1793007411.8250458,
+    "seen": 1793008986.7399108,
+    "ast_hash": "d9d30a23193e7f4efcafb8d58c31c1eb",
+    "semantic_hash": ""
+  },
+  "src/content/countries/madagascar.mdx": {
+    "mtime": 1793008478.8406763,
+    "seen": 1793008986.739916,
+    "ast_hash": "62e843082acf69e7ae8e6e656162837a",
+    "semantic_hash": ""
+  },
+  "src/content/countries/malaysia.mdx": {
+    "mtime": 1793007985.3904555,
+    "seen": 1793008986.739917,
+    "ast_hash": "5204634111600ffee927c099f0fe7794",
+    "semantic_hash": ""
+  },
+  "src/content/countries/maldives.mdx": {
+    "mtime": 1793008055.3198576,
+    "seen": 1793008986.739918,
+    "ast_hash": "db425acd9638a4be451d532c46221547",
+    "semantic_hash": ""
+  },
+  "src/content/countries/mauritius.mdx": {
+    "mtime": 1793008457.4543076,
+    "seen": 1793008986.73992,
+    "ast_hash": "e905e57bfb893276a64ba9d1d5c02a9c",
+    "semantic_hash": ""
+  },
+  "src/content/countries/mexico.mdx": {
+    "mtime": 1793008827.2845838,
+    "seen": 1793008986.73992,
+    "ast_hash": "b67639ba0bc12ce495e926eef5317122",
+    "semantic_hash": ""
+  },
+  "src/content/countries/moldova.mdx": {
+    "mtime": 1792988508.6777751,
+    "seen": 1793004309.064699,
+    "ast_hash": "bad0815f7444ee4d6e6e5892b395ca6a",
+    "semantic_hash": ""
+  },
+  "src/content/countries/monaco.mdx": {
+    "mtime": 1793007701.7533119,
+    "seen": 1793008986.7399218,
+    "ast_hash": "544e858c0e47d65bf625d64ae0f1f248",
+    "semantic_hash": ""
+  },
+  "src/content/countries/mongolia.mdx": {
+    "mtime": 1793008397.3337696,
+    "seen": 1793008986.739923,
+    "ast_hash": "156b4e89a9159a1da53705b057e33ac3",
+    "semantic_hash": ""
+  },
+  "src/content/countries/montenegro.mdx": {
+    "mtime": 1793007926.3404713,
+    "seen": 1793008986.739924,
+    "ast_hash": "27b20e1d654a9944e8b1ef48f3b42ee7",
+    "semantic_hash": ""
+  },
+  "src/content/countries/mozambique.mdx": {
+    "mtime": 1793008438.3102279,
+    "seen": 1793008986.739925,
+    "ast_hash": "b9111960106583efe0c82c64f115d3bf",
+    "semantic_hash": ""
+  },
+  "src/content/countries/namibia.mdx": {
+    "mtime": 1793008469.4334269,
+    "seen": 1793008986.739926,
+    "ast_hash": "774ac4d016516b1902758754d79e33c3",
+    "semantic_hash": ""
+  },
+  "src/content/countries/nigeria.mdx": {
+    "mtime": 1793008636.6623507,
+    "seen": 1793008986.7399302,
+    "ast_hash": "93ecaf919fd762b56283bf2479a7f2b5",
+    "semantic_hash": ""
+  },
+  "src/content/countries/north-macedonia.mdx": {
+    "mtime": 1793007990.3105896,
+    "seen": 1793008986.7399309,
+    "ast_hash": "9a8a2f1be29563158d706f0dee664e80",
+    "semantic_hash": ""
+  },
+  "src/content/countries/oman.mdx": {
+    "mtime": 1793007589.8256917,
+    "seen": 1793008986.739933,
+    "ast_hash": "34d428bfd916d7ba0d33a28a68aa3e13",
+    "semantic_hash": ""
+  },
+  "src/content/countries/pakistan.mdx": {
+    "mtime": 1793008073.0455332,
+    "seen": 1793008986.739934,
+    "ast_hash": "fa8ed5a7cb793a0e52fdc0cfb09cc86a",
+    "semantic_hash": ""
+  },
+  "src/content/countries/panama.mdx": {
+    "mtime": 1793008882.2598205,
+    "seen": 1793008986.739935,
+    "ast_hash": "6707dca5a2f7ec90ae2ad83fc14299dc",
+    "semantic_hash": ""
+  },
+  "src/content/countries/papua-new-guinea.mdx": {
+    "mtime": 1793008203.3809493,
+    "seen": 1793008986.739936,
+    "ast_hash": "781ad5ed8dbc8eb917abdb9bb9f75199",
+    "semantic_hash": ""
+  },
+  "src/content/countries/paraguay.mdx": {
+    "mtime": 1793008869.9262626,
+    "seen": 1793008986.739936,
+    "ast_hash": "c170cad70e656f5872ffd82549fb4b4c",
+    "semantic_hash": ""
+  },
+  "src/content/countries/peru.mdx": {
+    "mtime": 1793008854.665195,
+    "seen": 1793008986.739937,
+    "ast_hash": "2a649cd1f51bb8303b06d31d0823fe52",
+    "semantic_hash": ""
+  },
+  "src/content/countries/philippines.mdx": {
+    "mtime": 1793007951.2789667,
+    "seen": 1793008986.739938,
+    "ast_hash": "1d9f25eed6ffe6b5e6819908e1def213",
+    "semantic_hash": ""
+  },
+  "src/content/countries/qatar.mdx": {
+    "mtime": 1793007589.8994584,
+    "seen": 1793008986.7399411,
+    "ast_hash": "14e7270c798a5223e201a857e274e934",
+    "semantic_hash": ""
+  },
+  "src/content/countries/russia.mdx": {
+    "mtime": 1793007516.8209279,
+    "seen": 1793008986.739943,
+    "ast_hash": "48cc78cdccba27b041373317bcb5807a",
+    "semantic_hash": ""
+  },
+  "src/content/countries/rwanda.mdx": {
+    "mtime": 1793008531.087081,
+    "seen": 1793008986.739944,
+    "ast_hash": "0e47af72b23b3dc65a9c64dea44dd8d3",
+    "semantic_hash": ""
+  },
+  "src/content/countries/saudi-arabia.mdx": {
+    "mtime": 1793007960.7225294,
+    "seen": 1793008986.739945,
+    "ast_hash": "86a45eb061c1aeefc6e8b2ce8d3e9af0",
+    "semantic_hash": ""
+  },
+  "src/content/countries/senegal.mdx": {
+    "mtime": 1793008541.751406,
+    "seen": 1793008986.739946,
+    "ast_hash": "970412f49b2cae3f2e822781a574fd64",
+    "semantic_hash": ""
+  },
+  "src/content/countries/serbia.mdx": {
+    "mtime": 1793008085.811488,
+    "seen": 1793008986.739947,
+    "ast_hash": "b27fdc0ccdbd65b854ea88e0855b3e13",
+    "semantic_hash": ""
+  },
+  "src/content/countries/seychelles.mdx": {
+    "mtime": 1793008457.4861069,
+    "seen": 1793008986.739948,
+    "ast_hash": "b422fbd59f317e426e147eabbbf76bfc",
+    "semantic_hash": ""
+  },
+  "src/content/countries/sierra-leone.mdx": {
+    "mtime": 1793008559.3829744,
+    "seen": 1793008986.739949,
+    "ast_hash": "082d280fcbc3bba99bfd358d1d8ad2c7",
+    "semantic_hash": ""
+  },
+  "src/content/countries/singapore.mdx": {
+    "mtime": 1793007994.4971955,
+    "seen": 1793008986.7399502,
+    "ast_hash": "99174543d480a3d761ed6d6df063862d",
+    "semantic_hash": ""
+  },
+  "src/content/countries/solomon-islands.mdx": {
+    "mtime": 1793008214.634165,
+    "seen": 1793008986.7399528,
+    "ast_hash": "9b21407a7a19b4d7bf48161bfe8325e3",
+    "semantic_hash": ""
+  },
+  "src/content/countries/sri-lanka.mdx": {
+    "mtime": 1793008065.8900683,
+    "seen": 1793008986.739957,
+    "ast_hash": "f697698a999dfa0c0a7501dc64a39adb",
+    "semantic_hash": ""
+  },
+  "src/content/countries/taiwan.mdx": {
+    "mtime": 1793008388.5420036,
+    "seen": 1793008986.73996,
+    "ast_hash": "3c923e35aa54f65b86266a6eac79a932",
+    "semantic_hash": ""
+  },
+  "src/content/countries/tanzania.mdx": {
+    "mtime": 1793008631.7480342,
+    "seen": 1793008986.7399611,
+    "ast_hash": "8094481e193a410001cdc6532d40e784",
+    "semantic_hash": ""
+  },
+  "src/content/countries/trinidad-and-tobago.mdx": {
+    "mtime": 1793008601.3222528,
+    "seen": 1793008986.7399628,
+    "ast_hash": "2059a2cef2f931878aff99fe09fb199c",
+    "semantic_hash": ""
+  },
+  "src/content/countries/turkiye.mdx": {
+    "mtime": 1793007983.8841503,
+    "seen": 1793008986.739964,
+    "ast_hash": "62655506de169e7e0f25b71a4b672a80",
+    "semantic_hash": ""
+  },
+  "src/content/countries/uganda.mdx": {
+    "mtime": 1793008642.8734276,
+    "seen": 1793008986.739965,
+    "ast_hash": "76829d32bfb58ccfcdbb1c6bbecc8766",
+    "semantic_hash": ""
+  },
+  "src/content/countries/uruguay.mdx": {
+    "mtime": 1793008612.960687,
+    "seen": 1793008986.739969,
+    "ast_hash": "c37fea6faace97f67eb5ec9c6ae59cea",
+    "semantic_hash": ""
+  },
+  "src/content/countries/uzbekistan.mdx": {
+    "mtime": 1793007426.9207375,
+    "seen": 1793008986.73997,
+    "ast_hash": "3fc7611eb3e4b1cf28c8399bd2904deb",
+    "semantic_hash": ""
+  },
+  "src/content/countries/venezuela.mdx": {
+    "mtime": 1793008616.893545,
+    "seen": 1793008986.7399712,
+    "ast_hash": "d6f7e586b7e63032d294e5ab649a1e47",
+    "semantic_hash": ""
+  },
+  "src/content/countries/vietnam.mdx": {
+    "mtime": 1793007960.2986398,
+    "seen": 1793008986.739972,
+    "ast_hash": "190119b50b60983f39c2b4d209ab2ad3",
+    "semantic_hash": ""
+  },
+  "src/content/countries/zimbabwe.mdx": {
+    "mtime": 1793008652.8818924,
+    "seen": 1793008986.739973,
+    "ast_hash": "3a48bcc5ee320dcbc660e442c0333493",
+    "semantic_hash": ""
+  },
+  "public/og/albania.png": {
+    "mtime": 1792990088.2382746,
+    "seen": 1793004309.0647628,
+    "ast_hash": "47feffb14c56c3a51fd7162427ccad86",
+    "semantic_hash": ""
+  },
+  "public/og/algeria.png": {
+    "mtime": 1792990088.279001,
+    "seen": 1793004309.064764,
+    "ast_hash": "61edbfb6ba1d426a2e578719a2b00483",
+    "semantic_hash": ""
+  },
+  "public/og/andorra.png": {
+    "mtime": 1792990088.3300338,
+    "seen": 1793004309.064765,
+    "ast_hash": "a52be94ed7558fe92ec306f2f9117a5e",
+    "semantic_hash": ""
+  },
+  "public/og/antigua-and-barbuda.png": {
+    "mtime": 1792990088.3644838,
+    "seen": 1793004309.064766,
+    "ast_hash": "04f45f9a02178fb5a8a482210352d8e3",
+    "semantic_hash": ""
+  },
+  "public/og/argentina.png": {
+    "mtime": 1792990088.413798,
+    "seen": 1793004309.064769,
+    "ast_hash": "d04b7a10c19fc456ebbc198b88998be8",
+    "semantic_hash": ""
+  },
+  "public/og/bahrain.png": {
+    "mtime": 1792990088.563529,
+    "seen": 1793004309.0647721,
+    "ast_hash": "2cffb09324288e6a4adfe7e1f2d6e2e8",
+    "semantic_hash": ""
+  },
+  "public/og/bangladesh.png": {
+    "mtime": 1792990088.612426,
+    "seen": 1793004309.064773,
+    "ast_hash": "f41b5bad8ff4673486cb5c6f464c7efb",
+    "semantic_hash": ""
+  },
+  "public/og/barbados.png": {
+    "mtime": 1792990088.6463432,
+    "seen": 1793004309.0647738,
+    "ast_hash": "7fe3b30282f7af9cd411ac8068016c91",
+    "semantic_hash": ""
+  },
+  "public/og/belarus.png": {
+    "mtime": 1792990088.6788018,
+    "seen": 1793004309.064775,
+    "ast_hash": "23df87ad3707cc817126f68b803cf4e2",
+    "semantic_hash": ""
+  },
+  "public/og/belize.png": {
+    "mtime": 1792990088.76306,
+    "seen": 1793004309.064777,
+    "ast_hash": "7b894af349a142a0f0d8e6678834ad20",
+    "semantic_hash": ""
+  },
+  "public/og/bhutan.png": {
+    "mtime": 1792990088.8135357,
+    "seen": 1793004309.064778,
+    "ast_hash": "efaae45f50fb11af4e8ed3ddc7d0f315",
+    "semantic_hash": ""
+  },
+  "public/og/bosnia-and-herzegovina.png": {
+    "mtime": 1792990088.8655047,
+    "seen": 1793004309.064779,
+    "ast_hash": "d242a8eb3bc1e88f9d383c86d6a5e951",
+    "semantic_hash": ""
+  },
+  "public/og/botswana.png": {
+    "mtime": 1792990088.913748,
+    "seen": 1793004309.06478,
+    "ast_hash": "db537bf5d797014f450c7584852814b7",
+    "semantic_hash": ""
+  },
+  "public/og/brunei.png": {
+    "mtime": 1792990088.9795783,
+    "seen": 1793004309.064781,
+    "ast_hash": "087be9a970a361b40aff43e6a1b7b445",
+    "semantic_hash": ""
+  },
+  "public/og/cabo-verde.png": {
+    "mtime": 1792990089.0808613,
+    "seen": 1793004309.0647838,
+    "ast_hash": "84dcb57a83594aea22f46fe8422952b1",
+    "semantic_hash": ""
+  },
+  "public/og/cameroon.png": {
+    "mtime": 1792990089.131158,
+    "seen": 1793004309.064785,
+    "ast_hash": "e81e666995c343c548fdf0edb6c8a50f",
+    "semantic_hash": ""
+  },
+  "public/og/chile.png": {
+    "mtime": 1792990089.2287383,
+    "seen": 1793004309.064786,
+    "ast_hash": "8f85f0d5a25fa4ad8385b3e0246b2f43",
+    "semantic_hash": ""
+  },
+  "public/og/china.png": {
+    "mtime": 1792990089.280038,
+    "seen": 1793004309.064787,
+    "ast_hash": "cb188e4492687d7a1644da68b66f4907",
+    "semantic_hash": ""
+  },
+  "public/og/colombia.png": {
+    "mtime": 1792990089.3305964,
+    "seen": 1793004309.0647879,
+    "ast_hash": "b06a5a18c31f915ccdd22f2614e961a7",
+    "semantic_hash": ""
+  },
+  "public/og/costa-rica.png": {
+    "mtime": 1792990089.3803763,
+    "seen": 1793004309.064789,
+    "ast_hash": "1a61615719760eb82ff65072e26ab917",
+    "semantic_hash": ""
+  },
+  "public/og/cote-d-ivoire.png": {
+    "mtime": 1792990089.4296746,
+    "seen": 1793004309.06479,
+    "ast_hash": "ccbe6a0e2bcdfa7f8ec11e1a5f7edf38",
+    "semantic_hash": ""
+  },
+  "public/og/cuba.png": {
+    "mtime": 1792990089.4956806,
+    "seen": 1793004309.0647922,
+    "ast_hash": "dff1da088c48aca9b4c97635659c506c",
+    "semantic_hash": ""
+  },
+  "public/og/dominican-republic.png": {
+    "mtime": 1792990089.6304908,
+    "seen": 1793004309.064796,
+    "ast_hash": "8699ab6c9fc248a1155e329b488f07e4",
+    "semantic_hash": ""
+  },
+  "public/og/ecuador.png": {
+    "mtime": 1792990089.6794121,
+    "seen": 1793004309.064797,
+    "ast_hash": "231ff67969bd0c74ca0a928cac96fb02",
+    "semantic_hash": ""
+  },
+  "public/og/egypt.png": {
+    "mtime": 1792990089.7109923,
+    "seen": 1793004309.0647979,
+    "ast_hash": "aefb084d76c41434133628b484d6f178",
+    "semantic_hash": ""
+  },
+  "public/og/el-salvador.png": {
+    "mtime": 1792990089.7462044,
+    "seen": 1793004309.064799,
+    "ast_hash": "08a3776a240c4b415ac12af138f5d5c1",
+    "semantic_hash": ""
+  },
+  "public/og/ethiopia.png": {
+    "mtime": 1792990089.8287673,
+    "seen": 1793004309.064801,
+    "ast_hash": "2e167317f219c3c883b22f7c49d51e8b",
+    "semantic_hash": ""
+  },
+  "public/og/fiji.png": {
+    "mtime": 1792990089.862291,
+    "seen": 1793004309.064801,
+    "ast_hash": "5ee6fd20284a32df4f90a8ad62ae4cd0",
+    "semantic_hash": ""
+  },
+  "public/og/georgia.png": {
+    "mtime": 1792990089.9610593,
+    "seen": 1793004309.064804,
+    "ast_hash": "404d463a3f75257255a3d5f05a652a86",
+    "semantic_hash": ""
+  },
+  "public/og/ghana.png": {
+    "mtime": 1792990090.0467627,
+    "seen": 1793004309.064806,
+    "ast_hash": "f3d38dccb870a97eab1351a3cd5cd7a3",
+    "semantic_hash": ""
+  },
+  "public/og/guyana.png": {
+    "mtime": 1792990090.1457703,
+    "seen": 1793004309.0648088,
+    "ast_hash": "0f1b366e3aba35e530c93c7bbbf02e5a",
+    "semantic_hash": ""
+  },
+  "public/og/honduras.png": {
+    "mtime": 1792990090.1781104,
+    "seen": 1793004309.0648088,
+    "ast_hash": "a95646416f75a75c714d497ec29f7c75",
+    "semantic_hash": ""
+  },
+  "public/og/indonesia.png": {
+    "mtime": 1792990090.310864,
+    "seen": 1793004309.0648131,
+    "ast_hash": "c4a7aaefafeab91524f0a299706f370a",
+    "semantic_hash": ""
+  },
+  "public/og/iran.png": {
+    "mtime": 1792990090.3448122,
+    "seen": 1793004309.064814,
+    "ast_hash": "3126c314b5d6a42db50486073e95ed23",
+    "semantic_hash": ""
+  },
+  "public/og/israel.png": {
+    "mtime": 1792990090.4117413,
+    "seen": 1793004309.0648162,
+    "ast_hash": "1ae2e2aedb3431ee3b0814dbaabe6ee6",
+    "semantic_hash": ""
+  },
+  "public/og/jamaica.png": {
+    "mtime": 1792990090.4791737,
+    "seen": 1793004309.064818,
+    "ast_hash": "ca00f321f4617c209063e117d53cc35b",
+    "semantic_hash": ""
+  },
+  "public/og/jordan.png": {
+    "mtime": 1792990090.5461438,
+    "seen": 1793004309.06482,
+    "ast_hash": "9e6d258f486261acf13ee629e25fbf17",
+    "semantic_hash": ""
+  },
+  "public/og/kazakhstan.png": {
+    "mtime": 1792990090.5799294,
+    "seen": 1793004309.064821,
+    "ast_hash": "5c19a960d8c576057bcf716c07db10d8",
+    "semantic_hash": ""
+  },
+  "public/og/kenya.png": {
+    "mtime": 1792990090.6298697,
+    "seen": 1793004309.064822,
+    "ast_hash": "410232f47f82af3dbd13fd8b5f18424c",
+    "semantic_hash": ""
+  },
+  "public/og/kosovo.png": {
+    "mtime": 1792990090.680133,
+    "seen": 1793004309.0648232,
+    "ast_hash": "8efe411a2379593564149a085acd52b6",
+    "semantic_hash": ""
+  },
+  "public/og/kuwait.png": {
+    "mtime": 1792990090.7125468,
+    "seen": 1793004309.064824,
+    "ast_hash": "a1bf57d3764177374b01cb7ccf01155c",
+    "semantic_hash": ""
+  },
+  "public/og/kyrgyzstan.png": {
+    "mtime": 1792990090.7634099,
+    "seen": 1793004309.064825,
+    "ast_hash": "b5d47ed8e8e62ece4aa812012eb95fcf",
+    "semantic_hash": ""
+  },
+  "public/og/madagascar.png": {
+    "mtime": 1792990090.9615188,
+    "seen": 1793004309.06483,
+    "ast_hash": "c01245483703e057c8d4c9370a77d37b",
+    "semantic_hash": ""
+  },
+  "public/og/malaysia.png": {
+    "mtime": 1792990090.995558,
+    "seen": 1793004309.064831,
+    "ast_hash": "6796de5465d1dd9412e2acbb669dc23c",
+    "semantic_hash": ""
+  },
+  "public/og/maldives.png": {
+    "mtime": 1792990091.0289855,
+    "seen": 1793004309.064832,
+    "ast_hash": "688ced48db14d329f2a0c25641573e88",
+    "semantic_hash": ""
+  },
+  "public/og/mauritius.png": {
+    "mtime": 1792990091.0940382,
+    "seen": 1793004309.064834,
+    "ast_hash": "0e691cee2023d693030286522d98dd75",
+    "semantic_hash": ""
+  },
+  "public/og/mexico.png": {
+    "mtime": 1792990091.1289365,
+    "seen": 1793004309.064835,
+    "ast_hash": "d32a7d4f57a5ac88d60ee41eafc38f83",
+    "semantic_hash": ""
+  },
+  "public/og/moldova.png": {
+    "mtime": 1792990091.1616309,
+    "seen": 1793004309.064836,
+    "ast_hash": "8b91712ae2851c82ded7b2df0ac2bae3",
+    "semantic_hash": ""
+  },
+  "public/og/monaco.png": {
+    "mtime": 1792990091.1955087,
+    "seen": 1793004309.0648372,
+    "ast_hash": "e3c1f8f19cbd84adb9332ebf8bac3eec",
+    "semantic_hash": ""
+  },
+  "public/og/mongolia.png": {
+    "mtime": 1792990091.2294,
+    "seen": 1793004309.064838,
+    "ast_hash": "538f4753db0807eec49a207115846b7c",
+    "semantic_hash": ""
+  },
+  "public/og/montenegro.png": {
+    "mtime": 1792990091.2632518,
+    "seen": 1793004309.064839,
+    "ast_hash": "d21782963dc9cba7ebcfad1475fe0358",
+    "semantic_hash": ""
+  },
+  "public/og/mozambique.png": {
+    "mtime": 1792990091.2952163,
+    "seen": 1793004309.0648398,
+    "ast_hash": "32a775565f212f422c147855ddf94cc8",
+    "semantic_hash": ""
+  },
+  "public/og/namibia.png": {
+    "mtime": 1792990091.3292203,
+    "seen": 1793004309.0648398,
+    "ast_hash": "a027580b42c665cdf94b09f47674a46f",
+    "semantic_hash": ""
+  },
+  "public/og/nigeria.png": {
+    "mtime": 1792990091.494623,
+    "seen": 1793004309.0648441,
+    "ast_hash": "0c446ceb1ac35623177a1d79b1d9818e",
+    "semantic_hash": ""
+  },
+  "public/og/north-macedonia.png": {
+    "mtime": 1792990091.5298302,
+    "seen": 1793004309.064845,
+    "ast_hash": "81c4c84d88f5ba8d13e985ee075ea1da",
+    "semantic_hash": ""
+  },
+  "public/og/oman.png": {
+    "mtime": 1792990091.6119819,
+    "seen": 1793004309.064847,
+    "ast_hash": "b45a2eda5fe954963d1a247bb83f25a1",
+    "semantic_hash": ""
+  },
+  "public/og/pakistan.png": {
+    "mtime": 1792990091.6453674,
+    "seen": 1793004309.064848,
+    "ast_hash": "cb3ea77a73b4243a0af211f6962ab810",
+    "semantic_hash": ""
+  },
+  "public/og/panama.png": {
+    "mtime": 1792990091.6783464,
+    "seen": 1793004309.064849,
+    "ast_hash": "533bb04fcaab5a3dd63963bf60aaebec",
+    "semantic_hash": ""
+  },
+  "public/og/papua-new-guinea.png": {
+    "mtime": 1792990091.7126293,
+    "seen": 1793004309.0648499,
+    "ast_hash": "ff319a90c24d9eb730651fdd80debe60",
+    "semantic_hash": ""
+  },
+  "public/og/paraguay.png": {
+    "mtime": 1792990091.7444499,
+    "seen": 1793004309.064851,
+    "ast_hash": "5960b0283e2026a7c1718e4ea26a0231",
+    "semantic_hash": ""
+  },
+  "public/og/peru.png": {
+    "mtime": 1792990091.777019,
+    "seen": 1793004309.064852,
+    "ast_hash": "4b8d52e78c8f2db6be37d05951b4d11e",
+    "semantic_hash": ""
+  },
+  "public/og/philippines.png": {
+    "mtime": 1792990091.8129766,
+    "seen": 1793004309.064853,
+    "ast_hash": "65b09cbe8e9c1db2284f1cc7c25058ed",
+    "semantic_hash": ""
+  },
+  "public/og/qatar.png": {
+    "mtime": 1792990091.9294536,
+    "seen": 1793004309.064856,
+    "ast_hash": "fefafbe109871086fa5e708f23d427f8",
+    "semantic_hash": ""
+  },
+  "public/og/russia.png": {
+    "mtime": 1792990091.9957743,
+    "seen": 1793004309.0648582,
+    "ast_hash": "eadadd64a454a506882209d55a18d623",
+    "semantic_hash": ""
+  },
+  "public/og/rwanda.png": {
+    "mtime": 1792990092.0286489,
+    "seen": 1793004309.064859,
+    "ast_hash": "846966f8c3a6961100bdd69a947ea376",
+    "semantic_hash": ""
+  },
+  "public/og/saudi-arabia.png": {
+    "mtime": 1792990092.0619013,
+    "seen": 1793004309.0648599,
+    "ast_hash": "4b12cdaca4b051e9e83f8ff8076199a3",
+    "semantic_hash": ""
+  },
+  "public/og/senegal.png": {
+    "mtime": 1792990092.09486,
+    "seen": 1793004309.0648608,
+    "ast_hash": "0624d6a9e2ad7c5e24a56ca5778bc6f7",
+    "semantic_hash": ""
+  },
+  "public/og/serbia.png": {
+    "mtime": 1792990092.1280594,
+    "seen": 1793004309.0648608,
+    "ast_hash": "ee66b49ca942598a80d77756b6d653a7",
+    "semantic_hash": ""
+  },
+  "public/og/seychelles.png": {
+    "mtime": 1792990092.160415,
+    "seen": 1793004309.064862,
+    "ast_hash": "4911b421c14f13c83bd7c0937fe65663",
+    "semantic_hash": ""
+  },
+  "public/og/sierra-leone.png": {
+    "mtime": 1792990092.195277,
+    "seen": 1793004309.064863,
+    "ast_hash": "3cebff3dcc80f8b811f3d90462af6ee2",
+    "semantic_hash": ""
+  },
+  "public/og/singapore.png": {
+    "mtime": 1792990092.2289402,
+    "seen": 1793004309.064864,
+    "ast_hash": "9ff92a8c6e013a05ef74692be3450e27",
+    "semantic_hash": ""
+  },
+  "public/og/solomon-islands.png": {
+    "mtime": 1792990092.329836,
+    "seen": 1793004309.064867,
+    "ast_hash": "e9338321978a734790b7075e9735dc56",
+    "semantic_hash": ""
+  },
+  "public/og/sri-lanka.png": {
+    "mtime": 1792990092.462416,
+    "seen": 1793004309.0648708,
+    "ast_hash": "5b3ecd134c9078128d9e0e68ea2ecac1",
+    "semantic_hash": ""
+  },
+  "public/og/taiwan.png": {
+    "mtime": 1792990092.5616696,
+    "seen": 1793004309.064874,
+    "ast_hash": "8ee7b957f2d7a1102a49e56a4714b6b7",
+    "semantic_hash": ""
+  },
+  "public/og/tanzania.png": {
+    "mtime": 1792990092.595118,
+    "seen": 1793004309.0648751,
+    "ast_hash": "13adbde3d315f3ef02b501a55acc739d",
+    "semantic_hash": ""
+  },
+  "public/og/trinidad-and-tobago.png": {
+    "mtime": 1792990092.6628134,
+    "seen": 1793004309.064877,
+    "ast_hash": "7c4f92c34e821f4c368de79780c81f05",
+    "semantic_hash": ""
+  },
+  "public/og/turkiye.png": {
+    "mtime": 1792990092.7108192,
+    "seen": 1793004309.064878,
+    "ast_hash": "7dc4a473ce495d5b2ff2beab644a930a",
+    "semantic_hash": ""
+  },
+  "public/og/uganda.png": {
+    "mtime": 1792990092.7449055,
+    "seen": 1793004309.0648792,
+    "ast_hash": "fd4e5a6bacafee3b8158855ea550b174",
+    "semantic_hash": ""
+  },
+  "public/og/uruguay.png": {
+    "mtime": 1792990092.8789952,
+    "seen": 1793004309.064883,
+    "ast_hash": "46c7b49f33fe1e3338e0dc37ff28e7e2",
+    "semantic_hash": ""
+  },
+  "public/og/uzbekistan.png": {
+    "mtime": 1792990092.9126518,
+    "seen": 1793004309.064884,
+    "ast_hash": "c0721675fa63de6c9d84748f0c4b5dad",
+    "semantic_hash": ""
+  },
+  "public/og/venezuela.png": {
+    "mtime": 1792990092.9460874,
+    "seen": 1793004309.064885,
+    "ast_hash": "d7857136e77ae58246f9897234c83faa",
+    "semantic_hash": ""
+  },
+  "public/og/vietnam.png": {
+    "mtime": 1792990092.996351,
+    "seen": 1793004309.064886,
+    "ast_hash": "25793e961ed8ceef6b2d4e4a82cb17b6",
+    "semantic_hash": ""
+  },
+  "public/og/zimbabwe.png": {
+    "mtime": 1792990093.0472097,
+    "seen": 1793004309.064887,
+    "ast_hash": "efd229fed07ba6aeb114f10996523cc3",
+    "semantic_hash": ""
+  },
+  "arch-Powerpoint_Sidopi.pdf": {
+    "mtime": 1793007942.6408463,
+    "seen": 1793008986.739976,
+    "ast_hash": "90a1d0ba7c577acffa6a2d215a2d534a",
+    "semantic_hash": ""
+  },
+  "arch-pm_63_tahun_2021.pdf": {
+    "mtime": 1793007940.7841883,
+    "seen": 1793008986.739977,
+    "ast_hash": "45750361476c2d2e60889f2091c7a4f1",
     "semantic_hash": ""
   }
 }

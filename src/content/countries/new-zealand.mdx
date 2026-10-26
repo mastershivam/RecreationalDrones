@@ -5,22 +5,23 @@ authority: Civil Aviation Authority of New Zealand (CAA)
 authorityUrl: https://www.aviation.govt.nz/drones/
 registrationUrl: null
 whoMustRegister: >-
-  Nobody, on the pages we read: they mention no drone or pilot registration for
-  Part 101, the rules for unmanned aircraft under 25 kg. The CAA says there are no
-  separate rules for fun and for work, and no relaxed rules for drones under 250 g.
+  Nobody. Part 101, the rules for unmanned aircraft under 25 kg, says (rule 101.5)
+  that the aircraft registration rules in Part 47 do not apply to unmanned aircraft.
+  The CAA says there are no separate rules for fun and for work, and no relaxed rules
+  for drones under 250 g.
 restrictiveness: 1
 restrictivenessReason: >-
-  The CAA pages we read ask for no registration and no test. A pilot qualification
+  Part 101 asks for no registration and no test. A pilot qualification
   is needed only within 4 km of an aerodrome or to fly at night, and flying in
   controlled airspace needs clearance from air traffic control.
-registrationFee: None on the pages we read
+registrationFee: None, because there is no registration
 registrationWeightGrams: null
 minOperatorAge: null
 remoteId: null
 insurance: null
 howToRegister:
   needed:
-    - 'Nothing to register on the pages we read'
+    - 'Nothing to register: Part 101 rule 101.5 exempts unmanned aircraft from aircraft registration'
     - 'A pilot qualification from an approved person or organisation, only to fly within 4 km of an aerodrome or at night'
   steps:
     - 'Read the CAA''s drone rules (Part 101) and its summary of how to fly safely.'
@@ -29,21 +30,27 @@ howToRegister:
     - 'Flying on conservation land? The CAA says the Conservation Act 1987 requires a permit from the Department of Conservation for a drone to take off, land or hover there.'
   validFor: null
   afterwards: 'Before each flight, check AirShare''s map, and ask the council or landowner where the rules call for permission.'
-lastVerified: 2026-10-20
+lastVerified: 2026-10-26
 sources:
   - https://www.aviation.govt.nz/drones/
   - https://www.aviation.govt.nz/drones/regulations/part-101-rules-for-drones/
   - https://www.aviation.govt.nz/drones/flying-your-drone-safely/
   - https://www.aviation.govt.nz/drones/your-drone-questions-answered/
   - https://www.aviation.govt.nz/assets/rules/transport-instruments/CATI-101-1.pdf
+  - https://www.aviation.govt.nz/assets/rules/consolidations/Part_101_Consolidation.pdf
+  - https://www.aviation.govt.nz/rules/rule-part/part-101/
+  - https://www.aviation.govt.nz/drones/training-to-fly-unmanned-aircraft/
   - https://airshare.co.nz/know-the-rules/
   - https://airshare.co.nz/know-the-rules/flying-near-an-aerodrome/
   - https://airshare.co.nz/know-the-rules/information-for-tourists/
 ---
 
 This guide follows the Civil Aviation Authority's drone pages, its transport instrument CATI 101-1 (the detail behind Part
-101), and AirShare, the CAA's partner for drone information, read on 20 October 2026. None of the pages shows a date. Check
-the CAA for any change.
+101), the CAA's consolidated text of Part 101, and AirShare, the CAA's partner for drone information. The CAA's drone and Part 101
+pages were re-read on 26 October 2026; the other pages were read on 20 and 25 October. Our tools could not extract text from the Part 101
+and CATI 101-1 PDFs, so the details taken from those two documents (the consolidation date, CATI's limits) are from the earlier reading and
+not re-checked. The Part 101 consolidation is dated 22 December 2025 (amendment 1; the initial issue was 5 April 2025), and CATI 101-1 came
+into force on 22 December 2025. The CAA's other pages show no date. Check the CAA for any change.
 
 ## Which rules apply
 
@@ -55,7 +62,8 @@ Director has authorised. Over 25 kg, or anything outside Part 101, needs a Part 
 
 ## Registration
 
-None of the pages we read describes registering a drone or a pilot, or lists a fee. AirShare, which lets anyone log their
+There is none. Rule 101.5 of Part 101 says the aircraft registration requirements in Part 47 do not apply to unmanned aircraft, and
+no CAA page we read asks for a drone or pilot registration or lists a fee. AirShare, which lets anyone log their
 flights, says "You don't need to be a New Zealand resident to log your flights on AirShare." It also says local councils have
 their own rules and procedures, and that you must have permission before flying over people.
 
@@ -87,8 +95,15 @@ their own rules and procedures, and that you must have permission before flying 
 
 ## Not covered yet
 
-- **Penalties:** the CAA says a breach could bring "disciplinary action including prosecution", with no amounts.
-- **Minimum age, insurance and Remote ID:** none of the pages mentions them.
+- **Penalties:** the CAA's Part 101 page (read 26 October) says offences and penalties "may be imposed as set out in relevant
+  Regulations", with no amounts. The CAA says a breach could bring "disciplinary action including prosecution". The Civil Aviation Act
+  2023 and the Offences Regulations 2025 are on legislation.govt.nz, which returned 403 to our fetch tool and 202 to a plain request, so
+  we give no fine and have not read those provisions.
+- **Minimum age, insurance and Remote ID:** the CAA's drone pages and Part 101 landing page, read on 26 October, mention none of them, so
+  they are left null. The consolidated Part 101 and CATI 101-1 are PDFs we could not read, so we have not checked them for these points.
+  The "249 grams" statement in the first paragraph above was not re-read on 26 October either.
+- **Visitors:** the CAA's training page says foreign qualifications can count towards the pilot qualification and names
+  Australia's CASA Remote Pilot Licence. It is silent on tourists otherwise. AirShare says non-residents can log flights.
 - **AirShare and the CAA disagree on two points.** AirShare says night flying needs a Part 102 certificate, and that shielded
   flights are allowed only more than 4 km from an aerodrome. CATI 101-1 says otherwise (above), and we follow the instrument.
 - **The 4 km circle on our map** is drawn from every airport's centre in OurAirports, not from each aerodrome's boundary, so it

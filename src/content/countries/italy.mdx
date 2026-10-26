@@ -5,57 +5,141 @@ authority: Italian Civil Aviation Authority (ENAC)
 authorityUrl: https://www.enac.gov.it/
 registrationUrl: https://www.d-flight.it/new_portal/
 whoMustRegister: >-
-  Register yourself once, not each drone, with your home EU country's authority
-  (visitors: the first EU country you fly in). Needed if a drone weighs 250 g or
-  more or has a camera.
+  Register yourself once, not each drone, on the d-flight portal. Needed unless
+  your drone is a toy (EU toy directive) or weighs under 250 g and has no camera,
+  microphone or other device that collects personal data. A visitor from the EU
+  is registered in their home state; a visitor from outside the EU (including the
+  UK) registers in the first EU country where they fly.
 restrictiveness: 2
 restrictivenessReason: >-
-  Register online with your national authority and, for most drones, pass an
-  online training exam (EASA). Steps in your country may add to this; we have
-  not read them.
-registrationFee: null
+  Register online on d-flight (EUR 7 a year) and, for most drones, pass ENAC's
+  online exam (EUR 31). d-flight asks for identity documents by email, not in
+  person. Third-party insurance is compulsory for every drone. We found no
+  permission needed before a flight in the open category, but some areas are
+  banned or need ENAC's authorisation.
+registrationFee: 'EUR 7 a year (VAT included), for the d-flight Base subscription that includes operator registration and one drone QR code'
 registrationWeightGrams: 0
 minOperatorAge: null
 remoteId: >-
-  EASA says open-category drones, with limited exceptions, must have a remote
-  identification system.
+  ENAC says every operator gets a QR code carrying the EASA operator number from
+  d-flight and must put it on each drone. EASA says open-category drones, with
+  limited exceptions, must also have a remote identification system.
 insurance: >-
-  EASA requires insurance for a drone over 20 kg, and says most member states
-  also require third-party insurance for lighter drones. Check Italy's rules.
+  Compulsory for every drone: ENAC's UAS-IT rules (article 27) forbid flying
+  without third-party liability insurance in force, with cover at least the
+  minimums in the table in article 7 of Regulation (EC) 785/2004. ENAC's page
+  repeats that the operator must insure each drone.
 howToRegister:
   needed:
-    - 'Whatever your national authority asks for. We have not read the list for this country.'
+    - 'An email address, to create a d-flight account'
+    - 'Identity documents, sent by email to d-flight after you upgrade your account to operator'
+    - 'EUR 7 a year (VAT included) for the d-flight Base subscription, which includes operator registration and one drone QR code'
+    - 'Third-party liability insurance for your drone'
+    - 'For a drone of 250 g or more: ENAC''s A1/A3 online exam proof (EUR 31). Adults sign in with SPID; a minor uses ID copies of themself and a parent.'
   steps:
-    - 'Check that you need to register: yes if any drone weighs 250 g or more or has a camera or other sensor that could detect personal data. A toy under 250 g is exempt.'
-    - 'Register yourself, once and not each drone, with the authority of the EU country where you live. A visitor from outside the EU registers in the first EU country where they fly.'
-    - 'Complete the online training and exam if your drone needs it. Most drones of 250 g or more do (C1, C3, C4, and older drones). C2 needs more, and C0 and drones under 250 g need none.'
-    - 'Put your operator registration number on every drone you own as a sticker, and enter it into the drone''s Remote ID if it has one.'
-  validFor: 'Set by the authority you register with. It is valid in every EASA member state.'
-  afterwards: 'Before you fly in any EU country, check that the place is not in a geographical zone that country has published.'
-lastVerified: 2026-10-17
+    - 'Check that you need to register: yes unless every drone you fly is a toy, or is under 250 g with no camera, microphone or other data-collecting device.'
+    - 'Create a free account on d-flight and click the activation link in the email within 72 hours.'
+    - 'Buy the Base subscription (EUR 7 a year) and upgrade your account to UAS operator. Send the identity documents the email lists to registration@d-flight.it; registration is complete only when they are checked.'
+    - 'Download your QR code. It holds your EASA operator number. Put it on every drone you fly. Extra QR codes cost EUR 7 each.'
+    - 'Take the ENAC online A1/A3 exam if your drone needs it: 40 questions in 60 minutes, pass at 75%. The EUR 31 fee gives 4 attempts, and the proof is valid for 5 years.'
+    - 'Take out third-party liability insurance before you fly.'
+  validFor: 'A d-flight subscription runs for a year (EUR 7 a year). You renew it the day after it expires. The registration is valid in every EU country and Switzerland, ENAC says.'
+  afterwards: 'Before each flight, check the d-flight map for banned areas, and for any restriction set by the public-safety authorities.'
+lastVerified: 2026-10-25
 sources:
   - https://www.easa.europa.eu/en/domains/drones-air-mobility/operating-drone/open-category-low-risk-civil-drones
   - https://www.easa.europa.eu/the-agency/faqs/drones-uas
   - https://www.easa.europa.eu/en/domains/civil-drones/naa
   - https://www.d-flight.it/new_portal/
+  - https://www.d-flight.it/new_portal/tariffe/
+  - https://www.d-flight.it/new_portal/faq/
+  - https://www.d-flight.it/new_portal/servizi-d-flight/
+  - https://www.enac.gov.it/sicurezza-aerea/droni/operatori-di-droni-uas/
+  - https://www.enac.gov.it/sicurezza-aerea/droni/operatori-di-droni-uas/operatori-esteri/
+  - https://www.enac.gov.it/sicurezza-aerea/droni/faq-droni
+  - https://www.enac.gov.it/sicurezza-aerea/droni/zone-geografiche-space/
+  - https://www.enac.gov.it/sicurezza-aerea/droni/piloti-uas/come-si-diventa-pilota-uas-drone-open-a1a3/
+  - https://www.enac.gov.it/sicurezza-aerea/droni/piloti-uas/riconoscimento-degli-attestati-uas-conseguiti-allestero/
+  - https://www.enac.gov.it/app/uploads/2024/04/Regolamento_UAS-IT080121.pdf
 ---
 
 import EasaRules from '../../components/EasaRules.mdx';
 
-Italy applies the EU's common drone rules, set by the European Union Aviation Safety Agency (EASA). This
-guide gives those rules, then links to Italy's own authority for what is national.
+Italy applies the EU's common drone rules, set by the European Union Aviation Safety Agency (EASA), and adds a few
+national ones in ENAC's UAS-IT regulation. This guide gives the EASA rules, then what ENAC and d-flight add. The Italian
+parts follow ENAC's pages on drone operators, pilots, geographical zones and FAQ, the UAS-IT regulation, and the d-flight
+tariff, FAQ and services pages (d-flight is the portal ENAC points operators to), read on 25 October 2026. They are in
+Italian. Several ENAC pages were last updated in 2024, so check ENAC for any change.
 
 <EasaRules />
 
 ## In Italy
 
-- **Register:** [Italy's registration page](https://www.d-flight.it/new_portal/).
-- **Where you can fly:** [Italy's map of geographical zones](https://www.d-flight.it/new_portal/servizi-d-flight/#1-mappe).
+- **Register:** [d-flight, the portal for UAS operators](https://www.d-flight.it/new_portal/).
+- **Where you can fly:** [d-flight's maps](https://www.d-flight.it/new_portal/servizi-d-flight/#1-mappe).
 - **Authority:** [Italian Civil Aviation Authority (ENAC)](https://www.enac.gov.it/).
+
+## Registration
+
+ENAC says all operators register on d-flight and receive a European identification code as a QR code to put on each
+drone. Operators of toy drones, and of drones under 250 g with no camera, microphone or other device that collects
+personal data, are excluded. The fees are paid on d-flight at its tariff.
+
+- **Fee and term:** the d-flight Base subscription is EUR 7 a year, VAT included. It includes registration as a UAS
+  operator and one drone QR code. Each extra QR code is EUR 7. A Pro subscription is EUR 28 a year. Renew the day after
+  it expires.
+- **How:** create an account, then send identity documents by email to d-flight to complete the upgrade to operator.
+  We found no in-person step.
+- **Your number:** the QR code holds your EASA operator number, and ENAC says it counts in every EU state.
+- **Pilot exam:** for a drone of 250 g or more, pass ENAC's online A1/A3 exam: 40 questions in 60 minutes, 75% to pass.
+  The fee is EUR 31 for 4 attempts, and the proof lasts 5 years. Adults sign in with SPID (Italy's digital identity); a
+  minor uses ID copies of themself and a parent.
+- **Age:** ENAC's pages name no minimum age for an operator. Unverified.
+- **Visitors:** registration is valid in every EU country and Switzerland. EU residents register in their home state;
+  residents outside the EU, including the UK, register in the first EU country they visit. A pilot certificate from
+  another EASA state is recognised automatically in Italy; one from a state outside EASA is not. ENAC rejects certificates
+  that do not follow the EU format.
+
+## Where and how you can fly
+
+ENAC says Regulation 2019/947 applies, and that Italy's earlier national drone rules lapsed on 31 December 2020. ENAC
+issued the UAS-IT regulation for what is left to the state.
+
+- **Banned areas:** you find them on d-flight, whose maps follow ENAC's UAS-IT regulation and the circular ATM-09A, and on
+  the AIP. The layers include prohibited, restricted and danger zones, military drone and low-flying areas, and natural
+  parks and wildlife-protection areas. The maps do not yet show the days and hours when some areas allow flight.
+- **Zone data:** d-flight offers the geographical zones for download to operators, in the EU standard format (EUROCAE
+  ED-269, JSON), since August 2024. ENAC says no U-space has been switched on in Italy yet.
+- **Airports:** ENAC's FAQ says that near airports, inside an aerodrome traffic zone (ATZ) or control zone (CTR), you
+  can fly without an airspace reservation, following circular ATM-09A. We have not read the circular, so the conditions
+  are unverified.
+- **Other bans:** operators must check any restriction set by the public-safety authorities for the area. To fly where
+  overflight is banned under article 793 of the Navigation Code, you need ENAC's express authorisation.
+- **Roads and railways:** in the open category, do not operate near or over roads or railways, because uninvolved
+  people are there. The exception is A1 with a drone under 250 g or class C0, and not over a crowd.
+- **Specific category:** an operator registered in Italy or another EU state flying under a declaration or an
+  authorisation may need ENAC authorisation for airspace reservation, plus any permission the police, local authorities or private owners
+  require.
+
+## Remote ID and insurance
+
+- **Remote ID:** the d-flight QR code with your operator number goes on every drone. EASA's remote identification
+  rule for open-category drones also applies.
+- **Insurance:** UAS-IT article 27 says no UAS may be operated without third-party liability insurance in force, with
+  cover at least the minimums in article 7 of Regulation (EC) 785/2004. ENAC's operator page says the same. We did not
+  copy the amounts.
+
+## Penalties
+
+UAS-IT article 26 says a breach brings the criminal and disciplinary provisions of Book II, part III of the Navigation
+Code and the sanctions in Legislative Decree 173/2014. Administrative fines follow Law 689/1981. ENAC's FAQ names the
+provincial police headquarters (Questura), and in some cases ENAC, as the bodies that apply the sanctions. We found no
+fine amounts.
 
 ## Not covered yet
 
-- **Italy's national rules.** We have not read Italy's own drone rules, so what we say here is only what EASA says
-  applies everywhere. Fees, how long registration lasts, the minimum age (a state may lower EASA's 16 to 12),
-  insurance, penalties and any local bans are all unverified. Check the authority above before you fly.
-- **Where flying is banned.** Italy's geographical zones are on the map linked above, and we have not copied them.
+- **Minimum age** for an operator, which ENAC's pages do not give.
+- **Fine amounts** and the **insurance minimums** in Regulation 785/2004.
+- **Airport distances.** ENAC's FAQ points to circular ATM-09A, which we have not read.
+- **Model aircraft clubs, privacy rules and the specific category.**
+- **Where flying is banned.** The zones are on d-flight's maps and AIP Italia, and we have not copied them.

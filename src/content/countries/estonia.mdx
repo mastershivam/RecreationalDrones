@@ -5,57 +5,131 @@ authority: Estonian Transport Administration
 authorityUrl: https://transpordiamet.ee/en
 registrationUrl: https://transpordiamet.ee/en/aviation-and-aviation-safety/flying-drones-estonia/operator-registration
 whoMustRegister: >-
-  Register yourself once, not each drone, with your home EU country's authority
-  (visitors: the first EU country you fly in). Needed if a drone weighs 250 g or
-  more or has a camera.
+  Register yourself once as the operator, not each drone. Needed for a drone of
+  250 g or more, or one with a camera or other sensor that can record personal
+  data. A toy, or a drone under 250 g with no camera, is exempt. You register in
+  the EU state where you live, and cannot be registered in two.
 restrictiveness: 2
 restrictivenessReason: >-
-  Register online with your national authority and, for most drones, pass an
-  online training exam (EASA). Steps in your country may add to this; we have
-  not read them.
-registrationFee: null
+  Register online in LOIS for EUR 10 a year and, for a drone of 250 g or more,
+  pass an online A1/A3 exam (EASA). Permission is needed only inside the airport,
+  security and nature zones the authority publishes. We could not confirm how a
+  visitor from outside the EU registers.
+registrationFee: 'EUR 10, valid 1 year (renewal also EUR 10)'
 registrationWeightGrams: 0
 minOperatorAge: null
 remoteId: >-
-  EASA says open-category drones, with limited exceptions, must have a remote
-  identification system.
+  The authority's FAQ says Remote ID is required for all specific-category flights
+  and that class C1, C2 and C3 drones (and C5, C6) have it from the manufacturer.
+  It adds no separate Estonian rule for open-category flights.
 insurance: >-
-  EASA requires insurance for a drone over 20 kg, and says most member states
-  also require third-party insurance for lighter drones. Check Estonia's rules.
+  The authority's FAQ says insurance is required for a drone over 20 kg, and for
+  flights under an operational declaration or authorisation (the specific
+  category). It does not mention any for a lighter drone in the open category.
 howToRegister:
   needed:
-    - 'Whatever your national authority asks for. We have not read the list for this country.'
+    - 'A LOIS login (a person logs in with their personal details; a company chooses the legal person it represents)'
+    - 'EUR 10 for the state fee'
   steps:
-    - 'Check that you need to register: yes if any drone weighs 250 g or more or has a camera or other sensor that could detect personal data. A toy under 250 g is exempt.'
-    - 'Register yourself, once and not each drone, with the authority of the EU country where you live. A visitor from outside the EU registers in the first EU country where they fly.'
-    - 'Complete the online training and exam if your drone needs it. Most drones of 250 g or more do (C1, C3, C4, and older drones). C2 needs more, and C0 and drones under 250 g need none.'
-    - 'Put your operator registration number on every drone you own as a sticker, and enter it into the drone''s Remote ID if it has one.'
-  validFor: 'Set by the authority you register with. It is valid in every EASA member state.'
-  afterwards: 'Before you fly in any EU country, check that the place is not in a geographical zone that country has published.'
-lastVerified: 2026-10-17
+    - 'Check that you need to register: yes for a drone of 250 g or more, or one with a camera or other sensor that can record personal data. A toy, or a drone under 250 g with no camera, is exempt.'
+    - 'Register in the EU state where you live or have your main place of business. You cannot be registered in more than one state.'
+    - 'In LOIS (lois.transpordiamet.ee) choose Applications, Create new application, Aviation certification, Unmanned aircraft operator registration.'
+    - 'Pay the EUR 10 state fee. The number is issued once the fee is paid.'
+    - 'For a drone of 250 g or more, pass the online A1/A3 test in LOIS (40 questions, 75% to pass; the certificate costs EUR 10 and lasts five years).'
+    - 'Put the registration number on the drone.'
+    - 'Visiting? A registration number and pilot certificate from another EASA state let you fly in Estonia under the same rules.'
+  validFor: 'One year. Renew each year in LOIS under Authorisations/Certificates, for another EUR 10; a lapsed number becomes invalid. Valid in all EU states and in Switzerland, Norway, Liechtenstein and Iceland.'
+  afterwards: 'Before each flight, check the drone map at utm.eans.ee for zones and height limits, and for temporary restrictions just before you fly.'
+lastVerified: 2026-10-25
 sources:
   - https://www.easa.europa.eu/en/domains/drones-air-mobility/operating-drone/open-category-low-risk-civil-drones
   - https://www.easa.europa.eu/the-agency/faqs/drones-uas
   - https://www.easa.europa.eu/en/domains/civil-drones/naa
   - https://transpordiamet.ee/en/aviation-and-aviation-safety/flying-drones-estonia/operator-registration
+  - https://transpordiamet.ee/en/aviation-and-aviation-safety/flying-drones-estonia
+  - https://transpordiamet.ee/en/aviation-and-aviation-safety/flying-drones-estonia/remote-pilot-certificates
+  - https://transpordiamet.ee/en/aviation-and-aviation-safety/flying-drones-estonia/geographical-zones
+  - https://transpordiamet.ee/en/aviation-and-aviation-safety/flying-drones-estonia/faq
+  - https://transpordiamet.ee/en/open-category-flights
+  - https://transpordiamet.ee/en/aviation-and-aviation-safety/flying-drones-estonia/specific-category-flights
+  - https://www.riigiteataja.ee/en/akt/515102024003
+  - https://www.riigiteataja.ee/en/akt/520122018001
 ---
 
 import EasaRules from '../../components/EasaRules.mdx';
 
-Estonia applies the EU's common drone rules, set by the European Union Aviation Safety Agency (EASA). This
-guide gives those rules, then links to Estonia's own authority for what is national.
+This guide follows the Estonian Transport Administration (Transpordiamet) pages on flying drones in Estonia, read on 25 October
+2026, and the Aviation Act on Riigi Teataja. Estonia applies the EU's common drone rules, set by the European Union Aviation
+Safety Agency (EASA), and the Aviation Act points to them. Check the authority for any change.
 
 <EasaRules />
 
 ## In Estonia
 
 - **Register:** [Estonia's registration page](https://transpordiamet.ee/en/aviation-and-aviation-safety/flying-drones-estonia/operator-registration).
-- **Where you can fly:** [Estonia's map of geographical zones](https://utm.eans.ee/avm/).
+- **Where you can fly:** [Estonia's map of geographical zones](https://utm.eans.ee/avm/), described on the authority's
+  [geographical zones page](https://transpordiamet.ee/en/aviation-and-aviation-safety/flying-drones-estonia/geographical-zones).
 - **Authority:** [Estonian Transport Administration](https://transpordiamet.ee/en).
+
+## Registration
+
+Register in LOIS, the authority's aviation safety information system. The state fee is EUR 10 for a new number and for each yearly
+renewal, and the Aviation Act says the number is valid for one year. You register in the state where you live or have your main
+place of business, and the authority says you cannot be registered in more than one. A registered operator may fly in all EU
+states and in Switzerland, Norway, Liechtenstein and Iceland.
+
+- **Age:** the remote pilot must be 16 for the open category. Exceptions: a C0 drone, a privately built drone under 250 g that flies
+  under 19 m/s, or flying under the direct supervision of a qualified pilot.
+- **Pilot certificate:** the A1/A3 certificate is required for a drone of 250 g or more and recommended for lighter ones. The
+  online test has 40 multiple-choice questions and needs 75%. The certificate costs EUR 10 and lasts five years. One from another
+  EASA state means no exam in Estonia.
+- **Visitors:** the authority says the same operator number and pilot certificate let you fly in other EASA states. Its pages do not
+  say how a visitor from outside the EU registers. An operator from another EASA state who wants specific-category flights in
+  Estonia sends an application with a copy of their home authorisation.
+
+## Where and how you can fly
+
+For the open category, the authority gives these limits:
+
+- **Height:** at most 120 m above the ground or water, lower in some areas.
+- **Line of sight:** you must see the drone, or use an observer. Seeing it through a camera does not count.
+- **People:** A1 allows flying over people with a C0 or C1 drone but not over assemblies of people. In A2 stay at least 30 m from
+  uninvolved people (5 m in low-speed mode). In A3 stay at least 150 m from them and from residential, commercial, industrial and
+  recreational areas.
+- **Other:** no dangerous goods, no dropping material, and no flying at the scene of an accident.
+
+## Where you cannot fly without permission
+
+The authority says there are temporary and permanent restricted areas, shown on the drone map.
+
+- **Tallinn control zone:** restrictions apply at all times, and near the airport you may fly only with a specific-category
+  authorisation. Near marked helipads you must notify the Tallinn Tower controller through the app.
+- **Ämari control zone:** a permit is needed from the Defence Forces, applied for at least 5 working days before. It is needed at any
+  height in zone EEGZ19, from 30 m in EEGZ20 and from 60 m in EEGZ21.
+- **Tartu, Kuressaare, Kärdla and Pärnu airports:** height limits on the map apply all day.
+- **Security and nature zones:** set since 8 September 2022. You need permission from the zone's manager, who is named in the map
+  app, and they decide within five business days. Where zones overlap, keep to all of them.
+
+The authority gives no general distance from airports. The map is a supplement and does not relieve the pilot of the rules.
+
+## Remote ID and insurance
+
+- **Remote ID:** the authority's FAQ says drones in classes C1, C2 and C3 (including C5 and C6) come with it, and it is required
+  for all specific-category flights. Check that yours is switched on, or add a transmitter module.
+- **Insurance:** the FAQ says third-party liability insurance is required for a drone over 20 kg, as EASA says. The Aviation Act
+  also requires it for flights under an operational declaration or authorisation. We found nothing on insurance for a lighter
+  drone in the open category.
+
+## Penalties
+
+The Aviation Act (the 2024 consolidated text) sets a fine of up to 300 fine units for a remote pilot who breaks the operating rules, and the same for flying
+without pilot competency. A company can be fined up to EUR 12,000. The Penal Code text we read puts a fine unit at EUR 4, which would
+make 300 units EUR 1,200, but it is an older consolidated version, so check the current figure.
 
 ## Not covered yet
 
-- **Estonia's national rules.** We have not read Estonia's own drone rules, so what we say here is only what EASA says
-  applies everywhere. Fees, how long registration lasts, the minimum age (a state may lower EASA's 16 to 12),
-  insurance, penalties and any local bans are all unverified. Check the authority above before you fly.
-- **Where flying is banned.** Estonia's geographical zones are on the map linked above, and we have not copied them.
+- **Visitors from outside the EU.** The pages we read do not say how they register.
+- **Penalties for flying in restricted areas**, which we did not find, and whether the fine unit has changed since the Penal Code text we read.
+- **Privacy and filming**, which the authority sends to the Data Protection Inspectorate.
+- **Specific-category rules** beyond the points above.
+

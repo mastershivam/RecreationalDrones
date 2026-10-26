@@ -11,8 +11,10 @@ whoMustRegister: >-
 restrictiveness: 2
 restrictivenessReason: >-
   Register online with your national authority and, for most drones, pass an
-  online training exam (EASA). Steps in your country may add to this; we have
-  not read them.
+  online training exam (EASA). The Interior Ministry's guide also lists an
+  authorisation for some restricted zones, which is a permission for that area
+  and not a general step. Steps in your country may add to this; we have not
+  read AACR's own pages.
 registrationFee: null
 registrationWeightGrams: 0
 minOperatorAge: null
@@ -20,11 +22,14 @@ remoteId: >-
   EASA says open-category drones, with limited exceptions, must have a remote
   identification system.
 insurance: >-
-  EASA requires insurance for a drone over 20 kg, and says most member states
-  also require third-party insurance for lighter drones. Check Romania's rules.
+  Romania requires insurance: the Interior Ministry's guide lists a fine for
+  flying without the insurance contract that Government Decision (H.G.) 859/2021
+  requires; we could not read the amount cleanly. EASA requires insurance for a drone over 20
+  kg, and says most member states also require third-party insurance for lighter
+  drones.
 howToRegister:
   needed:
-    - 'Whatever your national authority asks for. We have not read the list for this country.'
+    - 'Whatever your national authority asks for. We have not read AACR''s list for this country.'
   steps:
     - 'Check that you need to register: yes if any drone weighs 250 g or more or has a camera or other sensor that could detect personal data. A toy under 250 g is exempt.'
     - 'Register yourself, once and not each drone, with the authority of the EU country where you live. A visitor from outside the EU registers in the first EU country where they fly.'
@@ -32,12 +37,13 @@ howToRegister:
     - 'Put your operator registration number on every drone you own as a sticker, and enter it into the drone''s Remote ID if it has one.'
   validFor: 'Set by the authority you register with. It is valid in every EASA member state.'
   afterwards: 'Before you fly in any EU country, check that the place is not in a geographical zone that country has published.'
-lastVerified: 2026-10-17
+lastVerified: 2026-10-26
 sources:
   - https://www.easa.europa.eu/en/domains/drones-air-mobility/operating-drone/open-category-low-risk-civil-drones
   - https://www.easa.europa.eu/the-agency/faqs/drones-uas
   - https://www.easa.europa.eu/en/domains/civil-drones/naa
   - https://rpas.caa.ro/
+  - https://www.mai.gov.ro/wp-content/uploads/2025/11/Ghid-de-utilizare-a-dronelor-inmatriculate-civil.pdf
 ---
 
 import EasaRules from '../../components/EasaRules.mdx';
@@ -49,13 +55,22 @@ guide gives those rules, then links to Romania's own authority for what is natio
 
 ## In Romania
 
-- **Register:** [Romania's registration page](https://rpas.caa.ro/).
+- **Insurance and penalties:** the Interior Ministry's guide on civil-registered drones (November 2025, our translation of
+  its Romanian text) lists fines under Government Decision (H.G.) 859/2021, including one for flying without the insurance contract
+  the decision requires. The text we extracted from the PDF is partly garbled, so we give no amounts; read them in the
+  guide itself.
+- **Restricted zones:** the same guide lists an authorisation from the Ministry of National Defence (MApN) for some
+  restricted zones. We have not confirmed which zones or how it applies.
+- **Register:** [Romania's registration page](https://rpas.caa.ro/). We could not reach it from our network when we checked.
 - **Where you can fly:** [Romania's map of geographical zones](https://flightplan.romatsa.ro/init/drones).
 - **Authority:** [Romanian Civil Aeronautical Authority](https://www.caa.ro/).
 
 ## Not covered yet
 
-- **Romania's national rules.** We have not read Romania's own drone rules, so what we say here is only what EASA says
-  applies everywhere. Fees, how long registration lasts, the minimum age (a state may lower EASA's 16 to 12),
-  insurance, penalties and any local bans are all unverified. Check the authority above before you fly.
+- **Romania's national rules.** AACR's own pages were blocked by a human-check page when we tried them, so we have not
+  read them. What we say here comes from EASA and from the Interior Ministry's guide. Fees, how long registration lasts,
+  the minimum age (a state may lower EASA's 16 to 12), and Remote ID for national drones are unverified. Check the
+  authority above before you fly.
 - **Where flying is banned.** Romania's geographical zones are on the map linked above, and we have not copied them.
+  The Interior Ministry's guide appears to mention a 3,000 m distance from certified aerodromes, but its extracted text
+  is too garbled to confirm, so we have not written it down.

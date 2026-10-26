@@ -3,59 +3,127 @@ name: Austria
 iso3: AUT
 authority: Austro Control
 authorityUrl: https://www.austrocontrol.at/
-registrationUrl: https://www.dronespace.at/registrierung/allgemeine_informationen
+registrationUrl: https://utm.dronespace.at/pm/
 whoMustRegister: >-
-  Register yourself once, not each drone, with your home EU country's authority
-  (visitors: the first EU country you fly in). Needed if a drone weighs 250 g or
-  more or has a camera.
+  You register yourself as the operator, not each drone. Needed if a drone
+  weighs 250 g or more, is a "high-speed" drone under 250 g (over 80 joules on
+  impact), or has a camera or other sensor that can capture personal data. Only
+  an EU toy is exempt. Austria registers people who live or have their main seat
+  there; a visitor from another EU country registers at home, and a visitor from
+  outside the EU can register in Austria for a first flight there.
 restrictiveness: 2
 restrictivenessReason: >-
-  Register online with your national authority and, for most drones, pass an
-  online training exam (EASA). Steps in your country may add to this; we have
-  not read them.
-registrationFee: null
+  Register online with Austro Control (EUR 46.80, three years) and take the free
+  online A1/A3 course if your drone needs it. Control zones and some restricted
+  areas need air traffic control consent or an Austro Control permit before you
+  fly. We kept level 2 because this applies to named zones, not to every flight.
+  We have not read Austria's rules on privacy or model aircraft.
+registrationFee: 'EUR 46.80, valid 3 years'
 registrationWeightGrams: 0
-minOperatorAge: null
+minOperatorAge: 18
 remoteId: >-
-  EASA says open-category drones, with limited exceptions, must have a remote
-  identification system.
+  Austro Control says Remote ID has been mandatory since 1 January 2024 for every
+  Specific-category drone and for open-category drones labelled C1, C2, C3, C5 or
+  C6. Drones under 250 g (C0) are exempt, and so are C4 drones with only simple
+  flight control. You store your 16-digit operator number and 3-digit PIN in the
+  drone's system.
 insurance: >-
-  EASA requires insurance for a drone over 20 kg, and says most member states
-  also require third-party insurance for lighter drones. Check Austria's rules.
+  Required for every drone you register, even a DJI Mini. Austro Control says the
+  cover must meet the Luftfahrtgesetz, with a minimum sum of 750,000 special
+  drawing rights (SDR). You enter only the policy number when you register.
 howToRegister:
   needed:
-    - 'Whatever your national authority asks for. We have not read the list for this country.'
+    - 'Austro Control''s pages name no documents to upload. We have not read whether anything else is asked for.'
+    - 'To be over 18 and fully legally capable, and to have your main residence (or, for a company, main business seat) in Austria. A non-EU operator planning a first UAS flight in Austria may also register.'
+    - 'Your insurance policy number. The policy itself is not uploaded.'
+    - 'EUR 46.80 for the registration'
   steps:
-    - 'Check that you need to register: yes if any drone weighs 250 g or more or has a camera or other sensor that could detect personal data. A toy under 250 g is exempt.'
-    - 'Register yourself, once and not each drone, with the authority of the EU country where you live. A visitor from outside the EU registers in the first EU country where they fly.'
-    - 'Complete the online training and exam if your drone needs it. Most drones of 250 g or more do (C1, C3, C4, and older drones). C2 needs more, and C0 and drones under 250 g need none.'
-    - 'Put your operator registration number on every drone you own as a sticker, and enter it into the drone''s Remote ID if it has one.'
-  validFor: 'Set by the authority you register with. It is valid in every EASA member state.'
-  afterwards: 'Before you fly in any EU country, check that the place is not in a geographical zone that country has published.'
-lastVerified: 2026-10-17
+    - 'Check that you need to register: yes if any drone weighs 250 g or more, is a high-speed drone (over 80 joules on impact), or has a camera or other sensor that can capture personal data. Only an EU toy is exempt. The FAQ does not limit this to flights in Austria.'
+    - 'Register yourself, once and not each drone, as an operator. You must live in Austria to register there. If you live in another EU country, register in that country instead.'
+    - 'Take out insurance that meets the Austrian Luftfahrtgesetz (at least 750,000 SDR), and have the policy number ready.'
+    - 'Create an account in the Austro Control Dronespace system and register as an operator. The registration costs EUR 46.80.'
+    - 'Take the free A1/A3 online course and test on dronespace.at if your drone needs it (EASA''s rules above). The FAQ calls the competence certificate (Drohnenführerschein) free.'
+    - 'Enter your 16-digit operator number and 3-digit PIN into the drone''s Remote ID system if it has one, and mark your number on the drone as EASA requires.'
+  validFor: '3 years. You can renew in Dronespace from 31 days before it ends, for EUR 46.80, and keep the same number. The registration is valid in every EASA member state.'
+  afterwards: 'Before each flight, check Dronespace''s zone map for control zones, aerodrome zones and restricted areas. Some need permission. The Neusiedler See area also needs approval from the Burgenland government all year.'
+lastVerified: 2026-10-26
 sources:
   - https://www.easa.europa.eu/en/domains/drones-air-mobility/operating-drone/open-category-low-risk-civil-drones
   - https://www.easa.europa.eu/the-agency/faqs/drones-uas
   - https://www.easa.europa.eu/en/domains/civil-drones/naa
   - https://www.dronespace.at/registrierung/allgemeine_informationen
+  - https://www.dronespace.at/registrierung/voraussetzungen
+  - https://www.dronespace.at/faq
+  - https://www.dronespace.at/open/remote_identification
+  - https://www.dronespace.at/geo_zonen/kontrollzonen
+  - https://www.dronespace.at/geo_zonen/flugplatzzonen
+  - https://www.dronespace.at/geo_zonen/flugbeschraenkungsgebiete
+  - https://utm.dronespace.at/pm/
 ---
 
 import EasaRules from '../../components/EasaRules.mdx';
 
-Austria applies the EU's common drone rules, set by the European Union Aviation Safety Agency (EASA). This
-guide gives those rules, then links to Austria's own authority for what is national.
+Austria applies the EU's common drone rules, set by the European Union Aviation Safety Agency (EASA). This guide gives
+those rules, then Austria's own rules from Austro Control's Dronespace pages, read on 26 October 2026. Our summaries of
+the German pages are our own translation. The Dronespace pages show no date, so check them for changes.
 
 <EasaRules />
 
 ## In Austria
 
-- **Register:** [Austria's registration page](https://www.dronespace.at/registrierung/allgemeine_informationen).
-- **Where you can fly:** [Austria's map of geographical zones](https://utm.dronespace.at/avm/).
+- **Register:** [Austro Control's Dronespace registration portal](https://utm.dronespace.at/pm/), or its
+  [information page](https://www.dronespace.at/registrierung/allgemeine_informationen).
+- **Where you can fly:** Dronespace's zone pages, for [control zones](https://www.dronespace.at/geo_zonen/kontrollzonen),
+  [aerodrome zones](https://www.dronespace.at/geo_zonen/flugplatzzonen) and
+  [restricted areas](https://www.dronespace.at/geo_zonen/flugbeschraenkungsgebiete). The zones are shown in the Dronespace system.
 - **Authority:** [Austro Control](https://www.austrocontrol.at/).
+
+### Registration
+
+- **Fee and term:** EUR 46.80, valid for 3 years. Renewal costs the same, and you keep your number.
+- **Age:** 18 to register as an operator, and you must be fully legally capable. Austro Control's FAQ says the minimum age
+  for the competence certificate is 16, and that from 16 a person may act as a pilot, but an adult must complete the
+  registration. The map's age field is the 18 for registering.
+- **Where you register:** Austria's requirement is a main residence or business seat in Austria. The EU rule is that you
+  register where you live. A non-EU operator may register in Austria for a first UAS flight there. The FAQ says short
+  stays by non-EU operators are covered too.
+- **Number:** a 16-digit number, shown on every drone and entered with the 3-digit PIN into the drone's Remote ID system if
+  it has one. Austro Control says only enforcement authorities can link the number to a person.
+
+### Insurance
+
+Austro Control says the insurance duty under the Luftfahrtgesetz stays, and that cover must be at least 750,000 special
+drawing rights. This includes the DJI Mini series if it must be registered. You enter the policy number when you register
+and do not upload the policy. Its page warns that insurance for flights in other EU countries may need to meet other
+requirements.
+
+### Where you cannot fly without permission
+
+Austro Control's zone pages say these need permission:
+
+- **Control zones** (around Graz, Innsbruck, Klagenfurt, Linz, Salzburg and Wien-Schwechat): only with the consent of
+  the air traffic control unit, requested by filing a flight plan in Dronespace. A drone under 250 g that stays at or
+  below 30 m above ground is exempt.
+- **Aerodrome zones:** an operating permit (Betriebsbewilligung) from Austro Control, under § 18 (4) of the
+  Luftverkehrsregeln 2014. The pages give no distance.
+- **Restricted areas:** Vienna (LO R 15) and the Rheindelta (LO R 18) need a paid Austro Control permit, with the same
+  exemption for a drone under 250 g at or below 30 m. That exemption is lost if an aerodrome without a zone lies in the
+  flight area. Neusiedler See (LO R 16) needs no Austro Control permit in August and September, but nature-protection
+  approval from the Burgenland government is needed before any flight.
+
+### Penalties
+
+A breach can be an administrative offence under section 169 of the Luftfahrtgesetz. The district administrative authority
+can impose fines of up to EUR 22,000, depending on the breach.
 
 ## Not covered yet
 
-- **Austria's national rules.** We have not read Austria's own drone rules, so what we say here is only what EASA says
-  applies everywhere. Fees, how long registration lasts, the minimum age (a state may lower EASA's 16 to 12),
-  insurance, penalties and any local bans are all unverified. Check the authority above before you fly.
-- **Where flying is banned.** Austria's geographical zones are on the map linked above, and we have not copied them.
+- **Distances around airports.** Austro Control's pages give none for control or aerodrome zones; the map is the source.
+  The circles on our map are not an Austrian rule.
+- **Model aircraft, privacy and data protection, and night flying.** The pages we read do not cover them for the open
+  category.
+- **Military zones and temporary event restrictions.** We have not read them.
+- **Nature-protection rules** outside the Neusiedler See area, and any nature reserves.
+- **Fines for uninsured flying or for a missing number.** The FAQ gives only the general maximum of EUR 22,000.
+- **The A2 and specific-category rules**, and the detail of Remote ID for older drones.
+- **Where flying is banned.** Austria's zones are on the Dronespace map linked above, and we have not copied them.

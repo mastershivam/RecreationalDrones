@@ -1,5 +1,15 @@
 import { expect, type Page } from '@playwright/test';
+import { readdirSync } from 'node:fs';
+import { join } from 'node:path';
+import { regionOf } from '../src/lib/regions';
 import { ANALYTICS_HOSTS } from '../src/lib/site';
+
+// How many country guides exist, and how many are in a region, read from the content folder so adding a guide does not break the tests.
+const SLUGS = readdirSync(join(import.meta.dirname, '../src/content/countries'))
+	.filter((f) => f.endsWith('.mdx'))
+	.map((f) => f.replace(/\.mdx$/, ''));
+export const GUIDE_COUNT = SLUGS.length;
+export const guidesIn = (region: string) => SLUGS.filter((s) => regionOf(s) === region).length;
 
 // Fields of the MapLibre map that the tests use.
 interface TestMap {

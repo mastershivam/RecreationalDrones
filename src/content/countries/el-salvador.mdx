@@ -1,0 +1,71 @@
+---
+name: El Salvador
+iso3: SLV
+authority: Civil Aviation Authority (AAC)
+authorityUrl: https://www.aac.gob.sv/rpas-sistema-de-aeronaves-pilotadas-a-distancia/
+registrationUrl: https://formularios.aac.gob.sv/form/registroOperadoRPA
+whoMustRegister: >-
+  A drone of 200 g or more must be registered, and so must its operator (RAC-RPAS 2.010 and 13.010, 13.015). A recreational
+  operator needs no operator certificate (CORPAS) and no operational authorisation (RAC-RPAS 5.055). The AAC's regulation says
+  a drone under 200 g is not subject to registration.
+restrictiveness: 2
+restrictivenessReason: >-
+  Recreational flyers register the aircraft and themselves on the AAC's online form, pay a registration fee and need no
+  certificate or permit before flying. The age is 16, with a parent's written authorisation. We read RAC-RPAS edition 00
+  (19 December 2023) ourselves. The AAC's May 2026 notice points back to it, so we have no newer edition.
+registrationFee: null
+registrationWeightGrams: 200
+minOperatorAge: 16
+remoteId: null
+insurance: >-
+  Not required for a recreational drone: the insurance-policy item on the aircraft form does not apply to recreational
+  equipment (RAC-RPAS 13.010(a)(16); our translation). Aerial work needs a third-party liability policy (CA-RAC-RPAS 5.030 b) 4).
+howToRegister:
+  needed:
+    - 'Your identity document (DUI or passport for a foreigner) and contact details: address, landline and email'
+    - 'For each drone: type, manufacturer, model, serial number, radio frequency, proof of ownership (a purchase invoice or notarised document) and photos from the front, top, bottom and side (RAC-RPAS 13.010)'
+    - 'Your declaration as operator on the AAC form (AAC-ING-000-F2 and F3), with your licences if you hold any'
+    - 'The registration fee receipt. The regulation says a fee is due but does not state the amount'
+  steps:
+    - 'Check the weight: a drone of 200 g or more must be registered, and so must you as its operator (RAC-RPAS 2.010, 13.010 and 13.015).'
+    - 'Register the drone and yourself on the AAC''s online operator form (formularios.aac.gob.sv). The regulation sets out the form content; we did not open the form, so check whether the aircraft has its own form.'
+    - 'Pay the registration fee and keep the receipt (RAC-RPAS 13.010(a)(15) and 13.015(a)(7)).'
+    - 'Accept the AAC''s declaration that you will follow the regulation (RAC-RPAS 5.055 a) 3).'
+    - 'Fix the AAC identification code to the drone and to its ground station or remote control (RAC-RPAS 13.005).'
+  validFor: null
+  afterwards: 'Keep the drone and operator details current: a change of owner needs the registration updated (RAC-RPAS 13.025). Images of private people or property must not be kept or published (RAC-RPAS 5.030 a) 3).'
+lastVerified: 2026-10-26
+sources:
+  - https://www.aac.gob.sv/rpas-sistema-de-aeronaves-pilotadas-a-distancia/
+  - https://www.aac.gob.sv/download/rac-rpas/?wpdmdl=2583
+  - https://www.aac.gob.sv/2026/05/14/tienes-un-dron-conoce-aqui-informacion-importante-para-utilizarlo-de-forma-segura-y-responsable/
+---
+
+This guide follows the Civil Aviation Authority's (AAC) RPAS page, its May 2026 drone notice and RAC-RPAS edition 00 (19 December
+2023). We read the RAC-RPAS PDF ourselves. The AAC's live page returned HTTP 403 to our fetch, so we read a web-archive copy of it
+(11 February 2026) and its links. The text is in Spanish and the translations are ours. Check the AAC for any change.
+
+## Flying as a recreational operator
+
+A recreational drone flies in class A (open). Its largest dimension must be under 1 m, it must stay within 500 m of the ground
+station and within visual line of sight (RAC-RPAS 5.010 a), b) and d)), no higher than 120 m (400 ft) above ground (5.010 e)), and
+at least 30 m from anyone not taking part (5.010 f)). Under RAC-RPAS 4.005
+the AAC bars flights at night, in cloud or outside visual conditions, over military sites, prisons, courts, government buildings,
+embassies, hospitals, ports and other sites in the AIP, and two or more drones at once. It also bars flights from a moving vehicle.
+
+Airports: under 4.005 no flight may come within 6 km of an international airport's perimeter, 2 km of an authorised private
+airstrip, or 250 m of an authorised heliport. The AAC's RPAS page also has a map of operating areas around some airports. We have
+not used it for the airport rule file.
+
+## Not covered yet
+
+- **Fees:** the regulation requires a fee receipt but does not give the amount.
+- **Penalties:** the AAC can warn, fine, suspend or cancel under RAC-RPAS 2.045, which refers to articles 191 to 194 of the Civil
+  Aviation Organic Law. We did not open that law.
+- **Remote ID:** the regulation sets remote identification for class B only (RAC-RPAS 6.020 to 6.030). We found no class A rule.
+- **Visitors:** RAC-RPAS 13.020 covers foreign operators, but we did not establish its full terms. The registration for a foreigner
+  is valid for at most six months.
+- **Whether the online form covers aircraft as well as operators:** we read the form's link on the AAC page, not the form.
+- **Whether the AAC's May 2026 notice adds rules:** its text on the page is a pointer to RAC-RPAS and does not add rules.
+- **Distances from airports and no-fly areas:** 4.005 gives 6 km, 2 km and 250 m. Whether these are the only limits is not clear
+  from the regulation. We have not added them to the airport rule file.

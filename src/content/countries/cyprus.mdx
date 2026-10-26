@@ -2,60 +2,119 @@
 name: Cyprus
 iso3: CYP
 authority: Department of Civil Aviation of Cyprus
-authorityUrl: https://uas.drones.gov.cy/
+authorityUrl: https://drones.gov.cy/
 registrationUrl: https://uas.drones.gov.cy/index.php/sessions/login
 whoMustRegister: >-
   Register yourself once, not each drone, with your home EU country's authority
-  (visitors: the first EU country you fly in). Needed if a drone weighs 250 g or
-  more or has a camera.
+  (visitors from outside the EU: the first EU country you fly in). Needed if a
+  drone weighs more than 250 g, or is lighter but has a camera or other sensor
+  that can capture personal data. Only people aged 18 or over register; a parent
+  or guardian can register for a minor.
 restrictiveness: 2
 restrictivenessReason: >-
-  Register online with your national authority and, for most drones, pass an
-  online training exam (EASA). Steps in your country may add to this; we have
-  not read them.
-registrationFee: null
+  Register online with the Department of Civil Aviation for EUR 15 and, for most
+  drones, pass an online A1/A3 exam for another EUR 15. Both are online, and
+  the pages we read name no in-person step. Flying in the restricted zone around
+  Larnaca and Paphos airports needs the Department's permission first.
+registrationFee: 'EUR 15, valid 3 years'
 registrationWeightGrams: 0
-minOperatorAge: null
+minOperatorAge: 18
 remoteId: >-
   EASA says open-category drones, with limited exceptions, must have a remote
-  identification system.
+  identification system. The Department says to upload your operator number to
+  the drone if it can take it. Drones of class C1, C2, C3, C5 and C6 must also
+  carry the geo-zones map.
 insurance: >-
-  EASA requires insurance for a drone over 20 kg, and says most member states
-  also require third-party insurance for lighter drones. Check Cyprus's rules.
+  The Department's pages we read give no general insurance rule for a light
+  drone. In the restricted zone (Zone B) around Larnaca and Paphos airports it
+  makes third-party liability cover of EUR 1,000,000 mandatory.
 howToRegister:
   needed:
-    - 'Whatever your national authority asks for. We have not read the list for this country.'
+    - 'An email address, to create an account on the Department''s UAS portal (uas.drones.gov.cy)'
+    - 'EUR 15 for the registration fee, and EUR 15 for the training and exam. A visitor from outside the EU can pay only by Visa card.'
+    - 'To be 18 or over. Under 18, a parent, guardian or other responsible person registers as the operator for you.'
   steps:
-    - 'Check that you need to register: yes if any drone weighs 250 g or more or has a camera or other sensor that could detect personal data. A toy under 250 g is exempt.'
-    - 'Register yourself, once and not each drone, with the authority of the EU country where you live. A visitor from outside the EU registers in the first EU country where they fly.'
-    - 'Complete the online training and exam if your drone needs it. Most drones of 250 g or more do (C1, C3, C4, and older drones). C2 needs more, and C0 and drones under 250 g need none.'
-    - 'Put your operator registration number on every drone you own as a sticker, and enter it into the drone''s Remote ID if it has one.'
-  validFor: 'Set by the authority you register with. It is valid in every EASA member state.'
-  afterwards: 'Before you fly in any EU country, check that the place is not in a geographical zone that country has published.'
-lastVerified: 2026-10-17
+    - 'Check that you need to register: yes if a drone weighs more than 250 g, or is lighter but has a camera or other sensor that can capture personal data.'
+    - 'Create an account on the Department''s UAS portal and register as an operator. You pay EUR 15.'
+    - 'Study the nine online lessons and pass the A1/A3 exam (40 multiple-choice questions, 75% to pass, 3 tries). A C0 drone under 250 g needs no exam, but the Department recommends it. The minimum age for the exam is 16; under 16, you may fly only supervised by someone 16 or older.'
+    - 'Put your operator registration number on every drone so that it cannot be erased, and upload it to the drone if it can take it.'
+    - 'Visiting? If you come from outside the EU and this is the first time you fly in an EU country, register here. You also need a remote pilot certificate issued by an EU country, which you can get through the portal''s online school.'
+  validFor: '3 years, then you register again. The remote pilot certificate lasts 5 years.'
+  afterwards: 'Before each flight, check the Department''s geographical zones map. Flying in a restricted zone needs the administrator''s authorisation first.'
+lastVerified: 2026-10-25
 sources:
   - https://www.easa.europa.eu/en/domains/drones-air-mobility/operating-drone/open-category-low-risk-civil-drones
   - https://www.easa.europa.eu/the-agency/faqs/drones-uas
   - https://www.easa.europa.eu/en/domains/civil-drones/naa
   - https://uas.drones.gov.cy/index.php/sessions/login
+  - https://drones.gov.cy/
+  - https://drones.gov.cy/open-category/
+  - https://drones.gov.cy/geo-zones-map/
+  - https://drones.gov.cy/geo-zones-about/
+  - https://drones.gov.cy/geo-zones-airports/
+  - https://drones.gov.cy/open-specific-intro-faq/
 ---
 
 import EasaRules from '../../components/EasaRules.mdx';
 
 Cyprus applies the EU's common drone rules, set by the European Union Aviation Safety Agency (EASA). This
-guide gives those rules, then links to Cyprus's own authority for what is national.
+guide gives those rules, then what the Department of Civil Aviation (DCA) of Cyprus adds. The national part follows the
+Department's drone website (drones.gov.cy) pages on registration, the open category and geographical zones, read on
+25 October 2026. Check it for any change.
 
 <EasaRules />
 
 ## In Cyprus
 
-- **Register:** [Cyprus's registration page](https://uas.drones.gov.cy/index.php/sessions/login).
-- **Where you can fly:** [Cyprus's map of geographical zones](https://www.google.com/maps/d/viewer?mid=1ad8tWU60h-QEz0ZSerTdxdItJhF-Ruqe&ll=35.03970867440805%2C33.13249101664633&z=8).
-- **Authority:** [Department of Civil Aviation of Cyprus](https://uas.drones.gov.cy/).
+- **Register:** [the Department's UAS portal](https://uas.drones.gov.cy/index.php/sessions/login).
+- **Where you can fly:** [the Department's geographical zones map](https://drones.gov.cy/geo-zones-map/), a downloadable file.
+- **Authority:** [Department of Civil Aviation of Cyprus](https://drones.gov.cy/).
+
+## Registration
+
+The Department says you register as an operator if a drone weighs more than 250 g, or is lighter but has a camera or
+other equipment that can capture personal data. You register the operator, not the drone.
+
+- **Fee and term:** EUR 15, valid for 3 years, then you register again.
+- **Age:** "You must register ONLY if you are 18 years of age and above." Otherwise a parent, guardian or other
+  responsible person registers as the operator for you.
+- **Pilot exam:** the A1/A3 online training and exam cost EUR 15 in total. There are 40 multiple-choice questions, the pass
+  mark is 75% and you get 3 tries. The certificate lasts 5 years. The minimum age for remote pilots is 16, and under 16
+  you may fly if supervised by someone 16 or older. A C0 drone under 250 g needs no exam.
+- **Your number:** it must be displayed on every drone so that it cannot be erased, and uploaded to the drone if it can
+  take it.
+- **Visitors from outside the EU:** if this is your first time flying in an EU country, you must register as an operator
+  with the Department, and hold a remote pilot certificate issued by an EU country. A visitor can pay only by Visa card.
+
+## Where you cannot fly without permission
+
+Cyprus sets its geographical zones by ministerial decree 190/2024, as amended by 123/2025, under Article 15 of Regulation
+2019/947. There are two kinds, restricted (yellow on the map) and prohibited. The Department says flights in a restricted
+zone can only be made after authorisation from the zone's administrator, which you request as the operator.
+
+- **Larnaca and Paphos airports:** each has two zones. In Zone A (red) "NO UAS operations are allowed", and the page
+  warns of heavy fines and imprisonment. In Zone B (yellow), open-category flying is restricted: you need the Department's
+  permission by sending its airport airspace reservation request form 7 working days ahead (the page also says 10 for
+  Larnaca and Paphos), and third-party liability insurance of EUR 1,000,000 is mandatory. The page gives no distances; check
+  the zone map.
+- **Visitors from outside the EU** are told to keep at least 8 km from airports and heliports. The Department's airport
+  zones page gives no 8 km figure, so we do not know how this relates to Zones A and B.
+- **Preinstalled maps:** the Department warns that most DJI drones come with a map for Cyprus that "IS NOT THE RIGHT
+  ONE".
+- **Other places:** the Department's rules of the air say not to overfly crowds, to keep your drone in sight, and not to
+  take photos, video or sound of people without their permission. It also asks you not to fly where emergency services
+  are working.
+
+## Penalties
+
+The Department says only that "Violation of the law constitutes an offence and offenders will be liable to penalties".
+It gives no amounts for the open category. For Zone A at the airports it warns of "heavy fines and imprisonment".
 
 ## Not covered yet
 
-- **Cyprus's national rules.** We have not read Cyprus's own drone rules, so what we say here is only what EASA says
-  applies everywhere. Fees, how long registration lasts, the minimum age (a state may lower EASA's 16 to 12),
-  insurance, penalties and any local bans are all unverified. Check the authority above before you fly.
-- **Where flying is banned.** Cyprus's geographical zones are on the map linked above, and we have not copied them.
+- **Insurance.** The pages we read give no general rule for a light drone, only the Zone B requirement above.
+- **Penalty amounts** and the Cypriot law behind them. The Department's regulations page lists only EU rules.
+- **Airport distances.** The airport zones page gives no distance; the Department's zones file is the source.
+- **Where else flying is banned.** The zones are in the Department's map and files, and we have not copied them. Its
+  [zones JSON file](https://drones.gov.cy/wp-content/uploads/2025/05/CYP_GeoZones_06_05_25.json) is dated 6 May 2025, and the
+  map file on its page is labelled ver 09.

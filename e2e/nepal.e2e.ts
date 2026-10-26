@@ -15,7 +15,7 @@ test.describe('Nepal on the globe', () => {
 	test('is highlighted, and so is its neighbour with no guide not', async ({ page }) => {
 		await showNepal(page);
 		expect(await highlightedAt(page, NEPAL)).toEqual(['NPL']);
-		expect(await highlightedAt(page, [90.4, 27.4])).toEqual([]); // Bhutan has no guide yet
+		expect(await highlightedAt(page, [96, 21])).toEqual([]); // Myanmar has no guide yet
 	});
 
 	test('shows a hover preview with the key facts', async ({ page }) => {

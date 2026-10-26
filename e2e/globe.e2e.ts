@@ -16,7 +16,7 @@ test.describe('globe', () => {
 	test('highlights countries that have a guide, and only those', async ({ page }) => {
 		await openGlobe(page);
 		await expect.poll(() => highlightedAt(page, [-2, 54])).toContain('GBR'); // United Kingdom
-		expect(await highlightedAt(page, [0, -80])).toEqual([]); // Antarctica has no guide (a country that might get one would break this test)
+		expect(await highlightedAt(page, [-40, 72])).toEqual([]); // Greenland has no guide (a country that might get one would break this test)
 	});
 
 	test('has night shading', async ({ page }) => {

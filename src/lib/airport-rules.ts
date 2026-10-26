@@ -65,8 +65,377 @@ export const AIRPORT_RULES: Record<string, AirportRule | { none: string }> = {
 		authority: 'Drone One-Stop portal, "Drone flight approval"',
 		note: 'The portal says flying in the control zone round an airfield (radius 9.3 km) needs prior approval whatever the drone weighs, and that a flight within 3 km of an airfield centre needs coordination. Only airports with a control zone have one, but this circle is drawn at every airport in the open data, so it shows more places than the rule covers. The prohibited zones (P-73 and others) are not drawn.',
 	},
+	SGP: {
+		iso2: 'SG',
+		radiusMeters: 5000,
+		indicative: true,
+		ruleUrl: 'https://www.caas.gov.sg/unmanned-aircraft/operator-and-activity-permits/',
+		authority: 'CAAS, "Operator and activity permits"',
+		note: 'CAAS says a Class 2 Activity Permit is needed to fly within 5 km of an airport or military airbase. This circle is 5 km from the centre of every airport in the open data, and military airbases are not shown, so it is only a guide. Use CAAS\'s no-fly zone map for the real areas.',
+	},
+	ARG: {
+		iso2: 'AR',
+		radiusMeters: 5000,
+		indicative: true,
+		ruleUrl: 'https://www.argentina.gob.ar/anac/nuevo-marco-normativo-para-la-operacion-de-drones',
+		authority: 'ANAC, "Nuevo marco normativo para la operación de drones" (Resolution 550/2025)',
+		note: 'ANAC says that without prior authorisation you may fly only up to 43 m within 5 km of a runway threshold, and not in a runway approach or climb path. This circle is 5 km from the centre of every airport in the open data, so it is only a guide, and it marks where the 43 m limit applies, not a ban. Control zones are also closed to the open category; the AIP shows the real airspace.',
+	},
+	COL: {
+		none: "Aerocivil points to its UAS geographic viewer for restricted airspace and gives no distance from airports on the pages we read (RAC 100, which may, would not load). A fixed circle would mislead.",
+	},
+	MYS: {
+		none: "CAAM asks for an Authorisation to Fly before any flight and gives no distance from airports on the pages we saw. A fixed circle would mislead.",
+	},
+	TUR: {
+		iso2: 'TR',
+		radiusMeters: 9260,
+		indicative: true,
+		ruleUrl: 'https://web.shgm.gov.tr/',
+		authority: 'SHGM, SHT-İHA Rev.04, art. 18(1)(a)',
+		note: 'SHT-İHA Rev.04 (2020, read from an archive copy) says permission is needed to fly within 5 nautical miles of the nearest runway edge. This circle is 5 nautical miles from the centre of every airport in the open data, so it shows a little more than the rule covers. The 2026 instruction was not read. Use the İHA Takip zone map.',
+	},
+	ISR: {
+		none: "The CAAI's study material, as far as we could read it, gives no fixed distance from airports (gov.il refused our requests). A fixed circle would mislead.",
+	},
+	PHL: {
+		iso2: 'PH',
+		radiusMeters: 10000,
+		indicative: true,
+		ruleUrl: 'https://www.caap.gov.ph/types-of-operations/',
+		authority: 'CAAP, "Types of operations"',
+		note: 'CAAP says a special flight permit is needed to operate within 10 km of an aerodrome (its table says "ARP"). This circle is 10 km from the centre of every airport in the open data, so it is only a guide. Ask CAAP for the real airspace.',
+	},
+	CHL: {
+		none: "The DGAC documents, as far as we could read them (search excerpts), give no fixed distance from airports. A fixed circle would mislead.",
+	},
+	PER: {
+		none: "The MTC pages, as far as we could read them (search excerpts), give no fixed distance from airports. A fixed circle would mislead.",
+	},
+	SAU: {
+		iso2: 'SA',
+		radiusMeters: 8000,
+		indicative: true,
+		ruleUrl: 'https://www.gaca.gov.sa/',
+		authority: 'GACA, GACAR Part 101 s.101.85(a)(4)',
+		note: 'GACAR Part 101 (read from an archive copy) asks for notice before flying within 8 km of an aerodrome. It is a notice, not a ban. This circle is 8 km from the centre of every airport in the open data, so it is only a guide. Check GACA for the real airspace.',
+	},
+	KEN: {
+		none: "The KCAA's regulations, as far as we could read them (search excerpts), give no fixed distance from airports. A fixed circle would mislead.",
+	},
+	IDN: {
+		none: "The Ministry's pages, as far as we could read them (search excerpts), give no fixed distance from airports. A fixed circle would mislead.",
+	},
+	TZA: {
+		none: "The TCAA's pages, as far as we could read them (search excerpts), give no fixed distance from airports. A fixed circle would mislead.",
+	},
+	LKA: {
+		none: "The CAASL's pages, as far as we could read them (search excerpts), give no fixed distance from airports. A fixed circle would mislead.",
+	},
+	SRB: {
+		none: "The CAD's pages, as far as we could read them (search excerpts), give no fixed distance from airports. A fixed circle would mislead.",
+	},
+	QAT: {
+		none: "The CAA's pages, as far as we could read them (search excerpts), give no fixed distance from airports. A fixed circle would mislead.",
+	},
+	NGA: {
+		iso2: 'NG',
+		radiusMeters: 10000,
+		indicative: true,
+		ruleUrl: 'https://ncaa.gov.ng/',
+		authority: 'NCAA, Nig.CARs Part 21, rule 21.1.1.5',
+		note: 'Part 21 sets 10 km from aerodromes, helipads and heliports. This circle is 10 km from the centre of every airport in the open data and shows no helipads or heliports, so it is only a guide.',
+	},
+	GHA: {
+		iso2: 'GH',
+		radiusMeters: 10000,
+		indicative: true,
+		ruleUrl: 'https://www.gcaa.com.gh/web/wp-content/uploads/2023/RPAS/RPAS%20FAQs.pdf',
+		authority: 'GCAA RPAS FAQs',
+		note: 'The GCAA\'s FAQ sets a 10 km restriction round airports or helipads with published instrument procedures, and 5 km where none are published, and says the GCAA can allow a flight inside it. This circle is 10 km from the centre of every airport in the open data, so it shows more places than the rule covers. Ask the GCAA for the real airspace.',
+	},
+	UGA: {
+		iso2: 'UG',
+		radiusMeters: 4000,
+		indicative: true,
+		ruleUrl: 'https://caa.go.ug/Download/81/unmanned-aircraft-systems-drones/5508/caa-unmanned-aircraft-systems-regulations-2022',
+		authority: 'UCAA, Unmanned Aircraft Systems Regulations 2022, reg. 52(a)',
+		note: 'Regulation 52 needs permission within 4 km of an aerodrome reference point. This circle is 4 km from the centre of every airport in the open data, so it is only a guide.',
+	},
+	OMN: {
+		iso2: 'OM',
+		radiusMeters: 5000,
+		indicative: true,
+		ruleUrl: 'https://www.caa.gov.om/files/publications/regulation-governing-unmanned-aircraft-systems-drones.pdf',
+		authority: 'CAA Oman, Regulation Decision 1412/2023 (drones), art. 17(1)',
+		note: 'The regulation bars flying within 5 km of airports, seaports and protected places. This circle is 5 km from the centre of every airport in the open data, so it is only a guide; it does not show seaports or protected places. Ask the CAA for the real airspace.',
+	},
+	JOR: {
+		none: "The CARC's documents, as far as we could read them (search excerpts), give no fixed distance from airports. A fixed circle would mislead.",
+	},
+	BGD: {
+		iso2: 'BD',
+		radiusMeters: 18520,
+		indicative: true,
+		ruleUrl: 'https://new.caab.gov.bd/corporate/rpas.pdf',
+		authority: 'CAAB, circular CAC-5 (Issue 01, 2019)',
+		note: 'CAC-5 (read from an archive copy) sets 10 nautical miles from an aerodrome. A 2021 draft order is marked draft and we could not tell which text is in force. This circle is 10 nautical miles from the centre of every airport in the open data, so it is only a guide.',
+	},
+	NAM: {
+		none: "The NCAA's documents, as far as we could read them (search excerpts), give no fixed distance from airports. A fixed circle would mislead.",
+	},
+	BWA: {
+		none: "The CAAB's documents, as far as we could read them (search excerpts), give no fixed distance from airports. A fixed circle would mislead.",
+	},
+	MUS: {
+		none: "The DCA's documents, as far as we could read them (search excerpts), give no fixed distance from airports. A fixed circle would mislead.",
+	},
+	KAZ: {
+		none: "The Aviation Administration's documents, as far as we could read them (search excerpts), give no fixed distance from airports. A fixed circle would mislead.",
+	},
+	GEO: {
+		none: "The GCAA's documents, as far as we could read them (search excerpts), give no fixed distance from airports. A fixed circle would mislead.",
+	},
+	MNE: {
+		none: "The CAA's documents, as far as we could read them (search excerpts), give no fixed distance from airports. A fixed circle would mislead.",
+	},
+	ALB: {
+		none: "The AAC's documents, as far as we could read them (search excerpts), give no fixed distance from airports. A fixed circle would mislead.",
+	},
+	MKD: {
+		iso2: 'MK',
+		radiusMeters: 8000,
+		indicative: true,
+		ruleUrl: 'https://www.caa.gov.mk/en/20706-2/',
+		authority: 'CAA North Macedonia, guidance on aircraft without crew',
+		note: 'An older, undated CAA guidance page says drones should stay at least 8 km (5 miles) from commercial airports. We did not confirm it against the 2025 Regulation on unmanned aircraft. This circle is 8 km from the centre of every airport in the open data, so it is only a guide. Check the CAA for the real zones.',
+	},
+	MNG: {
+		iso2: 'MN',
+		radiusMeters: 4000,
+		indicative: true,
+		ruleUrl: 'https://backend-api.mcaa.gov.mn/storage/filemanager/f8b4b814-cf21-4014-aa17-ca221e3bf048.pdf',
+		authority: 'MCAA, AC102-1 (summary of Part 101)',
+		note: 'AC102-1 gives 4 km from an aerodrome unless conditions allow flying closer. We did not read Part 101 itself. This circle is 4 km from the centre of every airport in the open data, so it is only a guide.',
+	},
+	RWA: {
+		none: "The RCAA's documents, as far as we could read them (search excerpts), give no fixed distance from airports. A fixed circle would mislead.",
+	},
+	CRI: {
+		none: "The DGAC's documents, as far as we could read them (search excerpts), give no fixed distance from airports. A fixed circle would mislead.",
+	},
+	URY: {
+		none: "The DINACIA's documents, as far as we could read them (search excerpts), give no fixed distance from airports. A fixed circle would mislead.",
+	},
+	ZWE: {
+		iso2: 'ZW',
+		radiusMeters: 5500,
+		indicative: true,
+		ruleUrl: 'https://www.caaz.co.zw/drone-safety/',
+		authority: 'CAAZ, drone safety',
+		note: 'CAAZ\'s pages, as summarised by a search, say drones are prohibited within 5.5 km (3 nautical miles) of any airport or airfield. This circle is 5.5 km from the centre of every airport in the open data, so it is only a guide. Ask CAAZ for the real airspace.',
+	},
+	MDV: {
+		none: "The CAA's documents, as far as we could read them (search excerpts), give no fixed distance from airports. A fixed circle would mislead.",
+	},
+	KWT: {
+		none: "The DGCA's documents, as far as we could read them (search excerpts), give no fixed distance from airports. A fixed circle would mislead.",
+	},
+	FJI: {
+		iso2: 'FJ',
+		radiusMeters: 5000,
+		indicative: true,
+		ruleUrl: 'https://www.caaf.org.fj/rpas-frequently-asked-questions/',
+		authority: 'CAAF, RPAS FAQ',
+		note: 'CAAF\'s FAQ, as summarised by a search, says flights need permission within 5 km of an international aerodrome and within 3 km of a domestic one. This circle is 5 km from the centre of every airport in the open data, so it shows more than the rule covers at domestic airports. Ask CAAF for the real airspace.',
+	},
+	PNG: {
+		iso2: 'PG',
+		radiusMeters: 5556,
+		indicative: true,
+		ruleUrl: 'https://casapng.gov.pg/admin/images/372675fd91d5577dac18323252c4b2d4.pdf',
+		authority: 'CASA PNG, Part 101 and Part 102',
+		note: 'CASA PNG\'s rules, as summarised by a search, ask for an additional qualification to fly a remotely piloted aircraft within 3 nautical miles (5.56 km) of an aerodrome reference point. This circle is drawn at every airport in the open data, so it is only a guide. Ask CASA PNG for the real airspace.',
+	},
+	DOM: {
+		none: "IDAC's guide, as far as we could read it (search excerpts), gives no fixed distance from airports. A fixed circle would mislead.",
+	},
+	JAM: {
+		iso2: 'JM',
+		radiusMeters: 5000,
+		indicative: true,
+		ruleUrl: 'https://www.jcaa.gov.jm/recreational-ua-operators-or-hobbyists/',
+		authority: 'JCAA, recreational UA operators',
+		note: 'The JCAA\'s guidelines for recreational operators, as summarised by a search, say not to fly within 5 km (16,500 ft) of any aerodrome or rotorcraft landing zone. This circle is 5 km from the centre of every airport in the open data, so it is only a guide. Ask the JCAA for the real airspace.',
+	},
+	TTO: {
+		none: "The TTCAA's documents, as far as we could read them (search excerpts), give no fixed distance from airports. A fixed circle would mislead.",
+	},
+	MDA: {
+		none: "The CAA's documents, as far as we could read them (search excerpts), give no fixed distance from airports. A fixed circle would mislead.",
+	},
+	PRY: {
+		none: "The DINAC's documents, as far as we could read them (search excerpts), give no fixed distance from airports. A fixed circle would mislead.",
+	},
+	BIH: {
+		iso2: 'BA',
+		radiusMeters: 1500,
+		indicative: true,
+		ruleUrl: 'https://www.bhdca.gov.ba/index.php/en/drone',
+		authority: 'BHDCA, drone page (commercial operations, rule h)',
+		note: 'The BHDCA\'s drone page says that, for commercial flights, a drone may fly within an airport area at a distance of less than 1.5 km only with the prior consent of air traffic control. The page gives no airport distance for non-commercial flights, so this circle shows more than the rule covers for recreational flying. It is 1.5 km from the centre of every airport in the open data. Ask the BHDCA for the real airspace.',
+	},
+	MOZ: {
+		iso2: 'MZ',
+		radiusMeters: 5000,
+		indicative: true,
+		ruleUrl: 'https://www.iacm.gov.mz/app/uploads/2018/12/DOS-09-2018-Normas-de-Operacoes-de-Sistema-de-Aeronave-Pilotada-Remotamente-RPAS.pdf',
+		authority: 'IACM, directive DOS-09-2018, section 8.3.3(d)',
+		note: "The directive's prohibited list, which section 8.2.1(c) applies to recreational (Category A) flying, includes 5 km from aerodromes in Class G airspace. This circle is 5 km from the centre of every airport in the open data, whatever its airspace class, so it shows more places than the rule covers.",
+	},
+	SEN: {
+		none: "The ANACIM's documents, as far as we could read them (search excerpts), give no fixed distance from airports. A fixed circle would mislead.",
+	},
+	UZB: {
+		none: "The Civil Aviation Agency's documents, as far as we could read them (search excerpts), give no fixed distance from airports. A fixed circle would mislead.",
+	},
+	HND: {
+		none: "The AHAC's documents, as far as we could read them (search excerpts), give no fixed distance from airports. A fixed circle would mislead.",
+	},
+	SLV: {
+		none: "The AAC's documents, as far as we could read them (search excerpts), give no fixed distance from airports. A fixed circle would mislead.",
+	},
+	MDG: {
+		none: "The ACM's documents, as far as we could read them (search excerpts), give no fixed distance from airports. A fixed circle would mislead.",
+	},
+	CMR: {
+		none: "The CCAA's documents, as far as we could read them (search excerpts), give no fixed distance from airports. A fixed circle would mislead.",
+	},
+	CIV: {
+		none: "The ANAC's documents, as far as we could read them (search excerpts), give no fixed distance from airports. A fixed circle would mislead.",
+	},
+	CHN: {
+		none: "The CAAC's documents, as far as we could read them (search excerpts), give no fixed distance from airports. A fixed circle would mislead.",
+	},
+	TWN: {
+		none: "The CAA's documents, as far as we could read them (search excerpts), give no fixed distance from airports. A fixed circle would mislead.",
+	},
+	BRN: {
+		iso2: 'BN',
+		radiusMeters: 5000,
+		indicative: true,
+		ruleUrl: 'https://www.dca.gov.bn/Site%20Pages/Unmanned%20Aircraft%20Registration%20Guide.aspx',
+		authority: 'DCA Brunei, unmanned aircraft registration guide',
+		note: 'The DCA\'s guide, as summarised by a search, says to keep drones away from airports, heliports, military bases and other restricted areas, specifically within 5 km. This circle is 5 km from the centre of every airport in the open data; heliports and military bases are not shown, so it is only a guide. Ask the DCA for the real areas.',
+	},
+	MEX: {
+		iso2: 'MX',
+		radiusMeters: 9200,
+		indicative: true,
+		ruleUrl: 'https://www.gob.mx/cms/uploads/attachment/file/602732/nom-107-sct3-2019-201119.pdf',
+		authority: 'SCT/AFAC, NOM-107-SCT3-2019, section 4.10.1',
+		note: 'NOM-107 section 4.10.1 sets 9.2 km from aerodromes (900 m from heliports, section 4.10.2, not shown). This circle is 9.2 km from the centre of every airport in the open data, so it is only a guide.',
+	},
+	RUS: {
+		none: "Rosaviatsia's documents, as far as we could read them (search excerpts), give no fixed distance from airports. A fixed circle would mislead.",
+	},
+	ECU: {
+		none: "The DGAC's documents, as far as we could read them (search excerpts), give no fixed distance from airports. A fixed circle would mislead.",
+	},
+	PAK: {
+		none: "The PCAA's documents, as far as we could read them (search excerpts), give no fixed distance from airports. A fixed circle would mislead.",
+	},
+	PAN: {
+		none: "The AAC's documents, as far as we could read them (search excerpts), give no fixed distance from airports. A fixed circle would mislead.",
+	},
+	VEN: {
+		none: "The INAC's documents, as far as we could read them (search excerpts), give no fixed distance from airports. A fixed circle would mislead.",
+	},
+	BHR: {
+		none: "The CAA's documents, as far as we could read them (search excerpts), give no fixed distance from airports. A fixed circle would mislead.",
+	},
+	DZA: {
+		none: "The national centre's documents, as far as we could read them (search excerpts), give no fixed distance from airports. A fixed circle would mislead.",
+	},
+	SYC: {
+		none: "The SCAA's documents, as far as we could read them (search excerpts), give no fixed distance from airports. A fixed circle would mislead.",
+	},
+	BRB: {
+		none: "The BCAA's documents, as far as we could read them (search excerpts), give no fixed distance from airports. A fixed circle would mislead.",
+	},
+	GUY: {
+		none: "The GCAA's documents, as far as we could read them (search excerpts), give no fixed distance from airports. A fixed circle would mislead.",
+	},
+	BLZ: {
+		none: "The BDCA's documents, as far as we could read them (search excerpts), give no fixed distance from airports. A fixed circle would mislead.",
+	},
+	CUB: {
+		none: "The IACC's documents, as far as we could read them (search excerpts), give no fixed distance from airports. A fixed circle would mislead.",
+	},
+	MCO: {
+		none: "The Monaco decrees' documents, as far as we could read them (search excerpts), give no fixed distance from airports. A fixed circle would mislead.",
+	},
+	AND: {
+		none: "The AAA's documents, as far as we could read them (search excerpts), give no fixed distance from airports. A fixed circle would mislead.",
+	},
+	KOS: {
+		none: "The CAA's documents, as far as we could read them (search excerpts), give no fixed distance from airports. A fixed circle would mislead.",
+	},
+	BLR: {
+		none: "The Department of Aviation's documents, as far as we could read them (search excerpts), give no fixed distance from airports. A fixed circle would mislead.",
+	},
+	KGZ: {
+		none: "The Agency's documents, as far as we could read them (search excerpts), give no fixed distance from airports. A fixed circle would mislead.",
+	},
+	VNM: {
+		none: "The CAAV's documents, as far as we could read them (search excerpts), give no fixed distance from airports. A fixed circle would mislead.",
+	},
+	BTN: {
+		iso2: 'BT',
+		radiusMeters: 5000,
+		indicative: true,
+		ruleUrl: 'https://bcaa.gov.bt/wp-content/uploads/2025/02/UAS-Regulation-2017.pdf',
+		authority: 'BCAA, UAS Regulation 2017, clause 4.12.10.3(c)',
+		note: 'The regulation puts 5 km from a controlled aerodrome off limits unless air traffic control authorises. This circle is 5 km from the centre of every airport in the open data, controlled or not, so it shows more places than the rule covers.',
+	},
+	SLE: {
+		iso2: 'SL',
+		radiusMeters: 4000,
+		indicative: true,
+		ruleUrl: 'https://www.slcaa.gov.sl/',
+		authority: 'SLCAA, Part 6B rule 2.11.1',
+		note: 'Part 6B sets 4 km from an aerodrome, and from the movement area of a controlled aerodrome. This circle is 4 km from the centre of every airport in the open data, so it is only a guide.',
+	},
+	CPV: {
+		iso2: 'CV',
+		radiusMeters: 2000,
+		indicative: true,
+		ruleUrl: 'https://www.aac.cv/artigos/drones',
+		authority: 'AAC Cabo Verde, drones',
+		note: 'The AAC\'s drone page, as summarised by a search, says drones may not be flown within 2,000 m of an aerodrome or landing site, or along aircraft flight routes. This circle is 2 km from the centre of every airport in the open data, so it is only a guide. Ask the AAC for the real areas.',
+	},
+	IRN: {
+		none: "The CAO's pages, as far as we could read them (search excerpts), give no fixed distance from airports. A fixed circle would mislead.",
+	},
+	EGY: {
+		none: "The ECAA's pages, as far as we could read them (search excerpts), give no fixed distance from airports. A fixed circle would mislead.",
+	},
+	ETH: {
+		none: "The ECAA's pages, as far as we could read them (search excerpts), give no fixed distance from airports. A fixed circle would mislead.",
+	},
+	SLB: {
+		none: "CAASI's pages, as far as we could read them (search excerpts), give no fixed distance from airports. A fixed circle would mislead.",
+	},
+	ATG: {
+		none: "The ECCAA's pages, as far as we could read them (search excerpts), give no fixed distance from airports. A fixed circle would mislead.",
+	},
 	ARE: {
-		none: "The UAE Drones portal and manual say flights are approved by the authority and that the app gives airspace updates, but give no distance from airports and no list of no-fly areas. A fixed circle would mislead.",
+		iso2: 'AE',
+		radiusMeters: 5000,
+		indicative: true,
+		ruleUrl: 'https://u.ae/en/information-and-services/justice-safety-and-the-law/Safety/aviation-safety',
+		authority: 'GCAA and the UAE government portal (u.ae)',
+		note: "The u.ae aviation safety page and the GCAA registration page say not to fly within 5 km of the airports' outer fence, heliports, helicopter landing sites, airfields and controlled zones. The 5 km is not in the regulation we read (CAR-UAR issue 3), and the guide says so. This circle is 5 km from the airport's centre, not its fence, and is drawn at every airport in the open data, so it is only a guide. Dubai has its own authority (DCAA), whose directive we read but whose map we could not. Use the UAE Drones app for the real zones.",
 	},
 	GBR: {
 		iso2: 'GB',
@@ -142,7 +511,21 @@ export const AIRPORT_RULES: Record<string, AirportRule | { none: string }> = {
 	PRT: EU_NONE,
 	ROU: EU_NONE,
 	SVK: EU_NONE,
-	SVN: EU_NONE,
+	SVN: {
+		iso2: 'SI',
+		radiusMeters: 5000,
+		indicative: true,
+		ruleUrl: 'https://www.caa.si/',
+		authority: 'Civil Aviation Agency of Slovenia, 2024 UAS regulation (Uradni list RS 39/2024), art. 13',
+		note: 'In the open category, flying inside a control zone (CTR) within 5 km of an airport reference point is banned. This circle is 5 km from the airport\'s centre and is drawn at every airport in the open data, including those with no control zone, so it shows more places than the rule covers. Use the agency\'s 2D zone map for the real zones.',
+	},
 	ESP: EU_NONE,
-	SWE: EU_NONE,
+	SWE: {
+		iso2: 'SE',
+		radiusMeters: 5000,
+		indicative: true,
+		ruleUrl: 'https://www.transportstyrelsen.se/en/aviation/aircraft/drones-unmanned-aircraft/guide-to-uas-operations-in-sweden/',
+		authority: 'Transportstyrelsen, "Guide to UAS operations in Sweden"',
+		note: 'Transportstyrelsen says flying closer than 5 km to any runway needs air traffic control permission at any height, and that heliports need coordination within 1,000 m. This circle is 5 km from the airport\'s centre, not its runway, and is drawn at every airport in the open data, so it is only a guide. Heliports are not shown. Use LFV\'s drone chart for the real zones.',
+	},
 };

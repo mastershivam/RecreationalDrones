@@ -3,59 +3,158 @@ name: Germany
 iso3: DEU
 authority: Federal Aviation Office (Luftfahrt-Bundesamt, LBA)
 authorityUrl: https://www.lba.de/
-registrationUrl: https://www.uas-operations.de/homepage/en/information/general/registration-and-qualification/
+registrationUrl: https://uas-registration.lba-openuav.de/#/registration/uasOperator
 whoMustRegister: >-
-  Register yourself once, not each drone, with your home EU country's authority
-  (visitors: the first EU country you fly in). Needed if a drone weighs 250 g or
-  more or has a camera.
+  Register yourself once as the operator, not each drone, with the LBA if you
+  live in Germany. Needed if a drone weighs 250 g or more, or has a camera,
+  microphone or other sensor that can record personal data (a toy is exempt). A
+  visitor registered in another EU state does not register in Germany; one from
+  outside the EU registers in the first EU state where they fly.
 restrictiveness: 2
 restrictivenessReason: >-
-  Register online with your national authority and, for most drones, pass an
-  online training exam (EASA). Steps in your country may add to this; we have
-  not read them.
-registrationFee: null
+  Register online with the LBA for EUR 20 (the form is in German only) and, for a
+  drone of 250 g or more, pass an online A1/A3 test (EUR 25). Liability insurance
+  is required. No in-person step and no permission before flying outside the
+  geographical zones, where the rules are stricter (for example, most nature
+  reserves are closed to flying for fun and a home or garden needs the owner's
+  consent).
+registrationFee: 'EUR 20 for a private person (EUR 50 for a legal person), per the portal''s own page (status 15 February 2023); no end date stated'
 registrationWeightGrams: 0
-minOperatorAge: null
+minOperatorAge: 16
 remoteId: >-
-  EASA says open-category drones, with limited exceptions, must have a remote
-  identification system.
+  The German portal says C1, C2 and C3 drones carry a remote identification
+  system, and the operator enters their e-ID into it; a C4 drone needs it only if
+  one is available. EASA says open-category drones, with limited exceptions, must
+  have one. The pages we read do not say what applies to drones without a class
+  label or to C5 and C6.
 insurance: >-
-  EASA requires insurance for a drone over 20 kg, and says most member states
-  also require third-party insurance for lighter drones. Check Germany's rules.
+  Liability insurance is mandatory. The portal says a drone is considered an
+  aircraft and that operators must take out liability insurance; the certificate
+  must be at hand when flying. Section 43(2) of the Civil Aviation Act (LuftVG)
+  obliges the keeper of an aircraft to hold liability insurance in an amount set
+  by regulation. The portal says section 37 sets that minimum sum, but section 37
+  sets liability limits and names no insurance amount, and we did not find the
+  regulation's figure. Flying without proof of cover is an administrative offence.
 howToRegister:
   needed:
-    - 'Whatever your national authority asks for. We have not read the list for this country.'
+    - 'The LBA registration form, which is in German only; the documents it asks for were not on the pages we read'
+    - 'EUR 20 for the registration fee'
+    - 'Your liability insurance details for the drone (the portal says liability insurance is required)'
   steps:
-    - 'Check that you need to register: yes if any drone weighs 250 g or more or has a camera or other sensor that could detect personal data. A toy under 250 g is exempt.'
-    - 'Register yourself, once and not each drone, with the authority of the EU country where you live. A visitor from outside the EU registers in the first EU country where they fly.'
-    - 'Complete the online training and exam if your drone needs it. Most drones of 250 g or more do (C1, C3, C4, and older drones). C2 needs more, and C0 and drones under 250 g need none.'
-    - 'Put your operator registration number on every drone you own as a sticker, and enter it into the drone''s Remote ID if it has one.'
-  validFor: 'Set by the authority you register with. It is valid in every EASA member state.'
-  afterwards: 'Before you fly in any EU country, check that the place is not in a geographical zone that country has published.'
-lastVerified: 2026-10-17
+    - 'Check that you need to register: yes if any drone weighs 250 g or more, or has a camera, microphone or other sensor that can record personal data. A toy under 250 g is exempt.'
+    - 'Register yourself, once and not each drone, with the LBA''s online form (in German only). You get one electronic ID (e-ID) for all your drones.'
+    - 'For a drone of 250 g or more, take the LBA''s online training and theory test for the EU A1/A3 certificate (EUR 25). A2 needs a further certificate.'
+    - 'Mark every drone with your e-ID, and enter it into the drone''s Remote ID if it has one.'
+    - 'Take your liability insurance certificate with you when you fly.'
+    - 'Visiting? Germany''s registration duty covers operators who live in Germany. An operator registered in another EU state does not register again. The LBA says an operator from a non-EU state has to register in Germany.'
+  validFor: 'The portal''s pages and section 66a LuftVG give no end date. EASA says the registration is valid in every EASA member state.'
+  afterwards: 'Before each flight, check the geographical zones on the DIPUL map tool.'
+lastVerified: 2026-10-26
 sources:
   - https://www.easa.europa.eu/en/domains/drones-air-mobility/operating-drone/open-category-low-risk-civil-drones
   - https://www.easa.europa.eu/the-agency/faqs/drones-uas
   - https://www.easa.europa.eu/en/domains/civil-drones/naa
+  - https://uas-registration.lba-openuav.de/#/registration/uasOperator
   - https://www.uas-operations.de/homepage/en/information/general/registration-and-qualification/
+  - https://www.uas-operations.de/homepage/en/applications-administrative-services/registration-as-an-operator/
+  - https://www.uas-operations.de/homepage/en/applications-administrative-services/eu-certificate-of-competency-a1-a3/
+  - https://www.uas-operations.de/homepage/en/information/general/minimum-age-and-mandatory-insurance/
+  - https://www.uas-operations.de/homepage/en/information/general/first-steps/
+  - https://www.uas-operations.de/homepage/en/information/categorizing-drone-operations/open-category/
+  - https://www.uas-operations.de/homepage/en/information/categorizing-drone-operations/c-classified-drones/
+  - https://www.uas-operations.de/homepage/en/information/geographical-zones/legal-basis/
+  - https://www.uas-operations.de/homepage/en/applications-administrative-services/entry-into-geographical-zones/
+  - https://www.lba.de/EN/Drones/Cross_Border_Operations/Cross_Border_Operations_hilfs_node.html
+  - https://www.gesetze-im-internet.de/luftvg/__37.html
+  - https://www.gesetze-im-internet.de/luftvg/__43.html
+  - https://www.gesetze-im-internet.de/luftvg/__58.html
+  - https://www.gesetze-im-internet.de/luftvg/__66a.html
+  - https://www.gesetze-im-internet.de/luftvo_2015/__21h.html
 ---
 
 import EasaRules from '../../components/EasaRules.mdx';
 
-Germany applies the EU's common drone rules, set by the European Union Aviation Safety Agency (EASA). This
-guide gives those rules, then links to Germany's own authority for what is national.
+Germany applies the EU's common drone rules, set by the European Union Aviation Safety Agency (EASA), with national
+additions. This guide gives the EASA rules first, then what Germany's authorities say. The Germany sections follow the
+federal drone portal (uas-operations.de, also served as dipul.de), the Federal Aviation Office (LBA) cross-border page
+and the texts of the Civil Aviation Act (LuftVG) and the Rules of the Air Regulations (LuftVO) on gesetze-im-internet.de,
+read on 25 and 26 October 2026. The German-language legal texts are quoted in our own English translation. Check the
+authority for any change.
 
 <EasaRules />
 
 ## In Germany
 
-- **Register:** [Germany's registration page](https://www.uas-operations.de/homepage/en/information/general/registration-and-qualification/).
-- **Where you can fly:** [Germany's map of geographical zones](https://dipul.de/homepage/en/information/geographical-zones/).
+- **Register:** [the LBA's registration form](https://uas-registration.lba-openuav.de/#/registration/uasOperator) (German
+  only); the portal's [English instructions](https://www.uas-operations.de/homepage/en/information/general/registration-and-qualification/).
+- **Where you can fly:** [Germany's map of geographical zones](https://dipul.de/homepage/en/information/geographical-zones/)
+  and its [interactive Map Tool](https://maptool-dipul.dfs.de/?language=en).
 - **Authority:** [Federal Aviation Office (Luftfahrt-Bundesamt, LBA)](https://www.lba.de/).
+
+## Registration and training
+
+- **Who:** an operator who lives in Germany registers with the LBA before flying a drone of 250 g or more, or one with a
+  sensor that can collect personal data such as a camera or microphone (the law makes an exception for a toy). You get one
+  electronic ID (e-ID) that goes on all your drones.
+- **Fee:** EUR 20 for a private person, EUR 50 for a legal person, on the portal's own registration page, which is
+  marked "status 15.02.23". The portal does not say whether registration expires, and section 66a LuftVG sets no period.
+- **Age:** 16 to fly. The rule does not apply to a toy drone or a home-built drone up to 249 g. Someone under 16 may fly
+  under the direct supervision of a person, and then the supervising remote pilot is responsible for the flight. EASA
+  says a state may lower the age to 12, but the portal does not.
+- **Certificate:** a drone of 250 g or more needs the EU A1/A3 certificate of competence before the first flight, from an
+  online course and theory test with a fee of EUR 25. Below 250 g no proof is required.
+- **Visitors:** the registration duty in section 66a LuftVG covers operators with their main residence in Germany. The
+  LBA's cross-border page says a foreign operator from a non-EU state "has to register in Germany" (its example is in the
+  context of an operating authorisation under Article 12 of the EU rules) and that an EU operator with a specific-category
+  authorisation applies for a confirmation, with the page's fee of EUR 100 for up to five locations. It does not say what
+  an EU visitor flying in the open category does, so we follow EASA's rule: a registration from your own EU state counts.
+
+## Where and how you can fly
+
+Under section 21h of the LuftVO, Germany's airspace is generally free for drones, but these geographical zones come with
+conditions:
+
+- **Airports:** within 1,000 m of the boundary and of the runway centrelines extended by 5 km, only in the specific
+  category. Other aerodromes: within 1,500 m, with the aerodrome's consent or in the specific category.
+- **Control zones:** you need air traffic control clearance.
+- **Within 100 m** of industrial sites, prisons, military sites, power plants, government buildings, embassies and
+  police sites: only with the operator's express consent. Hospitals: with the operator's consent.
+- **Roads, railways and federal waterways:** within 100 m, only under one of the conditions in section 21h, such as flying
+  lower than your distance from the road or railway, with consent, or crossing a waterway at 100 m or more.
+- **Nature reserves and national parks:** only with the conservation authority's consent or under state law. Outside
+  national parks, also allowed if the flight is not for sport or leisure, is above 100 m and meets further conditions.
+  So a hobby flight over a nature reserve needs the authority's consent.
+- **Homes and gardens:** with the owner's consent, or with a drone of 0.25 kg or less that cannot record or transmit, or
+  at 100 m or more with further conditions, none between 22:00 and 06:00.
+- **Pools and beaches:** only outside opening or bathing times.
+- **Accident and emergency sites:** within 100 m, with the head of operations' consent.
+- **A3:** the portal gives Germany's own A3 distance: at least 150 m from residential, commercial, industrial and
+  recreational areas.
+
+For permission to enter a zone you apply to the state aviation authority. Some publish a general permit that you can use
+without applying, usually valid about two years; otherwise you apply for an individual permit. The portal names no fee.
+The zones are on the Map Tool, but it cannot show every one (such as accident sites).
+
+## Remote ID and insurance
+
+- **Remote ID:** the portal says C1, C2 and C3 drones carry a remote identification system, and the operator enters the
+  e-ID into it. A C4 drone needs one only if one is available.
+- **Insurance:** required, and the certificate must be with you. See the details above.
+
+## Penalties
+
+Breaking the EU drone rules (section 58(2) LuftVG) and flying without liability insurance (section 58(1) no. 15) are
+administrative offences. Under section 58(3) the fine can reach **EUR 50,000** for both. The portal says only that
+offences are prosecuted, and that flying without proof of liability insurance is an administrative offence. We found
+no typical fine, and the fines for breaking the zone rules are not checked here.
 
 ## Not covered yet
 
-- **Germany's national rules.** We have not read Germany's own drone rules, so what we say here is only what EASA says
-  applies everywhere. Fees, how long registration lasts, the minimum age (a state may lower EASA's 16 to 12),
-  insurance, penalties and any local bans are all unverified. Check the authority above before you fly.
-- **Where flying is banned.** Germany's geographical zones are on the map linked above, and we have not copied them.
+- **Minimum insurance sum.** The portal says section 37 sets it; section 37 does not give an amount, and section 43(2)
+  leaves the figure to a regulation we did not find.
+- **Remote ID for drones without a class label,** for C5 and C6, and the C0 rule beyond the e-ID.
+- **Registration term.** The pages we read give none.
+- **Documents and fields on the LBA form.** The form is German only and its document list was not on the pages we read.
+- **Non-EU visitors in the open category.** The LBA's wording is ambiguous, as above.
+- **Fines for breaking the zone rules.** Section 58 gives the ceiling for the EU-rule and insurance offences only.
+- **Model-aircraft clubs, state rules on nature reserves and national parks,** and other local bans not on the Map Tool.

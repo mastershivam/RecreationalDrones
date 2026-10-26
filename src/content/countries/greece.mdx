@@ -3,60 +3,119 @@ name: Greece
 iso3: GRC
 authority: Hellenic Civil Aviation Authority (HCAA)
 authorityUrl: https://hcaa.gov.gr/
-registrationUrl: https://uas.hcaa.gr/Account/Login?ReturnUrl=%2F
+registrationUrl: https://uas.hcaa.gov.gr/Account/Login?ReturnUrl=/
 whoMustRegister: >-
-  Register yourself once, not each drone, with your home EU country's authority
-  (visitors: the first EU country you fly in). Needed if a drone weighs 250 g or
-  more or has a camera.
+  You register yourself as the operator, once, not each drone. The HCAA's
+  registration page says registration is open to people who reside in Greece.
+  Its FAQ says non-EU visitors must also register with the HCAA, and that a
+  visitor must register in the first EU country where they fly (see Visitors
+  below). We did not read the weight limit in Greek law.
 restrictiveness: 2
 restrictivenessReason: >-
-  Register online with your national authority and, for most drones, pass an
-  online training exam (EASA). Steps in your country may add to this; we have
-  not read them.
+  Register online on the HCAA portal, paying a fee stamp (the amount is not on
+  the pages we read) and passing EASA's online training if the drone needs it.
+  The pages we read show no in-person step and no permission before flying, so
+  the level stays at 2. Visitor rules are not settled (see below).
 registrationFee: null
-registrationWeightGrams: 0
-minOperatorAge: null
+registrationWeightGrams: null
+minOperatorAge: 16
 remoteId: >-
-  EASA says open-category drones, with limited exceptions, must have a remote
-  identification system.
+  The HCAA's registration page says that if your drone has remote identification,
+  you enter the operator registration number in it, which is the registration
+  number plus three more characters that only you know. EASA's exemptions apply.
 insurance: >-
-  EASA requires insurance for a drone over 20 kg, and says most member states
-  also require third-party insurance for lighter drones. Check Greece's rules.
+  The HCAA's FAQ (Q12) says third-party civil liability insurance is required for
+  each drone. We read a summary of the answer, not the full Greek text, and it
+  says the rule applies to professional drones and to privately flown drones of
+  4 kg or more under national law. We did not find a minimum sum.
 howToRegister:
   needed:
-    - 'Whatever your national authority asks for. We have not read the list for this country.'
+    - 'An account on the HCAA portal (uas.hcaa.gov.gr) and the operator details it asks for.'
+    - 'A fee stamp (παράβολο). The HCAA says registration needs one, but the amount is not on the pages we read.'
+    - 'For an operator aged 16 to 18, a parental consent declaration.'
+    - 'For a visitor using the HCAA visitor form, your name, nationality, permanent address, mobile, email, and optionally a passport scan.'
   steps:
-    - 'Check that you need to register: yes if any drone weighs 250 g or more or has a camera or other sensor that could detect personal data. A toy under 250 g is exempt.'
-    - 'Register yourself, once and not each drone, with the authority of the EU country where you live. A visitor from outside the EU registers in the first EU country where they fly.'
-    - 'Complete the online training and exam if your drone needs it. Most drones of 250 g or more do (C1, C3, C4, and older drones). C2 needs more, and C0 and drones under 250 g need none.'
-    - 'Put your operator registration number on every drone you own as a sticker, and enter it into the drone''s Remote ID if it has one.'
-  validFor: 'Set by the authority you register with. It is valid in every EASA member state.'
-  afterwards: 'Before you fly in any EU country, check that the place is not in a geographical zone that country has published.'
-lastVerified: 2026-10-17
+    - 'Check that you need to register. The HCAA''s FAQ (Q11) says registration in its information system is required for drones in the open and specific categories. The weight threshold in Greek law is not on the pages we read, so EASA''s 250 g rule above is EASA''s.'
+    - 'Register as an operator in the operators section of the HCAA portal (uas.hcaa.gov.gr). The portal says a resident registers once, however many drones they fly, and may not register in another EU state.'
+    - 'Pay the fee stamp (παράβολο) that the registration requires.'
+    - 'Display the operator registration number on every drone. It starts with GRC, followed by 13 letters and digits.'
+    - 'If the drone has remote identification, enter the registration number and the three extra characters into it.'
+    - 'Take EASA''s online training if your drone needs it (see the EU rules above). Remote pilot certificates are valid for five years (FAQ Q17).'
+  validFor: 'The HCAA registration page says the operator registration lasts three years, after which you may renew it. Remote pilot certificates are valid for five years.'
+  afterwards: 'Before you fly, check Greece''s geographical zones on the map linked above. We have not read that map.'
+lastVerified: 2026-10-26
 sources:
   - https://www.easa.europa.eu/en/domains/drones-air-mobility/operating-drone/open-category-low-risk-civil-drones
   - https://www.easa.europa.eu/the-agency/faqs/drones-uas
   - https://www.easa.europa.eu/en/domains/civil-drones/naa
-  - https://uas.hcaa.gr/Account/Login?ReturnUrl=%2F
+  - https://uas.hcaa.gov.gr/Account/Login?ReturnUrl=/
+  - https://uas.hcaa.gov.gr/RegistrationProcedures
+  - https://uas.hcaa.gov.gr/Faq
+  - https://hcaa.gov.gr/el/form/application-uas-operation-in-geo
 ---
 
 import EasaRules from '../../components/EasaRules.mdx';
 
-Greece applies the EU's common drone rules, set by the European Union Aviation Safety Agency (EASA). This
-guide gives those rules, then links to Greece's own authority for what is national.
+Greece applies the EU's common drone rules, set by the European Union Aviation Safety Agency (EASA). This guide gives
+those rules, then Greece's own, from the Hellenic Civil Aviation Authority's (HCAA) drone portal, its registration page,
+its FAQ and its visitor form, read on 26 October 2026. The Greek wording is quoted from a summary of each page, so our
+English is our translation, and the Greek original is the reference. Check the HCAA for any change.
 
 <EasaRules />
 
 ## In Greece
 
-- **Register:** [Greece's registration page](https://uas.hcaa.gr/Account/Login?ReturnUrl=%2F).
-- **Where you can fly:** [Greece's map of geographical zones](https://dagr.hasp.gov.gr/el/#map_page).
+- **Register:** [the HCAA's UAS portal](https://uas.hcaa.gov.gr/Account/Login?ReturnUrl=/). This is the address the HCAA
+  homepage links to. The address EASA gave, uas.hcaa.gr, did not connect when we tried it.
+- **Where you can fly:** [Greece's map of geographical zones](https://dagr.hasp.gov.gr/el/#map_page). We have not read it.
 - **Authority:** [Hellenic Civil Aviation Authority (HCAA)](https://hcaa.gov.gr/).
-- **Note:** EASA lists two registration routes: the portal linked above is for Greek residents, and [a separate form on the HCAA site](https://hcaa.gov.gr/el/form/application-uas-operation-in-geo) is listed for visitors from outside the EU. We have not read either.
+
+### Registration
+
+- **Who registers:** the HCAA portal says registration is open to people who reside in Greece. A resident registers once,
+  however many drones they fly, and may not register in another EU state. An operator is the natural or legal person who
+  owns, rents or intends to acquire the drone.
+- **How:** online, on the HCAA portal. Registration needs a **fee stamp (παράβολο)**. The HCAA's registration page does
+  not give its amount, and the fee document on the portal could not be read with our tools.
+- **Age:** the HCAA's FAQ (Q11) says the minimum age for drone operators in the open and specific categories is 16. A
+  minor operator aged 16 to 18 submits a parental consent declaration. We did not find what applies to anyone under 16.
+- **Validity:** the operator registration lasts three years, after which it can be renewed. Remote pilot certificates
+  are valid for five years (FAQ Q17).
+
+### Visitors
+
+- **Non-EU visitors:** the FAQ (Q25) says a visitor must also register in the first EU country where they intend to
+  operate, and (Q40) that non-EU residents visiting Greece must register with the HCAA for the specific category.
+- **The visitor form:** the HCAA's form at [hcaa.gov.gr](https://hcaa.gov.gr/el/form/application-uas-operation-in-geo)
+  says it applies only to people who do **not** have a Greek tax number (AFM). It asks for name, nationality, permanent
+  address, contact details and an optional passport scan.
+- **The pages disagree.** The portal's registration page ties registration to residence in Greece, and the visitor form
+  is keyed to having no Greek tax number, not to being outside the EU. We have not resolved which route a given visitor
+  uses. Ask the HCAA before you register.
+
+### Insurance
+
+The HCAA's FAQ (Q12) says third-party civil liability insurance is required for each drone. Our reading of that answer
+is a summary, and it says the rule applies to professional drones and to privately flown drones of 4 kg or more under
+national law. We did not find a minimum sum.
+
+### Where you cannot fly
+
+We did not read Greece's own rules on zones, local bans or permission, so the EU rules above are all we give. The HCAA
+portal links to a DAGR map (see In Greece above), which we did not read.
+
+### Penalties
+
+We did not find Greece's penalty amounts on the pages we read.
 
 ## Not covered yet
 
-- **Greece's national rules.** We have not read Greece's own drone rules, so what we say here is only what EASA says
-  applies everywhere. Fees, how long registration lasts, the minimum age (a state may lower EASA's 16 to 12),
-  insurance, penalties and any local bans are all unverified. Check the authority above before you fly.
-- **Where flying is banned.** Greece's geographical zones are on the map linked above, and we have not copied them.
+- **The registration fee.** The fee stamp is required, but the amount is not on the registration page, and the fee
+  document linked from the portal (Παράβολα ΣμηΕΑ.pdf) could not be read with our tools.
+- **Under-16 operators.** The FAQ sets 16 as the minimum age, and we found no lower Greek figure. We did not check whether
+  Greece has used EASA's option to lower the age to 12.
+- **Insurance.** The amount and the exact scope come from a summary of FAQ Q12, not from the Greek text.
+- **Visitor route.** The HCAA's pages disagree on whether non-EU visitors register in Greece or in the first EU country
+  they fly in (see Visitors).
+- **Greek weight threshold and penalties.** We did not read the Greek law that sets them.
+- **Where you can fly.** The zones on the DAGR map are not copied here.

@@ -1,9 +1,9 @@
 import { expect, test } from '@playwright/test';
-import { activate, focusOn, highlightedAt, openGlobe, pointAt } from './helpers';
+import { activate, focusOn, highlightedAt, openGlobe, pointAt, GUIDE_COUNT } from './helpers';
 
-// Germany is the sample member state; Serbia, to its south-east, is not in the EU and has no guide.
+// Germany is the sample member state; Ukraine, to its east, is not in the EU and has no guide.
 const GERMANY: [number, number] = [10.5, 51];
-const SERBIA: [number, number] = [20.8, 44];
+const UKRAINE: [number, number] = [31, 49];
 const ZOOM = 4;
 
 async function showGermany(page: import('@playwright/test').Page) {
@@ -16,7 +16,7 @@ test.describe('EU member states on the globe', () => {
 	test('highlights a member state, and not a non-member neighbour', async ({ page }) => {
 		await showGermany(page);
 		expect(await highlightedAt(page, GERMANY)).toEqual(['DEU']);
-		expect(await highlightedAt(page, SERBIA)).toEqual([]);
+		expect(await highlightedAt(page, UKRAINE)).toEqual([]);
 	});
 
 	test('shows a hover preview with the shared EASA registration rule', async ({ page }) => {
@@ -28,8 +28,9 @@ test.describe('EU member states on the globe', () => {
 		const preview = page.locator('.country-popup.preview');
 		await expect(preview).toContainText('Germany');
 		await expect(preview).toContainText('250 g');
-		// The fee is national, so EASA's pages give none.
-		await expect(preview.locator('.unverified')).toHaveCount(1);
+		// The fee is national: Germany's own portal gives it, so it shows with no "not yet verified" marker.
+		await expect(preview).toContainText('EUR 20');
+		await expect(preview.locator('.unverified')).toHaveCount(0);
 	});
 
 	test("opens Germany's guide, with the EASA rules and its own authority", async ({ page }) => {
@@ -38,7 +39,7 @@ test.describe('EU member states on the globe', () => {
 
 		const dialog = page.locator('#country-dialog');
 		await expect(dialog.getByRole('heading', { level: 1 })).toHaveText('Drone rules in Germany');
-		await expect(dialog.getByRole('link', { name: 'Register online' })).toHaveAttribute('href', /uas-operations\.de/);
+		await expect(dialog.getByRole('link', { name: 'Register online' })).toHaveAttribute('href', /lba-openuav\.de/);
 		await expect(dialog.getByRole('link', { name: 'Read the full guide' })).toHaveAttribute('href', '/countries/germany/');
 		await expect(dialog).not.toContainText('Flyer ID');
 	});
@@ -65,7 +66,7 @@ test.describe('EU guide pages', () => {
 		await page.goto('/countries/');
 		for (const name of ['Austria', 'France', 'Sweden', 'Germany']) await expect(page.getByRole('link', { name, exact: true })).toBeVisible();
 		// 27 EU + the UK, Switzerland, Norway, Iceland, Liechtenstein, Nepal, Thailand, the US, Canada, Australia and Japan.
-		await expect(page.locator('.countries li a')).toHaveCount(44);
+		await expect(page.locator('.countries li a')).toHaveCount(GUIDE_COUNT);
 	});
 
 	test('does not scroll sideways, even with the rules table', async ({ page }) => {

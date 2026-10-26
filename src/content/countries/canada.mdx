@@ -13,10 +13,12 @@ restrictivenessReason: >-
   A visitor with a drone of 250 g or more needs a Canadian pilot certificate and
   a Foreign SFOC-RPAS permission, which is applied for by email. Residents
   register and pass an online exam.
-registrationFee: null
+registrationFee: 'CAD $10.17 per drone (changes each 1 April)'
 registrationWeightGrams: 250
 minOperatorAge: 14
-remoteId: null
+remoteId: >-
+  Not required yet. Transport Canada proposed it on 8 June 2026 (NPA 2026-005) for
+  drones of 250 g up to 150 kg; the proposal is not in force.
 insurance: >-
   Not required for standard operations, but Transport Canada recommends it. Proof
   of insurance may be needed for operations that need an SFOC-RPAS.
@@ -28,12 +30,12 @@ howToRegister:
   steps:
     - 'Check the weight. A drone under 250 g needs no registration and no pilot certificate.'
     - 'Create an account on Transport Canada''s Drone Management Portal.'
-    - 'Pass the online Small Basic Exam for the pilot certificate (35 questions, 65% to pass).'
-    - 'Register the drone in the portal. Transport Canada says it takes about 3 minutes.'
-    - 'Visiting from abroad? You cannot register a drone. Apply for a Foreign SFOC-RPAS by email instead, and you still need a Canadian pilot certificate for a drone of 250 g or more.'
+    - 'Pass the online Small Basic Exam for the pilot certificate (35 questions, 65% to pass; CAD $10.17, and a retake costs the same).'
+    - 'Register the drone in the portal (CAD $10.17). Transport Canada says it takes about 3 minutes.'
+    - 'Visiting from abroad? You cannot register a drone. Apply for a Foreign SFOC-RPAS by email instead (CAD $20.34 for non-commercial flying), and you still need a Canadian pilot certificate for a drone of 250 g or more.'
   validFor: null
   afterwards: 'Mark the drone with its registration number (permanent marker, label or engraving), and carry your pilot certificate and proof of registration when you fly.'
-lastVerified: 2026-10-17
+lastVerified: 2026-10-26
 sources:
   - https://tc.canada.ca/en/aviation/drone-safety/registering-your-drone
   - https://tc.canada.ca/en/aviation/drone-safety/learn-rules-you-fly-your-drone/flying-your-drone-safely-legally
@@ -42,11 +44,17 @@ sources:
   - https://tc.canada.ca/en/aviation/drone-safety/learn-rules-you-fly-your-drone/drone-operation-categories-pilot-certificates/microdrones
   - https://tc.canada.ca/en/aviation/drone-safety/drone-pilot-licensing/take-drone-pilot-online-exam/small-basic-exam
   - https://tc.canada.ca/en/aviation/drone-safety/learn-rules-you-fly-your-drone/where-fly-your-drone
+  - https://tc.canada.ca/en/aviation/drone-safety/learn-rules-you-fly-your-drone/drone-operation-categories-pilot-certificates/advanced-operations
+  - https://tc.canada.ca/en/aviation/drone-safety/learn-rules-you-fly-your-drone/drone-operation-categories-pilot-certificates/level-1-complex-operations
+  - https://tc.canada.ca/en/aviation/drone-safety/drone-management-portal
+  - https://tc.canada.ca/en/aviation/drone-safety/summary-notice-proposed-amendment-npa-2026-005-information-sessions
+  - https://tc.canada.ca/en/aviation/drone-safety/drone-zone/drone-zone-issue-8-june-2026
   - https://tc.canada.ca/en/aviation/drone-safety/drone-pilot-licensing/get-permission-special-drone-operations/get-permission-fly-drone-foreign-pilot
 ---
 
-This guide follows Transport Canada's drone safety pages, read on 17 October 2026. Check Transport Canada for any
-change.
+This guide follows Transport Canada's drone safety pages, read on 17, 25 and 26 October 2026. Check Transport Canada for any
+change. The fee amounts are in Canadian dollars. The pages fill them in from Transport Canada's own fee service
+(api.tc.canada.ca), so they are blank in the page text; we read them from that service.
 
 ## Which rules apply to your drone
 
@@ -61,7 +69,9 @@ camera or a safety cage, does.
 
 Register through Transport Canada's [Drone Management Portal](https://tc.canada.ca/en/aviation/drone-safety/drone-management-portal).
 Transport Canada says it takes about 3 minutes. You need the make, model, serial number and type of drone, and a
-credit card (or Apple Pay or Google Pay). Mark the drone with its registration number, using a permanent marker,
+credit card (or Apple Pay or Google Pay). The fee is **$10.17** from 1 April 2026 to 31 March 2027, and Transport
+Canada's fee service lists $10.45 from 1 April 2027 (the fee is adjusted each year). Transport Canada's pages do not say how long
+a registration lasts or whether it must be renewed. Mark the drone with its registration number, using a permanent marker,
 permanent label or engraving.
 
 ## Pilot certificate
@@ -69,12 +79,13 @@ permanent label or engraving.
 For the most basic flying you need the **Pilot Certificate – Basic Operations**:
 
 1. You must be **14** or older.
-2. Pass the online **Small Basic Exam**: 35 multiple-choice questions, 90 minutes, and 65% to pass.
+2. Pass the online **Small Basic Exam**: 35 multiple-choice questions, 90 minutes, and 65% to pass. The exam
+   costs **$10.17** (same period as above), and each extra attempt costs the same.
 3. If you fail, wait 24 hours before you try again. You can retake it as often as you like.
 4. The certificate does not expire, but Transport Canada expects you to keep your skills up to date.
 
 Carry the certificate (printed or electronic, issued by Transport Canada) and proof of registration when you fly.
-An Advanced certificate (age 16) is needed to fly closer to people or in controlled airspace.
+An Advanced certificate (age 16) is needed to fly closer to people or in controlled airspace (see below).
 
 ## Where and how you can fly (basic operations)
 
@@ -91,6 +102,23 @@ If any of these is not true, the flight is "advanced" and needs a higher certifi
 Department of National Defence to fly within 5.6 km of a military aerodrome. You cannot take off or land in a
 **national park**.
 
+## Advanced operations
+
+An **Advanced** certificate lets you fly closer to people, closer to airports and heliports (inside 5.6 km of a
+certified airport or 1.9 km of a heliport), in controlled airspace with permission from air traffic control, medium
+drones, sheltered operations, and extended visual line-of-sight. To get one you must be **16** or older, pass the
+online Advanced exam and a flight review, then pay for the certificate: the exam costs **$10.17** and the
+certificate **$25.43** (same period as above; the page's own text still says $25.00, which is the 2025-26 fee). Your drone must also meet safety rules for the specific operation, shown
+by a manufacturer's declaration. In controlled airspace you ask NAV CANADA for a flight authorization through NAV
+Drone, and you need Department of National Defence permission near a military aerodrome. A **Level 1 Complex**
+certificate needs age 18 and is not covered here.
+
+## Remote ID
+
+Canada has no Remote ID rule yet. Transport Canada published a proposal on 8 June 2026 (Notice of Proposed Amendment
+2026-005) that would apply to drones of 250 g up to and including 150 kg, and not to drones under 250 g. Its public
+consultation closed on 9 September 2026. The proposal is not in force and may change, so check Transport Canada.
+
 ## Visiting from abroad
 
 Transport Canada says a **foreign pilot** is anyone who is not a Canadian citizen, permanent resident or Canadian
@@ -100,7 +128,14 @@ corporation. For a drone of 250 g or more:
   foreign pilots.
 - Foreign pilots **cannot register** a drone. Instead you apply for a **Foreign SFOC-RPAS** (a Special Flight
   Operations Certificate) with a form sent by email. For non-commercial flying the application is simplified, and
-  there is no compliance checklist. The standard time is 30 business days, and it is usually valid for up to a year.
+  there is no compliance checklist. The fee for this simplified, non-commercial permit is **$20.34** from 1 April 2026
+  to 31 March 2027 (Transport Canada's fee service lists $20.91 from 1 April 2027). The standard time is 30 business
+  days, and it is usually valid for up to a year. Email the "Application for a SFOC-RPAS" form (form 24-0109) to
+  TC.RPASCentre-CentreSATP.TC@tc.gc.ca. The foreign-pilot page states no insurance requirement, but the general rules
+  page says proof of insurance may be needed for operations that need an SFOC-RPAS.
+- You do **not** need a Foreign SFOC-RPAS to fly non-commercially if you hold a Canadian pilot certificate and the
+  drone is registered by a Canadian citizen, permanent resident or Canadian corporation. You must stay within your
+  certificate's privileges.
 
 A drone under 250 g needs no SFOC, except at an advertised event.
 
@@ -108,12 +143,14 @@ A drone under 250 g needs no SFOC, except at an advertised event.
 
 Transport Canada lists fines for individuals of up to **$1,000** for flying without a certificate, **$3,000** for
 flying where you are not allowed or putting aircraft and people at risk, and **$5,000** for an unregistered or
-unmarked drone. There may also be jail time.
+unmarked drone. For corporations the limits are $5,000, $15,000 and $25,000. A microdrone flown at an advertised
+event can draw up to $1,000 for an individual. There may also be jail time.
 
 ## Not covered yet
 
-- **Fees.** The registration and exam fees did not appear in the page text we could read.
-- **Remote ID.** The pages we read do not mention it.
-- **Advanced and complex operations**, and permission for flights in controlled airspace.
-- **Provincial and local rules**, and the limits inside parks and on private land.
-- **Foreign SFOC details.** The fee for the permit and the form's requirements.
+- **Level 1 Complex operations** and permission for medium- or high-complexity flights (the high-complexity SFOC fee is
+  $2,034 on Transport Canada's foreign-pilot page, but we did not read the other SFOC fees).
+- **Provincial and local rules**, and the limits inside parks and on private land. Transport Canada says federal law on
+  aeronautics can overlap with provincial, territorial and municipal law, and has published an advisory circular on it
+  that we did not read.
+- **Registration length.** Transport Canada's pages do not say how long a registration lasts.

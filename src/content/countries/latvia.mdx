@@ -3,59 +3,90 @@ name: Latvia
 iso3: LVA
 authority: Civil Aviation Agency of Latvia
 authorityUrl: https://www.caa.gov.lv/
-registrationUrl: https://e.caa.lv/?lang=en
+registrationUrl: https://e.caa.gov.lv/
 whoMustRegister: >-
   Register yourself once, not each drone, with your home EU country's authority
-  (visitors: the first EU country you fly in). Needed if a drone weighs 250 g or
-  more or has a camera.
+  (visitors: the first EU country you fly in). In Latvia it is needed if a drone
+  weighs 250 g or more, has a camera or other sensor that can read personal data,
+  could hit someone with more than 80 J of kinetic energy, or is flown in the
+  specific category. A drone under 250 g with no camera is exempt, as is a toy
+  that meets Directive 2009/48/EC for children under 14.
 restrictiveness: 2
 restrictivenessReason: >-
-  Register online with your national authority and, for most drones, pass an
-  online training exam (EASA). Steps in your country may add to this; we have
-  not read them.
-registrationFee: null
+  Register online and pass an online A1/A3 course and exam. Flying a C2 drone
+  within 150 m of homes, shops, industry or recreation areas is the A2 subcategory,
+  and the authority requires a self-study and an in-person theory exam at the
+  agency for it. Flying only in A1 or A3 needs no in-person step, so the ordinary
+  flyer stays at level 2, as in the other states where only A2 is in person.
+registrationFee: 'EUR 5, valid 1 year'
 registrationWeightGrams: 0
-minOperatorAge: null
+minOperatorAge: 16
 remoteId: >-
   EASA says open-category drones, with limited exceptions, must have a remote
-  identification system.
+  identification system. Latvia's registration page says to upload your
+  registration number to a remote identification system if the drone has one,
+  and gives no rule of its own on when one is needed.
 insurance: >-
-  EASA requires insurance for a drone over 20 kg, and says most member states
-  also require third-party insurance for lighter drones. Check Latvia's rules.
+  Required by Latvian law. Cabinet Regulation No. 447 of 29 June 2021 sets the
+  minimum third-party liability: EUR 50,000 for C2 drones (A2), and 750,000 SDR
+  for C3 and C4 drones of 20 to 25 kg and for specific-category flights. The
+  authority's table is hard to read, so this mapping is our reading. No minimum
+  is set for a C0 drone under 250 g or an A3 drone under 20 kg.
 howToRegister:
   needed:
-    - 'Whatever your national authority asks for. We have not read the list for this country.'
+    - 'An account on the authority''s e-service portal, e.caa.gov.lv'
+    - 'EUR 5 for the registration fee'
+    - 'For drones of 250 g or more, the online A1/A3 course and exam. For A2 flying, the self-study and the in-person A2 exam (EUR 15 for a first sitting)'
   steps:
-    - 'Check that you need to register: yes if any drone weighs 250 g or more or has a camera or other sensor that could detect personal data. A toy under 250 g is exempt.'
-    - 'Register yourself, once and not each drone, with the authority of the EU country where you live. A visitor from outside the EU registers in the first EU country where they fly.'
-    - 'Complete the online training and exam if your drone needs it. Most drones of 250 g or more do (C1, C3, C4, and older drones). C2 needs more, and C0 and drones under 250 g need none.'
-    - 'Put your operator registration number on every drone you own as a sticker, and enter it into the drone''s Remote ID if it has one.'
-  validFor: 'Set by the authority you register with. It is valid in every EASA member state.'
-  afterwards: 'Before you fly in any EU country, check that the place is not in a geographical zone that country has published.'
-lastVerified: 2026-10-17
+    - 'Check that you need to register: yes if any drone weighs 250 g or more, has a camera or other sensor that can read personal data, or you fly in the specific category. A toy under 250 g with no camera is exempt.'
+    - 'Register yourself, once and not each drone, at e.caa.gov.lv, and pay EUR 5. A visitor from outside the EU registers in the first EU country where they fly.'
+    - 'Complete the online A1/A3 course and exam if your drone needs it. Most drones of 250 g or more do (C1, C3, C4, and older drones). For A2 flying, also do the self-study and the in-person A2 exam. C0 and drones under 250 g need none.'
+    - 'Put your operator registration number on every drone you own, where it can be read without tools (the battery compartment is allowed if it cannot go on the body). Enter it into the drone''s Remote ID if it has one.'
+  validFor: 'One year, according to the authority''s registration page. The page says a registration made under this rule is valid across the EU.'
+  afterwards: 'Before you fly in any EU country, check that the place is not in a geographical zone that country has published. In Latvia, the official zone information is on airspace.lv.'
+lastVerified: 2026-10-26
 sources:
   - https://www.easa.europa.eu/en/domains/drones-air-mobility/operating-drone/open-category-low-risk-civil-drones
   - https://www.easa.europa.eu/the-agency/faqs/drones-uas
   - https://www.easa.europa.eu/en/domains/civil-drones/naa
-  - https://e.caa.lv/?lang=en
+  - https://droni.caa.gov.lv/registracija/
+  - https://droni.caa.gov.lv/darbibas-kategorijas/atverta-kategorija/
+  - https://droni.caa.gov.lv/apdrosinasanas-prasibas/
+  - https://droni.caa.gov.lv/talvadibas-pilotu-kvalifikacija/a2-apakskategorijas-teoretisko-zinasanu-eksamens/
+  - https://droni.caa.gov.lv/uas-geografiskas-zonas/
+  - https://e.caa.gov.lv/
+  - https://www.airspace.lv/drones/
 ---
 
 import EasaRules from '../../components/EasaRules.mdx';
 
-Latvia applies the EU's common drone rules, set by the European Union Aviation Safety Agency (EASA). This
-guide gives those rules, then links to Latvia's own authority for what is national.
+This guide follows the Civil Aviation Agency's drone portal (droni.caa.gov.lv), read on 26 October 2026. The
+portal's Latvian text is our translation where we quote it. Latvia applies the EU's common drone rules, set by the
+European Union Aviation Safety Agency (EASA), and adds national rules, including Cabinet Regulation No. 447 of 2021
+on insurance.
 
 <EasaRules />
 
 ## In Latvia
 
-- **Register:** [Latvia's registration page](https://e.caa.lv/?lang=en).
-- **Where you can fly:** [Latvia's map of geographical zones](https://www.airspace.lv/drones).
+- **Register:** [the registration page](https://droni.caa.gov.lv/registracija/), which sends you to the [e-service portal](https://e.caa.gov.lv/).
+- **Where you can fly:** [airspace.lv's drone map](https://www.airspace.lv/drones/). The authority says this site holds the only official, legally binding conditions for Latvian airspace. Drone makers' zone data is incomplete or inaccurate, the authority warns. Its zones page also links an ED-269 data set.
 - **Authority:** [Civil Aviation Agency of Latvia](https://www.caa.gov.lv/).
+
+## Fees, terms and age
+
+- **Fee:** EUR 5 to register. The A2 exam costs EUR 15 for a first sitting and EUR 10 to retake it.
+- **Term:** one year, according to the registration page.
+- **Age:** 16 to fly in the open category. Latvia does not lower this to 12. A drone that is self-built or a toy under 250 g is exempt, and so is a flight supervised by another remote pilot aged 16 or over.
+
+## Insurance
+
+Minimum third-party liability is set by Cabinet Regulation No. 447: EUR 50,000 for C2 drones (A2), and 750,000 SDR for C3 and C4 drones of 20 to 25 kg and for specific-category flights. The regulation does not cover damage to the drone itself or to its operator, and insuring those is a choice.
 
 ## Not covered yet
 
-- **Latvia's national rules.** We have not read Latvia's own drone rules, so what we say here is only what EASA says
-  applies everywhere. Fees, how long registration lasts, the minimum age (a state may lower EASA's 16 to 12),
-  insurance, penalties and any local bans are all unverified. Check the authority above before you fly.
-- **Where flying is banned.** Latvia's geographical zones are on the map linked above, and we have not copied them.
+- **Penalties.** The pages we read give no fine amounts. The Administrative Violations Code was not read.
+- **Local bans.** Zone conditions are on airspace.lv and we have not copied them.
+- **Visitors from outside the EU.** The authority says they register in the first EU country they fly in. We did not read that country's fees or steps.
+- **Remote ID.** The authority says only "if there is one". It does not say when one is required, so EASA's rule is the only firm statement.
+- **The main CAA site (caa.gov.lv)** did not respond when we tried it on 26 October 2026, so its own pages are unread.

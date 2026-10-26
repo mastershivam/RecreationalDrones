@@ -16,3 +16,9 @@ run_worker_first = ["/tiles/*", "/weather"]
 [[r2_buckets]]
 binding = "TILES"
 bucket_name = "recreationaldrones-tiles"
+
+# `wrangler preview` (Workers Builds, non-production branches) refuses to run without its own binding. The Worker only
+# reads tiles, so previews share the production bucket; point this at another bucket to keep them apart.
+[[previews.r2_buckets]]
+binding = "TILES"
+bucket_name = "recreationaldrones-tiles"

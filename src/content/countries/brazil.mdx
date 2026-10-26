@@ -5,84 +5,119 @@ authority: National Civil Aviation Agency (ANAC), with the Department of Airspac
 authorityUrl: https://www.gov.br/anac/pt-br/assuntos/drones
 registrationUrl: https://www.gov.br/anac/pt-br/assuntos/drones/orientacoes-aos-usuarios-do-sisant
 whoMustRegister: >-
-  ANAC's SISANT page says registration is mandatory for a drone of 250 g to 150 kg
-  maximum take-off weight, whether or not you fly for fun, and optional up to
-  249 g. Its rule text says up to 250 g needs none, so exactly 250 g is unclear.
-  A foreigner opens an SISANT account with a passport number.
+  ANAC's Resolution 806 (15 June 2026) says a model aircraft (a drone flown for
+  fun) of more than 250 g must be registered, and one of up to 250 g needs no ANAC
+  document. ANAC's Novo SISANT page and its model-aircraft page say the same. Only
+  ANAC's SISANT guidance page (updated 31 July 2026) says 250 g to 150 kg must register
+  and up to 249 g need not, so a drone of exactly 250 g is described two ways. A
+  foreigner opens an SISANT account with a passport number.
 restrictiveness: 3
 restrictivenessReason: >-
-  Registration is online, but DECEA says every flight, whatever the drone's weight,
-  needs an authorisation requested in its SARPAS system first. Some are approved
+  Registration is online, but DECEA's instruction ICA 100-40/2026 says every flight,
+  whatever the drone's weight (down to 250 g and under), needs an authorisation
+  requested in its SARPAS system first, at least 30 minutes ahead. Some are approved
   automatically. Recreational flights are capped at 60 m and 300 m from the pilot.
 registrationFee: null
 registrationWeightGrams: 250
 minOperatorAge: null
 remoteId: null
 insurance: >-
-  ANAC's rule requires third-party liability cover for non-recreational drones over
-  250 g. The text we read does not require it for recreational flying.
+  Not required for recreational flying: Resolution 806 (article 29) says operations
+  under it are exempt from insurance. ANAC's separate RBAC 100 (Resolution 805),
+  for other drones, requires third-party liability cover.
 howToRegister:
   needed:
     - 'A gov.br account at silver level or higher (an individual), or an SISANT account made with your passport number (a foreigner)'
     - 'Your drone''s manufacturer, model, serial number and maximum take-off weight, and its main activity'
   steps:
-    - 'Check the weight: from 250 g, register the drone in SISANT even if you fly only for fun.'
+    - 'Check the weight: above 250 g, register the drone in SISANT even if you fly only for fun. At exactly 250 g ANAC''s pages differ, so registering is the safe choice.'
     - 'Open the new SISANT, choose "Cadastrar Novo Drone" and fill in the details. You get a nine-digit identification number.'
     - 'Open a SARPAS account at DECEA and link your SISANT registration (SARPAS, then aeronaves, then sincronização SISANT).'
     - 'Request an authorisation in SARPAS before each flight.'
   validFor: 'Two years. Renew under "Meus Drones". ANAC deactivates a registration six months after it expires.'
-  afterwards: 'Before each flight, request the authorisation in SARPAS, check the restricted areas on DECEA''s AISWEB, and keep to the recreational limits below.'
-lastVerified: 2026-10-20
+  afterwards: 'Before each flight, request the authorisation in SARPAS (at least 30 minutes ahead), check the restricted areas on DECEA''s AISWEB, and keep to the recreational limits below.'
+lastVerified: 2026-10-26
 sources:
   - https://www.gov.br/anac/pt-br/assuntos/drones/orientacoes-aos-usuarios-do-sisant
+  - https://www.anac.gov.br/assuntos/legislacao/legislacao-1/resolucoes/2026/resolucao-806
+  - https://www.gov.br/defesa/pt-br/assuntos/aerolevantamento/arquivos/2026/ica-100-40-publicada-port-2094-dnor8-18-03-2026-bca-058-30-03-2026.pdf
+  - https://www.gov.br/anac/pt-br/assuntos/regulados/aviacao-geral/drones/aeromodelismo
+  - https://www.gov.br/anac/pt-br/assuntos/regulados/aviacao-geral/drones/novo-sisant
+  - https://www.anac.gov.br/assuntos/legislacao/legislacao-1/boletim-de-pessoal/2026/bps-v-21-no-24-15-a-19-06-2026/rbac-100-emd-00/visualizar_ato_normativo
   - https://www.decea.mil.br/drone/
   - https://www.anac.gov.br/assuntos/legislacao/legislacao-1/rbha-e-rbac/rbac/rbac-e-94-1
   - https://www.gov.br/anac/pt-br/assuntos/regulados/aviacao-geral/drones/registros-e-certificados-de-drones
   - https://www.gov.br/anac/pt-br/assuntos/regulados/aviacao-geral/drones/regras-de-todos-os-orgaos-brasileiros-sobre-operacao-de-drones
 ---
 
-This guide follows ANAC's SISANT page and its rule RBAC-E 94 (the 2023 text), and DECEA's drone page, read on 20 October 2026.
-The pages are in Portuguese and the translations are ours. ANAC's list of current rules says a 2026 resolution (number 806) now
-covers aircraft up to 250 g and model aircraft, and DECEA's page cites a 2026 instruction, ICA 100-40/2026. **We have read
-neither**, so check them before you fly.
+This guide follows ANAC's **Resolution 806** (15 June 2026, for aircraft up to 250 g and model aircraft), its SISANT, Novo SISANT and
+model-aircraft pages, and DECEA's **instruction ICA 100-40** (2026 edition). ANAC's pages and RBAC 100 were re-read on 26 October 2026.
+The ICA could not be re-read: our tools cannot extract text from its PDF, and DECEA's drone page returned 403 on 25 and 26 October. The
+ICA points below therefore come from an earlier reading on 20 October and are not re-checked. The sources are in Portuguese, and the
+quotations and translations are ours; the Resolution 806 points were checked against a fetch summary of the article text, not a line-by-line
+read. ANAC's other 2026 resolution, number 805 (RBAC 100), covers other drones and excludes recreational model aircraft and drones up to
+250 g flown within sight up to 120 m, so this guide does not use it for rules. The 2023 rule RBAC-E 94 that the first version of this
+guide cited does not appear in ANAC's 2026 list of resolutions, so we no longer rely on it.
 
 ## Registration
 
-ANAC calls a drone flown for recreation an *aeromodelo*. Its SISANT page says registration is mandatory from 250 g to 150 kg
-"regardless of recreational use", and optional up to 249 g. RBAC-E 94 says drones up to 250 g need none, so the exact 250 g
-case is unclear. The registration is tied to a person with a CPF or CNPJ in Brazil, and **a foreigner first opens an SISANT
-account with their passport number**.
+ANAC calls a drone flown for recreation an *aeromodelo*. Resolution 806 (article 24) says a model aircraft heavier than 250 g "deverá
+ser cadastrado junto à ANAC", tied to a person with a CPF or CNPJ in Brazil, and **a foreigner can register with a passport or other
+travel document**. Article 28 says operators of drones up to 250 g count as properly licensed and need no ANAC document.
 
-- **Term:** two years (RBAC-E 94 says 24 months).
-- **Fee:** none of the pages we read gives one.
-- **Age and test:** the rule's age of 18 applies to remote pilots of non-recreational drones. The pages we read give no age
-  or test for flying for fun.
+**The 250 g boundary is worded two ways.** Resolution 806 (articles 24 and 28), ANAC's Novo SISANT page ("de até 250 gramas não precisam
+ser cadastrados") and its model-aircraft page ("até 250 gramas") all put a drone of exactly 250 g in the no-registration group. ANAC's
+SISANT guidance page (updated 31 July 2026) says registration is mandatory from 250 g up to 150 kg and not required up to 249 g, and it
+uses "igual ou superior a 250" in one place and "superior a 250" in another. The resolution is the binding text, so a drone of exactly
+250 g needs no registration, but registering costs nothing we could find.
+
+- **Term:** two years (article 25). Renew under "Meus Drones". ANAC deactivates a registration not renewed within six months of expiry.
+- **Fee:** none of the ANAC pages we read gives one, and the resolution mentions none.
+- **Age:** no minimum age. Resolution 806 (article 7) says a remote pilot under 18 must be accompanied throughout by a remote pilot of
+  18 or over who is responsible for the operation. The pages we read mention no test for flying for fun.
+- **Insurance:** Resolution 806 (article 29) exempts operations under it from insurance.
+- **Identification:** the registration number must be on the drone (article 26), on the outside of the fuselage or in an internal
+  compartment reachable without tools. We found no Remote ID rule.
 
 ## Where and how you can fly
 
-DECEA says no unmanned aircraft may enter Brazilian airspace without prior authorisation, and that every one, whatever its
-weight, must request it through SARPAS before the flight. It is approved automatically when the flight does not affect air
-navigation: under 25 kg, within sight, outside a flight restriction zone, and at most 60 m for recreational flights.
-Recreational flying in an airspace set aside for model aircraft is exempt from the request.
+DECEA's ICA 100-40 (not re-read on 26 October; see above) says no unmanned aircraft may enter Brazilian airspace without the State's
+authorisation (article 19), and that this covers drones of up to 250 g as well (article 19, paragraph 4). This sits beside ANAC's
+Resolution 806, which exempts drones up to 250 g from ANAC documents; the two authorities are separate, so both apply. Access is requested
+through SARPAS (article 55), at least 30 minutes ahead for the open category and not more than 90 days ahead. The regional body's opinion
+can be issued automatically when the flight does not affect air navigation (article 60). The open category needs a drone of 25 kg or less,
+flown within sight, with no overlap with a restricted flight zone (FRZ) or a restricted, regulated or segregated area. **Recreational flying
+inside an airspace set aside for recreation (an EAC) is exempt from the request** (article 55, paragraph 2). Flying near an aerodrome or
+navigation aid without authorisation is treated as an act of unlawful interference with civil aviation (article 19, paragraph 3).
 
-- **Height:** at most 200 ft (60 m) above the ground for recreation. DECEA says 400 ft (120 m) is only for non-recreational
-  flights.
-- **Distance from you:** at most 300 m horizontally.
-- **Line of sight:** within sight. You cannot fly beyond it for recreation.
-- **People:** RBAC-E 94 says never closer than 30 m horizontally to people not involved and not consenting, unless a physical
-  barrier stands between. It also says model aircraft over 250 g may fly only in areas away from third parties.
-- **Other rules:** ANAC says to follow the DECEA and ANATEL rules as well.
+- **Height:** at most 200 ft (60 m) above the ground for recreation (ICA articles 32 and 38). ANAC's Resolution 806 (article 11) says
+  120 m (400 ft). The two differ; the lower one is the safe limit where DECEA's rules apply, and 806 itself says other bodies' rules still apply.
+- **Distance from you:** at most 300 m horizontally (ICA article 32).
+- **Line of sight:** within sight. Using FPV goggles, or extending the range, without an observer counts as flying beyond sight.
+- **People:** Resolution 806 (article 2, III) says the horizontal distance from people who are not involved and have not agreed can never
+  be less than 30 m, unless a mechanical barrier strong enough to protect them in an accident is in place.
+- **Weather:** do not fly in rain, wind, fog or any condition that endangers the drone (ICA article 27).
 
 ## Where you cannot fly
 
-- **Prohibited areas:** DECEA says flights in a prohibited controlled-airspace area (EAC P) are banned.
-- **Near airfields:** in its section on flying beside structures, DECEA says an operation closer than 200 m to a heliport or
-  500 m to an aerodrome needs review by its regional body. AISWEB, which DECEA links to, shows the restricted areas. We have
-  not read it.
+- **Prohibited areas:** flights in a prohibited controlled-airspace area (EAC P) are banned (ICA article 29), and so is any flight
+  crossing a special helicopter route (article 30). A flight crossing a restricted or regulated area needs a signed coordination
+  document.
+- **Flight restriction zones (FRZ):** they are set around aerodromes, heliports and security sites such as prisons, military sites and
+  power installations. A flight overlapping one needs a coordination document (article 28), and so is outside the open category. The
+  sizes of the zones around airports and heliports are drawn in figures in the ICA, which we cannot read as text. DECEA's drone page,
+  read on 20 October, said an operation closer than 200 m to a heliport or 500 m to an aerodrome needs review by its regional body.
+  AISWEB, which DECEA links to, shows the restricted areas. We have not read it.
 
 ## Not covered yet
 
-- **Fees, penalties and Remote ID:** none of the pages gives a fee or a Remote ID rule. ANAC says breaches bring the sanctions of
-  the Brazilian Aeronautical Code (Law 7,565/86), with no amounts.
-- **The 2026 rules** named above, and ANAC's pages on minimum age and recreational licensing, which we did not read.
-- **Airport distances:** DECEA gives no general distance on the pages we read, so the map draws no circle.
+- **Fees:** none of the ANAC pages we read gives a fee for registration. We could not read the ICA on 26 October, so we cannot say whether
+  it gives a fee for a SARPAS request. Do not assume it is free.
+- **Penalties:** the ICA says air-traffic infringements are judged administratively by the aeronautical court (JJAER), with no amounts, as
+  noted on 20 October (not re-checked). Resolution 806 (article 1, paragraph 2) says civil, administrative and criminal liability may apply,
+  and gives no amounts.
+- **Visitors:** Resolution 806 (article 23) says a drone may cross Brazil's borders in flight to enter the country only after ANAC issues
+  express authorisation, subject to airspace control and other competent bodies. We have not checked how that applies to a tourist's drone;
+  ask ANAC before you bring one.
+- **Remote ID:** we found no rule beyond displaying the registration number.
+- **Airport distances:** the FRZ sizes are in the ICA's figures, so the map draws no circle.

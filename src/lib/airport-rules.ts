@@ -116,6 +116,18 @@ export const AIRPORT_RULES: Record<string, AirportRule | { none: string }> = {
 	IDN: {
 		none: "The Ministry's pages, as far as we could read them (search excerpts), give no fixed distance from airports. A fixed circle would mislead.",
 	},
+	TZA: {
+		none: "The TCAA's pages, as far as we could read them (search excerpts), give no fixed distance from airports. A fixed circle would mislead.",
+	},
+	LKA: {
+		none: "The CAASL's pages, as far as we could read them (search excerpts), give no fixed distance from airports. A fixed circle would mislead.",
+	},
+	SRB: {
+		none: "The CAD's pages, as far as we could read them (search excerpts), give no fixed distance from airports. A fixed circle would mislead.",
+	},
+	QAT: {
+		none: "The CAA's pages, as far as we could read them (search excerpts), give no fixed distance from airports. A fixed circle would mislead.",
+	},
 	ARE: {
 		none: "The UAE Drones portal and manual say flights are approved by the authority and that the app gives airspace updates, but give no distance from airports and no list of no-fly areas. A fixed circle would mislead.",
 	},

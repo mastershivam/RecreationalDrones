@@ -238,6 +238,15 @@ export const AIRPORT_RULES: Record<string, AirportRule | { none: string }> = {
 		authority: 'JCAA, recreational UA operators',
 		note: 'The JCAA\'s guidelines for recreational operators, as summarised by a search, say not to fly within 5 km (16,500 ft) of any aerodrome or rotorcraft landing zone. This circle is 5 km from the centre of every airport in the open data, so it is only a guide. Ask the JCAA for the real airspace.',
 	},
+	TTO: {
+		none: "The TTCAA's documents, as far as we could read them (search excerpts), give no fixed distance from airports. A fixed circle would mislead.",
+	},
+	MDA: {
+		none: "The CAA's documents, as far as we could read them (search excerpts), give no fixed distance from airports. A fixed circle would mislead.",
+	},
+	PRY: {
+		none: "The DINAC's documents, as far as we could read them (search excerpts), give no fixed distance from airports. A fixed circle would mislead.",
+	},
 	ARE: {
 		none: "The UAE Drones portal and manual say flights are approved by the authority and that the app gives airspace updates, but give no distance from airports and no list of no-fly areas. A fixed circle would mislead.",
 	},

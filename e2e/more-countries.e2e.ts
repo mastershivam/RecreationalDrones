@@ -6,10 +6,10 @@ const COUNTRIES = [
 	{ name: 'Canada', slug: 'canada', iso3: 'CAN', at: [-100, 55], neighbour: [-42, 72], zoom: 3, level: 'Complex restrictions', fact: 'Foreign SFOC-RPAS' },
 	{ name: 'Australia', slug: 'australia', iso3: 'AUS', at: [134, -25], neighbour: [160, -9], zoom: 3, level: 'No restrictions', fact: 'There is no age limit' },
 	// Zoom 5, below where zones show (ZONE_MIN_ZOOM): Switzerland's official zones now cover most of it, and a zone under a tap wins over the country.
-	// Every country around it has a guide, so the "no guide" point is Belarus, further off.
-	{ name: 'Switzerland', slug: 'switzerland', iso3: 'CHE', at: [8.2, 46.8], neighbour: [28, 53.5], zoom: 5, level: 'Basic restrictions', fact: 'CHF 10' },
-	// Zoom 4, below where zones show (ZONE_MIN_ZOOM), so Norway's airport circles do not sit under the tap. Belarus has no guide (Russia now does).
-	{ name: 'Norway', slug: 'norway', iso3: 'NOR', at: [9.5, 61.5], neighbour: [28, 53.5], zoom: 4, level: 'Complex restrictions', fact: 'NOK 230' },
+	// Every country around it has a guide, so the "no guide" point is Ukraine, further off.
+	{ name: 'Switzerland', slug: 'switzerland', iso3: 'CHE', at: [8.2, 46.8], neighbour: [31, 49], zoom: 5, level: 'Basic restrictions', fact: 'CHF 10' },
+	// Zoom 4, below where zones show (ZONE_MIN_ZOOM), so Norway's airport circles do not sit under the tap. Ukraine has no guide (Russia and Belarus now do).
+	{ name: 'Norway', slug: 'norway', iso3: 'NOR', at: [9.5, 61.5], neighbour: [31, 49], zoom: 4, level: 'Complex restrictions', fact: 'NOK 230' },
 	// Greenland, to the north-west, has no guide.
 	{ name: 'Iceland', slug: 'iceland', iso3: 'ISL', at: [-19.5, 64.8], neighbour: [-40, 72], zoom: 5, level: 'Basic restrictions', fact: 'ISK 5,863' },
 	// Iran, to the north across the Gulf, has no guide (Saudi Arabia and Oman now do).

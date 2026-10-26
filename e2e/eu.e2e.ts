@@ -1,9 +1,9 @@
 import { expect, test } from '@playwright/test';
 import { activate, focusOn, highlightedAt, openGlobe, pointAt, GUIDE_COUNT } from './helpers';
 
-// Germany is the sample member state; Belarus, to its east, is not in the EU and has no guide.
+// Germany is the sample member state; Ukraine, to its east, is not in the EU and has no guide.
 const GERMANY: [number, number] = [10.5, 51];
-const BELARUS: [number, number] = [28, 53.5];
+const UKRAINE: [number, number] = [31, 49];
 const ZOOM = 4;
 
 async function showGermany(page: import('@playwright/test').Page) {
@@ -16,7 +16,7 @@ test.describe('EU member states on the globe', () => {
 	test('highlights a member state, and not a non-member neighbour', async ({ page }) => {
 		await showGermany(page);
 		expect(await highlightedAt(page, GERMANY)).toEqual(['DEU']);
-		expect(await highlightedAt(page, BELARUS)).toEqual([]);
+		expect(await highlightedAt(page, UKRAINE)).toEqual([]);
 	});
 
 	test('shows a hover preview with the shared EASA registration rule', async ({ page }) => {

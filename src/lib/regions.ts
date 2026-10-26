@@ -18,6 +18,8 @@ const OTHER: Record<string, string> = {
 	singapore: 'Asia',
 	'south-korea': 'Asia',
 	brazil: 'South America',
+	argentina: 'South America',
+	colombia: 'South America',
 	'south-africa': 'Africa',
 	australia: 'Oceania',
 };

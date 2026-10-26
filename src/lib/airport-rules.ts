@@ -73,6 +73,17 @@ export const AIRPORT_RULES: Record<string, AirportRule | { none: string }> = {
 		authority: 'CAAS, "Operator and activity permits"',
 		note: 'CAAS says a Class 2 Activity Permit is needed to fly within 5 km of an airport or military airbase. This circle is 5 km from the centre of every airport in the open data, and military airbases are not shown, so it is only a guide. Use CAAS\'s no-fly zone map for the real areas.',
 	},
+	ARG: {
+		iso2: 'AR',
+		radiusMeters: 5000,
+		indicative: true,
+		ruleUrl: 'https://www.argentina.gob.ar/anac/nuevo-marco-normativo-para-la-operacion-de-drones',
+		authority: 'ANAC, "Nuevo marco normativo para la operación de drones" (Resolution 550/2025)',
+		note: 'ANAC says that without prior authorisation you may fly only up to 43 m within 5 km of a runway threshold, and not in a runway approach or climb path. This circle is 5 km from the centre of every airport in the open data, so it is only a guide, and it marks where the 43 m limit applies, not a ban. Control zones are also closed to the open category; the AIP shows the real airspace.',
+	},
+	COL: {
+		none: "Aerocivil points to its UAS geographic viewer for restricted airspace and gives no distance from airports on the pages we read (RAC 100, which may, would not load). A fixed circle would mislead.",
+	},
 	ARE: {
 		none: "The UAE Drones portal and manual say flights are approved by the authority and that the app gives airspace updates, but give no distance from airports and no list of no-fly areas. A fixed circle would mislead.",
 	},

@@ -30,6 +30,7 @@ const BOX: Record<string, { lon: [number, number]; lat: [number, number] }> = {
 	ZAF: { lon: [16.3, 33], lat: [-35, -22.2] },
 	// Not Ulleung Airport, which OurAirports places in China (see the exclude list in airport-rules.ts).
 	KOR: { lon: [125.8, 131.5], lat: [32.8, 38.9] },
+	ARG: { lon: [-73.6, -53.5], lat: [-55.2, -21.7] },
 	SGP: { lon: [103.5, 104.2], lat: [1.1, 1.5] },
 	CHE: { lon: [5.9, 10.6], lat: [45.8, 47.9] },
 	LUX: { lon: [5.7, 6.6], lat: [49.4, 50.2] },
